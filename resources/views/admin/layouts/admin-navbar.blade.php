@@ -18,8 +18,9 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between text-center">
-        <a href="{{ route('admin.dashboard') }}" class="logo d-flex align-items-center">
-            <span class="d-none d-lg-block">Wifi Catalogue</span>
+        <a href="{{ route('admin.dashboard') }}" class="logo d-flex align-items-center justify-content-center">
+            {{-- <span class="d-none d-lg-block">Wifi Catalogue</span> --}}
+            <img class="w-100" src="{{ asset('public/admin_images/logos/put_logo3.jpeg') }}" alt="Logo">
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>

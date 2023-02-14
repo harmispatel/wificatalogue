@@ -76,6 +76,7 @@ class UserController extends Controller
         $email = $request->email;
         $password = Hash::make($request->password);
         $status = $request->status;
+        $shop_id = $request->shop_id;
         $shop_name = $request->shop_name;
         $shop_description = $request->shop_description;
 
@@ -93,17 +94,28 @@ class UserController extends Controller
         $client->update();
 
         // Update Client Shop
-        // $shop = Shop::;
-        // $shop->name = $shop_name;
-        // $shop->description = $shop_description;
+        $shop = Shop::find($shop_id);
+        $shop->name = $shop_name;
+        $shop->description = $shop_description;
 
-        // if($request->hasFile('shop_logo'))
-        // {
-        //     $imgname = time().".". $request->file('shop_logo')->getClientOriginalExtension();
-        //     $request->file('shop_logo')->move(public_path('admin_uploads/shop/'), $imgname);
-        //     $imageurl = asset('/').$imgname;
-        //     $shop->logo = $imageurl;
-        // }
+        if($request->hasFile('shop_logo'))
+        {
+
+            $old_image = isset($shop->logo) ? $shop->logo : '';
+            if(!empty($old_image))
+            {
+                if(file_exists($old_image))
+                {
+                    unlink($old_image);
+                }
+            }
+
+            $imgname = time().".". $request->file('shop_logo')->getClientOriginalExtension();
+            $request->file('shop_logo')->move(public_path('admin_uploads/shop/'), $imgname);
+            $imageurl = asset('/').'public/admin_uploads/shop/'.$imgname;
+            $shop->logo = $imageurl;
+        }
+        $shop->update();
 
         return redirect()->route('clients')->with('success','Client has been Updated SuccessFully....');
     }
@@ -111,11 +123,28 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        // Delete User
-        User::where('id',$id)->delete();
+        // Get User Details
+        $user = User::with(['hasOneShop'])->where('id',$id)->first();
+        $shop_id = isset($user->hasOneShop->shop['id']) ? $user->hasOneShop->shop['id'] : '';
 
+        if(!empty($shop_id))
+        {
+            $shop = Shop::where('id',$shop_id)->first();
+            $shop_logo = isset($shop->logo) ? $shop->logo : '';
+            
+            if(!empty($shop_logo) && file_exists($shop_logo))
+            {
+                unlink($shop_logo);
+            }
+
+            Shop::where('id',$shop_id)->delete();
+        }
+       
         // Delete UserShop
         UserShop::where('user_id',$id)->delete();
+        
+        // Delete User
+        User::where('id',$id)->delete();
 
         return redirect()->route('clients')->with('success','Client has been Removed SuccessFully..');
     }
@@ -123,7 +152,19 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $data['client'] = User::with(['hasOneShop'])->where('id',$id)->first();
-        return view('admin.clients.edit_clients',$data);
+       try 
+       {
+            $data['client'] = User::with(['hasOneShop'])->where('id',$id)->first();
+
+            if($data['client'])
+            {
+                return view('admin.clients.edit_clients',$data); 
+            }
+            return redirect()->route('clients')->with('error', 'Something went wrong!');
+       } 
+       catch (\Throwable $th) 
+       {
+            return redirect()->route('clients')->with('error', 'Something went wrong!');
+       }
     }
 }

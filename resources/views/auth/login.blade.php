@@ -69,20 +69,25 @@
                                             <div class="input-group">
                                                 <input type="text" name="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" id="email">
                                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                                @if($errors->has('email'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('email') }}
+                                                    </div>
+                                                @endif
                                             </div>
-                                            @if($errors->has('email'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('email') }}
-                                                </div>
-                                            @endif
                                         </div>
 
                                         <div class="col-12">
                                             <label for="password" class="form-label">Password</label>
                                             <div class="input-group">
-                                                <input type="password" name="password" class="form-control"
+                                                <input type="password" name="password" class="form-control {{ ($errors->has('password')) ? 'is-invalid' : '' }}"
                                                 id="password">
                                                 <span class="input-group-text"><i class="bi bi-eye-slash"></i></span>
+                                                @if($errors->has('password'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('password') }}
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
 
