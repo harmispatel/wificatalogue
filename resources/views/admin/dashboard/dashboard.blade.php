@@ -37,11 +37,11 @@
                     <div class="col-md-4">
                         <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title">Vendors <span>| (7)</span></h5>
+                                <h5 class="card-title">Clients <span>| (7)</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-shop"></i>
+                                        <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">
                                         <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> Active

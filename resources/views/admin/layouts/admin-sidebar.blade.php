@@ -13,6 +13,8 @@
         $userImage = '';
     }
 
+    $routeName = Route::currentRouteName();
+
 @endphp
 
 <aside id="sidebar" class="sidebar">
@@ -20,16 +22,16 @@
 
         {{-- Dashboard Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ (Route::currentRouteName() === 'dashboard') ? 'active-tab' : '' }}" href="{{ route('admin.dashboard') }}">
-                <i class="bi bi-grid {{ (Route::currentRouteName() === 'dashboard') ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ ($routeName == 'admin.dashboard') ? 'active-tab' : '' }}" href="{{ route('admin.dashboard') }}">
+                <i class="bi bi-grid {{ ($routeName == 'admin.dashboard') ? 'icon-tab' : '' }}"></i>
                 <span>Dashboard</span>
             </a>
         </li>
 
         {{-- Clients --}}
         <li class="nav-item">
-            <a class="nav-link {{ (Route::currentRouteName() === 'dashboard') ? 'active-tab' : '' }}" href="{{ route('admin.dashboard') }}">
-                <i class="bi bi-people {{ (Route::currentRouteName() === 'dashboard') ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ ($routeName == 'clients' || $routeName == 'clients.add') ? 'active-tab' : '' }}" href="{{ route('clients') }}">
+                <i class="bi bi-people {{ ($routeName == 'clients' || $routeName == 'clients.add') ? 'icon-tab' : '' }}"></i>
                 <span>Clients</span>
             </a>
         </li>

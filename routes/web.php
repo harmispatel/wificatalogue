@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,14 @@ Route::group(['prefix' => 'admin'], function () {
 
         // Logout
         Route::post('/logout', [AuthController::class,'logout'])->name('logout');
+
+        // Clients
+        Route::get('/clients',[UserController::class,'index'])->name('clients');
+        Route::get('/new-clients',[UserController::class,'insert'])->name('clients.add');
+        Route::post('/store-clients',[UserController::class,'store'])->name('clients.store');
+        Route::get('/delete-clients/{id}',[UserController::class,'destroy'])->name('clients.destroy');
+        Route::get('/edit-clients/{id}',[UserController::class,'edit'])->name('clients.edit');
+        Route::post('/update-clients',[UserController::class,'update'])->name('clients.update');
     });
 
 });
