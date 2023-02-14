@@ -10,8 +10,12 @@
 <!-- Template Main JS File -->
 <script src="{{ asset('public/admin/assets/vendor/js/main.js') }}"></script>
 
+
 {{-- Jquery --}}
 <script src="{{ asset('public/admin/assets/vendor/js/jquery.min.js') }}"></script>
+
+{{-- Jquery UI --}}
+<script src="{{ asset('public/admin/assets/vendor/js/jquery-ui.js') }}"></script>
 
 {{-- Sweet Alert --}}
 <script src="{{ asset('public/admin/assets/vendor/js/sweet-alert.js') }}"></script>
@@ -25,5 +29,4 @@
 <!-- Select 2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-{{-- Jquery UI --}}
-<script src="{{ asset('public/admin/assets/vendor/js/jquery-ui.js') }}"></script>
+

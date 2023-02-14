@@ -15,6 +15,7 @@ class DashboardController extends Controller
         $clients['nonactive'] = User::where('user_type',2)->where('status',0)->count();
 
         $data['client'] = $clients;
+        $data['recent_clients'] = User::with(['hasOneShop','hasOneSubscription'])->where('user_type',2)->orderBy('created_at','asc')->limit(10)->get();
 
         return view('admin.dashboard.dashboard',$data);
     }
