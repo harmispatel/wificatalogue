@@ -31,13 +31,14 @@
                 </div>
             @endif
 
+
             <div class="col-md-12">
                 <div class="row">
                     <!-- Vendors Card -->
                     <div class="col-md-4">
                         <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title">Clients <span>| (7)</span></h5>
+                                <h5 class="card-title">Clients <span>| ({{ (isset($client['total'])) ? $client['total'] : 0 }})</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -45,9 +46,9 @@
                                     </div>
                                     <div class="ps-3">
                                         <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> Active
-                                            - 5</span><br>
+                                            - {{ (isset($client['active'])) ? $client['active'] : 0 }}</span><br>
                                         <span class="text-danger pt-1"><i class="bi bi-arrow-down-circle"></i>
-                                            Non-Active - 2</span>
+                                            Non-Active - {{ (isset($client['nonactive'])) ? $client['nonactive'] : 0 }}</span>
                                     </div>
                                 </div>
                             </div>

@@ -81,16 +81,17 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <div class="form-group">
                                             <label for="duration" class="form-label">Duration</label>
-                                            <input type="text" name="duration" id="duration" class="form-control {{ ($errors->has('duration')) ? 'is-invalid' : '' }}" placeholder="Enter Duration" value="{{ $subscription->duration }}">
+                                            <input type="number" name="duration" id="duration" class="form-control {{ ($errors->has('duration')) ? 'is-invalid' : '' }}" placeholder="Enter Duration" value="{{ $subscription->duration }}">
                                             @if($errors->has('duration'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('duration') }}
                                                 </div>
                                             @endif
                                         </div>
+                                        <small class="text-muted">Enter Duration in Months</small>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">

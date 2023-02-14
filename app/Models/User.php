@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserShop::class,'user_id','id');
     }
+
+    public function hasOneSubscription()
+    {
+        return $this->hasOne(UsersSubscriptions::class,'user_id','id');
+    }
 }

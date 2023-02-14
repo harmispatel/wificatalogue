@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
 use App\Models\Shop;
+use App\Models\Subscriptions;
 use App\Models\User;
 use App\Models\UserShop;
+use App\Models\UsersSubscriptions;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -18,11 +22,22 @@ class UserController extends Controller
 
     public function insert()
     {
-        return view('admin.clients.new_clients');
+        $data['subscriptions'] = Subscriptions::where('status',1)->get();
+        return view('admin.clients.new_clients',$data);
     }
 
     public function store(ClientRequest $request)
     {
+        $subscription_id = $request->subscription;
+
+        $subscription = Subscriptions::where('id',$subscription_id)->first();
+        $subscription_duration = isset($subscription->duration) ? $subscription->duration : '';
+
+        $date = Carbon::now();
+        $current_date = $date->toDateTimeString();
+        $end_date = $date->addMonths($subscription_duration)->toDateTimeString();
+        $duration = $subscription_duration.' Months.';
+
         $username = $request->name;
         $email = $request->email;
         $password = Hash::make($request->password);
@@ -53,8 +68,21 @@ class UserController extends Controller
                 $imageurl = asset('/').'public/admin_uploads/shop/'.$imgname;
                 $shop->logo = $imageurl;
             }
-
             $shop->save();
+
+
+            // Insert User Subscriptions
+            if($subscription_id)
+            {
+                $user_subscription = new UsersSubscriptions();
+                $user_subscription->user_id = $client->id;
+                $user_subscription->subscription_id = $subscription_id;
+                $user_subscription->duration = $duration;
+                $user_subscription->start_date = $current_date;
+                $user_subscription->end_date = $end_date;
+                $user_subscription->save();
+            }
+
         }
 
         if($client->id && $shop->id)
@@ -72,6 +100,16 @@ class UserController extends Controller
 
     public function update(ClientRequest $request)
     {
+        $subscription_id = $request->subscription;
+
+        $subscription = Subscriptions::where('id',$subscription_id)->first();
+        $subscription_duration = isset($subscription->duration) ? $subscription->duration : '';
+
+        $date = Carbon::now();
+        $current_date = $date->toDateTimeString();
+        $end_date = $date->addMonths($subscription_duration)->toDateTimeString();
+        $duration = $subscription_duration.' Months.';
+
         $username = $request->name;
         $email = $request->email;
         $password = Hash::make($request->password);
@@ -92,6 +130,19 @@ class UserController extends Controller
 
         $client->status = $status;
         $client->update();
+
+
+        // Update User Subscriptions
+        if(!empty($subscription_id ) && !empty($request->user_sub_id))
+        {
+            $user_subscription = UsersSubscriptions::find($request->user_sub_id);
+            $user_subscription->subscription_id = $subscription_id;
+            $user_subscription->duration = $duration;
+            $user_subscription->start_date = $current_date;
+            $user_subscription->end_date = $end_date;
+            $user_subscription->update();
+        }
+
 
         // Update Client Shop
         $shop = Shop::find($shop_id);
@@ -154,7 +205,8 @@ class UserController extends Controller
     {
        try 
        {
-            $data['client'] = User::with(['hasOneShop'])->where('id',$id)->first();
+            $data['client'] = User::with(['hasOneShop','hasOneSubscription'])->where('id',$id)->first();
+            $data['subscriptions'] = Subscriptions::where('status',1)->get();
 
             if($data['client'])
             {
