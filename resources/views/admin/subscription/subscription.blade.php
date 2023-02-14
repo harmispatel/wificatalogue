@@ -70,7 +70,7 @@
                                         <tr>
                                             <td>{{ $subscription->id }}</td>
                                             <td>{{ $subscription->name }}</td>
-                                            <td>{{ $subscription->price }}</td>
+                                            <td>$ {{ $subscription->price }}</td>
                                             <td>{{ $subscription->duration }} Months</td>
                                             <td>
                                                 @if($subscription->status == 1)
