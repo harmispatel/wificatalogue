@@ -60,7 +60,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h3>Client Details</h3>
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
