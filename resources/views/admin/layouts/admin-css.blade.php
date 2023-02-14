@@ -12,6 +12,9 @@
 <link href="{{ asset('public/admin/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
 <link href="{{ asset('public/admin/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
 
+<!-- icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+
 {{-- DataTable --}}
 <link href="{{ asset('public/admin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 

@@ -597,7 +597,8 @@
     scrollbar-width: thin;
     scrollbar-color: #aab7cf transparent;
     box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-    background-color: #fff;
+/*    background-color: #fff;*/
+    background-color:#203047;
   }
 
   @media (max-width: 1199px) {
@@ -671,26 +672,32 @@
     align-items: center;
     font-size: 15px;
     font-weight: 600;
-    color: #012970;
+/*    color: #012970;*/
+    color: #fff;
     transition: 0.3;
-    background: #fff;
+/*    background: #fff;*/
+    background-color:#203047;
     padding: 10px 15px;
     border-radius: 4px;
   }
 
   .sidebar-nav .active-tab{
-      color: #4154f1!important;
-      background: #f6f9ff!important;
+    /*color: #4154f1!important;
+    background: #f6f9ff!important;*/
+    color: #fff!important;
+    background: #45448a!important;
   }
 
   .sidebar-nav .icon-tab{
-      color: #4154f1!important;
+/*      color: #4154f1!important;*/
+      color: #fff!important;
   }
 
   .sidebar-nav .nav-link i {
     font-size: 16px;
     margin-right: 10px;
-    color: #899bbd;
+/*    color: #899bbd;*/
+    color:#fff;
   }
 
   .sidebar-nav .nav-link.collapsed {

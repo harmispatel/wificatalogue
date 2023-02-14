@@ -23,7 +23,7 @@
         {{-- Dashboard Nav --}}
         <li class="nav-item">
             <a class="nav-link {{ ($routeName == 'admin.dashboard') ? 'active-tab' : '' }}" href="{{ route('admin.dashboard') }}">
-                <i class="bi bi-grid {{ ($routeName == 'admin.dashboard') ? 'icon-tab' : '' }}"></i>
+                <i class="fa-solid fa-house-chimney {{ ($routeName == 'admin.dashboard') ? 'icon-tab' : '' }}"></i>
                 <span>Dashboard</span>
             </a>
         </li>
@@ -31,8 +31,14 @@
         {{-- Clients --}}
         <li class="nav-item">
             <a class="nav-link {{ ($routeName == 'clients' || $routeName == 'clients.add') ? 'active-tab' : '' }}" href="{{ route('clients') }}">
-                <i class="bi bi-people {{ ($routeName == 'clients' || $routeName == 'clients.add') ? 'icon-tab' : '' }}"></i>
+                <i class="fa-solid fa-users {{ ($routeName == 'clients' || $routeName == 'clients.add') ? 'icon-tab' : '' }}"></i>
                 <span>Clients</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="nav-link">
+                
             </a>
         </li>
 
