@@ -73,12 +73,15 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="price" class="form-label">Price</label>
-                                            <input type="number" name="price" id="price" class="form-control {{ ($errors->has('price')) ? 'is-invalid' : '' }}" placeholder="Enter Price" value="{{ $subscription->price }}">
-                                            @if($errors->has('price'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('price') }}
-                                                </div>
-                                            @endif
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="number" name="price" id="price" class="form-control {{ ($errors->has('price')) ? 'is-invalid' : '' }}" placeholder="Enter Price" value="{{ $subscription->price }}">
+                                                @if($errors->has('price'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('price') }}
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
