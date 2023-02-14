@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -24,24 +25,24 @@ Route::get('config-clear', function () {
     dd("Cache is cleared");
 });
 
-Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/', function () {
-        return redirect()->route('admin-login');
-    });
+// Auth Routes
+Route::get('/', function () {
+    return redirect()->route('login');
+});
+Route::get('/login', [AuthController::class,'showLogin'])->name('login');
+Route::post('/login', [AuthController::class,'login'])->name('doLogin');
+// Logout
+Route::post('/logout', [AuthController::class,'logout'])->name('logout');
 
-    // Auth Routes
-    Route::get('/login', [AuthController::class,'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class,'login'])->name('doLogin');
 
+Route::group(['prefix' => 'admin'], function () 
+{
     // If Auth Login
     Route::group(['middleware' => 'auth'], function ()
     {
         // Admin Dashboard
         Route::get('dashboard', [DashboardController::class,'index'])->name('admin.dashboard');
-
-        // Logout
-        Route::post('/logout', [AuthController::class,'logout'])->name('logout');
 
         // Clients
         Route::get('/clients',[UserController::class,'index'])->name('clients');
@@ -50,6 +51,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/delete-clients/{id}',[UserController::class,'destroy'])->name('clients.destroy');
         Route::get('/edit-clients/{id}',[UserController::class,'edit'])->name('clients.edit');
         Route::post('/update-clients',[UserController::class,'update'])->name('clients.update');
+
+        // Subscription
+        Route::get('/subscriptions',[SubscriptionsController::class,'index'])->name('subscriptions');
+        Route::get('/new-subscription',[SubscriptionsController::class,'insert'])->name('subscription.add');
+        Route::post('/store-subscription',[SubscriptionsController::class,'store'])->name('subscription.store');
+        Route::get('/delete-subscription/{id}',[SubscriptionsController::class,'destroy'])->name('subscription.destroy');
+        Route::get('/edit-subscription/{id}',[SubscriptionsController::class,'edit'])->name('subscription.edit');
+        Route::post('/update-subscription',[SubscriptionsController::class,'update'])->name('subscription.update');
+
     });
 
 });

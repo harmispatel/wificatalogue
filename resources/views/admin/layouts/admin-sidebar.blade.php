@@ -30,30 +30,25 @@
 
         {{-- Clients --}}
         <li class="nav-item">
-            <a class="nav-link {{ ($routeName == 'clients' || $routeName == 'clients.add') ? 'active-tab' : '' }}" href="{{ route('clients') }}">
-                <i class="bi bi-people {{ ($routeName == 'clients' || $routeName == 'clients.add') ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ ($routeName == 'clients' || $routeName == 'clients.add' || $routeName == 'clients.edit') ? 'active-tab' : '' }}" href="{{ route('clients') }}">
+                <i class="bi bi-people {{ ($routeName == 'clients' || $routeName == 'clients.add' || $routeName == 'clients.edit') ? 'icon-tab' : '' }}"></i>
                 <span>Clients</span>
             </a>
         </li>
 
-        {{-- Packages Nav --}}
-        {{-- <li class="nav-item">
-            <a class="nav-link {{ ((Route::currentRouteName() != 'packages') && (Route::currentRouteName() != 'package-type')) ? 'collapsed' : '' }} {{ ((Route::currentRouteName() == 'packages') || (Route::currentRouteName() == 'package-type')) ? 'active-tab' : '' }}" data-bs-target="#packages-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ ((Route::currentRouteName() == 'packages') || (Route::currentRouteName() == 'package-type')) ? 'true' : 'false' }}">
-                <i class="bi bi-collection {{ ((Route::currentRouteName() == 'packages') || (Route::currentRouteName() == 'package-type')) ? 'icon-tab' : '' }}"></i><span>Packages</span><i class="bi bi-chevron-down ms-auto {{ ((Route::currentRouteName() == 'packages') || (Route::currentRouteName() == 'package-types')) ? 'icon-tab' : '' }}"></i>
+        {{-- Settings Nav --}}
+        <li class="nav-item">
+            <a class="nav-link {{ (($routeName != 'subscriptions') && ($routeName != 'subscription.add') && ($routeName != 'subscription.edit')) ? 'collapsed' : '' }} {{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit')) ? 'true' : 'false' }}">
+                <i class="bi bi-gear {{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit')) ? 'icon-tab' : '' }}"></i><span>Systems</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="packages-nav" class="nav-content sidebar-ul collapse {{ ((Route::currentRouteName() == 'packages') || (Route::currentRouteName() == 'package-type')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="system-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('packages') }}" class="{{ (Route::currentRouteName() == 'packages') ? 'active-link' : '' }}">
-                        <i class="{{ (Route::currentRouteName() == 'packages') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i><span>Packages</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('package-type') }}" class="{{ (Route::currentRouteName() == 'package-type') ? 'active-link' : '' }}">
-                        <i class="{{ (Route::currentRouteName() == 'package-type') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i><span>Package Types</span>
+                    <a href="{{ route('subscriptions') }}" class="{{ ($routeName == 'subscriptions' || $routeName == 'subscription.add' || $routeName == 'subscription.edit') ? 'active-link' : '' }}">
+                        <i class="{{ ($routeName == 'subscriptions' || $routeName == 'subscription.add' || $routeName == 'subscription.edit') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i><span>Subscription</span>
                     </a>
                 </li>
             </ul>
-        </li> --}}
+        </li>
 
     </ul>
 </aside>

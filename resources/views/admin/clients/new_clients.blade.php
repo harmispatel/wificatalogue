@@ -12,6 +12,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('clients') }}">Clients</a></li>
                         <li class="breadcrumb-item active">New Clients</li>
                     </ol>
                 </nav>
@@ -65,7 +66,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="name" class="form-label">Client Name</label>
-                                            <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter Client Name">
+                                            <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter Client Name" value="{{ old('name') }}">
                                             @if($errors->has('name'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('name') }}
@@ -76,7 +77,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="email" class="form-label">Client Email</label>
-                                            <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Enter Client Email">
+                                            <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Enter Client Email" value="{{ old('email') }}">
                                             @if($errors->has('email'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('email') }}
@@ -124,7 +125,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="shop_name" class="form-label">Shop Name</label>
-                                            <input type="text" name="shop_name" id="shop_name" class="form-control {{ ($errors->has('shop_name')) ? 'is-invalid' : '' }}" placeholder="Enter Shop Name">
+                                            <input type="text" name="shop_name" id="shop_name" class="form-control {{ ($errors->has('shop_name')) ? 'is-invalid' : '' }}" placeholder="Enter Shop Name" value="{{ old('shop_name') }}">
                                             @if($errors->has('shop_name'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('shop_name') }}
@@ -141,7 +142,7 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label for="shop_description" class="form-label">Shop Description</label>
-                                            <textarea name="shop_description" id="shop_description" rows="5" class="form-control"></textarea>
+                                            <textarea name="shop_description" id="shop_description" rows="5" class="form-control">{{ old('shop_description') }}</textarea>
                                         </div>
                                     </div>
                                 </div>

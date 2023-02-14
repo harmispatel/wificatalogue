@@ -12,6 +12,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('clients') }}">Clients</a></li>
                         <li class="breadcrumb-item active">Edit Clients</li>
                     </ol>
                 </nav>
@@ -65,6 +66,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <input type="hidden" name="client_id" id="client_id" value="{{ $client->id }}">
+                                            <input type="hidden" name="shop_id" id="shop_id" value="{{ $client->hasOneShop['shop_id']}}">
                                             <label for="name" class="form-label">Client Name</label>
                                             <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter Client Name" value="{{ $client->name }}">
                                             @if($errors->has('name'))
