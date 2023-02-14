@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -9,6 +10,12 @@ class DashboardController extends Controller
     // Display Admin Dashboard.
     public function index()
     {
-        return view('admin.dashboard.dashboard');
+        $clients['total'] = User::where('user_type',2)->count();
+        $clients['active'] = User::where('user_type',2)->where('status',1)->count();
+        $clients['nonactive'] = User::where('user_type',2)->where('status',0)->count();
+
+        $data['client'] = $clients;
+
+        return view('admin.dashboard.dashboard',$data);
     }
 }

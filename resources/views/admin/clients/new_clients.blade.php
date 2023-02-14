@@ -146,6 +146,32 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h3>Subscription Details</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="subscription" class="form-label">Subscriptions</label>
+                                            <select name="subscription" id="subscription" class="form-control {{ ($errors->has('subscription')) ? 'is-invalid' : '' }}">
+                                                <option value="">Select Subscription</option>
+                                                @if (count($subscriptions) > 0)
+                                                    @foreach ($subscriptions as $subscription)
+                                                        <option value="{{ $subscription->id }}">{{ $subscription->name }} ({{$subscription->duration}} Months)</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @if($errors->has('subscription'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('subscription') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">

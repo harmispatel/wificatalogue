@@ -26,6 +26,7 @@ class ClientRequest extends FormRequest
         $rules = [
             'name' => 'required',
             'shop_name' => 'required',
+            'subscription' => 'required',
         ];
 
 

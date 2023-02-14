@@ -60,13 +60,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h3>Client Details</h3>
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <input type="hidden" name="client_id" id="client_id" value="{{ $client->id }}">
                                             <input type="hidden" name="shop_id" id="shop_id" value="{{ $client->hasOneShop['shop_id']}}">
+                                            <input type="hidden" name="user_sub_id" id="user_sub_id" value="{{ isset($client->hasOneSubscription['subscription_id']) ? $client->hasOneSubscription['id'] : '' }}">
                                             <label for="name" class="form-label">Client Name</label>
                                             <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter Client Name" value="{{ $client->name }}">
                                             @if($errors->has('name'))
@@ -149,6 +150,32 @@
                                         <div class="form-group">
                                             <label for="shop_description" class="form-label">Shop Description</label>
                                             <textarea name="shop_description" id="shop_description" rows="5" class="form-control">{{ $client->hasOneShop->shop['description'] }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h3>Subscription Details</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="subscription" class="form-label">Subscriptions</label>
+                                            <select name="subscription" id="subscription" class="form-control {{ ($errors->has('subscription')) ? 'is-invalid' : '' }}">
+                                                <option value="">Select Subscription</option>
+                                                @if (count($subscriptions) > 0)
+                                                    @foreach ($subscriptions as $subscription)
+                                                        <option value="{{ $subscription->id }}" {{ ($client->hasOneSubscription['subscription_id'] == $subscription->id) ? 'selected' : '' }}>{{ $subscription->name }} ({{$subscription->duration}} Months)</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @if($errors->has('subscription'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('subscription') }}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

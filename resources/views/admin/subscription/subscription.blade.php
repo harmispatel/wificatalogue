@@ -60,7 +60,6 @@
                                         <th>Id</th>
                                         <th>Name</th>
                                         <th>Price</th>
-                                        <th>Description</th>
                                         <th>Duration</th>
                                         <th>Status</th>
                                         <th>Actions</th>
@@ -72,8 +71,7 @@
                                             <td>{{ $subscription->id }}</td>
                                             <td>{{ $subscription->name }}</td>
                                             <td>{{ $subscription->price }}</td>
-                                            <td>{{ $subscription->description }}</td>
-                                            <td>{{ $subscription->duration }}</td>
+                                            <td>{{ $subscription->duration }} Months</td>
                                             <td>
                                                 @if($subscription->status == 1)
                                                     <span class="badge bg-success">Active</span>
