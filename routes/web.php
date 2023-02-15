@@ -37,7 +37,7 @@ Route::post('/login', [AuthController::class,'login'])->name('doLogin');
 Route::post('/logout', [AuthController::class,'logout'])->name('logout');
 
 
-Route::group(['prefix' => 'admin'], function () 
+Route::group(['prefix' => 'admin'], function ()
 {
     // If Auth Login
     Route::group(['middleware' => 'auth'], function ()
@@ -61,6 +61,9 @@ Route::group(['prefix' => 'admin'], function ()
         Route::get('/edit-subscription/{id}',[SubscriptionsController::class,'edit'])->name('subscription.edit');
         Route::post('/update-subscription',[SubscriptionsController::class,'update'])->name('subscription.update');
 
+        // AdminProfile
+        Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('admin.profile');
+        Route::post('/update-profile',[UserController::class,'updateProfile'])->name('admin.profile.update');
     });
 
 });

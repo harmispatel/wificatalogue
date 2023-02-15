@@ -97,7 +97,7 @@
                                     </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td colspan="4">Clients Not Found!</td>
+                                        <td colspan="6">Clients Not Found!</td>
                                     </tr>
                                 @endforelse
                             </tbody>

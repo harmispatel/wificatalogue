@@ -22,7 +22,7 @@
             <span class="d-none d-lg-block">My Logo</span>
             {{-- <img class="w-100" src="{{ asset('public/admin_images/logos/put_logo1.jpg') }}" alt="Logo"> --}}
         </a>
-        
+
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
 
@@ -31,11 +31,7 @@
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     @if (!empty($userImage) || $userImage != null)
-                        @if (file_exists($userImage))
-                            <img src="{{ asset($userImage) }}" alt="Profile" class="rounded-circle">
-                        @else
-                            <img src="{{ asset('public/admin_images/demo_images/profiles/profile1.jpg') }}" alt="Profile" class="rounded-circle">
-                        @endif
+                        <img src="{{ asset($userImage) }}" alt="Profile" class="rounded-circle">
                     @else
                         <img src="{{ asset('public/admin_images/demo_images/profiles/profile1.jpg') }}" alt="Profile" class="rounded-circle">
                     @endif
@@ -52,7 +48,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.profile',$userID) }}">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>

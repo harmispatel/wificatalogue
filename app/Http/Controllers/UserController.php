@@ -10,6 +10,7 @@ use App\Models\UserShop;
 use App\Models\UsersSubscriptions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -182,7 +183,7 @@ class UserController extends Controller
         {
             $shop = Shop::where('id',$shop_id)->first();
             $shop_logo = isset($shop->logo) ? $shop->logo : '';
-            
+
             if(!empty($shop_logo) && file_exists($shop_logo))
             {
                 unlink($shop_logo);
@@ -190,10 +191,10 @@ class UserController extends Controller
 
             Shop::where('id',$shop_id)->delete();
         }
-       
+
         // Delete UserShop
         UserShop::where('user_id',$id)->delete();
-        
+
         // Delete User
         User::where('id',$id)->delete();
 
@@ -203,20 +204,84 @@ class UserController extends Controller
 
     public function edit($id)
     {
-       try 
+       try
        {
             $data['client'] = User::with(['hasOneShop','hasOneSubscription'])->where('id',$id)->first();
             $data['subscriptions'] = Subscriptions::where('status',1)->get();
 
             if($data['client'])
             {
-                return view('admin.clients.edit_clients',$data); 
+                return view('admin.clients.edit_clients',$data);
             }
             return redirect()->route('clients')->with('error', 'Something went wrong!');
-       } 
-       catch (\Throwable $th) 
+       }
+       catch (\Throwable $th)
        {
             return redirect()->route('clients')->with('error', 'Something went wrong!');
        }
     }
+
+
+    public function editProfile($id)
+    {
+        $data['user'] = User::where('id',decrypt($id))->first();
+
+        if(Auth::user()->user_type == 1)
+        {
+            return view('auth.admin-profile',$data);
+        }
+        else
+        {
+            dd(1);
+        }
+    }
+
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name'                  =>      'required',
+            'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
+            'confirm_password'      =>      'same:password',
+            'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG'
+        ]);
+
+        $user  = User::find($request->user_id);
+
+        if(Auth::user()->user_type == 1)
+        {
+            $user->name = $request->name;
+            $user->email = $request->email;
+
+            if(!empty($request->password))
+            {
+                $user->password = Hash::make($request->password);
+            }
+
+            if($request->hasFile('profile_picture'))
+            {
+                // Remove Old Image
+                $old_image = isset($user->image) ? $user->image : '';
+                if(!empty($old_image) && file_exists($old_image))
+                {
+                    unlink($old_image);
+                }
+
+                // Insert New Image
+                $imgname = time().".". $request->file('profile_picture')->getClientOriginalExtension();
+                $request->file('profile_picture')->move(public_path('admin_uploads/users/'), $imgname);
+                $imageurl = asset('/').'public/admin_uploads/users/'.$imgname;
+                $user->image = $imageurl;
+            }
+
+            $user->update();
+            return redirect()->route('admin.dashboard')->with('success','Profile has been Updated SuccessFully..');
+        }
+        else
+        {
+            dd(1);
+        }
+
+    }
+
 }
