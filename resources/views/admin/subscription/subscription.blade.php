@@ -17,7 +17,7 @@
                 </nav>
             </div>
             <div class="col-md-4" style="text-align: right;">
-                <a href="{{ route('subscription.add') }}" class="btn btn-sm new-amenity btn-primary">
+                <a href="{{ route('subscriptions.add') }}" class="btn btn-sm new-amenity btn-primary">
                     <i class="bi bi-plus-lg"></i>
                 </a>
             </div>
@@ -80,10 +80,10 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('subscription.edit',$subscription->id) }}" class="btn btn-sm btn-primary">
+                                                <a href="{{ route('subscriptions.edit',$subscription->id) }}" class="btn btn-sm btn-primary">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
-                                                <a href="{{ route('subscription.destroy',$subscription->id) }}" class="btn btn-sm btn-danger">
+                                                <a href="{{ route('subscriptions.destroy',$subscription->id) }}" class="btn btn-sm btn-danger">
                                                     <i class="bi bi-trash"></i>
                                                 </a>
                                             </td>

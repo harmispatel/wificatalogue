@@ -11,6 +11,7 @@
 <link href="{{ asset('public/admin/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
 <link href="{{ asset('public/admin/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
 <link href="{{ asset('public/admin/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+<link href="{{ asset('public/admin/assets/css/custom.css') }}" rel="stylesheet">
 
 <!-- icon -->
 {{-- font Awesome --}}

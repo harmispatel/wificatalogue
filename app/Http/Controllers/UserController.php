@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['clients'] = User::where('user_type',2)->get();
+        $data['clients'] = User::with(['hasOneShop','hasOneSubscription'])->where('user_type',2)->get();
         return view('admin.clients.clients',$data);
     }
 
@@ -197,6 +197,9 @@ class UserController extends Controller
 
         // Delete User
         User::where('id',$id)->delete();
+
+        // Delete Users Subscription
+        UsersSubscriptions::where('user_id',$id)->delete();
 
         return redirect()->route('clients')->with('success','Client has been Removed SuccessFully..');
     }

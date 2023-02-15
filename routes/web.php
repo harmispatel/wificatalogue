@@ -55,11 +55,11 @@ Route::group(['prefix' => 'admin'], function ()
 
         // Subscription
         Route::get('/subscriptions',[SubscriptionsController::class,'index'])->name('subscriptions');
-        Route::get('/new-subscription',[SubscriptionsController::class,'insert'])->name('subscription.add');
-        Route::post('/store-subscription',[SubscriptionsController::class,'store'])->name('subscription.store');
-        Route::get('/delete-subscription/{id}',[SubscriptionsController::class,'destroy'])->name('subscription.destroy');
-        Route::get('/edit-subscription/{id}',[SubscriptionsController::class,'edit'])->name('subscription.edit');
-        Route::post('/update-subscription',[SubscriptionsController::class,'update'])->name('subscription.update');
+        Route::get('/new-subscription',[SubscriptionsController::class,'insert'])->name('subscriptions.add');
+        Route::post('/store-subscription',[SubscriptionsController::class,'store'])->name('subscriptions.store');
+        Route::get('/delete-subscription/{id}',[SubscriptionsController::class,'destroy'])->name('subscriptions.destroy');
+        Route::get('/edit-subscription/{id}',[SubscriptionsController::class,'edit'])->name('subscriptions.edit');
+        Route::post('/update-subscription',[SubscriptionsController::class,'update'])->name('subscriptions.update');
 
         // AdminProfile
         Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('admin.profile');

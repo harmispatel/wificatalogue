@@ -33,28 +33,39 @@
             </a>
         </li>
 
-        {{-- Clients --}}
+        {{-- Clients Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ ($routeName == 'clients' || $routeName == 'clients.add' || $routeName == 'clients.edit') ? 'active-tab' : '' }}" href="{{ route('clients') }}">
-                <i class="fa-solid fa-users {{ ($routeName == 'clients' || $routeName == 'clients.add' || $routeName == 'clients.edit') ? 'icon-tab' : '' }}"></i>
-                <span>Clients</span>
-                <i class="bi bi-grid-fill icon_right"></i>
+            <a class="nav-link {{ (($routeName != 'clients') && ($routeName != 'clients.add') && ($routeName != 'clients.edit')) ? 'collapsed' : '' }} {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'active-tab' : '' }}" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'true' : 'false' }}">
+                <i class="fa-solid fa-users {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'icon-tab' : '' }}"></i><span>Clients</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'icon-tab' : '' }}"></i>
+            </a>
+            <ul id="client-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('clients') }}" class="{{ ($routeName == 'clients' || $routeName == 'clients.add' || $routeName == 'clients.edit') ? 'active-link' : '' }}">
+                        {{-- <i class="{{ ($routeName == 'subscriptions' || $routeName == 'subscription.add' || $routeName == 'subscription.edit') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
+                        <span>Clients</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- Subscriptions Nav --}}
+        <li class="nav-item">
+            <a class="nav-link {{ (($routeName == 'subscriptions') || ($routeName == 'subscriptions.add') || ($routeName == 'subscriptions.edit')) ? 'active-tab' : '' }}" href="{{ route('subscriptions') }}">
+                <i class="fa-solid fa-cubes {{ (($routeName == 'subscriptions') || ($routeName == 'subscriptions.add') || ($routeName == 'subscriptions.edit')) ? 'icon-tab' : '' }}"></i>
+                <span>Subscriptions</span>
             </a>
         </li>
 
-        {{-- Settings Nav --}}
+        {{-- System Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ (($routeName != 'subscriptions') && ($routeName != 'subscription.add') && ($routeName != 'subscription.edit') && ($routeName != 'admin.profile')) ? 'collapsed' : '' }} {{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit') || ($routeName == 'admin.profile')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit') || ($routeName == 'admin.profile')) ? 'true' : 'false' }}">
-                <i class="fa-solid fa-wrench {{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit') || ($routeName == 'admin.profile')) ? 'icon-tab' : '' }}"></i><span>Systems</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit') || ($routeName == 'admin.profile')) ? 'icon-tab' : '' }}"></i>
+            {{-- First && and !=  --}}
+            <a class="nav-link {{ (($routeName != 'admin.profile')) ? 'collapsed' : '' }} {{ (($routeName == 'admin.profile')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'admin.profile')) ? 'true' : 'false' }}">
+                <i class="fa-solid fa-wrench {{ (($routeName == 'admin.profile')) ? 'icon-tab' : '' }}"></i><span>System</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'admin.profile')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="system-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'subscriptions') || ($routeName == 'subscription.add') || ($routeName == 'subscription.edit') || ($routeName == 'admin.profile')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="system-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'admin.profile')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('subscriptions') }}" class="{{ ($routeName == 'subscriptions' || $routeName == 'subscription.add' || $routeName == 'subscription.edit') ? 'active-link' : '' }}">
-                        {{-- <i class="{{ ($routeName == 'subscriptions' || $routeName == 'subscription.add' || $routeName == 'subscription.edit') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
-                        <span>Subscription</span>
-                    </a>
                     <a href="{{ route('admin.profile',$userID) }}" class="{{ ($routeName == 'admin.profile') ? 'active-link' : '' }}">
-                        {{-- <i class="{{ ($routeName == 'subscriptions' || $routeName == 'subscription.add' || $routeName == 'subscription.edit') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
+                        {{-- <i class="{{ ($routeName == 'admin.profile') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
                         <span>Profile</span>
                     </a>
                 </li>

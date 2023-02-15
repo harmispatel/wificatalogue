@@ -51,7 +51,7 @@
             {{-- Subscription Card --}}
             <div class="col-md-12">
                 <div class="card">
-                    <form class="form" action="{{ route('subscription.store') }}" method="POST" enctype="multipart/form-data">
+                    <form class="form" action="{{ route('subscriptions.store') }}" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="card-title">
                             </div>
@@ -113,7 +113,7 @@
                                             <textarea name="description" id="description" rows="5" placeholder="Enter Subscription Description" class="form-control"></textarea>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">
