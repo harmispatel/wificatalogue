@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubscriptionsController;
@@ -47,8 +48,11 @@ Route::group(['prefix' => 'admin'], function ()
 
         // Clients
         Route::get('/clients',[UserController::class,'index'])->name('clients');
+        Route::get('/list-clients/{id?}',[UserController::class,'clientsList'])->name('clients.list');
         Route::get('/new-clients',[UserController::class,'insert'])->name('clients.add');
         Route::post('/store-clients',[UserController::class,'store'])->name('clients.store');
+        Route::post('/status-clients',[UserController::class,'changeStatus'])->name('clients.status');
+        Route::post('/status-fav-clients',[UserController::class,'addToFavClients'])->name('clients.addtofav');
         Route::get('/delete-clients/{id}',[UserController::class,'destroy'])->name('clients.destroy');
         Route::get('/edit-clients/{id}',[UserController::class,'edit'])->name('clients.edit');
         Route::post('/update-clients',[UserController::class,'update'])->name('clients.update');
@@ -64,6 +68,12 @@ Route::group(['prefix' => 'admin'], function ()
         // AdminProfile
         Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('admin.profile');
         Route::post('/update-profile',[UserController::class,'updateProfile'])->name('admin.profile.update');
+
+        // Admin Settings
+        Route::get('/settings',[AdminSettingsController::class,'index'])->name('admin.settings');
+        Route::post('/settings-update',[AdminSettingsController::class,'update'])->name('update.admin.settings');
+
+
     });
 
 });

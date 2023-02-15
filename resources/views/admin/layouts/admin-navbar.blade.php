@@ -13,14 +13,20 @@
         $userImage = '';
     }
 
+    $settings = getAdminSettings();
+    $logo = isset($settings['logo']) ? $settings['logo'] : '';
+
 @endphp
 
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between text-center">
         <a href="{{ route('admin.dashboard') }}" class="logo d-flex align-items-center justify-content-center">
-            <span class="d-none d-lg-block">My Logo</span>
-            {{-- <img class="w-100" src="{{ asset('public/admin_images/logos/put_logo1.jpg') }}" alt="Logo"> --}}
+            @if(!empty($logo))
+                <img class="w-100" src="{{ $logo }}" alt="Logo">
+            @else
+                <span class="d-none d-lg-block">My Logo</span>
+            @endif
         </a>
 
         <i class="bi bi-list toggle-sidebar-btn"></i>

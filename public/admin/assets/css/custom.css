@@ -67,3 +67,26 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.clients-list{
+    position: absolute;
+    top:50%;
+    right:10px;
+    transform: translate(0 , -50%);
+    margin-right: 0!important;
+}
+
+/* Toggle Status Button */
+.form-check-input:checked{
+    background-color: #198754!important;
+    border-color: #198754!important;
+}
+.form-check-input{
+    background-color: #e47b86!important;
+    border-color: #e47b86!important;
+}
+.form-switch .form-check-input
+{
+    width: 45px!important;
+    height: 25px!important;
+}

@@ -114,6 +114,13 @@
                                             <input type="radio" name="status" value="0" id="inactive"> <label for="inactive">InActive</label>
                                         </div>
                                     </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="favourite" class="form-label">Favourite</label><br>
+                                            <input type="radio" name="favourite" value="1" id="yes"> <label for="yes">Yes</label>
+                                            <input type="radio" name="favourite" value="0" id="no" checked> <label for="no">No</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <hr>
                                 <div class="row mt-3">

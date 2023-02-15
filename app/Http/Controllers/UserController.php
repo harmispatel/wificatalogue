@@ -17,8 +17,28 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['clients'] = User::with(['hasOneShop','hasOneSubscription'])->where('user_type',2)->get();
+        $settings = getAdminSettings();
+        $favourite_client_limit = isset($settings['favourite_client_limit']) ? $settings['favourite_client_limit'] : 5;
+
+        $data['clients'] = FavClients($favourite_client_limit);
         return view('admin.clients.clients',$data);
+    }
+
+    public function clientsList($id="")
+    {
+        $settings = getAdminSettings();
+        $favourite_client_limit = isset($settings['favourite_client_limit']) ? $settings['favourite_client_limit'] : 5;
+
+        if(empty($id))
+        {
+            $data['clients'] = User::with(['hasOneShop','hasOneSubscription'])->where('user_type',2)->get();
+        }
+        else
+        {
+            $data['clients'] = User::with(['hasOneShop','hasOneSubscription'])->where('id',$id)->get();
+        }
+
+        return view('admin.clients.clients_list',$data);
     }
 
     public function insert()
@@ -53,6 +73,7 @@ class UserController extends Controller
         $client->password = $password;
         $client->status = $status;
         $client->user_type = 2;
+        $client->is_fav = $request->favourite;
         $client->save();
 
         if($client->id)
@@ -123,6 +144,7 @@ class UserController extends Controller
         $client = User::find($request->client_id);
         $client->name = $username;
         $client->email = $email;
+        $client->is_fav = $request->favourite;
 
         if(!empty($password))
         {
@@ -285,6 +307,58 @@ class UserController extends Controller
             dd(1);
         }
 
+    }
+
+
+    public function changeStatus(Request $request)
+    {
+        // Client ID & Status
+        $client_id = $request->id;
+        $status = $request->status;
+
+        try
+        {
+            $client = User::find($client_id);
+            $client->status = $status;
+            $client->update();
+
+            return response()->json([
+                'success' => 1,
+            ]);
+
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json([
+                'success' => 0,
+            ]);
+        }
+    }
+
+
+    public function addToFavClients(Request $request)
+    {
+        // Client ID & isFav
+        $client_id = $request->id;
+        $status = $request->status;
+
+        try
+        {
+            $client = User::find($client_id);
+            $client->is_fav = $status;
+            $client->update();
+
+            return response()->json([
+                'success' => 1,
+            ]);
+
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json([
+                'success' => 0,
+            ]);
+        }
     }
 
 }

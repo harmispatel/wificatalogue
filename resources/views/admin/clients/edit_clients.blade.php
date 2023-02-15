@@ -60,7 +60,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h3>Client Details</h3>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -115,6 +115,13 @@
                                             <label for="status" class="form-label">Status</label><br>
                                             <input type="radio" name="status" value="1" id="active" {{ ($client->status == 1) ? 'checked' : '' }}> <label for="active">Active</label>
                                             <input type="radio" name="status" value="0" id="inactive" {{ ($client->status == 0) ? 'checked' : '' }}> <label for="inactive">InActive</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="favourite" class="form-label">Favourite</label><br>
+                                            <input type="radio" name="favourite" value="1" id="yes" {{ ($client->is_fav == 1) ? 'checked' : '' }}> <label for="yes">Yes</label>
+                                            <input type="radio" name="favourite" value="0" id="no" {{ ($client->is_fav == 0) ? 'checked' : '' }}> <label for="no">No</label>
                                         </div>
                                     </div>
                                 </div>

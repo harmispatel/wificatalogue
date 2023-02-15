@@ -13,7 +13,15 @@
         $userImage = '';
     }
 
+    // Get Settings
+    $settings = getAdminSettings();
+    $favourite_client_limit = isset($settings['favourite_client_limit']) ? $settings['favourite_client_limit'] : 5;
+
+    // Current Route Name
     $routeName = Route::currentRouteName();
+
+    // Get Fav Clients List
+    $clients = FavClients($favourite_client_limit);
 
 @endphp
 
@@ -35,16 +43,23 @@
 
         {{-- Clients Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ (($routeName != 'clients') && ($routeName != 'clients.add') && ($routeName != 'clients.edit')) ? 'collapsed' : '' }} {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'active-tab' : '' }}" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'true' : 'false' }}">
-                <i class="fa-solid fa-users {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'icon-tab' : '' }}"></i><span>Clients</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ (($routeName != 'clients') && ($routeName != 'clients.add') && ($routeName != 'clients.edit') && ($routeName != 'clients.list')) ? 'collapsed' : '' }} {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'active-tab' : '' }}" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'true' : 'false' }}">
+                <i class="fa-solid fa-users {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'icon-tab' : '' }}"></i><span onclick="gotoListView()">Clients</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'icon-tab' : '' }}"></i>
+            <i class="bi bi-grid clients.list" onclick="gotoTilesView()"></i>
             </a>
-            <ul id="client-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{ route('clients') }}" class="{{ ($routeName == 'clients' || $routeName == 'clients.add' || $routeName == 'clients.edit') ? 'active-link' : '' }}">
-                        {{-- <i class="{{ ($routeName == 'subscriptions' || $routeName == 'subscription.add' || $routeName == 'subscription.edit') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
-                        <span>Clients</span>
-                    </a>
-                </li>
+            <ul id="client-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                @if(count($clients) > 0)
+                    @foreach ($clients as $client)
+                        @php
+                            $shopName = (isset($client->hasOneShop->shop['name'])) ? $client->hasOneShop->shop['name'] : '';
+                        @endphp
+                        <li>
+                            <a href="{{ route('clients.list',$client->id) }}">
+                                <span>{{ $shopName }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </li>
 
@@ -58,15 +73,19 @@
 
         {{-- System Nav --}}
         <li class="nav-item">
-            {{-- First && and !=  --}}
-            <a class="nav-link {{ (($routeName != 'admin.profile')) ? 'collapsed' : '' }} {{ (($routeName == 'admin.profile')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'admin.profile')) ? 'true' : 'false' }}">
-                <i class="fa-solid fa-wrench {{ (($routeName == 'admin.profile')) ? 'icon-tab' : '' }}"></i><span>System</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'admin.profile')) ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ (($routeName != 'admin.profile') && ($routeName != 'admin.settings')) ? 'collapsed' : '' }} {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'true' : 'false' }}">
+                <i class="fa-solid fa-wrench {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'icon-tab' : '' }}"></i><span>System</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="system-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'admin.profile')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="system-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('admin.profile',$userID) }}" class="{{ ($routeName == 'admin.profile') ? 'active-link' : '' }}">
                         {{-- <i class="{{ ($routeName == 'admin.profile') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
                         <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.settings') }}" class="{{ ($routeName == 'admin.settings') ? 'active-link' : '' }}">
+                        <span>Settings</span>
                     </a>
                 </li>
             </ul>
