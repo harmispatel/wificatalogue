@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminSettings;
+use App\Models\Languages;
 use Illuminate\Http\Request;
 
 class AdminSettingsController extends Controller
@@ -24,7 +25,10 @@ class AdminSettingsController extends Controller
             $settings[$key] = isset($query->value) ? $query->value : '';
         }
 
-        return view('admin.settings.settings',compact('settings'));
+        // Languages
+        $languages = Languages::where('status',1)->get();
+
+        return view('admin.settings.settings',compact('settings','languages'));
     }
 
 
@@ -47,7 +51,6 @@ class AdminSettingsController extends Controller
             $logoUrl = asset('/').'public/admin_uploads/logos/'.$logoname;
             $all_data['logo'] = $logoUrl;
         }
-
 
         // Insert or Update Settings
         foreach($all_data as $key => $value)

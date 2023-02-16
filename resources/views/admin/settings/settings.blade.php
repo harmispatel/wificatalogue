@@ -70,7 +70,7 @@
                                     <b>Copyright</b>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="copyright_text" class="form-control {{ ($errors->has('copyright_text')) ? 'is-invalid' : '' }}" value="{{ isset($settings['copyright_text']) ? $settings['copyright_text'] : '' }}">
+                                    <textarea name="copyright_text" id="copyright_text" rows="5" class="form-control {{ ($errors->has('copyright_text')) ? 'is-invalid' : '' }}">{{ isset($settings['copyright_text']) ? $settings['copyright_text'] : '' }}</textarea>
                                     @if($errors->has('copyright_text'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('copyright_text') }}
@@ -89,6 +89,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="logo" class="form-control {{ ($errors->has('logo')) ? 'is-invalid' : '' }}">
+                                    <code>Upload Logo (100*30)</code>
                                      @if($errors->has('logo'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('logo') }}
@@ -97,6 +98,50 @@
                                     @if(!empty($logo))
                                         <div class="mt-3">
                                             <img src="{{ $logo }}" alt="" width="100">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- New Language Section --}}
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>New Language</b>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" name="lang_name" id="lang_name" class="form-control" placeholder="Enter Language Name">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" name="lang_code" id="lang_code" class="form-control" placeholder="Enter Language Code">
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-success" onclick="addNewLanguage()"><i class="bi bi-save"></i></a>
+                                </div>
+                            </div>
+
+
+                            {{-- Languages Section --}}
+                            @php
+                                $languages_array = [];
+                                foreach ($languages as $key => $value) {
+                                    $languages_array[] = $value->id;
+                                }
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Languages</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="languages[]" id="languages" class="form-control {{ ($errors->has('languages')) ? 'is-invalid' : '' }}" multiple>
+                                        @if(count($languages) > 0)
+                                            @foreach ($languages as $language)
+                                                <option value="{{ $language->id }}" {{ (in_array($language->id,$languages_array)) ? 'selected' : '' }}>{{ $language->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if($errors->has('languages'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('languages') }}
                                         </div>
                                     @endif
                                 </div>
@@ -116,6 +161,44 @@
 {{-- Custom JS --}}
 @section('page-js')
     <script type="text/javascript">
+
+        // Select 2
+        $("#languages").select2();
+
+        // Add New Language
+        function addNewLanguage(){
+            var lang_name = $('#lang_name').val();
+            var lang_code = $('#lang_code').val();
+
+            if(lang_name == '' && lang_code == '')
+            {
+                alert('Please Enter Language Name or Code!');
+                return false;
+            }
+            else
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('languages.save.ajax') }}",
+                    data: {
+                        "_token" : "{{ csrf_token() }}",
+                        "name" : lang_name,
+                        "code" : lang_code,
+                    },
+                    dataType: "JSON",
+                    success: function (response) {
+                        if(response.success == 1)
+                        {
+                            toastr.success("Language has been Inseted SuccessFully...");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        }
+                    }
+                });
+            }
+
+        }
 
     </script>
 @endsection

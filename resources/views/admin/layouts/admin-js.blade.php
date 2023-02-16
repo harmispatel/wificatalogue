@@ -37,9 +37,4 @@
         window.location.href = "{{ route('clients')}}";
     }
 
-    function gotoListView()
-    {
-        window.location.href = "{{ route('clients.list')}}";
-    }
-
 </script>

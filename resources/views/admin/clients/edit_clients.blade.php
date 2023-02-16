@@ -147,10 +147,10 @@
                                         <div class="form-group">
                                             <label for="shop_logo" class="form-label">Shop Logo</label>
                                             <input type="file" name="shop_logo" id="shop_logo" class="form-control">
-                                            <br>
-                                            <div>
-                                                <img width="70" src="{{ $client->hasOneShop->shop['logo'] }}" alt="">
-                                            </div>
+                                        </div>
+                                        <code>Upload Shop Logo (150*80) or (150*150)</code>
+                                        <div class="form-group">
+                                            <img width="70" src="{{ $client->hasOneShop->shop['logo'] }}" alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3">

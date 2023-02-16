@@ -7,7 +7,7 @@
 <footer id="footer" class="footer">
     <div class="copyright">
         {{-- &copy; Copyright <strong><span>Wifi Catalogue</span></strong>. All Rights Reserved --}}
-        {{ $copyright_text }}
+        {!! $copyright_text !!}
     </div>
     {{-- <div class="credits">
         Designed by <a href="#" target="_blank">Wifi Catalogue</a>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersSubscriptionsController;
@@ -46,6 +47,14 @@ Route::group(['prefix' => 'admin'], function ()
         // Admin Dashboard
         Route::get('dashboard', [DashboardController::class,'index'])->name('admin.dashboard');
 
+        // Admins
+        Route::get('/admins',[UserController::class,'AdminUsers'])->name('admins');
+        Route::get('/new-admins',[UserController::class,'NewAdminUser'])->name('admins.add');
+        Route::post('/store-admins',[UserController::class,'storeNewAdmin'])->name('admins.store');
+        Route::get('/delete-admins/{id}',[UserController::class,'destroyAdminUser'])->name('admins.destroy');
+        Route::get('/edit-admins/{id}',[UserController::class,'editAdmin'])->name('admins.edit');
+        Route::post('/update-admins',[UserController::class,'updateAdmin'])->name('admins.update');
+
         // Clients
         Route::get('/clients',[UserController::class,'index'])->name('clients');
         Route::get('/list-clients/{id?}',[UserController::class,'clientsList'])->name('clients.list');
@@ -73,6 +82,9 @@ Route::group(['prefix' => 'admin'], function ()
         Route::get('/settings',[AdminSettingsController::class,'index'])->name('admin.settings');
         Route::post('/settings-update',[AdminSettingsController::class,'update'])->name('update.admin.settings');
 
+
+        // Languages
+        Route::post('/save-language',[LanguagesController::class,'saveAjax'])->name('languages.save.ajax');
 
     });
 

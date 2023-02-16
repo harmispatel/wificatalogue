@@ -1,31 +1,31 @@
 @extends('admin.layouts.admin-layout')
 
-@section('title', 'New Client')
+@section('title', 'New Admin')
 
 @section('content')
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Clients</h1>
+        <h1>Admins</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('clients') }}">Clients</a></li>
-                        <li class="breadcrumb-item active">New Clients</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admins') }}">Admins</a></li>
+                        <li class="breadcrumb-item active">New Admin</li>
                     </ol>
                 </nav>
             </div>
             <div class="col-md-4" style="text-align: right;">
-                <a href="{{ route('clients') }}" class="btn btn-sm new-amenity btn-primary">
+                <a href="{{ route('admins') }}" class="btn btn-sm new-amenity btn-primary">
                     <i class="bi bi-arrow-left"></i>
                 </a>
             </div>
         </div>
     </div>
 
-    {{-- New Clients add Section --}}
+    {{-- New Admins add Section --}}
     <section class="section dashboard">
         <div class="row">
             {{-- Error Message Section --}}
@@ -48,25 +48,20 @@
                 </div>
             @endif
 
-            {{-- Clients Card --}}
+            {{-- Admin Card --}}
             <div class="col-md-12">
                 <div class="card">
-                    <form class="form" action="{{ route('clients.store') }}" method="POST" enctype="multipart/form-data">
+                    <form class="form" action="{{ route('admins.store') }}" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="card-title">
                             </div>
                             @csrf
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>Client Details</h3>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="name" class="form-label">Client Name</label>
-                                            <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter Client Name" value="{{ old('name') }}">
+                                            <label for="name" class="form-label">Username</label>
+                                            <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter User Name" value="{{ old('name') }}">
                                             @if($errors->has('name'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('name') }}
@@ -76,8 +71,8 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="email" class="form-label">Client Email</label>
-                                            <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Enter Client Email" value="{{ old('email') }}">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Enter User Email" value="{{ old('email') }}">
                                             @if($errors->has('email'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('email') }}
@@ -116,68 +111,15 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="favourite" class="form-label">Favourite</label><br>
-                                            <input type="radio" name="favourite" value="1" id="yes"> <label for="yes">Yes</label>
-                                            <input type="radio" name="favourite" value="0" id="no" checked> <label for="no">No</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                                        <h3>Shop Details</h3>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="shop_name" class="form-label">Shop Name</label>
-                                            <input type="text" name="shop_name" id="shop_name" class="form-control {{ ($errors->has('shop_name')) ? 'is-invalid' : '' }}" placeholder="Enter Shop Name" value="{{ old('shop_name') }}">
-                                            @if($errors->has('shop_name'))
+                                            <label for="user_image" class="form-label">User Image</label>
+                                            <input type="file" name="user_image" id="user_image" class="form-control {{ ($errors->has('user_image')) ? 'is-invalid' : '' }}">
+                                            @if($errors->has('user_image'))
                                                 <div class="invalid-feedback">
-                                                    {{ $errors->first('shop_name') }}
+                                                    {{ $errors->first('user_image') }}
                                                 </div>
                                             @endif
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="shop_logo" class="form-label">Shop Logo</label>
-                                            <input type="file" name="shop_logo" id="shop_logo" class="form-control">
-                                        </div>
-                                        <code>Upload Shop Logo (150*80) or (150*150)</code>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <div class="form-group">
-                                            <label for="shop_description" class="form-label">Shop Description</label>
-                                            <textarea name="shop_description" id="shop_description" rows="5" class="form-control">{{ old('shop_description') }}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                                        <h3>Subscription Details</h3>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="subscription" class="form-label">Subscriptions</label>
-                                            <select name="subscription" id="subscription" class="form-control {{ ($errors->has('subscription')) ? 'is-invalid' : '' }}">
-                                                <option value="">Select Subscription</option>
-                                                @if (count($subscriptions) > 0)
-                                                    @foreach ($subscriptions as $subscription)
-                                                        <option value="{{ $subscription->id }}">{{ $subscription->name }} ({{$subscription->duration}} Months)</option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                            @if($errors->has('subscription'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('subscription') }}
-                                                </div>
-                                            @endif
-                                        </div>
+                                        <code>Upload Profile Photo (100*100) </code>
                                     </div>
                                 </div>
                             </div>

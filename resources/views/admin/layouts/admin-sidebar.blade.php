@@ -44,7 +44,7 @@
         {{-- Clients Nav --}}
         <li class="nav-item">
             <a class="nav-link {{ (($routeName != 'clients') && ($routeName != 'clients.add') && ($routeName != 'clients.edit') && ($routeName != 'clients.list')) ? 'collapsed' : '' }} {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'active-tab' : '' }}" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'true' : 'false' }}">
-                <i class="fa-solid fa-users {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'icon-tab' : '' }}"></i><span onclick="gotoListView()">Clients</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'icon-tab' : '' }}"></i>
+                <i class="fa-solid fa-users {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'icon-tab' : '' }}"></i><span>Clients</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'icon-tab' : '' }}"></i>
             <i class="bi bi-grid clients.list" onclick="gotoTilesView()"></i>
             </a>
             <ul id="client-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'clients') || ($routeName == 'clients.add') || ($routeName == 'clients.edit') || ($routeName == 'clients.list')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
@@ -55,11 +55,16 @@
                         @endphp
                         <li>
                             <a href="{{ route('clients.list',$client->id) }}">
-                                <span>{{ $shopName }}</span>
+                                -- &nbsp;<span>{{ $shopName }}</span>
                             </a>
                         </li>
                     @endforeach
                 @endif
+                <li>
+                    <a href="{{ route('clients.list') }}">
+                        <span>All Clients</span>
+                    </a>
+                </li>
             </ul>
         </li>
 
@@ -81,6 +86,11 @@
                     <a href="{{ route('admin.profile',$userID) }}" class="{{ ($routeName == 'admin.profile') ? 'active-link' : '' }}">
                         {{-- <i class="{{ ($routeName == 'admin.profile') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
                         <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admins') }}" class="{{ ($routeName == 'admins') ? 'active-link' : '' }}">
+                        <span>Admins</span>
                     </a>
                 </li>
                 <li>

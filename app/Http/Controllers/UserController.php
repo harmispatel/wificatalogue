@@ -11,6 +11,7 @@ use App\Models\UsersSubscriptions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -23,6 +24,8 @@ class UserController extends Controller
         $data['clients'] = FavClients($favourite_client_limit);
         return view('admin.clients.clients',$data);
     }
+
+
 
     public function clientsList($id="")
     {
@@ -41,11 +44,15 @@ class UserController extends Controller
         return view('admin.clients.clients_list',$data);
     }
 
+
+
     public function insert()
     {
         $data['subscriptions'] = Subscriptions::where('status',1)->get();
         return view('admin.clients.new_clients',$data);
     }
+
+
 
     public function store(ClientRequest $request)
     {
@@ -64,6 +71,7 @@ class UserController extends Controller
         $password = Hash::make($request->password);
         $status = $request->status;
         $shop_name = $request->shop_name;
+        $shop_slug = strtolower(str_replace(' ','_',$shop_name));
         $shop_description = $request->shop_description;
 
         // Insert New Client
@@ -85,10 +93,12 @@ class UserController extends Controller
 
             if($request->hasFile('shop_logo'))
             {
+                $path = public_path('admin_uploads/shops/').$shop_slug."/";
                 $imgname = time().".". $request->file('shop_logo')->getClientOriginalExtension();
-                $request->file('shop_logo')->move(public_path('admin_uploads/shop/'), $imgname);
-                $imageurl = asset('/').'public/admin_uploads/shop/'.$imgname;
+                $request->file('shop_logo')->move($path, $imgname);
+                $imageurl = asset('public/admin_uploads/shops/'.$shop_slug).'/'.$imgname;
                 $shop->logo = $imageurl;
+                $shop->directory = $path;
             }
             $shop->save();
 
@@ -115,9 +125,10 @@ class UserController extends Controller
             $userShop->save();
         }
 
-        return redirect()->route('clients')->with('success','Client has been Inserted SuccessFully....');
+        return redirect()->route('clients.list')->with('success','Client has been Inserted SuccessFully....');
 
     }
+
 
 
     public function update(ClientRequest $request)
@@ -138,6 +149,7 @@ class UserController extends Controller
         $status = $request->status;
         $shop_id = $request->shop_id;
         $shop_name = $request->shop_name;
+        $shop_slug = strtolower(str_replace(' ','_',$shop_name));
         $shop_description = $request->shop_description;
 
         // Update New Client
@@ -174,7 +186,6 @@ class UserController extends Controller
 
         if($request->hasFile('shop_logo'))
         {
-
             $old_image = isset($shop->logo) ? $shop->logo : '';
             if(!empty($old_image))
             {
@@ -184,15 +195,18 @@ class UserController extends Controller
                 }
             }
 
+            $path = public_path('admin_uploads/shops/').$shop_slug."/";
             $imgname = time().".". $request->file('shop_logo')->getClientOriginalExtension();
-            $request->file('shop_logo')->move(public_path('admin_uploads/shop/'), $imgname);
-            $imageurl = asset('/').'public/admin_uploads/shop/'.$imgname;
+            $request->file('shop_logo')->move($path, $imgname);
+            $imageurl = asset('public/admin_uploads/shops/'.$shop_slug).'/'.$imgname;
             $shop->logo = $imageurl;
+            $shop->directory = $path;
         }
         $shop->update();
 
-        return redirect()->route('clients')->with('success','Client has been Updated SuccessFully....');
+        return redirect()->route('clients.list')->with('success','Client has been Updated SuccessFully....');
     }
+
 
 
     public function destroy($id)
@@ -204,12 +218,13 @@ class UserController extends Controller
         if(!empty($shop_id))
         {
             $shop = Shop::where('id',$shop_id)->first();
-            $shop_logo = isset($shop->logo) ? $shop->logo : '';
+            $shop_directory = isset($shop->directory) ? $shop->directory : '';
 
-            if(!empty($shop_logo) && file_exists($shop_logo))
+            if(!empty($shop_directory))
             {
-                unlink($shop_logo);
+                File::deleteDirectory($shop_directory);
             }
+
 
             Shop::where('id',$shop_id)->delete();
         }
@@ -225,6 +240,7 @@ class UserController extends Controller
 
         return redirect()->route('clients')->with('success','Client has been Removed SuccessFully..');
     }
+
 
 
     public function edit($id)
@@ -247,6 +263,7 @@ class UserController extends Controller
     }
 
 
+
     public function editProfile($id)
     {
         $data['user'] = User::where('id',decrypt($id))->first();
@@ -260,6 +277,7 @@ class UserController extends Controller
             dd(1);
         }
     }
+
 
 
     public function updateProfile(Request $request)
@@ -310,6 +328,7 @@ class UserController extends Controller
     }
 
 
+
     public function changeStatus(Request $request)
     {
         // Client ID & Status
@@ -336,6 +355,7 @@ class UserController extends Controller
     }
 
 
+
     public function addToFavClients(Request $request)
     {
         // Client ID & isFav
@@ -359,6 +379,145 @@ class UserController extends Controller
                 'success' => 0,
             ]);
         }
+    }
+
+
+
+    // Admin Users
+    public function AdminUsers()
+    {
+        $data['users'] = User::where('user_type',1)->get();
+        return view('admin.admins.admins',$data);
+    }
+
+
+
+    // New Admin Users
+    public function NewAdminUser()
+    {
+        return view('admin.admins.new_admin');
+    }
+
+
+
+    // Store Admin Users
+    public function storeNewAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password',
+            'user_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+        ]);
+
+        $name = $request->name;
+        $email = $request->email;
+        $password = Hash::make($request->password);
+        $status = $request->status;
+
+        $user = new User();
+        $user->name = $name;
+        $user->email = $email;
+        $user->password = $password;
+        $user->user_type = 1;
+        $user->status = $status;
+
+        if($request->hasFile('user_image'))
+        {
+            // Insert New Image
+            $imgname = time().".". $request->file('user_image')->getClientOriginalExtension();
+            $request->file('user_image')->move(public_path('admin_uploads/users/'), $imgname);
+            $imageurl = asset('/').'public/admin_uploads/users/'.$imgname;
+            $user->image = $imageurl;
+        }
+
+        $user->save();
+
+        return redirect()->route('admins')->with('success','Admin has been Inserted SuccessFully....');
+
+    }
+
+
+
+    // Delete Admin Users
+    public function destroyAdminUser($id)
+    {
+        // Get User Details
+        $user = User::where('id',$id)->first();
+        $user_image = isset($user->image) ? $user->image : '';
+        if(!empty($user_image) && file_exists($user_image))
+        {
+            unlink($user_image);
+        }
+
+        // Delete User
+        User::where('id',$id)->delete();
+
+        return redirect()->route('admins')->with('success','Admin has been Removed SuccessFully..');
+    }
+
+
+
+    // Edit Admin Users
+    public function editAdmin($id)
+    {
+       try
+       {
+            $data['user'] = User::where('id',$id)->first();
+
+            if($data['user'])
+            {
+                return view('admin.admins.edit_admin',$data);
+            }
+            return redirect()->route('admins')->with('error', 'Something went wrong!');
+       }
+       catch (\Throwable $th)
+       {
+            return redirect()->route('admins')->with('error', 'Something went wrong!');
+       }
+    }
+
+
+
+    // Update Admin
+    public function updateAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$request->user_id,
+            'confirm_password' => 'same:password',
+            'user_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+        ]);
+
+        $name = $request->name;
+        $email = $request->email;
+        $password = Hash::make($request->password);
+        $status = $request->status;
+
+        $user = User::find($request->user_id);
+        $user->name = $name;
+        $user->email = $email;
+
+        if(!empty($password))
+        {
+            $user->password = $password;
+        }
+
+        $user->status = $status;
+
+        if($request->hasFile('user_image'))
+        {
+            // Insert New Image
+            $imgname = time().".". $request->file('user_image')->getClientOriginalExtension();
+            $request->file('user_image')->move(public_path('admin_uploads/users/'), $imgname);
+            $imageurl = asset('/').'public/admin_uploads/users/'.$imgname;
+            $user->image = $imageurl;
+        }
+
+        $user->update();
+
+        return redirect()->route('admins')->with('success','Admin has been Updated SuccessFully....');
     }
 
 }
