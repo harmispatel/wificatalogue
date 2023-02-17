@@ -19,4 +19,10 @@ class DashboardController extends Controller
 
         return view('admin.dashboard.dashboard',$data);
     }
+
+    // Display Client Dashboard
+    public function clientDashboard()
+    {
+        return view('client.dashboard.dashboard');
+    }
 }

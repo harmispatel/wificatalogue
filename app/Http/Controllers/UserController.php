@@ -69,7 +69,7 @@ class UserController extends Controller
         $username = $request->name;
         $email = $request->email;
         $password = Hash::make($request->password);
-        $status = $request->status;
+        $status = (isset($request->status)) ? $request->status : 0;
         $shop_name = $request->shop_name;
         $shop_slug = strtolower(str_replace(' ','_',$shop_name));
         $shop_description = $request->shop_description;
@@ -81,7 +81,7 @@ class UserController extends Controller
         $client->password = $password;
         $client->status = $status;
         $client->user_type = 2;
-        $client->is_fav = $request->favourite;
+        $client->is_fav = (isset($request->favourite)) ? $request->favourite : 0;
         $client->save();
 
         if($client->id)
@@ -146,7 +146,7 @@ class UserController extends Controller
         $username = $request->name;
         $email = $request->email;
         $password = Hash::make($request->password);
-        $status = $request->status;
+        $status = isset($request->status) ? $request->status : 0;
         $shop_id = $request->shop_id;
         $shop_name = $request->shop_name;
         $shop_slug = strtolower(str_replace(' ','_',$shop_name));
@@ -156,7 +156,7 @@ class UserController extends Controller
         $client = User::find($request->client_id);
         $client->name = $username;
         $client->email = $email;
-        $client->is_fav = $request->favourite;
+        $client->is_fav = (isset($request->favourite)) ? $request->favourite : 0;
 
         if(!empty($password))
         {
@@ -414,7 +414,7 @@ class UserController extends Controller
         $name = $request->name;
         $email = $request->email;
         $password = Hash::make($request->password);
-        $status = $request->status;
+        $status = isset($request->status) ? $request->status : 0;
 
         $user = new User();
         $user->name = $name;
@@ -493,7 +493,7 @@ class UserController extends Controller
         $name = $request->name;
         $email = $request->email;
         $password = Hash::make($request->password);
-        $status = $request->status;
+        $status = isset($request->status) ? $request->status : 0;
 
         $user = User::find($request->user_id);
         $user->name = $name;

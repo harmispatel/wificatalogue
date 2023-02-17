@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguagesController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersSubscriptionsController;
@@ -42,7 +44,7 @@ Route::post('/logout', [AuthController::class,'logout'])->name('logout');
 Route::group(['prefix' => 'admin'], function ()
 {
     // If Auth Login
-    Route::group(['middleware' => 'auth'], function ()
+    Route::group(['middleware' => ['auth','is_admin']], function ()
     {
         // Admin Dashboard
         Route::get('dashboard', [DashboardController::class,'index'])->name('admin.dashboard');
@@ -88,4 +90,26 @@ Route::group(['prefix' => 'admin'], function ()
 
     });
 
+});
+
+
+Route::group(['prefix' => 'client'], function()
+{
+    // If Auth Login
+    Route::group(['middleware' => 'auth'], function ()
+    {
+        // Admin Dashboard
+        Route::get('dashboard', [DashboardController::class,'clientDashboard'])->name('client.dashboard');
+
+        // Menu
+        Route::get('/menu', [MenuController::class,'index'])->name('menu');
+
+        // Categories
+        Route::post('store-categories',[CategoryController::class,'store'])->name('categories.store');
+        Route::post('delete-categories',[CategoryController::class,'destroy'])->name('categories.delete');
+        Route::post('edit-categories',[CategoryController::class,'edit'])->name('categories.edit');
+        Route::post('update-categories',[CategoryController::class,'update'])->name('categories.update');
+        Route::post('status-categories',[CategoryController::class,'status'])->name('categories.status');
+
+    });
 });

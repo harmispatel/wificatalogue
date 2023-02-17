@@ -39,10 +39,15 @@ class AuthController extends Controller
 
         if (Auth::attempt($input))
         {
-            if (Auth::user()->user_type === 1) {
+            if (Auth::user()->user_type === 1)
+            {
                 return redirect()->route('admin.dashboard')->with('success', 'Welcome '.Auth::user()->name);
             }
-            return back()->with('error', 'Kindly Login with Active Admin User.');
+            else
+            {
+                return redirect()->route('client.dashboard')->with('success', 'Welcome '.Auth::user()->name);
+            }
+            // return back()->with('error', 'Kindly Login with Active Admin User.');
         }
 
         return back()->with('error', 'Please Enter Valid Email & Password');

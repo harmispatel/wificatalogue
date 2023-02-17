@@ -105,9 +105,10 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="status" class="form-label">Status</label><br>
-                                            <input type="radio" name="status" value="1" id="active" {{ ($user->status == 1) ? 'checked' : '' }}> <label for="active">Active</label>
-                                            <input type="radio" name="status" value="0" id="inactive" {{ ($user->status == 0) ? 'checked' : '' }}> <label for="inactive">InActive</label>
+                                            <label for="status" class="form-label">Status</label>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" value="1" {{ ($user->status == 1) ? 'checked' : '' }}>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">

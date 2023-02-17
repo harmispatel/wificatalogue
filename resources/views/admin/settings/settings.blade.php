@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="logo" class="form-control {{ ($errors->has('logo')) ? 'is-invalid' : '' }}">
-                                    <code>Upload Logo (100*30)</code>
+                                    <code>Max Dimensions of Logo (150*50)</code>
                                      @if($errors->has('logo'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('logo') }}
@@ -97,7 +97,7 @@
                                     @endif
                                     @if(!empty($logo))
                                         <div class="mt-3">
-                                            <img src="{{ $logo }}" alt="" width="100">
+                                            <img src="{{ $logo }}" alt="" width="150">
                                         </div>
                                     @endif
                                 </div>

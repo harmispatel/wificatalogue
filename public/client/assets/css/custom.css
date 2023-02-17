@@ -1,0 +1,394 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.main_section{
+  padding:0 25px;
+}
+
+.main_section_inr{
+  padding:30px;
+  background-color:#fff;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 10px 10px -5px rgb(0 0 0 / 4%);
+}
+
+.item_box{
+  padding:10px;
+  border-radius:5px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+  margin-bottom:20px;
+}
+
+.search_box {
+  margin-bottom:25px;
+}
+
+.search_box .search_icon{
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0 , -50%);
+  font-size:14px;
+}
+
+.search_box input.form-control:hover{
+  border-color:#40a9ff;
+}
+
+.sec_title{
+  margin-bottom:20px;
+}
+
+.sec_title h2{
+  font-size:20px;
+  color:#333c4e;
+  font-weight:500;
+  margin-bottom:10px;
+}
+
+.sec_title p{
+  font-size:16px;
+  margin:0;
+}
+
+.item_img{
+  position: relative;
+}
+
+.item_img:hover .edit_item_bt{
+  opacity: 1;
+  visibility: visible;
+}
+
+.edit_item_bt{
+  /*position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* transform: translate(-50% , -50%); */
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.edit_item{
+  background-color: #0099ac;
+  border-radius:50px;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+.edit_category{
+  background-color: #ff9300;
+  border-radius:50px;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+}
+.edit_item:hover{
+  color:#fff;
+  box-shadow: rgb(0 188 212 / 20%) 0px 5px 10px 2px;
+  background-color: #0099ac;
+  border: none;
+}
+.edit_category:hover{
+  color:#fff;
+  box-shadow:rgb(255 147 0 / 20%) 0px 5px 10px 2px;
+  background-color: #ff9300;
+  border: none;
+}
+.delet_bt{
+  position: absolute;
+  top:15px;
+  right: 15px;
+  width:40px;
+  height:40px;
+  background-color:#fff;
+  border-radius:50%;
+  color:#ff0000;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+.delet_bt:hover{
+  color: #ff0000;
+}
+
+/*switch start*/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(30px);
+  -ms-transform: translateX(30px);
+  transform: translateX(30px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input:checked + .slider .uncheck_icon{
+  display:none;
+}
+
+input[type="checkbox"]:not(:checked) + .slider .check_icon{
+  display:none;
+
+}
+
+
+input:checked + .slider .check_icon{
+  display:block;
+  position: absolute;
+  top:50%;
+  left:10px;
+  transform: translate(0 , -50%);
+  color:#fff;
+}
+
+.slider .uncheck_icon{
+  display:block;
+  position: absolute;
+  top:50%;
+  right:10px;
+  transform: translate(0 , -50%);
+  color:#fff;
+}
+
+/*switch end*/
+
+.item_info{
+  padding:15px 0;
+  min-height:85px;
+}
+
+.item_name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item_name h3{
+  font-size:16px;
+  color:#000;
+  font-weight:500;
+  margin:0;
+}
+
+.item_info h2{
+  font-size:20px;
+  font-weight:600;
+  margin:0;
+  color:#000;
+}
+
+.add_category{
+    /* width: 265px; */
+    height: 284px;
+    background-color: #d2d6dc;
+}
+
+.add_category_bt {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.add_category_bt i{
+  font-size:50px;
+  color:#00bcd4;
+}
+
+.modal-dialog{
+  max-width:700px;
+}
+
+
+.drop-zone {
+  max-width: 100%;
+  height: 150px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  color: #777;
+  border: 2px solid #e5e5e5;
+  border-radius: 10px;
+}
+
+.drop-zone:hover{
+  background-color:#f6f6f6;
+}
+
+.drop-zone--over {
+  border-style: solid;
+}
+
+.drop-zone__input {
+  display: none;
+}
+
+.drop-zone__thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #cccccc;
+  background-size: cover;
+  position: relative;
+}
+
+.drop-zone__thumb::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 0;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Design page */
+
+.add_logo_sec{
+  border: 1px solid #f1f3f7;
+  border-radius:5px;
+}
+.add_logo_sec_header{
+  padding:20px;
+  border-bottom:1px solid #f1f3f7;
+}
+.add_logo_sec_header h2{
+  font-size:20px;
+  font-weight:400;
+  color:rgba(0, 0, 0, 0.85);
+  margin:0;
+}
+.add_logo_sec_body{
+  padding:20px;
+}
+.add_logo_sec_body_inr{
+  min-height:350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add_category:hover .icon_none{
+  display: none;
+}
+
+
+/* theme preview */
+
+.theme_name{
+  background-color:#f1f3f7;
+  padding:10px;
+  margin-bottom:20px;
+}
+
+.theme_name h2{
+  font-size:20px;
+  color:rgba(0, 0, 0, 0.65);
+  margin:0;
+}
+
+.theme_change_sec_inr .accordion-item{
+  margin-bottom:20px;
+  border:1px solid rgba(0,0,0,.125) !important;
+}
+
+.theme_change_sec_inr .accordion-item .accordion-button{
+  font-size:25px;
+  color:#000;
+  background-color:#f1f3f7;
+}
+
+.main_theme_color input[type=color]{
+  width: 50px;
+  height: 38px;
+}
+
+.accordion-button:not(.collapsed){
+  background-color:#f1f3f7;
+}
+
+.accordion-button:focus{
+  box-shadow: none;
+  border:none;
+}
