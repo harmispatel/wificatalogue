@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -18,6 +19,7 @@ class CategoryController extends Controller
         $name = $request->name;
         $description = $request->description;
         $published = isset($request->published) ? $request->published : 0;
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
 
        try
        {
@@ -25,6 +27,7 @@ class CategoryController extends Controller
             $category->en_name = $name;
             $category->en_description = $description;
             $category->published = $published;
+            $category->shop_id = $shop_id;
 
             // Insert Category Image if is Exists
             if($request->hasFile('image'))
