@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+
+    // Get all Categories
+    public function index()
+    {
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+        $data['categories'] = Category::where('shop_id',$shop_id)->get();
+        return view('client.categories.categories',$data);
+    }
+
+
+
     // Function for Store New Category
     public function store(Request $request)
     {
@@ -196,5 +207,84 @@ class CategoryController extends Controller
                 'message' => "Internal Server Error!",
             ]);
         }
+    }
+
+
+
+    // Function for Filtered Categories
+    public function searchCategories(Request $request)
+    {
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+        $keyword = $request->keywords;
+
+        try
+        {
+            $categories = Category::where('en_name','LIKE','%'.$keyword.'%')->where('shop_id',$shop_id)->get();
+            $html = '';
+
+            if(count($categories) > 0)
+            {
+                foreach($categories as $category)
+                {
+                    $newStatus = ($category->published == 1) ? 0 : 1;
+                    $checked = ($category->published == 1) ? 'checked' : '';
+
+                    if(!empty($category->image) && file_exists('public/client_uploads/categories/'.$category->image))
+                    {
+                        $image = asset('public/client_uploads/categories/'.$category->image);
+                    }
+                    else
+                    {
+                        $image = asset('public/client_images/not-found/no_image_1.jpg');
+                    }
+
+                    $html .= '<div class="col-md-3">';
+                        $html .= '<div class="item_box">';
+                            $html .= '<div class="item_img">';
+                                $html .= '<a href="#"><img src="'.$image.'" class="w-100"></a>';
+                                $html .= '<div class="edit_item_bt">';
+                                    $html .= '<button type="button" class="btn edit_item">ADD OR EDIT ITEMS</button>';
+                                    $html .= '<button class="btn edit_category" onclick="editCategory('.$category->id.')">EDIT CATEGORY</button>';
+                                $html .= '</div>';
+                                $html .= '<a class="delet_bt" onclick="deleteCategory('.$category->id.')" style="cursor: pointer;"><i class="fa-solid fa-trash"></i></a>';
+                            $html .= '</div>';
+                            $html .= '<div class="item_info">';
+                                $html .= '<div class="item_name">';
+                                    $html .= '<h3>'.$category->en_name.'</h3>';
+                                    $html .= '<div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="status" role="switch" id="status" onclick="changeStatus('.$category->id.','.$newStatus.')" value="1" '.$checked.'></div>';
+                                $html .= '</div>';
+                                $html .= '<h2>Product Category</h2>';
+                            $html .= '</div>';
+                        $html .= '</div>';
+                    $html .= '</div>';
+
+
+                }
+            }
+
+            $html .= '<div class="col-md-3">';
+                $html .= '<div class="item_box">';
+                    $html .= '<div class="item_img add_category">';
+                        $html .= '<a data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="add_category_bt" id="NewCategoryBtn"><i class="fa-solid fa-plus"></i></a>';
+                    $html .= '</div>';
+                    $html .= '<div class="item_info text-center"><h2>Product Category</h2></div>';
+                $html .= '</div>';
+            $html .= '</div>';
+
+            return response()->json([
+                'success' => 1,
+                'message' => "Categories has been retrived Successfully...",
+                'data'    => $html,
+            ]);
+
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json([
+                'success' => 0,
+                'message' => "Internal Server Error!",
+            ]);
+        }
+
     }
 }

@@ -266,15 +266,15 @@ class UserController extends Controller
 
     public function editProfile($id)
     {
-        $data['user'] = User::where('id',decrypt($id))->first();
-
         if(Auth::user()->user_type == 1)
         {
+            $data['user'] = User::where('id',decrypt($id))->first();
             return view('auth.admin-profile',$data);
         }
         else
         {
-            dd(1);
+            $data['user'] = User::with(['hasOneShop','hasOneSubscription'])->where('id',decrypt($id))->first();
+            return view('auth.client-profile',$data);
         }
     }
 
@@ -282,17 +282,17 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $request->validate([
-            'name'                  =>      'required',
-            'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
-            'confirm_password'      =>      'same:password',
-            'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG'
-        ]);
-
         $user  = User::find($request->user_id);
 
         if(Auth::user()->user_type == 1)
         {
+            $request->validate([
+                'name'                  =>      'required',
+                'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
+                'confirm_password'      =>      'same:password',
+                'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG'
+            ]);
+
             $user->name = $request->name;
             $user->email = $request->email;
 
@@ -322,7 +322,73 @@ class UserController extends Controller
         }
         else
         {
-            dd(1);
+            $request->validate([
+                'shop_name'             =>      'required',
+                'name'                  =>      'required',
+                'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
+                'confirm_password'      =>      'same:password',
+                'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+                'shop_logo'             =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            ]);
+
+            // User Update
+            $user->name = $request->name;
+            $user->email = $request->email;
+
+            if(!empty($request->password))
+            {
+                $user->password = Hash::make($request->password);
+            }
+
+            if($request->hasFile('profile_picture'))
+            {
+                // Remove Old Image
+                $old_image = isset($user->image) ? $user->image : '';
+                if(!empty($old_image) && file_exists($old_image))
+                {
+                    unlink($old_image);
+                }
+
+                // Insert New Image
+                $imgname = time().".". $request->file('profile_picture')->getClientOriginalExtension();
+                $request->file('profile_picture')->move(public_path('admin_uploads/users/'), $imgname);
+                $imageurl = asset('/').'public/admin_uploads/users/'.$imgname;
+                $user->image = $imageurl;
+            }
+            $user->update();
+
+            // Shop Update
+            $shop_id = isset($user->hasOneShop->shop['id']) ? $user->hasOneShop->shop['id'] : '';
+
+            if(!empty($shop_id))
+            {
+                $shop_slug = strtolower(str_replace(' ','_',$request->shop_name));
+                $shop = Shop::find($shop_id);
+                $shop->name = $request->shop_name;
+                $shop->description = $request->shop_description;
+
+                if($request->hasFile('shop_logo'))
+                {
+                    $old_image = isset($shop->logo) ? $shop->logo : '';
+                    if(!empty($old_image))
+                    {
+                        if(file_exists($old_image))
+                        {
+                            unlink($old_image);
+                        }
+                    }
+
+                    $path = public_path('admin_uploads/shops/').$shop_slug."/";
+                    $imgname = time().".". $request->file('shop_logo')->getClientOriginalExtension();
+                    $request->file('shop_logo')->move($path, $imgname);
+                    $imageurl = asset('public/admin_uploads/shops/'.$shop_slug).'/'.$imgname;
+                    $shop->logo = $imageurl;
+                    $shop->directory = $path;
+                }
+                $shop->update();
+            }
+
+            return redirect()->back()->with('success','Profile has been Updated SuccessFully..');
         }
 
     }

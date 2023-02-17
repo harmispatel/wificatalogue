@@ -52,7 +52,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('client.profile',$userID) }}">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
@@ -62,13 +62,10 @@
                     </li>
 
                     <li>
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button class="dropdown-item d-flex align-items-center" type="submit">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Logout</span>
-                            </button>
-                        </form>
+                        <a href="{{ route('logout') }}" class="dropdown-item d-flex align-items-center">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </a>
                     </li>
                 </ul>
             </li>

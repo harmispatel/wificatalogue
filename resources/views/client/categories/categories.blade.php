@@ -191,7 +191,7 @@
                             <div class="col-md-4">
                                 <div class="search_box">
                                     <div class="form-group position-relative">
-                                        <input type="txt" class="form-control" placeholder="Search">
+                                        <input type="text" id="search" class="form-control" placeholder="Search">
                                         <i class="fa-solid fa-magnifying-glass search_icon"></i>
                                     </div>
                                 </div>
@@ -202,12 +202,12 @@
                             <p> Menu categories define the core structure of your menu. Move your mouse over a category to ‘Add or edit category items’ (aka products) or ‘Edit category’
                             </p>
                         </div>
-                        <div class="row">
+                        <div class="row" id="categorySection">
 
                             {{-- Categories Section --}}
                             @if(count($categories) > 0)
                                 @foreach ($categories as $category)
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="item_box">
                                             <div class="item_img">
                                                 <a href="#">
@@ -243,7 +243,7 @@
                             @endif
 
                             {{-- Add New Category Section --}}
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="item_box">
                                     <div class="item_img add_category">
                                         <a data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="add_category_bt" id="NewCategoryBtn">
@@ -269,7 +269,6 @@
 @section('page-js')
 
     <script type="text/javascript">
-
 
         // Reset New CategoryForm
         $('#NewCategoryBtn').on('click',function(){
@@ -572,6 +571,37 @@
                 }
             });
         }
+
+
+
+        // Function for Get Filterd Categories
+        $('#search').on('keyup',function()
+        {
+            var keywords = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: '{{ route("categories.search") }}',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    'keywords':keywords,
+                },
+                dataType: 'JSON',
+                success: function(response)
+                {
+                    if (response.success == 1)
+                    {
+                        $('#categorySection').html('');
+                        $('#categorySection').append(response.data);
+                    }
+                    else
+                    {
+                        toastr.error(response.message);
+                    }
+                }
+            });
+
+        });
 
     </script>
 

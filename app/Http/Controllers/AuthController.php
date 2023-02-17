@@ -45,7 +45,7 @@ class AuthController extends Controller
             }
             else
             {
-                return redirect()->route('client.dashboard')->with('success', 'Welcome '.Auth::user()->name);
+                return redirect()->route('categories')->with('success', 'Welcome '.Auth::user()->name);
             }
             // return back()->with('error', 'Kindly Login with Active Admin User.');
         }

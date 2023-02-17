@@ -23,7 +23,7 @@ class IsAdmin
         }
         else
         {
-            return redirect('client/dashboard')->with('errors',"You don't have admin access.");
+            return redirect('client/categories')->with('error',"You don't have admin access.");
         }
 
     }

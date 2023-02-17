@@ -38,7 +38,7 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class,'showLogin'])->name('login');
 Route::post('/login', [AuthController::class,'login'])->name('doLogin');
 // Logout
-Route::post('/logout', [AuthController::class,'logout'])->name('logout');
+Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 
 
 Route::group(['prefix' => 'admin'], function ()
@@ -101,15 +101,20 @@ Route::group(['prefix' => 'client'], function()
         // Admin Dashboard
         Route::get('dashboard', [DashboardController::class,'clientDashboard'])->name('client.dashboard');
 
-        // Menu
-        Route::get('/menu', [MenuController::class,'index'])->name('menu');
-
         // Categories
+        Route::get('categories',[CategoryController::class,'index'])->name('categories');
         Route::post('store-categories',[CategoryController::class,'store'])->name('categories.store');
         Route::post('delete-categories',[CategoryController::class,'destroy'])->name('categories.delete');
         Route::post('edit-categories',[CategoryController::class,'edit'])->name('categories.edit');
         Route::post('update-categories',[CategoryController::class,'update'])->name('categories.update');
         Route::post('status-categories',[CategoryController::class,'status'])->name('categories.status');
+        Route::post('search-categories',[CategoryController::class,'searchCategories'])->name('categories.search');
 
+        // Designs
+        Route::get('/design', [MenuController::class,'index'])->name('design');
+
+        // ClientProfile
+        Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('client.profile');
+        Route::post('/update-profile',[UserController::class,'updateProfile'])->name('client.profile.update');
     });
 });
