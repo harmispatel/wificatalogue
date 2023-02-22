@@ -76,6 +76,14 @@
             </a>
         </li>
 
+        {{-- Ingredients Nav --}}
+        <li class="nav-item">
+            <a class="nav-link {{ (($routeName == 'ingredients') || ($routeName == 'ingredients.add') || ($routeName == 'ingredients.edit')) ? 'active-tab' : '' }}" href="{{ route('ingredients') }}">
+                <i class="fas fa-seedling {{ (($routeName == 'ingredients') || ($routeName == 'ingredients.add') || ($routeName == 'ingredients.edit')) ? 'icon-tab' : '' }}"></i>
+                <span>Ingredients</span>
+            </a>
+        </li>
+
         {{-- System Nav --}}
         <li class="nav-item">
             <a class="nav-link {{ (($routeName != 'admin.profile') && ($routeName != 'admin.settings')) ? 'collapsed' : '' }} {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'true' : 'false' }}">

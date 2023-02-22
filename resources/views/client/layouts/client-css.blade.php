@@ -34,3 +34,29 @@
 
 <!-- custom css -->
 <link rel="stylesheet" type="text/css" href="{{ asset('public/client/assets/css/custom.css') }}">
+
+{{-- Custom CSS --}}
+<style>
+    /* select 2 css */
+    .select2 {
+        width: 100%!important;
+    }
+    .select2-selection{
+        min-height: 37px!important;
+    }
+    .select2-container--default .select2-selection--multiple{
+        border: 1px solid #ced4da!important;
+    }
+
+    /* Product Tags */
+    .product-tags {
+        background: #f1f3f7;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 5px;
+        color: rgb(0 0 0 / 65%);
+        margin-bottom: 15px;
+    }
+</style>

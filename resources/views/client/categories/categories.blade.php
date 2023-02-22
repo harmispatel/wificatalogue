@@ -1,6 +1,6 @@
 @extends('client.layouts.client-layout')
 
-@section('title', 'Menu')
+@section('title', 'Categories')
 
 @section('content')
 
@@ -148,13 +148,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Menu</h1>
+        <h1>Categories</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('client.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Menu</li>
+                        {{-- <li class="breadcrumb-item"><a href="{{ route('client.dashboard') }}">Dashboard</a></li> --}}
+                        <li class="breadcrumb-item active">Categories</li>
                     </ol>
                 </nav>
             </div>
@@ -218,7 +218,7 @@
                                                     @endif
                                                 </a>
                                                 <div class="edit_item_bt">
-                                                    <button type="button" class="btn edit_item" >ADD OR EDIT ITEMS</button>
+                                                    <a href="{{ route('items',$category->id) }}" class="btn edit_item" >ADD OR EDIT ITEMS</a>
                                                     <button class="btn edit_category" onclick="editCategory({{ $category->id }})">EDIT CATEGORY</button>
                                                 </div>
                                                 <a class="delet_bt" onclick="deleteCategory({{ $category->id }})" style="cursor: pointer;">

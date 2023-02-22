@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             SubscriptionsSeeder::class,
             LanguagesSeeder::class,
             CategorySeeder::class,
+            AdminSettingSeeder::class,
+            IngredientSeeder::class,
         ]);
     }
 }

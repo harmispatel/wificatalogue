@@ -4,9 +4,12 @@ use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubscriptionsController;
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersSubscriptionsController;
 use Illuminate\Support\Facades\Artisan;
@@ -27,7 +30,8 @@ Route::get('config-clear', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
     Artisan::call('config:clear');
-    dd("Cache is cleared");
+    return redirect('/');
+    // dd("Cache is cleared");
 });
 
 
@@ -76,6 +80,15 @@ Route::group(['prefix' => 'admin'], function ()
         Route::get('/edit-subscription/{id}',[SubscriptionsController::class,'edit'])->name('subscriptions.edit');
         Route::post('/update-subscription',[SubscriptionsController::class,'update'])->name('subscriptions.update');
 
+        // Ingredients
+        Route::get('/ingredients',[IngredientController::class,'index'])->name('ingredients');
+        Route::get('/new-ingredients',[IngredientController::class,'insert'])->name('ingredients.add');
+        Route::post('/store-ingredients',[IngredientController::class,'store'])->name('ingredients.store');
+        Route::get('/delete-ingredients/{id}',[IngredientController::class,'destroy'])->name('ingredients.destroy');
+        Route::get('/edit-ingredients/{id}',[IngredientController::class,'edit'])->name('ingredients.edit');
+        Route::post('/update-ingredients',[IngredientController::class,'update'])->name('ingredients.update');
+        Route::post('/status-ingredients',[IngredientController::class,'changeStatus'])->name('ingredients.status');
+
         // AdminProfile
         Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('admin.profile');
         Route::post('/update-profile',[UserController::class,'updateProfile'])->name('admin.profile.update');
@@ -110,11 +123,26 @@ Route::group(['prefix' => 'client'], function()
         Route::post('status-categories',[CategoryController::class,'status'])->name('categories.status');
         Route::post('search-categories',[CategoryController::class,'searchCategories'])->name('categories.search');
 
+        // Items
+        Route::get('items/{id}',[ItemsController::class,'index'])->name('items');
+        Route::post('store-items',[ItemsController::class,'store'])->name('items.store');
+        Route::post('delete-items',[ItemsController::class,'destroy'])->name('items.delete');
+        Route::post('status-items',[ItemsController::class,'status'])->name('items.status');
+        Route::post('search-items',[ItemsController::class,'searchItems'])->name('items.search');
+        Route::post('edit-items',[ItemsController::class,'edit'])->name('items.edit');
+        Route::post('update-items',[ItemsController::class,'update'])->name('items.update');
+
         // Designs
         Route::get('/design', [MenuController::class,'index'])->name('design');
 
         // ClientProfile
         Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('client.profile');
         Route::post('/update-profile',[UserController::class,'updateProfile'])->name('client.profile.update');
+
+        // Tags
+        Route::post('delete-tags',[TagsController::class,'destroy'])->name('tags.destroy');
+        Route::post('edit-tags',[TagsController::class,'edit'])->name('tags.edit');
+        Route::post('update-tags',[TagsController::class,'update'])->name('tags.update');
+
     });
 });
