@@ -446,3 +446,10 @@ input:checked + .slider .check_icon{
     font-size:15px;
     color:rgba(0, 0, 0, 0.65);
 }
+
+.lang_right_side .switch{
+    width:105px;
+}
+.lang_right_side .switch .slider:before{
+    left: 45px;
+}

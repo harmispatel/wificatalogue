@@ -106,8 +106,10 @@
                                 <label class="switch">
                                     <input type="checkbox" checked>
                                     <span class="slider round">
-                                        <i class="fa-solid fa-circle-check check_icon"></i>
-                                        <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
+                                        {{-- <i class="fa-solid fa-circle-check check_icon"></i> --}}
+                                        <span class="check_icon">Publish</span>
+                                        {{-- <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i> --}}
+                                        <span class="uncheck_icon">Unpublish</span>
                                     </span>
                                 </label>
                             </div>
