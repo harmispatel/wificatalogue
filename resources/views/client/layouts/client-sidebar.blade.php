@@ -63,27 +63,27 @@
             </a>
             <ul id="design-nav" class="nav-content sidebar-ul collapse" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="" class="">
+                    <a href="{{ route('design.general-info') }}" class="">
                         <span>General Info</span>
                     </a>
                 </li>
                 <li>
-                    <a href="" class="">
+                    <a href="{{ route('design.logo') }}" class="">
                         <span>Logo</span>
                     </a>
                 </li>
                 <li>
-                    <a href="" class="">
+                    <a href="{{ route('design.cover') }}" class="">
                         <span>Cover</span>
                     </a>
                 </li>
                 <li>
-                    <a href="" class="">
+                    <a href="{{ route('design.banner') }}" class="">
                         <span>Banner</span>
                     </a>
                 </li>
                 <li>
-                    <a href="" class="">
+                    <a href="{{ route('design.theme') }}" class="">
                         <span>Theme</span>
                     </a>
                 </li>
@@ -103,12 +103,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="">
-                        <span>Dishes</span>
+                    <a href="{{ route('items') }}" class="">
+                        <span>Items</span>
                     </a>
                 </li>
                 <li>
-                    <a href="" class="">
+                    <a href="{{ route('languages') }}" class="">
                         <span>Languages</span>
                     </a>
                 </li>
@@ -125,8 +125,8 @@
 
         {{-- QrCode Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ ($routeName == '') ? 'active-tab' : '' }}" href="">
-                <i class="fa-solid fa-qrcode {{ ($routeName == '') ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ ($routeName == 'qrcode') ? 'active-tab' : '' }}" href="{{ route('qrcode') }}">
+                <i class="fa-solid fa-qrcode {{ ($routeName == 'qrcode') ? 'icon-tab' : '' }}"></i>
             <span>Get QR Code</span>
             </a>
         </li>

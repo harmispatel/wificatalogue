@@ -325,6 +325,11 @@ input:checked + .slider .check_icon{
 
 /* Design page */
 
+.logo_sec{
+    background-color:#fff;
+    padding: 20px;
+}
+
 .add_logo_sec{
   border: 1px solid #f1f3f7;
   border-radius:5px;
@@ -391,4 +396,53 @@ input:checked + .slider .check_icon{
 .accordion-button:focus{
   box-shadow: none;
   border:none;
+}
+
+
+/* language page */
+
+.lang_main{
+    padding:20px;
+    background-color:#fff;
+}
+
+.lang_sidebar{
+    padding:10px;
+    border-right:1px solid #ccc;
+}
+
+.lang_menu_ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+.lang_menu_ul li{
+    padding:5px 0;
+}
+
+.lang_menu_ul li a{
+    font-size:16px;
+    color:rgba(0, 0, 0, 0.65);
+    display:flex;
+    align-items:center;
+}
+
+.lang_right_side{
+    padding:10px;
+}
+
+.lang_title h2{
+    font-size:25px;
+    color:rgba(0, 0, 0, 0.85);
+}
+
+.lang_right_side .lang_title{
+    border-bottom:1px solid #ccc;
+    margin-bottom:20px;
+}
+
+.lang_title p{
+    font-size:15px;
+    color:rgba(0, 0, 0, 0.65);
 }

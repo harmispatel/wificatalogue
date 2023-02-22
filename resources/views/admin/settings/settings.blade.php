@@ -103,6 +103,28 @@
                                 </div>
                             </div>
 
+                            @php
+                                $login_bg = isset($settings['login_form_background']) ? $settings['login_form_background'] : '';
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Login Form Background</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="login_form_background" class="form-control {{ ($errors->has('login_form_background')) ? 'is-invalid' : '' }}">
+                                     @if($errors->has('login_form_background'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('login_form_background') }}
+                                        </div>
+                                    @endif
+                                    @if(!empty($login_bg))
+                                        <div class="mt-3">
+                                            <img src="{{ $login_bg }}" alt="" width="150">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
                             {{-- New Language Section --}}
                             <div class="row mb-3">
                                 <div class="col-md-4">

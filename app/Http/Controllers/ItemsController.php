@@ -12,14 +12,29 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemsController extends Controller
 {
-    public function index($id)
+    public function index($id="")
     {
-        $data['categories'] = Category::get();
-        $data['category'] = Category::where('id',$id)->first();
-        $data['items'] = Items::where('category_id',$id)->get();
         $data['ingredients'] = Ingredient::get();
         $data['tags'] = Tags::get();
-        $data['cat_tags'] = CategoryProductTags::with(['hasOneTag'])->where('category_id',$id)->get()->unique('tag_id');
+
+        if(!empty($id) || $id != '')
+        {
+            $data['cat_id'] = $id;
+            $data['categories'] = Category::get();
+            $data['category'] = Category::where('id',$id)->first();
+            $data['items'] = Items::where('category_id',$id)->orderBy('order_key')->get();
+            // $data['cat_tags'] = CategoryProductTags::with([ 'hasOneTag'])->where('category_id',$id)->get()->unique('tag_id');
+            $data['cat_tags'] = CategoryProductTags::join('tags','tags.id','category_product_tags.tag_id')->orderBy('tags.order')->get()->unique('tag_id');
+        }
+        else
+        {
+            $data['cat_id'] = '';
+            $data['categories'] = Category::get();
+            $data['category'] = "All";
+            $data['items'] = Items::orderBy('order_key')->get();
+            $data['cat_tags'] = CategoryProductTags::join('tags','tags.id','category_product_tags.tag_id')->orderBy('tags.order')->get()->unique('tag_id');
+        }
+
         return view('client.items.items',$data);
     }
 
@@ -33,9 +48,13 @@ class ItemsController extends Controller
             'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG|dimensions:width=400,height=400',
         ]);
 
-        $category_id = $request->category_id;
+        $max_item_order_key = Items::max('order_key');
+        $item_order = (isset($max_item_order_key) && !empty($max_item_order_key)) ? ($max_item_order_key + 1) : 1;
+
+        $category_id = $request->category;
         $type = $request->type;
         $name = $request->name;
+        $calories = $request->calories;
         $description = $request->description;
         $is_new = isset($request->is_new) ? $request->is_new : 0;
         $as_sign = isset($request->is_sign) ? $request->is_sign : 0;
@@ -65,9 +84,11 @@ class ItemsController extends Controller
             $item->shop_id = $shop_id;
             $item->type = $type;
             $item->en_name = $name;
+            $item->en_calories = $calories;
             $item->en_description = $description;
             $item->published = $published;
             $item->price = $price;
+            $item->order_key = $item_order;
             $item->ingredients = $ingredients;
             $item->is_new = $is_new;
             $item->as_sign = $as_sign;
@@ -99,8 +120,12 @@ class ItemsController extends Controller
                     }
                     else
                     {
+                        $max_order = Tags::max('order');
+                        $order = (isset($max_order) && !empty($max_order)) ? ($max_order + 1) : 1;
+
                         $tag = new Tags();
                         $tag->name = strtolower($val);
+                        $tag->order = $order;
                         $tag->save();
                     }
 
@@ -199,76 +224,84 @@ class ItemsController extends Controller
     // Function for Filtered Items
     public function searchItems(Request $request)
     {
-    $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
-    $keyword = $request->keywords;
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+        $keyword = $request->keywords;
+        $cat_id = $request->id;
 
-    try
-    {
-        $items = Items::where('en_name','LIKE','%'.$keyword.'%')->where('shop_id',$shop_id)->get();
-        $html = '';
-
-        if(count($items) > 0)
+        try
         {
-            foreach($items as $item)
+            if(!empty($cat_id))
             {
-                $newStatus = ($item->published == 1) ? 0 : 1;
-                $checked = ($item->published == 1) ? 'checked' : '';
+                $items = Items::where('en_name','LIKE','%'.$keyword.'%')->where('category_id',$cat_id)->where('shop_id',$shop_id)->get();
+            }
+            else
+            {
+                $items = Items::where('en_name','LIKE','%'.$keyword.'%')->where('shop_id',$shop_id)->get();
+            }
+            $html = '';
 
-                if(!empty($item->image) && file_exists('public/client_uploads/items/'.$item->image))
+            if(count($items) > 0)
+            {
+                foreach($items as $item)
                 {
-                    $image = asset('public/client_uploads/items/'.$item->image);
-                }
-                else
-                {
-                    $image = asset('public/client_images/not-found/no_image_1.jpg');
-                }
+                    $newStatus = ($item->published == 1) ? 0 : 1;
+                    $checked = ($item->published == 1) ? 'checked' : '';
 
-                $html .= '<div class="col-md-3">';
-                    $html .= '<div class="item_box">';
-                        $html .= '<div class="item_img">';
-                            $html .= '<a href="#"><img src="'.$image.'" class="w-100"></a>';
-                            $html .= '<div class="edit_item_bt">';
-                                $html .= '<button class="btn edit_category" onclick="editCategory('.$item->id.')">EDIT ITEM</button>';
+                    if(!empty($item->image) && file_exists('public/client_uploads/items/'.$item->image))
+                    {
+                        $image = asset('public/client_uploads/items/'.$item->image);
+                    }
+                    else
+                    {
+                        $image = asset('public/client_images/not-found/no_image_1.jpg');
+                    }
+
+                    $html .= '<div class="col-md-3">';
+                        $html .= '<div class="item_box">';
+                            $html .= '<div class="item_img">';
+                                $html .= '<a href="#"><img src="'.$image.'" class="w-100"></a>';
+                                $html .= '<div class="edit_item_bt">';
+                                    $html .= '<button class="btn edit_category" onclick="editCategory('.$item->id.')">EDIT ITEM</button>';
+                                $html .= '</div>';
+                                $html .= '<a class="delet_bt" onclick="deleteItem('.$item->id.')" style="cursor: pointer;"><i class="fa-solid fa-trash"></i></a>';
                             $html .= '</div>';
-                            $html .= '<a class="delet_bt" onclick="deleteItem('.$item->id.')" style="cursor: pointer;"><i class="fa-solid fa-trash"></i></a>';
-                        $html .= '</div>';
-                        $html .= '<div class="item_info">';
-                            $html .= '<div class="item_name">';
-                                $html .= '<h3>'.$item->en_name.'</h3>';
-                                $html .= '<div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="status" role="switch" id="status" onclick="changeStatus('.$item->id.','.$newStatus.')" value="1" '.$checked.'></div>';
+                            $html .= '<div class="item_info">';
+                                $html .= '<div class="item_name">';
+                                    $html .= '<h3>'.$item->en_name.'</h3>';
+                                    $html .= '<div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="status" role="switch" id="status" onclick="changeStatus('.$item->id.','.$newStatus.')" value="1" '.$checked.'></div>';
+                                $html .= '</div>';
+                                $html .= '<h2>Product</h2>';
                             $html .= '</div>';
-                            $html .= '<h2>Product</h2>';
                         $html .= '</div>';
                     $html .= '</div>';
-                $html .= '</div>';
 
 
+                }
             }
-        }
 
-        $html .= '<div class="col-md-3">';
-            $html .= '<div class="item_box">';
-                $html .= '<div class="item_img add_category">';
-                    $html .= '<a data-bs-toggle="modal" data-bs-target="#addItemModal" class="add_category_bt" id="NewItemBtn"><i class="fa-solid fa-plus"></i></a>';
+            $html .= '<div class="col-md-3">';
+                $html .= '<div class="item_box">';
+                    $html .= '<div class="item_img add_category">';
+                        $html .= '<a data-bs-toggle="modal" data-bs-target="#addItemModal" class="add_category_bt" id="NewItemBtn"><i class="fa-solid fa-plus"></i></a>';
+                    $html .= '</div>';
+                    $html .= '<div class="item_info text-center"><h2>Product</h2></div>';
                 $html .= '</div>';
-                $html .= '<div class="item_info text-center"><h2>Product</h2></div>';
             $html .= '</div>';
-        $html .= '</div>';
 
-        return response()->json([
-            'success' => 1,
-            'message' => "Item has been retrived Successfully...",
-            'data'    => $html,
-        ]);
+            return response()->json([
+                'success' => 1,
+                'message' => "Item has been retrived Successfully...",
+                'data'    => $html,
+            ]);
 
-    }
-    catch (\Throwable $th)
-    {
-        return response()->json([
-            'success' => 0,
-            'message' => "Internal Server Error!",
-        ]);
-    }
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json([
+                'success' => 0,
+                'message' => "Internal Server Error!",
+            ]);
+        }
 
     }
 
@@ -331,6 +364,7 @@ class ItemsController extends Controller
         $category_id = $request->category;
         $item_id = $request->item_id;
         $name = $request->name;
+        $calories = $request->calories;
         $description = $request->description;
         $is_new = isset($request->is_new) ? $request->is_new : 0;
         $as_sign = isset($request->is_sign) ? $request->is_sign : 0;
@@ -356,6 +390,7 @@ class ItemsController extends Controller
             $item = Items::find($item_id);
             $item->category_id = $category_id;
             $item->en_name = $name;
+            $item->en_calories = $calories;
             $item->en_description = $description;
             $item->published = $published;
             $item->price = $price;
@@ -400,8 +435,12 @@ class ItemsController extends Controller
                     }
                     else
                     {
+                        $max_order = Tags::max('order');
+                        $order = (isset($max_order) && !empty($max_order)) ? ($max_order + 1) : 1;
+
                         $tag = new Tags();
                         $tag->name = strtolower($val);
+                        $tag->order = $order;
                         $tag->save();
                     }
 
@@ -428,6 +467,25 @@ class ItemsController extends Controller
                 'message' => "Internal Server Error!",
             ]);
         }
+
+    }
+
+
+    // Function for Sorting Tags.
+    public function sorting(Request $request)
+    {
+        $sort_array = $request->sortArr;
+
+        foreach ($sort_array as $key => $value)
+        {
+    		$key = $key+1;
+    		Items::where('id',$value)->update(['order_key'=>$key]);
+    	}
+
+        return response()->json([
+            'success' => 1,
+            'message' => "Item has been Sorted SuccessFully....",
+        ]);
 
     }
 }

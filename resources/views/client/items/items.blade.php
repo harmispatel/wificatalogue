@@ -5,17 +5,17 @@
 @section('content')
 
     {{-- Add Modal --}}
-    <div class="modal fade" id="addItemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addItemModalLabel">Create New Item</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addItemForm" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="category_id" id="category_id" value="{{ $category->id }}">
-                    <div class="modal-body">
+                <div class="modal-body">
+                    <form id="addItemForm" enctype="multipart/form-data">
+                        @csrf
+                        {{-- <input type="hidden" name="category_id" id="category_id" value="{{ $category->id }}"> --}}
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <label for="type" class="form-label">Type</label>
@@ -25,6 +25,23 @@
                                     <select name="type" id="type" onchange="togglePrice('add')" class="form-control">
                                         <option value="1">Product</option>
                                         <option value="2">Devider</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="category" class="form-label">Category</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <select name="category" id="category" class="form-control">
+                                        <option value="">Choose Category</option>
+                                        @if(count($categories) > 0)
+                                            @foreach ($categories as $cat)
+                                                <option value="{{ $cat->id }}" {{ ($cat_id == $cat->id) ? 'selected' : '' }}>{{ $cat->en_name }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -118,6 +135,16 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="calories" class="form-label">Calories</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <input type="text" name="calories" class="form-control" id="calories" placeholder="Enter Calories">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="switch me-2">
@@ -167,28 +194,28 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn btn-primary" id="saveItem" onclick="saveItem()">Save</a>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a class="btn btn-primary" id="saveItem" onclick="saveItem()">Save</a>
+                </div>
             </div>
         </div>
     </div>
 
     {{-- Edit Modal --}}
     <div class="modal fade" id="editItemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editItemForm" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="item_id" id="item_id" value="">
-                    <div class="modal-body">
+                <div class="modal-body">
+                    <form id="editItemForm" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="item_id" id="item_id" value="">
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <label for="type" class="form-label">Type</label>
@@ -309,6 +336,16 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="calories" class="form-label">Calories</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <input type="text" name="calories" class="form-control" id="calories" placeholder="Enter Calories">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="switch me-2">
@@ -358,12 +395,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn btn-primary" id="updateItem" onclick="updateItem()">Update</a>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a class="btn btn-primary" id="updateItem" onclick="updateItem()">Update</a>
+                </div>
             </div>
         </div>
     </div>
@@ -397,6 +434,8 @@
         </div>
     </div>
 
+    {{-- Cat ID --}}
+    <input type="hidden" name="cat_id" id="cat_id" value="{{ $cat_id }}">
 
     {{-- Page Title --}}
     <div class="pagetitle">
@@ -406,7 +445,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('categories') }}">Categories</a></li>
-                        <li class="breadcrumb-item active">{{ (isset($category->en_name) && !empty($category->en_name)) ? $category->en_name : 'Item' }}</li>
+                        <li class="breadcrumb-item active">{{ (isset($category->en_name) && !empty($category->en_name)) ? $category->en_name : 'All' }}</li>
                     </ol>
                 </nav>
             </div>
@@ -441,6 +480,16 @@
                     <div class="main_section_inr">
                         <div class="row justify-content-end">
                             <div class="col-md-4">
+                                <select name="cat_filter" id="cat_filter" class="form-control">
+                                    <option value="">Filter By Category</option>
+                                    @if(count($categories) > 0)
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ ($cat_id == $category->id) ? 'selected' : '' }}>{{ $category->en_name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="search_box">
                                     <div class="form-group position-relative">
                                         <input type="text" id="search" class="form-control" placeholder="Search">
@@ -452,11 +501,11 @@
                         <div class="sec_title">
                             <h3>Tags</h3>
                         </div>
-                        <div class="row mb-4">
+                        <div class="row mb-4 connectedSortableTags" id="tagsSorting">
                             {{-- Tags Section --}}
                             @if(count($cat_tags) > 0)
                                 @foreach ($cat_tags as $tag)
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-2"  tag-id="{{ $tag->hasOneTag['id'] }}">
                                         <div class="product-tags">
                                             {{ $tag->hasOneTag['name'] }}
                                             <i class="fa fa-edit" onclick="editTag({{ $tag->hasOneTag['id'] }})" style="cursor: pointer"></i>
@@ -469,11 +518,11 @@
                         <div class="sec_title">
                             <h3>Items</h3>
                         </div>
-                        <div class="row" id="ItemSection">
+                        <div class="row connectedSortableItems" id="ItemSection">
                             {{-- Itens Section --}}
                             @if(count($items) > 0)
                                 @foreach ($items as $item)
-                                    <div class="col-md-3">
+                                    <div class="col-md-3" item-id="{{ $item->id }}">
                                         <div class="item_box">
                                             <div class="item_img">
                                                 <a href="#">
@@ -750,6 +799,7 @@
         $('#search').on('keyup',function()
         {
             var keywords = $(this).val();
+            var catId = $('#cat_id').val();
 
             $.ajax({
                 type: "POST",
@@ -757,6 +807,7 @@
                 data: {
                     "_token": "{{ csrf_token() }}",
                     'keywords':keywords,
+                    'id':catId,
                 },
                 dataType: 'JSON',
                 success: function(response)
@@ -902,6 +953,7 @@
 
                         // Add values in editItemForm
                         $('#editItemForm #name').val(item.en_name);
+                        $('#editItemForm #calories').val(item.en_calories);
                         $('#editItemForm #description').val(item.en_description);
                         $('#editItemForm #item_id').val(item.id);
 
@@ -1210,6 +1262,88 @@
             });
 
         }
+
+
+        $( function()
+        {
+            // Sorting Tags
+            $( "#tagsSorting" ).sortable({
+                connectWith: ".connectedSortableTags",
+                opacity: 0.5,
+            }).disableSelection();
+
+            $( ".connectedSortableTags" ).on( "sortupdate", function( event, ui )
+            {
+                var tagsArr = [];
+
+                $("#tagsSorting .col-sm-2").each(function( index )
+                {
+                    tagsArr[index] = $(this).attr('tag-id');
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route("tags.sorting") }}',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'sortArr': tagsArr,
+                    },
+                    dataType: 'JSON',
+                    success: function(response)
+                    {
+                        if (response.success == 1)
+                        {
+                            toastr.success(response.message);
+                        }
+                    }
+                });
+
+            });
+
+
+
+            // Sorting Items
+            $( "#ItemSection" ).sortable({
+                connectWith: ".connectedSortableItems",
+                opacity: 0.5,
+            }).disableSelection();
+
+            $( ".connectedSortableItems" ).on( "sortupdate", function( event, ui )
+            {
+                var itemsArr = [];
+
+                $("#ItemSection .col-md-3").each(function( index )
+                {
+                    itemsArr[index] = $(this).attr('item-id');
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route("items.sorting") }}',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'sortArr': itemsArr,
+                    },
+                    dataType: 'JSON',
+                    success: function(response)
+                    {
+                        if (response.success == 1)
+                        {
+                            toastr.success(response.message);
+                        }
+                    }
+                });
+
+            });
+
+        });
+
+        // Function for Get Items By Category ID
+        $('#cat_filter').on('change',function(){
+            var catID = $('#cat_filter :selected').val();
+            var Url = "{{ route('items') }}";
+            location.href = Url+"/"+catID;
+        });
 
     </script>
 

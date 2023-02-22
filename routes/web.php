@@ -4,10 +4,13 @@ use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DesignController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ItemsController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ShopQrController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\UserController;
@@ -124,16 +127,29 @@ Route::group(['prefix' => 'client'], function()
         Route::post('search-categories',[CategoryController::class,'searchCategories'])->name('categories.search');
 
         // Items
-        Route::get('items/{id}',[ItemsController::class,'index'])->name('items');
+        Route::get('items/{id?}',[ItemsController::class,'index'])->name('items');
         Route::post('store-items',[ItemsController::class,'store'])->name('items.store');
         Route::post('delete-items',[ItemsController::class,'destroy'])->name('items.delete');
         Route::post('status-items',[ItemsController::class,'status'])->name('items.status');
         Route::post('search-items',[ItemsController::class,'searchItems'])->name('items.search');
         Route::post('edit-items',[ItemsController::class,'edit'])->name('items.edit');
         Route::post('update-items',[ItemsController::class,'update'])->name('items.update');
+        Route::post('sorting-items',[ItemsController::class,'sorting'])->name('items.sorting');
 
         // Designs
-        Route::get('/design', [MenuController::class,'index'])->name('design');
+        Route::get('/design-logo', [DesignController::class,'logo'])->name('design.logo');
+        Route::get('/design-theme', [DesignController::class,'theme'])->name('design.theme');
+        Route::get('/design-cover', [DesignController::class,'cover'])->name('design.cover');
+        Route::get('/design-banner', [DesignController::class,'banner'])->name('design.banner');
+        Route::get('/design-general-info', [DesignController::class,'generalInfo'])->name('design.general-info');
+        Route::get('/design-theme-preview', [DesignController::class,'themePrview'])->name('design.theme-preview');
+
+        // Languages
+        Route::get('/languages', [LanguageController::class,'index'])->name('languages');
+
+
+        // Shop QrCode
+        Route::get('/qrcode', [ShopQrController::class,'index'])->name('qrcode');
 
         // ClientProfile
         Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('client.profile');
@@ -143,6 +159,7 @@ Route::group(['prefix' => 'client'], function()
         Route::post('delete-tags',[TagsController::class,'destroy'])->name('tags.destroy');
         Route::post('edit-tags',[TagsController::class,'edit'])->name('tags.edit');
         Route::post('update-tags',[TagsController::class,'update'])->name('tags.update');
+        Route::post('sorting-tags',[TagsController::class,'sorting'])->name('tags.sorting');
 
     });
 });

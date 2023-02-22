@@ -44,6 +44,9 @@
     .select2-selection{
         min-height: 37px!important;
     }
+    .select2-container .select2-search--inline .select2-search__field{
+        height:22px;
+    }
     .select2-container--default .select2-selection--multiple{
         border: 1px solid #ced4da!important;
     }
@@ -58,5 +61,6 @@
         border-radius: 5px;
         color: rgb(0 0 0 / 65%);
         margin-bottom: 15px;
+        cursor: move;
     }
 </style>

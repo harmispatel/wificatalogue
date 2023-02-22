@@ -15,6 +15,7 @@ class AdminSettingsController extends Controller
             'favourite_client_limit',
             'copyright_text',
             'logo',
+            'login_form_background',
         ]);
 
         $settings = [];
@@ -39,6 +40,7 @@ class AdminSettingsController extends Controller
             'favourite_client_limit'      =>          'required|numeric',
             'copyright_text'              =>          'required',
             'logo'                        =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            'login_form_background'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
         $all_data['favourite_client_limit'] = $request->favourite_client_limit;
@@ -50,6 +52,14 @@ class AdminSettingsController extends Controller
             $request->file('logo')->move(public_path('admin_uploads/logos/'), $logoname);
             $logoUrl = asset('/').'public/admin_uploads/logos/'.$logoname;
             $all_data['logo'] = $logoUrl;
+        }
+
+        if($request->hasFile('login_form_background'))
+        {
+            $bgName = "login_bg_".time().".". $request->file('login_form_background')->getClientOriginalExtension();
+            $request->file('login_form_background')->move(public_path('admin_uploads/login_backgrounds/'), $bgName);
+            $loginbgUrl = asset('/').'public/admin_uploads/login_backgrounds/'.$bgName;
+            $all_data['login_form_background'] = $loginbgUrl;
         }
 
         // Insert or Update Settings

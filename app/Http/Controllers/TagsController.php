@@ -39,15 +39,22 @@ class TagsController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tags  $tags
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tags $tags)
+    // Sorting Tags.
+    public function sorting(Request $request)
     {
-        //
+        $sort_array = $request->sortArr;
+
+        foreach ($sort_array as $key => $value)
+        {
+    		$key = $key+1;
+    		Tags::where('id',$value)->update(['order'=>$key]);
+    	}
+
+        return response()->json([
+            'success' => 1,
+            'message' => "Tags has been Sorted SuccessFully....",
+        ]);
+
     }
 
     // Show the form for editing the specified resource.

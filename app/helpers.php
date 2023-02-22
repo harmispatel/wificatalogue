@@ -11,6 +11,7 @@ use App\Models\User;
             'favourite_client_limit',
             'copyright_text',
             'logo',
+            'login_form_background',
         ]);
 
         $settings = [];
