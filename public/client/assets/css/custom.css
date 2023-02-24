@@ -45,7 +45,14 @@
   font-size:20px;
   color:#333c4e;
   font-weight:500;
-  margin-bottom:10px;
+  margin-bottom:0;
+}
+
+.sec_title h3{
+  font-size:20px;
+  color:#333c4e;
+  font-weight:700;
+  margin-bottom:0;
 }
 
 .sec_title p{
@@ -55,6 +62,11 @@
 
 .item_img{
   position: relative;
+}
+
+.item_img img{
+    width: 202px;
+    height: 202px;
 }
 
 .item_img:hover .edit_item_bt{
@@ -401,7 +413,7 @@ input:checked + .slider .check_icon{
 
 /* language page */
 
-.lang_main{
+.lang_main,.qr_main{
     padding:20px;
     background-color:#fff;
 }
@@ -428,9 +440,22 @@ input:checked + .slider .check_icon{
     align-items:center;
 }
 
-.lang_right_side{
-    padding:10px;
+.submenu{
+    padding-left:40px;
 }
+
+.lang_sidebar .lang_menu_ul a:hover,.lang_sidebar .lang_menu_ul a:focus{
+    color:rgba(0, 0, 0, 0.65);
+}
+
+
+.submenu li,.submenu li a{
+    padding:0;
+}
+
+/* .lang_right_side{
+    padding:10px;
+} */
 
 .lang_title h2{
     font-size:25px;
@@ -447,9 +472,184 @@ input:checked + .slider .check_icon{
     color:rgba(0, 0, 0, 0.65);
 }
 
-.lang_right_side .switch{
-    width:105px;
+.select_lang{
+    padding:20px 0;
 }
-.lang_right_side .switch .slider:before{
-    left: 45px;
+
+.select_lang_inr{
+    padding:5px;
+    border:1px solid #0099ac;
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+    border-radius:10px;
+}
+
+.select_lang_inr .switch{
+    width:100px;
+}
+.select_lang_inr .switch .slider:before{
+    left: 5px;
+}
+
+.select_lang_inr input:checked + .slider:before{
+    -webkit-transform: translateX(68px);
+    -ms-transform: translateX(68px);
+    transform: translateX(68px);
+}
+
+.select_lang_inr input:checked + .slider .check_icon,.select_lang_inr .slider .uncheck_icon{
+    font-size:12px;
+}
+
+.select_lang_inr label.form-check-label{
+    font-size:13px;
+}
+
+.cate_lang_box .card-header,.cate_lang_box .card-body{
+    padding:10px;
+}
+
+.cate_lang_box .card-header h3{
+    font-size:20px;
+    margin:0;
+}
+
+.item_lang_box .card-header,.item_lang_box .card-body{
+    padding:10px;
+}
+
+.item_lang_box .card-header h3{
+    font-size:20px;
+    margin:0;
+}
+
+/* qr code */
+
+.qr_main .sec_title{
+    padding-bottom:5px;
+    border-bottom:1px solid #ccc;
+    margin-bottom:20px;
+}
+
+.qr_main .sec_title h2{
+    font-size:25px;
+    color:#000;
+    margin:0;
+}
+
+.qr_btn_group .qr_btn{
+    padding:7px 30px;
+    font-size:16px;
+}
+
+.qr_sidebar .nav-pills{
+    background-color:rgb(199 199 199 / 25%);
+}
+
+.qr_sidebar .nav-pills .nav-link{
+    color:#495057;
+}
+
+.qr_sidebar .nav-pills .nav-link.active{
+    color:#fff;
+}
+
+.qr_content .remove_bt{
+    background-color:#FFEBF1;
+}
+
+
+/* General Info */
+
+.general_info_main{
+    background-color:#fff;
+    padding:20px;
+}
+
+.icon-input{
+    padding-left:40px;
+}
+
+.input-icon{
+    position: absolute;
+    top:50%;
+    left:10px;
+    transform: translate(0 , -50%);
+    color:#0099ac;
+}
+
+.social_media_title h2{
+    font-size:20px;
+    color:#333c4e;
+    font-weight:700;
+}
+
+.social_media_title p{
+    font-size:16px;
+    color:#333c4e;
+}
+
+
+/* statistics */
+.statistics_main{
+    background-color:#fff;
+    padding:20px;
+}
+.chart #chart .apexcharts-toolbar{
+    display:none;
+}
+#chart {
+    height: 450px !important;
+}
+
+.most_viewed_sec{
+    padding:20px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.most_viewed_sec h4{
+    font-size:15px;
+    margin-bottom:10px;
+    color:#000;
+    font-weight:600;
+    text-align:center;
+}
+
+.most_viewed_sec .viewed_ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+.most_viewed_sec .viewed_ul li{
+    display:flex;
+    border-bottom:1px solid #ccc;
+    margin-bottom:10px;
+}
+
+.most_viewed_sec .viewed_ul li p{
+    font-size:16px;
+    color:rgba(0, 0, 0, 0.75);
+    margin:0;
+    padding-left:5px;
+}
+
+
+/* contact */
+.contact_main{
+    background-color:#fff;
+    padding:20px;
+}
+
+/* form design */
+
+.form-group label,.form-label{
+    color:#203047;
+    font-weight:600;
+}
+
+.main .form-control{
+    border-color:#0099ac;
 }

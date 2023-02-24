@@ -58,33 +58,33 @@
 
         {{-- Design Nav --}}
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#design-nav" data-bs-toggle="collapse" href="#" aria-expanded="">
-                <i class="fa-solid fa-pen-nib "></i><span>Design</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link {{ (($routeName != 'design.general-info') && ($routeName != 'design.logo') && ($routeName != 'design.cover') && ($routeName != 'design.banner') && ($routeName != 'design.theme')) ? 'collapsed' : '' }} {{ (($routeName == 'design.general-info') || ($routeName == 'design.logo') || ($routeName == 'design.cover') || ($routeName == 'design.banner') || ($routeName == 'design.theme')) ? 'active-tab' : '' }}" data-bs-target="#design-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'design.general-info') || ($routeName == 'design.logo') || ($routeName == 'design.cover') || ($routeName == 'design.banner') || ($routeName == 'design.theme')) ? 'true' : 'false' }}">
+                <i class="fa-solid fa-pen-nib {{ (($routeName == 'design.general-info') || ($routeName == 'design.logo') || ($routeName == 'design.cover') || ($routeName == 'design.banner') || ($routeName == 'design.theme')) ? 'icon-tab' : '' }}"></i><span>Design</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'design.general-info') || ($routeName == 'design.logo') || ($routeName == 'design.cover') || ($routeName == 'design.banner') || ($routeName == 'design.theme')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="design-nav" class="nav-content sidebar-ul collapse" data-bs-parent="#sidebar-nav">
+            <ul id="design-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'design.general-info') || ($routeName == 'design.logo') || ($routeName == 'design.cover') || ($routeName == 'design.banner') || ($routeName == 'design.theme')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('design.general-info') }}" class="">
+                    <a href="{{ route('design.general-info') }}" class="{{ ($routeName == 'design.general-info') ? 'active-link' : '' }}">
                         <span>General Info</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('design.logo') }}" class="">
+                    <a href="{{ route('design.logo') }}" class="{{ ($routeName == 'design.logo') ? 'active-link' : '' }}">
                         <span>Logo</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('design.cover') }}" class="">
+                    <a href="{{ route('design.cover') }}" class="{{ ($routeName == 'design.cover') ? 'active-link' : '' }}">
                         <span>Cover</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('design.banner') }}" class="">
+                    <a href="{{ route('design.banner') }}" class="{{ ($routeName == 'design.banner') ? 'active-link' : '' }}">
                         <span>Banner</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('design.theme') }}" class="">
-                        <span>Theme</span>
+                    <a href="{{ route('design.theme') }}" class="{{ ($routeName == 'design.theme') ? 'active-link' : '' }}">
+                        <span>Themes</span>
                     </a>
                 </li>
             </ul>
@@ -93,22 +93,22 @@
         {{-- Menu Nav --}}
         <li class="nav-item">
             {{-- && --}}
-            <a class="nav-link {{ (($routeName != 'categories')) ? 'collapsed' : '' }} {{ (($routeName == 'categories')) ? 'active-tab' : '' }}" data-bs-target="#menu-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'categories')) ? 'true' : 'false' }}">
-                <i class="fa-solid fa-bars {{ (($routeName == 'categories')) ? 'icon-tab' : '' }}"></i><span>Menu</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'categories')) ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ (($routeName != 'categories') && ($routeName != 'items') && ($routeName != 'languages')) ? 'collapsed' : '' }} {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'active-tab' : '' }}" data-bs-target="#menu-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'true' : 'false' }}">
+                <i class="fa-solid fa-bars {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'icon-tab' : '' }}"></i><span>Menu</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="menu-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'categories')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="menu-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('categories') }}" class="{{ ($routeName == 'categories') ? 'active-link' : '' }}">
                         <span>Categories</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('items') }}" class="">
+                    <a href="{{ route('items') }}" class="{{ ($routeName == 'items') ? 'active-link' : '' }}">
                         <span>Items</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('languages') }}" class="">
+                    <a href="{{ route('languages') }}" class="{{ ($routeName == 'languages') ? 'active-link' : '' }}">
                         <span>Languages</span>
                     </a>
                 </li>

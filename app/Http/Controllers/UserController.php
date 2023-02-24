@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
+use App\Models\Languages;
+use App\Models\LanguageSettings;
 use App\Models\Shop;
 use App\Models\Subscriptions;
 use App\Models\User;
@@ -49,6 +51,7 @@ class UserController extends Controller
     public function insert()
     {
         $data['subscriptions'] = Subscriptions::where('status',1)->get();
+        $data['languages'] = Languages::get();
         return view('admin.clients.new_clients',$data);
     }
 
@@ -57,6 +60,7 @@ class UserController extends Controller
     public function store(ClientRequest $request)
     {
         $subscription_id = $request->subscription;
+        $primary_language = $request->primary_language;
 
         $subscription = Subscriptions::where('id',$subscription_id)->first();
         $subscription_duration = isset($subscription->duration) ? $subscription->duration : '';
@@ -102,6 +106,13 @@ class UserController extends Controller
             }
             $shop->save();
 
+
+            // Add Client Default Language
+            $primary_lang = new LanguageSettings();
+            $primary_lang->shop_id = $shop->id;
+            $primary_lang->key = "primary_language";
+            $primary_lang->value = $primary_language;
+            $primary_lang->save();
 
             // Insert User Subscriptions
             if($subscription_id)

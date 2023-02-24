@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class AdditionalLanguage extends Model
 {
     use HasFactory;
 
-    public function items()
+    public function language()
     {
-        return $this->hasMany(Items::class,'category_id','id');
+        return $this->hasOne(Languages::class,'id','language_id');
     }
 }

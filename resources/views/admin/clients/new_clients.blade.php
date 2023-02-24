@@ -145,6 +145,24 @@
                                         </div>
                                         <code>Upload Shop Logo (150*80) or (150*150)</code>
                                     </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="primary_language" class="form-label">Primary Language</label>
+                                            <select name="primary_language" id="primary_language" class="form-select {{ ($errors->has('primary_language')) ? 'is-invalid' : '' }}">
+                                                <option value="">Select Primary Language</option>
+                                                @if(count($languages) > 0)
+                                                    @foreach ($languages as $language)
+                                                        <option value="{{ $language->id }}">{{ $language->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @if($errors->has('primary_language'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('primary_language') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label for="shop_description" class="form-label">Shop Description</label>

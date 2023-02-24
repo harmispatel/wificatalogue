@@ -73,7 +73,7 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <input type="file" name="image" id="image" class="form-control">
-                                    <code>Upload Image in (400*400) Dimensions</code>
+                                    <code>Upload Image in (200*200) Dimensions</code>
                                 </div>
                             </div>
                         </div>
@@ -274,7 +274,7 @@
                                 <div class="form-group">
                                     <input type="file" name="image" id="image" class="form-control">
                                     <div class="mt-3" id="itemImage"></div>
-                                    <code>Upload Image in (400*400) Dimensions</code>
+                                    <code>Upload Image in (200*200) Dimensions</code>
                                 </div>
                             </div>
                         </div>
@@ -883,32 +883,39 @@
                         // Price
                         const price = item.price?.price;
 
-                        // Set Selected option for Ingredients.
-                        ingredients.forEach(ingredient =>
+                        if(ingredients != '')
                         {
-                            var ingredient_id = ingredient;
-                            $("#editItemForm #ingredients").find("option[value=" + ingredient_id + "]").prop("selected","selected");
-                        });
-                        // Intialized Ingredients SelectBox
-                        $("#editItemForm #ingredients").select2({
-                            dropdownParent: $("#editItemModal"),
-                            placeholder: "Select Ingredients",
-                        });
+                            // Set Selected option for Ingredients.
+                            ingredients.forEach(ingredient =>
+                            {
+                                var ingredient_id = ingredient;
+                                $("#editItemForm #ingredients").find("option[value=" + ingredient_id + "]").prop("selected","selected");
+                            });
+                            // Intialized Ingredients SelectBox
+                            $("#editItemForm #ingredients").select2({
+                                dropdownParent: $("#editItemModal"),
+                                placeholder: "Select Ingredients",
+                            });
+                        }
 
 
-                        // Set Selected option for Tags.
-                        product_tags.forEach(tag =>
+                        if(product_tags != '')
                         {
-                            var tag_name = tag.has_one_tag.name;
-                            $("#editItemForm #tags").find("option[value=" + tag_name + "]").prop("selected","selected");
-                        });
-                        // Intialized Tags SelectBox
-                        $("#editItemForm #tags").select2({
-                            dropdownParent: $("#editItemModal"),
-                            placeholder: "Select Tags",
-                            tags: true,
-                            // tokenSeparators: [',', ' ']
-                        });
+                            // Set Selected option for Tags.
+                            product_tags.forEach(tag =>
+                            {
+                                var tag_name = tag.has_one_tag.name;
+                                $("#editItemForm #tags").find("option[value='" + tag_name + "']").prop("selected","selected");
+                            });
+                            // Intialized Tags SelectBox
+                            $("#editItemForm #tags").select2({
+                                dropdownParent: $("#editItemModal"),
+                                placeholder: "Select Tags",
+                                tags: true,
+                                // tokenSeparators: [',', ' ']
+                            });
+                        }
+
 
                         if(price != undefined)
                         {

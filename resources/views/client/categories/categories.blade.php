@@ -46,7 +46,7 @@
                                 <div class="form-group mb-3">
                                    <input type="file" name="image" id="image" class="form-control">
                                    <div class="mt-3" id="categoryImage"></div>
-                                   <code>Upload Image in (400*400) Dimensions</code>
+                                   <code>Upload Image in (200*200) Dimensions</code>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -116,7 +116,7 @@
                             <div class="col-md-10">
                                 <div class="form-group mb-3">
                                    <input type="file" name="image" id="image" class="form-control">
-                                   <code>Upload Image in (400*400) Dimensions</code>
+                                   <code>Upload Image in (200*200) Dimensions</code>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -202,12 +202,12 @@
                             <p> Menu categories define the core structure of your menu. Move your mouse over a category to ‘Add or edit category items’ (aka products) or ‘Edit category’
                             </p>
                         </div>
-                        <div class="row" id="categorySection">
+                        <div class="row connectedSortableCategory" id="categorySection">
 
                             {{-- Categories Section --}}
                             @if(count($categories) > 0)
                                 @foreach ($categories as $category)
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 catDiv" cat-id="{{ $category->id }}">
                                         <div class="item_box">
                                             <div class="item_img">
                                                 <a href="#">
@@ -600,6 +600,46 @@
                     }
                 }
             });
+
+        });
+
+        $( function()
+        {
+            // Sorting Categories
+            $( "#categorySection" ).sortable({
+                connectWith: ".connectedSortableCategory",
+                opacity: 0.5,
+            }).disableSelection();
+
+            $( ".connectedSortableCategory" ).on( "sortupdate", function( event, ui )
+            {
+                var catArray = [];
+
+                $("#categorySection .catDiv").each(function( index )
+                {
+                    catArray[index] = $(this).attr('cat-id');
+                });
+
+                console.log(catArray);
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route("categories.sorting") }}',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'sortArr': catArray,
+                    },
+                    dataType: 'JSON',
+                    success: function(response)
+                    {
+                        if (response.success == 1)
+                        {
+                            toastr.success(response.message);
+                        }
+                    }
+                });
+            });
+
 
         });
 

@@ -1,6 +1,7 @@
 <?php
 
     use App\Models\AdminSettings;
+use App\Models\LanguageSettings;
 use App\Models\User;
 
     // Get Admin's Settings
@@ -23,7 +24,27 @@ use App\Models\User;
         }
 
         return $settings;
+    }
 
+
+
+    // Get Client's LanguageSettings
+    function clientLanguageSettings($shopID)
+    {
+        // Keys
+        $keys = ([
+            'primary_language',
+        ]);
+
+        $settings = [];
+
+        foreach($keys as $key)
+        {
+            $query = LanguageSettings::select('value')->where('key',$key)->where('shop_id',$shopID)->first();
+            $settings[$key] = isset($query->value) ? $query->value : '';
+        }
+
+        return $settings;
     }
 
 

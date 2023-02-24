@@ -63,4 +63,9 @@
         margin-bottom: 15px;
         cursor: move;
     }
+
+    /* categorySection */
+    #categorySection .col-md-3{
+        cursor: move;
+    }
 </style>

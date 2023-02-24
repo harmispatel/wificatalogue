@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="add_logo_sec">
                     <div class="add_logo_sec_header">
-                        <h2>Logo</h2>
+                        <h2>Cover</h2>
                     </div>
                     <div class="add_logo_sec_body">
                         <p>Logo will appear on the top of your menu</p>

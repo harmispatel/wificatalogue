@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Languages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
-        $data['categories'] = Category::where('shop_id',$shop_id)->get();
+        $data['categories'] = Category::where('shop_id',$shop_id)->orderBy('order_key')->get();
         return view('client.categories.categories',$data);
     }
 
@@ -24,21 +25,43 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name'   => 'required',
-            'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG|dimensions:width=400,height=400',
+            'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
+
+        // Shop ID
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+
+        // Language Settings
+        $language_settings = clientLanguageSettings($shop_id);
+        $primary_lang_id = isset($language_settings['primary_language']) ? $language_settings['primary_language'] : '';
+
+        // Language Details
+        $language_detail = Languages::where('id',$primary_lang_id)->first();
+        $lang_code = isset($language_detail->code) ? $language_detail->code : '';
+
+        $category_name_key = $lang_code."_name";
+        $category_description_key = $lang_code."_description";
 
         $name = $request->name;
         $description = $request->description;
         $published = isset($request->published) ? $request->published : 0;
         $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
 
+        $max_category_order_key = Category::max('order_key');
+        $category_order = (isset($max_category_order_key) && !empty($max_category_order_key)) ? ($max_category_order_key + 1) : 1;
+
        try
        {
             $category = new Category();
             $category->en_name = $name;
             $category->en_description = $description;
+
+            $category->$category_name_key = $name;
+            $category->$category_description_key = $description;
+
             $category->published = $published;
             $category->shop_id = $shop_id;
+            $category->order_key = $category_order;
 
             // Insert Category Image if is Exists
             if($request->hasFile('image'))
@@ -132,8 +155,22 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name'   => 'required',
-            'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG|dimensions:width=400,height=400',
+            'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
+
+        // Shop ID
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+
+        // Language Settings
+        $language_settings = clientLanguageSettings($shop_id);
+        $primary_lang_id = isset($language_settings['primary_language']) ? $language_settings['primary_language'] : '';
+
+        // Language Details
+        $language_detail = Languages::where('id',$primary_lang_id)->first();
+        $lang_code = isset($language_detail->code) ? $language_detail->code : '';
+
+        $category_name_key = $lang_code."_name";
+        $category_description_key = $lang_code."_description";
 
         try
         {
@@ -143,8 +180,13 @@ class CategoryController extends Controller
             $published = isset($request->published) ? $request->published : 0;
 
             $category = Category::find($id);
+
             $category->en_name = $name;
             $category->en_description = $description;
+
+            $category->$category_name_key = $name;
+            $category->$category_description_key = $description;
+
             $category->published = $published;
 
             // Insert Category Image if is Exists
@@ -285,6 +327,26 @@ class CategoryController extends Controller
                 'message' => "Internal Server Error!",
             ]);
         }
+
+    }
+
+
+
+    // Function for Sorting Category.
+    public function sorting(Request $request)
+    {
+        $sort_array = $request->sortArr;
+
+        foreach ($sort_array as $key => $value)
+        {
+    		$key = $key+1;
+    		Category::where('id',$value)->update(['order_key'=>$key]);
+    	}
+
+        return response()->json([
+            'success' => 1,
+            'message' => "Category has been Sorted SuccessFully....",
+        ]);
 
     }
 }

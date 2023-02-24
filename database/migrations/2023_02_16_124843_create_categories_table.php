@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('shop_id')->nullable();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->integer('order_key')->nullable();
 
             $table->string('en_name')->nullable();
             $table->text('en_description')->nullable();

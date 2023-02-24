@@ -23,7 +23,7 @@
             <div class="col-md-12">
                 <div class="add_logo_sec">
                     <div class="add_logo_sec_header d-flex align-items-center justify-content-between">
-                        <h2>Logo</h2>
+                        <h2>Banner</h2>
                         <label class="switch">
                             <input type="checkbox" checked>
                             <span class="slider round">

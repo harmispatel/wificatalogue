@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ItemsController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ShopQrController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\UserController;
@@ -125,6 +127,7 @@ Route::group(['prefix' => 'client'], function()
         Route::post('update-categories',[CategoryController::class,'update'])->name('categories.update');
         Route::post('status-categories',[CategoryController::class,'status'])->name('categories.status');
         Route::post('search-categories',[CategoryController::class,'searchCategories'])->name('categories.search');
+        Route::post('sorting-categories',[CategoryController::class,'sorting'])->name('categories.sorting');
 
         // Items
         Route::get('items/{id?}',[ItemsController::class,'index'])->name('items');
@@ -146,6 +149,14 @@ Route::group(['prefix' => 'client'], function()
 
         // Languages
         Route::get('/languages', [LanguageController::class,'index'])->name('languages');
+        Route::post('/language-set-primary', [LanguageController::class,'setPrimaryLanguage'])->name('language.set-primary');
+        Route::post('/language-set-additional', [LanguageController::class,'setAdditionalLanguages'])->name('language.set-additional');
+        Route::post('/language-delete-additional', [LanguageController::class,'deleteAdditionalLanguage'])->name('language.delete-additional');
+        Route::post('/language-change-status', [LanguageController::class,'changeLanguageStatus'])->name('language.changeStatus');
+        Route::post('/language-categorydetails', [LanguageController::class,'getCategoryDetails'])->name('language.categorydetails');
+        Route::post('/language-update-catdetails', [LanguageController::class,'updateCategoryDetails'])->name('language.update-category-details');
+        Route::post('/language-itemdetails', [LanguageController::class,'getItemDetails'])->name('language.itemdetails');
+        Route::post('/language-update-itemdetails', [LanguageController::class,'updateItemDetails'])->name('language.update-item-details');
 
 
         // Shop QrCode
@@ -160,6 +171,13 @@ Route::group(['prefix' => 'client'], function()
         Route::post('edit-tags',[TagsController::class,'edit'])->name('tags.edit');
         Route::post('update-tags',[TagsController::class,'update'])->name('tags.update');
         Route::post('sorting-tags',[TagsController::class,'sorting'])->name('tags.sorting');
+
+
+        // Statistic
+        Route::get('/statistics',[StatisticsController::class,'index'])->name('statistics');
+
+        // contact us
+        Route::get('/contact',[ContactController::class,'index'])->name('contact');
 
     });
 });

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\CategoryProductTags;
 use App\Models\Ingredient;
 use App\Models\Items;
+use App\Models\Languages;
 use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,8 +46,23 @@ class ItemsController extends Controller
     {
         $request->validate([
             'name'   => 'required',
-            'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG|dimensions:width=400,height=400',
+            'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
+
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+
+        // Language Settings
+        $language_settings = clientLanguageSettings($shop_id);
+        $primary_lang_id = isset($language_settings['primary_language']) ? $language_settings['primary_language'] : '';
+
+        // Language Details
+        $language_detail = Languages::where('id',$primary_lang_id)->first();
+        $lang_code = isset($language_detail->code) ? $language_detail->code : '';
+
+        $item_name_key = $lang_code."_name";
+        $item_price_key = $lang_code."_price";
+        $item_calories_key = $lang_code."_calories";
+        $item_description_key = $lang_code."_description";
 
         $max_item_order_key = Items::max('order_key');
         $item_order = (isset($max_item_order_key) && !empty($max_item_order_key)) ? ($max_item_order_key + 1) : 1;
@@ -60,7 +76,6 @@ class ItemsController extends Controller
         $as_sign = isset($request->is_sign) ? $request->is_sign : 0;
         $published = isset($request->published) ? $request->published : 0;
         $day_special = isset($request->day_special) ? $request->day_special : 0;
-        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
         $ingredients = (isset($request->ingredients) && count($request->ingredients) > 0) ? serialize($request->ingredients) : '';
         $tags = isset($request->tags) ? $request->tags : [];
 
@@ -83,11 +98,18 @@ class ItemsController extends Controller
             $item->category_id = $category_id;
             $item->shop_id = $shop_id;
             $item->type = $type;
-            $item->en_name = $name;
-            $item->en_calories = $calories;
-            $item->en_description = $description;
-            $item->published = $published;
+
+            $item->name = $name;
             $item->price = $price;
+            $item->calories = $calories;
+            $item->description = $description;
+
+            $item->$item_name_key = $name;
+            $item->$item_price_key = $price;
+            $item->$item_calories_key = $calories;
+            $item->$item_description_key = $description;
+
+            $item->published = $published;
             $item->order_key = $item_order;
             $item->ingredients = $ingredients;
             $item->is_new = $is_new;
@@ -357,15 +379,31 @@ class ItemsController extends Controller
 
         $request->validate([
             'name'   => 'required',
-            'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG|dimensions:width=400,height=400',
+            'image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
             'category'   => 'required',
         ]);
+
+        // Shop ID
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+
+        // Language Settings
+        $language_settings = clientLanguageSettings($shop_id);
+        $primary_lang_id = isset($language_settings['primary_language']) ? $language_settings['primary_language'] : '';
+
+        // Language Details
+        $language_detail = Languages::where('id',$primary_lang_id)->first();
+        $lang_code = isset($language_detail->code) ? $language_detail->code : '';
+
+        $item_name_key = $lang_code."_name";
+        $item_price_key = $lang_code."_price";
+        $item_calories_key = $lang_code."_calories";
+        $item_description_key = $lang_code."_description";
 
         $category_id = $request->category;
         $item_id = $request->item_id;
         $name = $request->name;
-        $calories = $request->calories;
         $description = $request->description;
+        $calories = $request->calories;
         $is_new = isset($request->is_new) ? $request->is_new : 0;
         $as_sign = isset($request->is_sign) ? $request->is_sign : 0;
         $published = isset($request->published) ? $request->published : 0;
@@ -389,11 +427,18 @@ class ItemsController extends Controller
         {
             $item = Items::find($item_id);
             $item->category_id = $category_id;
-            $item->en_name = $name;
-            $item->en_calories = $calories;
-            $item->en_description = $description;
-            $item->published = $published;
+
+            $item->name = $name;
             $item->price = $price;
+            $item->calories = $calories;
+            $item->description = $description;
+
+            $item->$item_name_key = $name;
+            $item->$item_price_key = $price;
+            $item->$item_calories_key = $calories;
+            $item->$item_description_key = $description;
+
+            $item->published = $published;
             $item->is_new = $is_new;
             $item->as_sign = $as_sign;
             $item->ingredients = $ingredients;
