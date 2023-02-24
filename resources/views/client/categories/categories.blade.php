@@ -6,72 +6,14 @@
 
     {{-- Edit Modal --}}
     <div class="modal fade" id="editCategoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editCategoryModalLabel">Edit category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editCategoryForm" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="category_id" id="category_id">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="input_label">
-                                    <label class="form-label" for="name">Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="form-group mb-3">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Category Title">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="input_label">
-                                    <label class="form-label" for="description">Description</label>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="form-group mb-3">
-                                    <textarea class="form-control" name="description" id="description" rows="5"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="input_label">
-                                    <label class="form-label" for="image">Image</label>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="form-group mb-3">
-                                   <input type="file" name="image" id="image" class="form-control">
-                                   <div class="mt-3" id="categoryImage"></div>
-                                   <code>Upload Image in (200*200) Dimensions</code>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="input_label">
-                                    <label class="form-label" for="publish">Published</label>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="form-group mb-3">
-                                    <label class="switch">
-                                        <input type="checkbox" id="publish" name="published" value="1">
-                                        <span class="slider round">
-                                            <i class="fa-solid fa-circle-check check_icon"></i>
-                                            <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn btn-primary" id="updateCategory" onclick="updateCategory()">Update</a>
-                    </div>
-                </form>
+                <div class="modal-body" id="cat_lang_div">
+                </div>
             </div>
         </div>
     </div>
@@ -401,17 +343,10 @@
 
 
         // Function for Edit Category
-        function editCategory(catId)
+        function editCategory(catID)
         {
-            // Reset NewCategoryForm
-            $('#editCategoryForm').trigger('reset');
-
-            // Remove Validation Class
-            $('#editCategoryForm #name').removeClass('is-invalid');
-            $('#editCategoryForm #image').removeClass('is-invalid');
-
-            // Clear Image Div
-            $('#editCategoryForm #categoryImage').html('');
+            // Reset All Form
+            $('#editCategoryModal #cat_lang_div').html('');
 
             // Clear all Toastr Messages
             toastr.clear();
@@ -422,43 +357,14 @@
                 dataType: "JSON",
                 data: {
                     '_token': "{{ csrf_token() }}",
-                    'id': catId,
+                    'id': catID,
                 },
                 success: function(response)
                 {
                     if (response.success == 1)
                     {
-                        // Category Data's
-                        const category = response.category;
-
-                        // Image
-                        const default_image = "public/client_images/not-found/no_image_1.jpg";
-                        const image_path = "public/client_uploads/categories/"+category.image;
-                        const category_image = (category.image) ? image_path : default_image;
-
-                        // Published Status
-                        const publish = (category.published) ? 1 : 0;
-
-                        // Add values in editCategoryForm
-                        $('#editCategoryForm #name').val(category.en_name);
-                        $('#editCategoryForm #description').val(category.en_description);
-                        $('#editCategoryForm #category_id').val(category.id);
-
-                        // Publish Status Check & Uncheck
-                        if(publish == 1)
-                        {
-                            $('#editCategoryForm #publish').attr('checked',true);
-                        }
-                        else
-                        {
-                            $('#editCategoryForm #publish').removeAttr('checked',true);
-                        }
-
-                        // Show Image in editCategoryForm
-                        $('#editCategoryForm #categoryImage').html('');
-                        $('#editCategoryForm #categoryImage').append('<img src="{{ asset('/') }}'+category_image+'" width="100">');
-
-                        // Show Modal
+                        $('#editCategoryModal #cat_lang_div').html('');
+                        $('#editCategoryModal #cat_lang_div').append(response.data);
                         $('#editCategoryModal').modal('show');
                     }
                     else
@@ -467,18 +373,20 @@
                     }
                 }
             });
+
         }
 
 
 
         // Function for Update Category
-        function updateCategory()
+        function updateCategory(langCode)
         {
-            const myFormData = new FormData(document.getElementById('editCategoryForm'));
+            var formID = langCode+"_category_form";
+            var myFormData = new FormData(document.getElementById(formID));
 
             // Remove Validation Class
-            $('#editCategoryForm #name').removeClass('is-invalid');
-            $('#editCategoryForm #image').removeClass('is-invalid');
+            $(formID+' #category_name').removeClass('is-invalid');
+            $(formID+' #category_image').removeClass('is-invalid');
 
             // Clear all Toastr Messages
             toastr.clear();
@@ -495,8 +403,6 @@
                 {
                     if(response.success == 1)
                     {
-                        $('#editCategoryForm #categoryImage').html('');
-                        $('#editCategoryForm').trigger('reset');
                         $('#editCategoryModal').modal('hide');
                         toastr.success(response.message);
                         setTimeout(() => {
@@ -505,10 +411,11 @@
                     }
                     else
                     {
-                        $('#editCategoryForm').trigger('reset');
                         $('#editCategoryModal').modal('hide');
-                        $('#editCategoryForm #categoryImage').html('');
                         toastr.error(response.message);
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
                     }
                 },
                 error: function(response)
@@ -522,7 +429,7 @@
                         var nameError = (validationErrors.name) ? validationErrors.name : '';
                         if (nameError != '')
                         {
-                            $('#editCategoryForm #name').addClass('is-invalid');
+                            $(formID+' #category_name').addClass('is-invalid');
                             toastr.error(nameError);
                         }
 
@@ -530,7 +437,7 @@
                         var imageError = (validationErrors.image) ? validationErrors.image : '';
                         if (imageError != '')
                         {
-                            $('#editCategoryForm #image').addClass('is-invalid');
+                            $(formID+' #category_image').addClass('is-invalid');
                             toastr.error(imageError);
                         }
                     }
@@ -538,6 +445,7 @@
             });
 
         }
+
 
 
         // Function for Change Category Status

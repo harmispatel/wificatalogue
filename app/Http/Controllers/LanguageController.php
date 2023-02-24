@@ -77,7 +77,7 @@ class LanguageController extends Controller
                         // Insert Category Name into Primary Language.
                         $name_key = $lang_code."_name";
                         $lang_cat_name = $category[$name_key];
-                        if(empty($lang_cat_name))
+                        if(empty($lang_cat_name) || $lang_cat_name == '')
                         {
                             $cat = Category::find($category->id);
                             $cat->$name_key = $def_name;

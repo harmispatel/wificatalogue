@@ -405,6 +405,19 @@
         </div>
     </div>
 
+    {{-- <div class="modal fade" id="editItemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="item_lang_div">
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
     {{-- EditTag Modal --}}
     <div class="modal fade" id="updateTagModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateTagModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -1036,6 +1049,45 @@
                 }
             });
         }
+
+        // function editItem(itemID)
+        // {
+        //     // Reset All Form
+        //     $('#editItemModal #item_lang_div').html('');
+
+        //     // Clear all Toastr Messages
+        //     toastr.clear();
+
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "{{ route('items.edit') }}",
+        //         dataType: "JSON",
+        //         data: {
+        //             '_token': "{{ csrf_token() }}",
+        //             'id': itemID,
+        //         },
+        //         success: function(response)
+        //         {
+        //             if (response.success == 1)
+        //             {
+        //                 $('#editItemModal #item_lang_div').html('');
+        //                 $('#editItemModal #item_lang_div').append(response.data);
+
+        //                 // Intialized Ingredients SelectBox
+        //                 $("#editItemModal #ingredients").select2({
+        //                     dropdownParent: $("#editItemModal"),
+        //                     placeholder: "Select Ingredients",
+
+        //                 });
+        //                 $('#editItemModal').modal('show');
+        //             }
+        //             else
+        //             {
+        //                 toastr.error(response.message);
+        //             }
+        //         }
+        //     });
+        // }
 
 
         // Function for Update Item

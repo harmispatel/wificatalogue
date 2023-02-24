@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdditionalLanguage;
 use App\Models\Category;
 use App\Models\CategoryProductTags;
 use App\Models\Ingredient;
@@ -371,6 +372,153 @@ class ItemsController extends Controller
         }
     }
 
+    // public function edit(Request $request)
+    // {
+    //     $item_id = $request->id;
+    //     $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+
+    //     try
+    //     {
+
+    //         // Categories
+    //         $categories = Category::get();
+
+    //         // Ingredients
+    //         $ingredients = Ingredient::get();
+
+    //         // Item Details
+    //         $item = Items::where('id',$item_id)->first();
+    //         $default_image = asset('public/client_images/not-found/no_image_1.jpg');
+    //         $item_image = (isset($item['image']) && !empty($item['image']) && file_exists('public/client_uploads/items/'.$item['image'])) ? asset('public/client_uploads/items/'.$item['image']) : $default_image;
+    //         $item_status = (isset($item['published']) && $item['published'] == 1) ? 'checked' : '';
+    //         $item_type = (isset($item['type'])) ? $item['type'] : '';
+    //         $category_id = (isset($item['category_id'])) ? $item['category_id'] : '';
+    //         $item_ingredients = (isset($item['ingredients']) && !empty($item['ingredients'])) ? unserialize($item['ingredients']) : [];
+
+    //         // Get Language Settings
+    //         $language_settings = clientLanguageSettings($shop_id);
+    //         $primary_lang_id = isset($language_settings['primary_language']) ? $language_settings['primary_language'] : '';
+
+    //         // Primary Language Details
+    //         $primary_language_detail = Languages::where('id',$primary_lang_id)->first();
+    //         $primary_lang_code = isset($primary_language_detail->code) ? $primary_language_detail->code : '';
+    //         $primary_lang_name = isset($primary_language_detail->name) ? $primary_language_detail->name : '';
+
+    //         // Primary Language Category Details
+    //         $primary_item_name = isset($item[$primary_lang_code."_name"]) ? $item[$primary_lang_code."_name"] : '';
+    //         $primary_item_calories = isset($item[$primary_lang_code."_calories"]) ? $item[$primary_lang_code."_calories"] : '';
+    //         $primary_item_desc = isset($item[$primary_lang_code."_description"]) ? $item[$primary_lang_code."_description"] : '';
+    //         $primary_input_lang_code = "'$primary_lang_code'";
+
+    //         // Additional Languages
+    //         $additional_languages = AdditionalLanguage::where('shop_id',$shop_id)->get();
+
+    //         if(count($additional_languages) > 0)
+    //         {
+
+    //         }
+    //         else
+    //         {
+    //             $html = '';
+
+    //             $html .= '<form id="'.$primary_lang_code.'_item_form" enctype="multipart/form-data">';
+    //                 $html .= csrf_field();
+    //                 $html .= '<input type="hidden" name="lang_code" id="lang_code" value="'.$primary_lang_code.'">';
+    //                 $html .= '<input type="hidden" name="item_id" id="item_id" value="'.$item['id'].'">';
+    //                 $html .= '<div class="row">';
+
+    //                 $html .= '<div class="form-group mb-3">';
+    //                     $html .= '<label class="form-label" for="type">Type</label>';
+    //                     $html .= '<select name="type" id="type" class="form-select">';
+    //                         $html .= '<option value="1"';
+    //                             if($item_type == 1)
+    //                             {
+    //                                 $html .= 'selected';
+    //                             }
+    //                         $html .='>Product</option>';
+    //                         $html .= '<option value="2"';
+    //                             if($item_type == 2)
+    //                             {
+    //                                 $html .= 'selected';
+    //                             }
+    //                         $html .= '>Devider</option>';
+    //                     $html .= '</select>';
+    //                 $html .= '</div>';
+
+    //                 $html .= '<div class="form-group mb-3">';
+    //                     $html .= '<label class="form-label" for="category">Category</label>';
+    //                     $html .= '<select name="category" id="category" class="form-select">';
+    //                             $html .= '<option value="">Choose Category</option>';
+    //                             if(count($categories) > 0)
+    //                             {
+    //                                 foreach ($categories as $cat)
+    //                                 {
+    //                                     $html .= '<option value="'.$cat['id'].'"';
+    //                                         if($category_id == $cat['id'])
+    //                                         {
+    //                                             $html .= 'selected';
+    //                                         }
+    //                                     $html .= '>'.$cat[$primary_lang_code."_name"].'</option>';
+    //                                 }
+    //                             }
+    //                     $html .= '</select>';
+    //                 $html .= '</div>';
+
+    //                 $html .= '<div class="form-group mb-3">';
+    //                     $html .= '<label class="form-label" for="item_name">Name</label>';
+    //                     $html .= '<input type="text" name="item_name" id="item_name" class="form-control" value="'.$primary_item_name.'">';
+    //                 $html .= '</div>';
+
+    //                 $html .= '<div class="form-group mb-3">';
+    //                     $html .= '<label class="form-label" for="item_description">Desription</label>';
+    //                     $html .= '<textarea name="item_description" id="item_description" class="form-control" rows="3">'.$primary_item_desc.'</textarea>';
+    //                 $html .= '</div>';
+
+    //                 $html .= '<div class="form-group mb-3">';
+    //                     $html .= '<label class="form-label" for="item_image">Image</label>';
+    //                     $html .= '<input type="file" name="item_image" id="item_image" class="form-control">';
+    //                     $html .= '<div class="mt-3" id="itemImage">';
+    //                         $html .= '<img src="'.$item_image.'" width="100">';
+    //                     $html .= '</div>';
+    //                     $html .= '<code>Upload Image in (200*200) Dimensions</code>';
+    //                 $html .= '</div>';
+
+    //                 $html .= '<div class="form-group mb-3">';
+    //                     $html .= '<label class="form-label" for="ingredients">Ingredients</label>';
+    //                     $html .= '<select name="ingredients[]" id="ingredients" class="form-select" multiple>';
+    //                         if(count($ingredients) > 0)
+    //                         {
+    //                             foreach($ingredients as $ing)
+    //                             {
+    //                                 $html .= '<option value="'.$ing["id"].'"';
+    //                                     if(in_array($ing["id"],$item_ingredients))
+    //                                     {
+    //                                         $html .= 'selected';
+    //                                     }
+    //                                 $html .='>'.$ing["name"].'</option>';
+    //                             }
+    //                         }
+    //                     $html .= '</select>';
+    //                 $html .= '</div>';
+
+    //                 $html .= '</div>';
+    //             $html .= '</form>';
+    //         }
+
+    //         return response()->json([
+    //             'success' => 1,
+    //             'message' => "Item Details has been Retrived Successfully..",
+    //             'data'=> $html,
+    //         ]);
+    //     }
+    //     catch (\Throwable $th)
+    //     {
+    //         return response()->json([
+    //             'success' => 0,
+    //             'message' => "Internal Server Error!",
+    //         ]);
+    //     }
+    // }
 
 
     // Function for Update Existing Item
