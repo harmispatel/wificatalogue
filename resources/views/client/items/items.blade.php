@@ -212,211 +212,11 @@
                     <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="editItemForm" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="item_id" id="item_id" value="">
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="type" class="form-label">Type</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <select name="type" onchange="togglePrice('edit')" id="type" class="form-control">
-                                        <option value="1">Product</option>
-                                        <option value="2">Devider</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="category" class="form-label">Category</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <select name="category" id="category" class="form-control">
-                                        <option value="">Choose Category</option>
-                                        @if(count($categories) > 0)
-                                            @foreach ($categories as $cat)
-                                                <option value="{{ $cat->id }}">{{ $cat->en_name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="name" class="form-label">Name</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Item Name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="description" class="form-label">Description</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <textarea class="form-control" name="description" id="description" rows="5" placeholder="Item Description"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="image" class="form-label">Image</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <input type="file" name="image" id="image" class="form-control">
-                                    <div class="mt-3" id="itemImage"></div>
-                                    <code>Upload Image in (200*200) Dimensions</code>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="ingredients" class="form-label">Ingredients</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <select name="ingredients[]" id="ingredients" class="form-control" multiple>
-                                        @if(count($ingredients) > 0)
-                                            @foreach ($ingredients as $ingredient)
-                                                <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="tags" class="form-label">Tags</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <select name="tags[]" id="tags" class="form-control" multiple>
-                                        @if(count($tags) > 0)
-                                            @foreach ($tags as $tag)
-                                                <option value="{{ $tag->name }}">{{ $tag->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="price" class="form-label">Price</label>
-                            </div>
-                            <div class="col-md-9 priceDiv" id="priceDiv">
-                                <div class="row mb-3 align-items-center price price_1">
-                                    <div class="col-md-5 mb-1">
-                                        <input type="text" name="price[price][]" class="form-control" placeholder="Enter Price">
-                                    </div>
-                                    <div class="col-md-6 mb-1">
-                                        <input type="text" name="price[label][]" class="form-control" placeholder="Enter Price Label">
-                                    </div>
-                                    <div class="col-md-1 mb-1">
-                                        <a onclick="$('.price_1').remove()" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4 priceDiv justify-content-end">
-                            <div class="col-md-3">
-                                <a onclick="addPrice('add')" class="btn addPriceBtn btn-info text-white">Add Price</a>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="calories" class="form-label">Calories</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <input type="text" name="calories" class="form-control" id="calories" placeholder="Enter Calories">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="switch me-2">
-                                        <input type="checkbox" id="mark_new" name="is_new" value="1">
-                                        <span class="slider round">
-                                            <i class="fa-solid fa-circle-check check_icon"></i>
-                                            <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
-                                        </span>
-                                    </label>
-                                    <label for="mark_new" class="form-label">Mark Item as New</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="switch me-2">
-                                        <input type="checkbox" id="mark_sign" name="is_sign" value="1">
-                                        <span class="slider round">
-                                            <i class="fa-solid fa-circle-check check_icon"></i>
-                                            <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
-                                        </span>
-                                    </label>
-                                    <label for="mark_sign" class="form-label">Mark Item as Signature</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mt-2">
-                                <div class="form-group">
-                                    <label class="switch me-2">
-                                        <input type="checkbox" id="day_special" name="day_special" value="1">
-                                        <span class="slider round">
-                                            <i class="fa-solid fa-circle-check check_icon"></i>
-                                            <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
-                                        </span>
-                                    </label>
-                                    <label for="day_special" class="form-label">Mark Item as Day Special</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mt-2">
-                                <div class="form-group">
-                                    <label class="switch me-2">
-                                        <input type="checkbox" id="publish" name="published" value="1">
-                                        <span class="slider round">
-                                            <i class="fa-solid fa-circle-check check_icon"></i>
-                                            <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
-                                        </span>
-                                    </label>
-                                    <label for="publish" class="form-label">Published</label>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a class="btn btn-primary" id="updateItem" onclick="updateItem()">Update</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- <div class="modal fade" id="editItemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body" id="item_lang_div">
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     {{-- EditTag Modal --}}
     <div class="modal fade" id="updateTagModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateTagModalLabel" aria-hidden="true">
@@ -637,7 +437,7 @@
             }
             else
             {
-                var formType = "#editItemForm #priceDiv";
+                var formType = "#"+key+" #priceDiv";
             }
 
             var count = $(formType).children('.price').length;
@@ -840,38 +640,12 @@
         });
 
 
+
         // Function for Edit Item
-        function editItem(itemId)
+        function editItem(itemID)
         {
-            // Reset editItemForm
-            $('#editItemForm').trigger('reset');
-
-            // Remove Validation Class
-            $('#editItemForm #name').removeClass('is-invalid');
-            $('#editItemForm #image').removeClass('is-invalid');
-
-            // Remove Old Seleted Value
-            $('#editItemForm #category option:selected').removeAttr('selected');
-
-            // Clear Image Div
-            $('#editItemForm #itemImage').html('');
-
-            // Reset Price Div
-            $('#editItemForm #priceDiv').html('');
-
-            // Intialized Ingredients SelectBox
-            $("#editItemForm #ingredients").select2({
-                dropdownParent: $("#editItemModal"),
-                placeholder: "Select Ingredients",
-            });
-
-            // Intialized Tags SelectBox
-            $("#editItemForm #tags").select2({
-                dropdownParent: $("#editItemModal"),
-                placeholder: "Select Tags",
-                tags: true,
-                // tokenSeparators: [',', ' ']
-            });
+            // Reset All Form
+            $('#editItemModal #item_lang_div').html('');
 
             // Clear all Toastr Messages
             toastr.clear();
@@ -882,151 +656,23 @@
                 dataType: "JSON",
                 data: {
                     '_token': "{{ csrf_token() }}",
-                    'id': itemId,
+                    'id': itemID,
                 },
                 success: function(response)
                 {
                     if (response.success == 1)
                     {
-                        // Item Data's
-                        const item = response.item;
-                        const ingredients = item.ingredients;
-                        const product_tags = item.product_tags;
+                        $('#editItemModal #item_lang_div').html('');
+                        $('#editItemModal #item_lang_div').append(response.data);
 
-                        // Price
-                        const price = item.price?.price;
+                        // Language Array
+                        const langArr = response.language_array;
 
-                        if(ingredients != '')
-                        {
-                            // Set Selected option for Ingredients.
-                            ingredients.forEach(ingredient =>
-                            {
-                                var ingredient_id = ingredient;
-                                $("#editItemForm #ingredients").find("option[value=" + ingredient_id + "]").prop("selected","selected");
-                            });
-                            // Intialized Ingredients SelectBox
-                            $("#editItemForm #ingredients").select2({
-                                dropdownParent: $("#editItemModal"),
-                                placeholder: "Select Ingredients",
-                            });
-                        }
+                        // Item Type
+                        const itemType = response.item_type;
 
-
-                        if(product_tags != '')
-                        {
-                            // Set Selected option for Tags.
-                            product_tags.forEach(tag =>
-                            {
-                                var tag_name = tag.has_one_tag.name;
-                                $("#editItemForm #tags").find("option[value='" + tag_name + "']").prop("selected","selected");
-                            });
-                            // Intialized Tags SelectBox
-                            $("#editItemForm #tags").select2({
-                                dropdownParent: $("#editItemModal"),
-                                placeholder: "Select Tags",
-                                tags: true,
-                                // tokenSeparators: [',', ' ']
-                            });
-                        }
-
-
-                        if(price != undefined)
-                        {
-                            $.each(price, function (key, val)
-                            {
-                                var label = item.price.label[key];
-                                var count = key+1;
-                                var html = '';
-
-                                html += '<div class="row mb-3 align-items-center price price_'+count+'">';
-                                    html += '<div class="col-md-5 mb-1">';
-                                        html += '<input type="text" name="price[price][]" class="form-control" placeholder="Enter Price" value="'+val+'">';
-                                    html += '</div>';
-                                    html += '<div class="col-md-6 mb-1">';
-                                        html += '<input type="text" name="price[label][]" class="form-control" placeholder="Enter Price Label" value="'+label+'">';
-                                    html += '</div>';
-                                    html += '<div class="col-md-1 mb-1">';
-                                        html += '<a onclick="$(\'.price_'+count+'\').remove()" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>';
-                                    html += '</div>';
-                                html += '</div>';
-
-                                $('#editItemForm #priceDiv').append(html);
-                            });
-                        }
-
-                        // Image
-                        const default_image = "public/client_images/not-found/no_image_1.jpg";
-                        const image_path = "public/client_uploads/items/"+item.image;
-                        const item_image = (item.image) ? image_path : default_image;
-
-                        // Published Status
-                        const publish = (item.published) ? 1 : 0;
-
-                        // Mark as New Status
-                        const markNew = (item.is_new) ? 1 : 0;
-
-                        // Mark as Signature Status
-                        const markAsSign = (item.as_sign) ? 1 : 0;
-
-                        // Mark as DaySpecial Status
-                        const daySpecial = (item.day_special) ? 1 : 0;
-
-                        // Add values in editItemForm
-                        $('#editItemForm #name').val(item.en_name);
-                        $('#editItemForm #calories').val(item.en_calories);
-                        $('#editItemForm #description').val(item.en_description);
-                        $('#editItemForm #item_id').val(item.id);
-
-                        // Publish Status Check & Uncheck
-                        if(publish == 1)
-                        {
-                            $('#editItemForm #publish').attr('checked',true);
-                        }
-                        else
-                        {
-                            $('#editItemForm #publish').removeAttr('checked',true);
-                        }
-
-                        // Mark as New Check & Uncheck
-                        if(markNew == 1)
-                        {
-                            $('#editItemForm #mark_new').attr('checked',true);
-                        }
-                        else
-                        {
-                            $('#editItemForm #mark_new').removeAttr('checked',true);
-                        }
-
-                        // Mark as Day Special & Uncheck
-                        if(daySpecial == 1)
-                        {
-                            $('#editItemForm #day_special').attr('checked',true);
-                        }
-                        else
-                        {
-                            $('#editItemForm #day_special').removeAttr('checked',true);
-                        }
-
-                        // Mark as Signature Check & Uncheck
-                        if(markAsSign == 1)
-                        {
-                            $('#editItemForm #mark_sign').attr('checked',true);
-                        }
-                        else
-                        {
-                            $('#editItemForm #mark_sign').removeAttr('checked',true);
-                        }
-
-                        // Show Image in editItemForm
-                        $('#editItemForm #itemImage').html('');
-                        $('#editItemForm #itemImage').append('<img src="{{ asset('/') }}'+item_image+'" width="100">');
-
-                        // Remove old Selected Options Value &  Set New Selected Option
-                        $('#editItemForm #type option:selected').removeAttr('selected');
-                        $("#editItemForm #type option[value='"+item.type+"']").attr("selected", "selected");
-
-                        // if type == devider then hide price
-                        if(item.type === 2)
+                        // If Item Type is Divider Then Hide Price Divs
+                        if(itemType === 2)
                         {
                             $('.priceDiv').hide();
                         }
@@ -1035,11 +681,29 @@
                             $('.priceDiv').show();
                         }
 
-                        // Remove old Selected Options Value &  Set New Selected Option
-                        $('#editItemForm #category option:selected').removeAttr('selected');
-                        $("#editItemForm #category option[value='"+item.category_id+"']").attr("selected", "selected");
+                        // Reinitialized all Select 2
+                        if(langArr != undefined)
+                        {
+                            $.each(langArr, function (index, value)
+                            {
+                                var ingredientsEle = "#editItemModal #"+value+"_ingredients";
+                                var tagsEle = "#editItemModal #"+value+"_tags";
 
-                        // Show Modal
+                                // Intialized Ingredients SelectBox
+                                $(ingredientsEle).select2({
+                                    dropdownParent: $("#editItemModal"),
+                                    placeholder: "Select Ingredients",
+                                });
+
+                                // Intialized Tags SelectBox
+                                $(tagsEle).select2({
+                                    dropdownParent: $("#editItemModal"),
+                                    placeholder: "Add New Tags",
+                                    tags: true,
+                                });
+                            });
+                        }
+
                         $('#editItemModal').modal('show');
                     }
                     else
@@ -1050,54 +714,18 @@
             });
         }
 
-        // function editItem(itemID)
-        // {
-        //     // Reset All Form
-        //     $('#editItemModal #item_lang_div').html('');
-
-        //     // Clear all Toastr Messages
-        //     toastr.clear();
-
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "{{ route('items.edit') }}",
-        //         dataType: "JSON",
-        //         data: {
-        //             '_token': "{{ csrf_token() }}",
-        //             'id': itemID,
-        //         },
-        //         success: function(response)
-        //         {
-        //             if (response.success == 1)
-        //             {
-        //                 $('#editItemModal #item_lang_div').html('');
-        //                 $('#editItemModal #item_lang_div').append(response.data);
-
-        //                 // Intialized Ingredients SelectBox
-        //                 $("#editItemModal #ingredients").select2({
-        //                     dropdownParent: $("#editItemModal"),
-        //                     placeholder: "Select Ingredients",
-
-        //                 });
-        //                 $('#editItemModal').modal('show');
-        //             }
-        //             else
-        //             {
-        //                 toastr.error(response.message);
-        //             }
-        //         }
-        //     });
-        // }
 
 
         // Function for Update Item
-        function updateItem()
+        function updateItem(langCode)
         {
-            const myFormData = new FormData(document.getElementById('editItemForm'));
+            var formID = langCode+"_item_form";
+            var myFormData = new FormData(document.getElementById(formID));
 
             // Remove Validation Class
-            $('#editItemForm #name').removeClass('is-invalid');
-            $('#editItemForm #image').removeClass('is-invalid');
+            $("#"+formID+' #item_name').removeClass('is-invalid');
+            $("#"+formID+' #category').removeClass('is-invalid');
+            $("#"+formID+' #item_image').removeClass('is-invalid');
 
             // Clear all Toastr Messages
             toastr.clear();
@@ -1114,8 +742,6 @@
                 {
                     if(response.success == 1)
                     {
-                        $('#editItemForm #itemImage').html('');
-                        $('#editItemForm').trigger('reset');
                         $('#editItemModal').modal('hide');
                         toastr.success(response.message);
                         setTimeout(() => {
@@ -1124,10 +750,11 @@
                     }
                     else
                     {
-                        $('#editItemForm').trigger('reset');
                         $('#editItemModal').modal('hide');
-                        $('#editItemForm #itemImage').html('');
                         toastr.error(response.message);
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
                     }
                 },
                 error: function(response)
@@ -1138,33 +765,34 @@
                     if (validationErrors != '')
                     {
                         // Name Error
-                        var nameError = (validationErrors.name) ? validationErrors.name : '';
+                        var nameError = (validationErrors.item_name) ? validationErrors.item_name : '';
                         if (nameError != '')
                         {
-                            $('#editItemForm #name').addClass('is-invalid');
+                            $("#"+formID+' #item_name').addClass('is-invalid');
                             toastr.error(nameError);
-                        }
-
-                        // Image Error
-                        var imageError = (validationErrors.image) ? validationErrors.image : '';
-                        if (imageError != '')
-                        {
-                            $('#editItemForm #image').addClass('is-invalid');
-                            toastr.error(imageError);
                         }
 
                         // Category Error
                         var categoryError = (validationErrors.category) ? validationErrors.category : '';
                         if (categoryError != '')
                         {
-                            $('#editItemForm #category').addClass('is-invalid');
+                            $("#"+formID+' #category').addClass('is-invalid');
                             toastr.error(categoryError);
+                        }
+
+                        // Image Error
+                        var imageError = (validationErrors.item_image) ? validationErrors.item_image : '';
+                        if (imageError != '')
+                        {
+                            $("#"+formID+' #item_image').addClass('is-invalid');
+                            toastr.error(imageError);
                         }
                     }
                 }
             });
 
         }
+
 
 
         // Function for Hide & Show Price

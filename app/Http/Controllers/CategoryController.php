@@ -235,7 +235,7 @@ class CategoryController extends Controller
                         $add_lang_name = isset($add_lang_detail->name) ? $add_lang_detail->name : '';
                         $add_input_lang_code = "'$add_lang_code'";
 
-                        // Additional Labguage Category Details
+                        // Additional Language Category Details
                         $add_cat_name = isset($category[$add_lang_code."_name"]) ? $category[$add_lang_code."_name"] : '';
                         $add_cat_desc = isset($category[$add_lang_code."_description"]) ? $category[$add_lang_code."_description"] : '';
 

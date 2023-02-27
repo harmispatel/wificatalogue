@@ -133,8 +133,8 @@
 
         {{-- Statistics Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ ($routeName == '') ? 'active-tab' : '' }}" href="">
-                <i class="fa-solid fa-chart-line {{ ($routeName == '') ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ ($routeName == 'statistics') ? 'active-tab' : '' }}" href="{{ route('statistics') }}">
+                <i class="fa-solid fa-chart-line {{ ($routeName == 'statistics') ? 'icon-tab' : '' }}"></i>
             <span>Statistics</span>
             </a>
         </li>
@@ -149,8 +149,8 @@
 
         {{-- Contact Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ ($routeName == '') ? 'active-tab' : '' }}" href="">
-                <i class="fa-solid fa-address-card {{ ($routeName == '') ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ ($routeName == 'contact') ? 'active-tab' : '' }}" href="{{ route('contact') }}">
+                <i class="fa-solid fa-address-card {{ ($routeName == 'contact') ? 'icon-tab' : '' }}"></i>
             <span>Contact</span>
             </a>
         </li>

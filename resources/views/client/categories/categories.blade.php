@@ -385,8 +385,8 @@
             var myFormData = new FormData(document.getElementById(formID));
 
             // Remove Validation Class
-            $(formID+' #category_name').removeClass('is-invalid');
-            $(formID+' #category_image').removeClass('is-invalid');
+            $("#"+formID+' #category_name').removeClass('is-invalid');
+            $("#"+formID+' #category_image').removeClass('is-invalid');
 
             // Clear all Toastr Messages
             toastr.clear();
@@ -426,18 +426,18 @@
                     if (validationErrors != '')
                     {
                         // Name Error
-                        var nameError = (validationErrors.name) ? validationErrors.name : '';
+                        var nameError = (validationErrors.category_name) ? validationErrors.category_name : '';
                         if (nameError != '')
                         {
-                            $(formID+' #category_name').addClass('is-invalid');
+                            $("#"+formID+' #category_name').addClass('is-invalid');
                             toastr.error(nameError);
                         }
 
                         // Image Error
-                        var imageError = (validationErrors.image) ? validationErrors.image : '';
+                        var imageError = (validationErrors.category_image) ? validationErrors.category_image : '';
                         if (imageError != '')
                         {
-                            $(formID+' #category_image').addClass('is-invalid');
+                            $("#"+formID+' #category_image').addClass('is-invalid');
                             toastr.error(imageError);
                         }
                     }
