@@ -165,7 +165,7 @@ class CategoryController extends Controller
                 $html .= '<ul class="nav nav-tabs" id="myTab" role="tablist">';
                     // For Primary Language
                     $html .= '<li class="nav-item" role="presentation">';
-                    $html .= '<button title="'.$primary_lang_name.'" class="nav-link active" id="'.$primary_lang_code.'-tab" data-bs-toggle="tab" data-bs-target="#'.$primary_lang_code.'" type="button" role="tab" aria-controls="'.$primary_lang_code.'" aria-selected="true">'.strtoupper($primary_lang_code).'</button>';
+                        $html .= '<button title="'.$primary_lang_name.'" class="nav-link active" id="'.$primary_lang_code.'-tab" data-bs-toggle="tab" data-bs-target="#'.$primary_lang_code.'" type="button" role="tab" aria-controls="'.$primary_lang_code.'" aria-selected="true">'.strtoupper($primary_lang_code).'</button>';
                     $html .= '</li>';
 
                     // For Additional Language

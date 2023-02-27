@@ -139,6 +139,7 @@ Route::group(['prefix' => 'client'], function()
         Route::post('update-items',[ItemsController::class,'update'])->name('items.update');
         Route::post('sorting-items',[ItemsController::class,'sorting'])->name('items.sorting');
 
+
         // Designs
         Route::get('/design-logo', [DesignController::class,'logo'])->name('design.logo');
         Route::get('/design-theme', [DesignController::class,'theme'])->name('design.theme');
@@ -167,10 +168,13 @@ Route::group(['prefix' => 'client'], function()
         Route::post('/update-profile',[UserController::class,'updateProfile'])->name('client.profile.update');
 
         // Tags
+        Route::get('tags',[TagsController::class,'index'])->name('tags');
         Route::post('delete-tags',[TagsController::class,'destroy'])->name('tags.destroy');
         Route::post('edit-tags',[TagsController::class,'edit'])->name('tags.edit');
         Route::post('update-tags',[TagsController::class,'update'])->name('tags.update');
         Route::post('sorting-tags',[TagsController::class,'sorting'])->name('tags.sorting');
+        Route::post('edit-language-tags',[TagsController::class,'editTag'])->name('language.tags.edit');
+        Route::post('update-language-tags',[TagsController::class,'updateTag'])->name('language.tags.update');
 
 
         // Statistic

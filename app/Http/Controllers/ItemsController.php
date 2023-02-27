@@ -139,6 +139,7 @@ class ItemsController extends Controller
                     {
                         $tag = Tags::find($tag_id);
                         $tag->name = strtolower($val);
+                        $tag->$item_name_key = strtolower($val);
                         $tag->update();
                     }
                     else
@@ -148,6 +149,7 @@ class ItemsController extends Controller
 
                         $tag = new Tags();
                         $tag->name = strtolower($val);
+                        $tag->$item_name_key = strtolower($val);
                         $tag->order = $order;
                         $tag->save();
                     }
@@ -1141,6 +1143,7 @@ class ItemsController extends Controller
                         {
                             $tag = Tags::find($tag_id);
                             $tag->name = strtolower($val);
+                            $tag->$name_key = strtolower($val);
                             $tag->update();
                         }
                         else
@@ -1150,6 +1153,7 @@ class ItemsController extends Controller
 
                             $tag = new Tags();
                             $tag->name = strtolower($val);
+                            $tag->$name_key = strtolower($val);
                             $tag->order = $order;
                             $tag->save();
                         }

@@ -1,6 +1,7 @@
 <?php
 
     use App\Models\AdminSettings;
+use App\Models\Languages;
 use App\Models\LanguageSettings;
 use App\Models\User;
 
@@ -45,6 +46,15 @@ use App\Models\User;
         }
 
         return $settings;
+    }
+
+
+
+    // Get Language Details
+    function getLangDetails($langID)
+    {
+        $language = Languages::where('id',$langID)->first();
+        return $language;
     }
 
 

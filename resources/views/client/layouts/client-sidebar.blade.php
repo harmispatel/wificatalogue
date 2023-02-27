@@ -24,19 +24,6 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
 
-        {{-- toggle --}}
-        {{-- <li class="nav-itme">
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </li> --}}
-
-        {{-- Dashboard Nav --}}
-        {{-- <li class="nav-item">
-            <a class="nav-link {{ ($routeName == 'client.dashboard') ? 'active-tab' : '' }}" href="{{ route('client.dashboard') }}">
-                <i class="fa-solid fa-house-chimney {{ ($routeName == 'client.dashboard') ? 'icon-tab' : '' }}"></i>
-                <span>Dashboard</span>
-            </a>
-        </li> --}}
-
         {{-- Shop Details Nav --}}
         <li class="nav-item">
             <a class="nav-link {{ (($routeName != 'client.profile')) ? 'collapsed' : '' }} {{ (($routeName == 'client.profile')) ? 'active-tab' : '' }}" data-bs-target="#shop-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'client.profile')) ? 'true' : 'false' }}">
@@ -93,10 +80,10 @@
         {{-- Menu Nav --}}
         <li class="nav-item">
             {{-- && --}}
-            <a class="nav-link {{ (($routeName != 'categories') && ($routeName != 'items') && ($routeName != 'languages')) ? 'collapsed' : '' }} {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'active-tab' : '' }}" data-bs-target="#menu-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'true' : 'false' }}">
-                <i class="fa-solid fa-bars {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'icon-tab' : '' }}"></i><span>Menu</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ (($routeName != 'categories') && ($routeName != 'items') && ($routeName != 'languages') && ($routeName != 'tags')) ? 'collapsed' : '' }} {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages') || ($routeName == 'tags')) ? 'active-tab' : '' }}" data-bs-target="#menu-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages') || ($routeName == 'tags')) ? 'true' : 'false' }}">
+                <i class="fa-solid fa-bars {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages') || ($routeName == 'tags')) ? 'icon-tab' : '' }}"></i><span>Menu</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages') || ($routeName == 'tags')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="menu-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="menu-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'categories') || ($routeName == 'items') || ($routeName == 'languages') || ($routeName == 'tags')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('categories') }}" class="{{ ($routeName == 'categories') ? 'active-link' : '' }}">
                         <span>Categories</span>
@@ -105,6 +92,11 @@
                 <li>
                     <a href="{{ route('items') }}" class="{{ ($routeName == 'items') ? 'active-link' : '' }}">
                         <span>Items</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('tags') }}" class="{{ ($routeName == 'tags') ? 'active-link' : '' }}">
+                        <span>Tags</span>
                     </a>
                 </li>
                 <li>
