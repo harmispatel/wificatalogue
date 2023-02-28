@@ -9,7 +9,37 @@
     @include('client.layouts.client-css')
 </head>
 
+@php
+    $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+@endphp
+
 <body>
+
+    {{-- Preview Modal --}}
+    <div class="modal fade preview_modal" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewModalLabel">Preview</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="mob_preview position-relative">
+                                <img src="{{ asset('public/client_images/mobile_view/mobile_view_1.png') }}" class="w-100 mobile_img" alt="">
+                                <div class="mob_preview_inr">
+                                    <iframe src="{{ route('restaurant',$shop_id) }}" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     {{-- Navbar --}}
     @include('client.layouts.client-navbar')
 

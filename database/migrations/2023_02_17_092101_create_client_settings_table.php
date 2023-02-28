@@ -15,6 +15,10 @@ class CreateClientSettingsTable extends Migration
     {
         Schema::create('client_settings', function (Blueprint $table) {
             $table->id();
+            $table->integer('client_id');
+            $table->integer('shop_id');
+            $table->string('key');
+            $table->text('value')->nullable();
             $table->timestamps();
         });
     }

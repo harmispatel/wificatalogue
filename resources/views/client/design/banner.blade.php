@@ -1,15 +1,15 @@
 @extends('client.layouts.client-layout')
 
-@section('title', 'Banner')
+@section('title', 'Cover')
 
 @section('content')
 
     <section class="logo_sec">
         <div class="row">
-            {{-- <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="add_logo_sec">
                     <div class="add_logo_sec_header">
-                        <h2>Logo</h2>
+                        <h2>Cover</h2>
                     </div>
                     <div class="add_logo_sec_body">
                         <p>Logo will appear on the top of your menu</p>
@@ -19,18 +19,11 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
-            <div class="col-md-12">
+            </div>
+            {{-- <div class="col-md-6">
                 <div class="add_logo_sec">
-                    <div class="add_logo_sec_header d-flex align-items-center justify-content-between">
-                        <h2>Banner</h2>
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="slider round">
-                                <i class="fa-solid fa-circle-check check_icon"></i>
-                                <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
-                            </span>
-                        </label>
+                    <div class="add_logo_sec_header">
+                        <h2>Logo</h2>
                     </div>
                     <div class="add_logo_sec_body">
                         <p>Intro image will appear before your digital menu for the duration specified image Specs : File size <2MB, Recommended image size : 1920x1080 pixels.</p>
@@ -46,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 

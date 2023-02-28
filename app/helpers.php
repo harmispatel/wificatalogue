@@ -1,9 +1,11 @@
 <?php
 
     use App\Models\AdminSettings;
+use App\Models\ClientSettings;
 use App\Models\Languages;
 use App\Models\LanguageSettings;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
     // Get Admin's Settings
     function getAdminSettings()
@@ -27,6 +29,49 @@ use App\Models\User;
         return $settings;
     }
 
+
+    // Get Client's Settings
+    function getClientSettings($shopID="")
+    {
+
+        if(!empty($shopID))
+        {
+            $shop_id = $shopID;
+        }
+        else
+        {
+            $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+        }
+
+        // Keys
+        $keys = ([
+            'shop_view_header_logo',
+            'shop_intro_icon',
+            'intro_icon_status',
+            'intro_icon_duration',
+            'business_name',
+            'default_currency',
+            'business_telephone',
+            'instagram_link',
+            'twitter_link',
+            'facebook_link',
+            'foursquare_link',
+            'tripadvisor_link',
+            'homepage_intro',
+            'map_url',
+            'website_url',
+        ]);
+
+        $settings = [];
+
+        foreach($keys as $key)
+        {
+            $query = ClientSettings::select('value')->where('shop_id',$shop_id)->where('key',$key)->first();
+            $settings[$key] = isset($query->value) ? $query->value : '';
+        }
+
+        return $settings;
+    }
 
 
     // Get Client's LanguageSettings
@@ -54,6 +99,14 @@ use App\Models\User;
     function getLangDetails($langID)
     {
         $language = Languages::where('id',$langID)->first();
+        return $language;
+    }
+
+
+    // Get Language Details by Code
+    function getLangDetailsbyCode($langCode)
+    {
+        $language = Languages::where('code',$langCode)->first();
         return $language;
     }
 

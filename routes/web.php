@@ -11,6 +11,8 @@ use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PreviewController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopQrController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\SubscriptionsController;
@@ -142,10 +144,15 @@ Route::group(['prefix' => 'client'], function()
 
         // Designs
         Route::get('/design-logo', [DesignController::class,'logo'])->name('design.logo');
+        Route::post('/design-logo-upload', [DesignController::class,'logoUpload'])->name('design.logo.upload');
+        Route::post('/design-intro-status', [DesignController::class,'introStatus'])->name('design.intro.status');
+        Route::post('/design-intro-icon', [DesignController::class,'introIconUpload'])->name('design.intro.icon');
+        Route::post('/design-intro-duration', [DesignController::class,'introDuration'])->name('design.intro.duration');
         Route::get('/design-theme', [DesignController::class,'theme'])->name('design.theme');
         Route::get('/design-cover', [DesignController::class,'cover'])->name('design.cover');
         Route::get('/design-banner', [DesignController::class,'banner'])->name('design.banner');
         Route::get('/design-general-info', [DesignController::class,'generalInfo'])->name('design.general-info');
+        Route::post('/design-generalInfoUpdate', [DesignController::class,'generalInfoUpdate'])->name('design.generalInfoUpdate');
         Route::get('/design-theme-preview', [DesignController::class,'themePrview'])->name('design.theme-preview');
 
         // Languages
@@ -176,6 +183,8 @@ Route::group(['prefix' => 'client'], function()
         Route::post('edit-language-tags',[TagsController::class,'editTag'])->name('language.tags.edit');
         Route::post('update-language-tags',[TagsController::class,'updateTag'])->name('language.tags.update');
 
+        // Preview
+        Route::get('/preview',[PreviewController::class,'index'])->name('preview');
 
         // Statistic
         Route::get('/statistics',[StatisticsController::class,'index'])->name('statistics');
@@ -185,3 +194,9 @@ Route::group(['prefix' => 'client'], function()
 
     });
 });
+
+
+// Shops
+Route::get('/{shopid}',[ShopController::class,'index'])->name('restaurant');
+Route::post('shop-locale-change',[ShopController::class,'changeShopLocale'])->name('shop.locale.change');
+Route::post('search-shop-categories',[ShopController::class,'searchCategories'])->name('shop.categories.search');

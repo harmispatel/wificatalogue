@@ -109,8 +109,8 @@
 
         {{-- Preview Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ ($routeName == '') ? 'active-tab' : '' }}" href="">
-                <i class="fa-solid fa-eye {{ ($routeName == '') ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer">
+                <i class="fa-solid fa-eye"></i>
                 <span>Prview</span>
             </a>
         </li>
