@@ -14,4 +14,9 @@ class CategoryProductTags extends Model
     {
         return $this->hasOne(Tags::class,'id','tag_id');
     }
+
+    public function product()
+    {
+        return $this->hasOne(Items::class,'id','item_id');
+    }
 }

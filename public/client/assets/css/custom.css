@@ -390,6 +390,9 @@ input:checked + .slider .check_icon{
     width:50%;
 }
 
+.banner_text{
+    padding:20px;
+}
 
 /* theme preview */
 
@@ -821,6 +824,11 @@ input:checked + .slider .check_icon{
 
     /*  item_page*/
 
+    .item_list_div{
+        padding: 20px 0;
+        text-align: center;
+    }
+
     .item_sec_main{
       padding:20px 10px 0;
     }
@@ -865,35 +873,78 @@ input:checked + .slider .check_icon{
       background-color:rgb(255, 255, 255);
       border-bottom: 3px solid rgb(209, 204, 184);
       margin-bottom:15px;
-      padding:10px 25px;
+      padding:20px 25px;
       border-radius:15px;
-      background-image:url("../image/light.png");
+      background-image:url("../../../client_images/backgrounds/light.png");
       position: relative;
     }
+
+    .item_image img {
+        width: 80px;
+        height: 80px;
+        margin-top: 25px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0px 0px 9px 3px rgb(0 0 0 / 35%);
+    }
+
     .single_item_inr h3{
       font-size:22px;
       color: #4d572b;
       font-weight:700;
+      margin-top: 20px;
+    }
+
+    .single_item_inr img.tag-img{
+        position: absolute;
+        width:20px;
+    }
+
+    .single_item_inr img.tag-img.is_new {
+        top: 0;
+        left: 0;
+        width: 50px;
+    }
+
+    .single_item_inr img.tag-img.is_sign{
+        top:0;
+        left:50%;
+        width: 30px;
+        transform: translate(-50%, 0);
+    }
+
+
+
+    .single_item_inr img.tag-img.is_special{
+        top: 0;
+        right:0;
+        width: 50px;
     }
 
     .single_item_inr p{
       margin:0;
       font-size:18px;
-      color:#fff;
+      color:#000000;
       font-weight:600;
     }
 
-    .single_item_inr .tag{
-      position: absolute;
-      top:10px;
-      left:10px;
-      width:40px;
+    .price_ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        text-align: center;
+        margin-top: 10px;
     }
-    .single_item_inr .special_tag{
-      position: absolute;
-      top:0;
-      right:15px;
-      width:40px;
+
+    .price_ul li p{
+        color: #000;
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .price_ul li span{
+        color: #ff0000;
     }
 
 
@@ -1061,4 +1112,18 @@ input:checked + .slider .check_icon{
     .lang_inr{
         width: 60%;
     }
+
+    .single_item_inr{
+        padding:10px;
+    }
+
+    .item_image img{
+        margin-top:35px;
+    }
+}
+
+
+/* Banner */
+.banner-image img{
+    height: 160px;
 }

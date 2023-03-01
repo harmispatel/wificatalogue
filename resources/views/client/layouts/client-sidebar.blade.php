@@ -111,7 +111,7 @@
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="modal" data-bs-target="#previewModal" style="cursor: pointer">
                 <i class="fa-solid fa-eye"></i>
-                <span>Prview</span>
+                <span>Preview</span>
             </a>
         </li>
 

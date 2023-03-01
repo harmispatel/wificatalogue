@@ -1,9 +1,12 @@
 <?php
 
     use App\Models\AdminSettings;
+use App\Models\CategoryProductTags;
 use App\Models\ClientSettings;
+use App\Models\Ingredient;
 use App\Models\Languages;
 use App\Models\LanguageSettings;
+use App\Models\ShopBanner;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -110,6 +113,36 @@ use Illuminate\Support\Facades\Auth;
         return $language;
     }
 
+
+    // Get Tags Product
+    function getTagsProducts($tagID,$catID)
+    {
+        if(!empty($tagID) && !empty($catID))
+        {
+            $items = CategoryProductTags::with(['product'])->where('tag_id',$tagID)->where('category_id',$catID)->get();
+        }
+        else
+        {
+            $items = [];
+        }
+        return $items;
+    }
+
+
+    // Get Ingredients Details
+    function getIngredientDetail($id)
+    {
+        $ingredient = Ingredient::where('id',$id)->first();
+        return $ingredient;
+    }
+
+
+    // Get Banner Settings
+    function getBannerSetting($shopID)
+    {
+        $banner = ShopBanner::where('shop_id',$shopID)->where('key','shop_banner')->first();
+        return $banner;
+    }
 
 
     // Get Favourite Clients List

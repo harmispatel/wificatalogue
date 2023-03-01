@@ -12,6 +12,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PreviewController;
+use App\Http\Controllers\ShopBannerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopQrController;
 use App\Http\Controllers\StatisticsController;
@@ -150,7 +151,8 @@ Route::group(['prefix' => 'client'], function()
         Route::post('/design-intro-duration', [DesignController::class,'introDuration'])->name('design.intro.duration');
         Route::get('/design-theme', [DesignController::class,'theme'])->name('design.theme');
         Route::get('/design-cover', [DesignController::class,'cover'])->name('design.cover');
-        Route::get('/design-banner', [DesignController::class,'banner'])->name('design.banner');
+        Route::get('/design-banner', [ShopBannerController::class,'index'])->name('design.banner');
+        Route::post('/design-banner-update', [ShopBannerController::class,'update'])->name('design.banner.update');
         Route::get('/design-general-info', [DesignController::class,'generalInfo'])->name('design.general-info');
         Route::post('/design-generalInfoUpdate', [DesignController::class,'generalInfoUpdate'])->name('design.generalInfoUpdate');
         Route::get('/design-theme-preview', [DesignController::class,'themePrview'])->name('design.theme-preview');
@@ -196,7 +198,8 @@ Route::group(['prefix' => 'client'], function()
 });
 
 
-// Shops
+// Shops Preview
 Route::get('/{shopid}',[ShopController::class,'index'])->name('restaurant');
+Route::get('{shopid}/items/{catID}',[ShopController::class,'itemPreview'])->name('items.preview');
 Route::post('shop-locale-change',[ShopController::class,'changeShopLocale'])->name('shop.locale.change');
 Route::post('search-shop-categories',[ShopController::class,'searchCategories'])->name('shop.categories.search');

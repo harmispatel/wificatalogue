@@ -26,7 +26,7 @@ class ItemsController extends Controller
             $data['category'] = Category::where('id',$id)->first();
             $data['items'] = Items::where('category_id',$id)->orderBy('order_key')->get();
             // $data['cat_tags'] = CategoryProductTags::with([ 'hasOneTag'])->where('category_id',$id)->get()->unique('tag_id');
-            $data['cat_tags'] = CategoryProductTags::join('tags','tags.id','category_product_tags.tag_id')->orderBy('tags.order')->get()->unique('tag_id');
+            $data['cat_tags'] = CategoryProductTags::join('tags','tags.id','category_product_tags.tag_id')->orderBy('tags.order')->where('category_id',$id)->get()->unique('tag_id');
         }
         else
         {

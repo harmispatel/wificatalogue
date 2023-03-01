@@ -1,4 +1,23 @@
+{{-- Bootstrap --}}
+<script src="{{ asset('public/client/assets/js/bootstrap.min.js') }}"></script>
+
+{{-- Jquery --}}
+<script src="{{ asset('public/client/assets/js/jquery.min.js') }}"></script>
+
+{{-- Toastr --}}
+<script src="{{ asset('public/admin/assets/vendor/js/toastr.min.js') }}"></script>
+
+
+{{-- Common JS Functions --}}
 <script type="text/javascript">
+
+    // Toastr Settings
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        timeOut: 4000
+    }
 
     // Function for Change Language
     function changeLanguage(langCode)
@@ -46,3 +65,4 @@
     });
 
 </script>
+
