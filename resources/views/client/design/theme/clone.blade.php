@@ -1,28 +1,25 @@
 @extends('client.layouts.client-layout')
 
-@section('title', 'Theme-Preview')
+@section('title', 'Clone Theme')
 
 @section('content')
-
-<input type="hidden" name="is_default" id="is_default" value="{{ $theme->is_default }}">
 
 <section class="theme_section">
     <div class="main_section_inr">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('design.theme') }}">Themes</a></li>
-                <li class="breadcrumb-item active">{{ isset($theme->name) ? $theme->name : '' }}</li>
+                <li class="breadcrumb-item active">Clone Theme</li>
             </ol>
         </nav>
         <div class="row">
-            <form action="{{ route('design.theme-update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('design.theme-store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="theme_id" id="theme_id" value="{{ $theme->id }}">
                 <div class="col-md-12">
                     <div class="theme_change_sec">
                         <div class="theme_name">
                             <h2 class="form-group">
-                                <input type="text" name="theme_name" id="theme_name" class="form-control border-0 {{ ($errors->has('theme_name')) ? 'is-invalid' : '' }}" placeholder="Enter Theme Name" value="{{ isset($theme->name) ? $theme->name : '' }}">
+                                <input type="text" name="theme_name" id="theme_name" class="form-control border-0 {{ ($errors->has('theme_name')) ? 'is-invalid' : '' }}" placeholder="Enter Theme Name" value="{{ isset($theme['name']) ? $theme['name'] : '' }}">
                                 @if($errors->has('theme_name'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('theme_name') }}
@@ -60,7 +57,7 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <label class="switch">
-                                                                    <input type="checkbox" name="sticky_header" id="sticky_header" {{ (isset($settings['sticky_header']) && $settings['sticky_header'] == 1) ? 'checked' : '' }} value="1">
+                                                                    <input type="checkbox" name="sticky_header" id="sticky_header" value="1" {{ (isset($settings['sticky_header']) && $settings['sticky_header'] == 1) ? 'checked' : '' }}>
                                                                     <span class="slider round">
                                                                         <i class="fa-solid fa-circle-check check_icon"></i>
                                                                         <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
@@ -323,7 +320,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
-                    <button class="btn btn-success updatebtn">Update</button>
+                    <button class="btn btn-success">S A V E</button>
                 </div>
             </form>
         </div>
@@ -337,35 +334,17 @@
 
     <script type="text/javascript">
 
-        // Remove Color Picker's Eyedropper
-        $('input').attr('colorpick-eyedropper-active','false');
-
-        // Disabled all Input When Theme is Default;
-        var isDefault = $('#is_default').val();
-        if(isDefault == 1)
-        {
-            $("input, select, .updatebtn").prop("disabled", true);
-        }
-
-
-        // Function for Insert Value into ColorPicker's TextBox
         function changeVal(colorPickerID,textID)
         {
             var value = $('#'+colorPickerID).val();
             $('#'+textID).val(value);
         }
 
-        // Function for Insert Value into ColorPicker
         function changeColor(textID,colorPickerID)
         {
             var value = $('#'+textID).val();
             $('#'+colorPickerID).val(value);
         }
-
-        // Success Toastr Message
-        @if (Session::has('success'))
-            toastr.success('{{ Session::get('success') }}')
-        @endif
 
     </script>
 

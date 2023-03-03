@@ -62,7 +62,7 @@
                                         <input type="hidden" name="lang_code" id="lang_code" value="{{ $primary_code }}">
 
                                         <div class="add_logo_sec_body">
-                                            <label class="form-label">Logo will appear on the top of your menu</label>
+                                            <label class="form-label">Banner will appear on the top of your menu</label>
                                             <div class="add_logo_sec_body_inr">
                                                 <label for="{{ $primary_banner_id }}" style="cursor: pointer;">
                                                     @if(!empty($primary_banner_image) && file_exists('public/client_uploads/banners/'.$primary_banner_image))
@@ -114,7 +114,7 @@
                                             <input type="hidden" name="lang_code" id="lang_code" value="{{ $add_lang_code }}">
 
                                             <div class="add_logo_sec_body">
-                                                <label class="form-label">Logo will appear on the top of your menu</label>
+                                                <label class="form-label">Banner will appear on the top of your menu</label>
                                                 <div class="add_logo_sec_body_inr">
                                                     <label for="{{ $add_banner_id }}" style="cursor: pointer;">
                                                         @if(!empty($add_banner_image) && file_exists('public/client_uploads/banners/'.$add_banner_image))
@@ -148,7 +148,7 @@
                             <input type="hidden" name="lang_code" id="lang_code" value="{{ $primary_code }}">
 
                             <div class="add_logo_sec_body">
-                                <label class="form-label">Logo will appear on the top of your menu</label>
+                                <label class="form-label">Banner will appear on the top of your menu</label>
                                 <div class="add_logo_sec_body_inr">
                                     <label for="{{ $primary_banner_id }}" style="cursor: pointer;">
                                         @if(!empty($primary_banner_image) && file_exists('public/client_uploads/banners/'.$primary_banner_image))
@@ -177,7 +177,7 @@
                         <textarea name="" id="" class="form-control" rows="4"></textarea>
                     </div>
                     <div class="add_logo_sec_body">
-                        <label class="form-label">Logo will appear on the top of your menu</label>
+                        <label class="form-label">Banner will appear on the top of your menu</label>
                         <div class="add_logo_sec_body_inr">
                             <input type="image" src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}" width="200px"/>
                             <input type="file" id="my_file" style="display: none;" />

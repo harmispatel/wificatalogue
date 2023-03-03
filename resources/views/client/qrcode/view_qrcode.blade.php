@@ -1,3 +1,7 @@
+@php
+    $qr_image = isset($shop_details['qr_code']) ? $shop_details['qr_code'] : '';
+@endphp
+
 @extends('client.layouts.client-layout')
 
 @section('title', 'Qr-Code')
@@ -11,9 +15,11 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="qr_img">
-                    <img src="{{ asset('public/client_images/not-found/qr_img.png') }}" class="w-100" >
+                    @if(!empty($qr_image) && file_exists('public/admin_uploads/shops_qr/'.$qr_image))
+                        <img src="{{ asset('public/admin_uploads/shops_qr/'.$qr_image) }}" class="w-100" >
+                    @endif
                     <div class="qr_btn_group d-flex align-center justify-content-center mt-4">
-                        <button class="btn qr_btn btn-primary me-3">Download</button>
+                        <a href="{{ asset('public/admin_uploads/shops_qr/'.$qr_image) }}" class="btn qr_btn btn-primary me-3" download>Download</a>
                         <button class="btn qr_btn btn-primary">Print</button>
                     </div>
                 </div>

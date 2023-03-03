@@ -1,28 +1,25 @@
 @extends('client.layouts.client-layout')
 
-@section('title', 'Theme-Preview')
+@section('title', 'New Theme')
 
 @section('content')
-
-<input type="hidden" name="is_default" id="is_default" value="{{ $theme->is_default }}">
 
 <section class="theme_section">
     <div class="main_section_inr">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('design.theme') }}">Themes</a></li>
-                <li class="breadcrumb-item active">{{ isset($theme->name) ? $theme->name : '' }}</li>
+                <li class="breadcrumb-item active">New Theme</li>
             </ol>
         </nav>
         <div class="row">
-            <form action="{{ route('design.theme-update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('design.theme-store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="theme_id" id="theme_id" value="{{ $theme->id }}">
                 <div class="col-md-12">
                     <div class="theme_change_sec">
                         <div class="theme_name">
                             <h2 class="form-group">
-                                <input type="text" name="theme_name" id="theme_name" class="form-control border-0 {{ ($errors->has('theme_name')) ? 'is-invalid' : '' }}" placeholder="Enter Theme Name" value="{{ isset($theme->name) ? $theme->name : '' }}">
+                                <input type="text" name="theme_name" id="theme_name" class="form-control border-0 {{ ($errors->has('theme_name')) ? 'is-invalid' : '' }}" placeholder="Enter Theme Name">
                                 @if($errors->has('theme_name'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('theme_name') }}
@@ -49,8 +46,8 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="header_color" name="header_color" class="form-control me-2 p-0" value="{{ isset($settings['header_color']) ? $settings['header_color'] : '' }}" onchange="changeVal('header_color','header_color_input')">
-                                                                    <input type="text" id="header_color_input" class="form-control" onkeyup="changeColor('header_color_input','header_color')" value="{{ isset($settings['header_color']) ? $settings['header_color'] : '' }}">
+                                                                    <input type="color" id="header_color" name="header_color" class="form-control me-2 p-0" value="" onchange="changeVal('header_color','header_color_input')">
+                                                                    <input type="text" id="header_color_input" class="form-control" onkeyup="changeColor('header_color_input','header_color')" value="">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -60,7 +57,7 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <label class="switch">
-                                                                    <input type="checkbox" name="sticky_header" id="sticky_header" {{ (isset($settings['sticky_header']) && $settings['sticky_header'] == 1) ? 'checked' : '' }} value="1">
+                                                                    <input type="checkbox" name="sticky_header" id="sticky_header" value="1">
                                                                     <span class="slider round">
                                                                         <i class="fa-solid fa-circle-check check_icon"></i>
                                                                         <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
@@ -73,9 +70,9 @@
                                                                 <span>Language Box Position</span>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <select name="language_bar_position" id="language_bar_position" class="form-select">
-                                                                    <option value="right" {{ ($settings['language_bar_position'] == 'right') ? 'selected' : '' }}>Right</option>
-                                                                    <option value="left" {{ ($settings['language_bar_position'] == 'left') ? 'selected' : '' }}>Left</option>
+                                                                <select name="language_bar_position" id="language_bar_position" class="form-select header-select">
+                                                                    <option value="right">Right</option>
+                                                                    <option value="left" selected>Left</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -84,10 +81,10 @@
                                                                 <span>Logo Position</span>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <select name="logo_position" id="logo_position" class="form-select">
-                                                                    <option value="right" {{ ($settings['logo_position'] == 'right') ? 'selected' : '' }}>Right</option>
-                                                                    <option value="left" {{ ($settings['logo_position'] == 'left') ? 'selected' : '' }}>Left</option>
-                                                                    <option value="center" {{ ($settings['logo_position'] == 'center') ? 'selected' : '' }}>Center</option>
+                                                                <select name="logo_position" id="logo_position" class="form-select header-select">
+                                                                    <option value="right">Right</option>
+                                                                    <option value="left">Left</option>
+                                                                    <option value="center" selected>Center</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -96,10 +93,10 @@
                                                                 <span>Search Box Position</span>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <select name="search_box_position" id="search_box_position" class="form-select">
-                                                                    <option value="right" {{ ($settings['search_box_position'] == 'right') ? 'selected' : '' }}>Right</option>
-                                                                    <option value="left" {{ ($settings['search_box_position'] == 'left') ? 'selected' : '' }}>Left</option>
-                                                                    <option value="center" {{ ($settings['search_box_position'] == 'center') ? 'selected' : '' }}>Center</option>
+                                                                <select name="search_box_position" id="search_box_position" class="form-select header-select">
+                                                                    <option value="right" selected>Right</option>
+                                                                    <option value="left">Left</option>
+                                                                    <option value="center">Center</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -109,8 +106,8 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <select name="banner_position" id="banner_position" class="form-select">
-                                                                    <option value="top" {{ ($settings['banner_position'] == 'top') ? 'selected' : '' }}>Top</option>
-                                                                    <option value="bottom" {{ ($settings['banner_position'] == 'bottom') ? 'selected' : '' }}>Bottom</option>
+                                                                    <option value="top">Top</option>
+                                                                    <option value="bottom">Bottom</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -120,8 +117,8 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <select name="banner_type" id="banner_type" class="form-select">
-                                                                    <option value="text" {{ ($settings['banner_type'] == 'text') ? 'selected' : '' }}>Text</option>
-                                                                    <option value="image" {{ ($settings['banner_type'] == 'image') ? 'selected' : '' }}>Image</option>
+                                                                    <option value="text">Text</option>
+                                                                    <option value="image">Image</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -131,8 +128,8 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="background_color" name="background_color" class="form-control me-2 p-0" value="{{ isset($settings['background_color']) ? $settings['background_color'] : '' }}" onchange="changeVal('background_color','background_color_input')">
-                                                                    <input id="background_color_input" type="text" class="form-control" value="{{ isset($settings['background_color']) ? $settings['background_color'] : '' }}" onkeyup="changeColor('background_color_input','background_color')">
+                                                                    <input type="color" id="background_color" name="background_color" class="form-control me-2 p-0" value="" onchange="changeVal('background_color','background_color_input')">
+                                                                    <input id="background_color_input" type="text" class="form-control" value="" onkeyup="changeColor('background_color_input','background_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -142,8 +139,8 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="font_color" name="font_color" class="form-control me-2 p-0" value="{{ isset($settings['font_color']) ? $settings['font_color'] : '' }}" onchange="changeVal('font_color','font_color_input')">
-                                                                    <input id="font_color_input" type="text" class="form-control" value="{{ isset($settings['font_color']) ? $settings['font_color'] : '' }}" onkeyup="changeColor('font_color_input','font_color')">
+                                                                    <input type="color" id="font_color" name="font_color" class="form-control me-2 p-0" value="" onchange="changeVal('font_color','font_color_input')">
+                                                                    <input id="font_color_input" type="text" class="form-control" value="" onkeyup="changeColor('font_color_input','font_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -153,8 +150,8 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="label_color" name="label_color" class="form-control me-2 p-0" value="{{ isset($settings['label_color']) ? $settings['label_color'] : '' }}" onchange="changeVal('label_color','label_color_input')">
-                                                                    <input id="label_color_input" type="text" class="form-control" value="{{ isset($settings['label_color']) ? $settings['label_color'] : '' }}" onkeyup="changeColor('label_color_input','label_color')">
+                                                                    <input type="color" id="label_color" name="label_color" class="form-control me-2 p-0" value="" onchange="changeVal('label_color','label_color_input')">
+                                                                    <input id="label_color_input" type="text" class="form-control" value="" onkeyup="changeColor('label_color_input','label_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -164,8 +161,8 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="social_media_icon_color" name="social_media_icon_color" class="form-control me-2 p-0" value="{{ isset($settings['social_media_icon_color']) ? $settings['social_media_icon_color'] : '' }}" onchange="changeVal('social_media_icon_color','social_media_icon_color_input')">
-                                                                    <input id="social_media_icon_color_input" type="text" class="form-control" value="{{ isset($settings['social_media_icon_color']) ? $settings['social_media_icon_color'] : '' }}" onkeyup="changeColor('social_media_icon_color_input','social_media_icon_color')">
+                                                                    <input type="color" id="social_media_icon_color" name="social_media_icon_color" class="form-control me-2 p-0" value="" onchange="changeVal('social_media_icon_color','social_media_icon_color_input')">
+                                                                    <input id="social_media_icon_color_input" type="text" class="form-control" value="" onkeyup="changeColor('social_media_icon_color_input','social_media_icon_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -199,8 +196,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="categories_bar_color" name="categories_bar_color" class="form-control me-2 p-0" value="{{ isset($settings['categories_bar_color']) ? $settings['categories_bar_color'] : '' }}" onchange="changeVal('categories_bar_color','categories_bar_color_input')">
-                                                                    <input id="categories_bar_color_input" type="text" class="form-control" value="{{ isset($settings['categories_bar_color']) ? $settings['categories_bar_color'] : '' }}" onkeyup="changeColor('categories_bar_color_input','categories_bar_color')">
+                                                                    <input type="color" id="categories_bar_color" name="categories_bar_color" class="form-control me-2 p-0" value="" onchange="changeVal('categories_bar_color','categories_bar_color_input')">
+                                                                    <input id="categories_bar_color_input" type="text" class="form-control" value="" onkeyup="changeColor('categories_bar_color_input','categories_bar_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -210,8 +207,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="menu_bar_font_color" name="menu_bar_font_color" class="form-control me-2 p-0" value="{{ isset($settings['menu_bar_font_color']) ? $settings['menu_bar_font_color'] : '' }}" onchange="changeVal('menu_bar_font_color','menu_bar_font_color_input')">
-                                                                    <input id="menu_bar_font_color_input" type="text" class="form-control" value="{{ isset($settings['menu_bar_font_color']) ? $settings['menu_bar_font_color'] : '' }}" onkeyup="changeColor('menu_bar_font_color_input','menu_bar_font_color')">
+                                                                    <input type="color" id="menu_bar_font_color" name="menu_bar_font_color" class="form-control me-2 p-0" value="" onchange="changeVal('menu_bar_font_color','menu_bar_font_color_input')">
+                                                                    <input id="menu_bar_font_color_input" type="text" class="form-control" value="" onkeyup="changeColor('menu_bar_font_color_input','menu_bar_font_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -221,8 +218,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="category_title_and_description_color" name="category_title_and_description_color" class="form-control me-2 p-0" value="{{ isset($settings['category_title_and_description_color']) ? $settings['category_title_and_description_color'] : '' }}" onchange="changeVal('category_title_and_description_color','category_title_and_description_color_input')">
-                                                                    <input id="category_title_and_description_color_input" type="text" class="form-control" value="{{ isset($settings['category_title_and_description_color']) ? $settings['category_title_and_description_color'] : '' }}" onkeyup="changeColor('category_title_and_description_color_input','category_title_and_description_color')">
+                                                                    <input type="color" id="category_title_and_description_color" name="category_title_and_description_color" class="form-control me-2 p-0" value="" onchange="changeVal('category_title_and_description_color','category_title_and_description_color_input')">
+                                                                    <input id="category_title_and_description_color_input" type="text" class="form-control" value="" onkeyup="changeColor('category_title_and_description_color_input','category_title_and_description_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -232,8 +229,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="price_color" name="price_color" class="form-control me-2 p-0" value="{{ isset($settings['price_color']) ? $settings['price_color'] : '' }}" onchange="changeVal('price_color','price_color_input')">
-                                                                    <input id="price_color_input" type="text" class="form-control" value="{{ isset($settings['price_color']) ? $settings['price_color'] : '' }}" onkeyup="changeColor('price_color_input','price_color')">
+                                                                    <input type="color" id="price_color" name="price_color" class="form-control me-2 p-0" value="" onchange="changeVal('price_color','price_color_input')">
+                                                                    <input id="price_color_input" type="text" class="form-control" value="" onkeyup="changeColor('price_color_input','price_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -243,7 +240,7 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="switch">
-                                                                    <input type="checkbox" name="item_devider" id="item_devider" {{ (isset($settings['item_devider']) && $settings['item_devider'] == 1) ? 'checked' : '' }} value="1">
+                                                                    <input type="checkbox" name="item_devider" id="item_devider" value="1">
                                                                     <span class="slider round">
                                                                         <i class="fa-solid fa-circle-check check_icon"></i>
                                                                         <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
@@ -257,8 +254,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="devider_color" name="devider_color" class="form-control me-2 p-0" value="{{ isset($settings['devider_color']) ? $settings['devider_color'] : '' }}" onchange="changeVal('devider_color','devider_color_input')">
-                                                                    <input id="devider_color_input" type="text" class="form-control" value="{{ isset($settings['devider_color']) ? $settings['devider_color'] : '' }}" onkeyup="changeColor('devider_color_input','devider_color')">
+                                                                    <input type="color" id="devider_color" name="devider_color" class="form-control me-2 p-0" value="" onchange="changeVal('devider_color','devider_color_input')">
+                                                                    <input id="devider_color_input" type="text" class="form-control" value="" onkeyup="changeColor('devider_color_input','devider_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -268,9 +265,9 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <select name="devider_thickness" id="devider_thickness" class="form-select">
-                                                                    <option value="1px" {{ ($settings['devider_thickness'] == '1px') ? 'selected' : '' }}>Light</option>
-                                                                    <option value="3px" {{ ($settings['devider_thickness'] == '3px') ? 'selected' : '' }}>Medium</option>
-                                                                    <option value="5px" {{ ($settings['devider_thickness'] == '5px') ? 'selected' : '' }}>Bold</option>
+                                                                    <option value="1px">Light</option>
+                                                                    <option value="3px">Medium</option>
+                                                                    <option value="5px">Bold</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -280,8 +277,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="tag_font_color" name="tag_font_color" class="form-control me-2 p-0" value="{{ isset($settings['tag_font_color']) ? $settings['tag_font_color'] : '' }}" onchange="changeVal('tag_font_color','tag_font_color_input')">
-                                                                    <input id="tag_font_color_input" type="text" class="form-control" value="{{ isset($settings['tag_font_color']) ? $settings['tag_font_color'] : '' }}" onkeyup="changeColor('tag_font_color_input','tag_font_color')">
+                                                                    <input type="color" id="tag_font_color" name="tag_font_color" class="form-control me-2 p-0" value="" onchange="changeVal('tag_font_color','tag_font_color_input')">
+                                                                    <input id="tag_font_color_input" type="text" class="form-control" value="" onkeyup="changeColor('tag_font_color_input','tag_font_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -291,8 +288,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="tag_label_color" name="tag_label_color" class="form-control me-2 p-0" value="{{ isset($settings['tag_label_color']) ? $settings['tag_label_color'] : '' }}" onchange="changeVal('tag_label_color','tag_label_color_input')">
-                                                                    <input id="tag_label_color_input" type="text" class="form-control" value="{{ isset($settings['tag_label_color']) ? $settings['tag_label_color'] : '' }}" onkeyup="changeColor('tag_label_color_input','tag_label_color')">
+                                                                    <input type="color" id="tag_label_color" name="tag_label_color" class="form-control me-2 p-0" value="" onchange="changeVal('tag_label_color','tag_label_color_input')">
+                                                                    <input id="tag_label_color_input" type="text" class="form-control" value="" onkeyup="changeColor('tag_label_color_input','tag_label_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -302,8 +299,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="item_devider_font_color" name="item_devider_font_color" class="form-control me-2 p-0" value="{{ isset($settings['item_devider_font_color']) ? $settings['item_devider_font_color'] : '' }}" onchange="changeVal('item_devider_font_color','item_devider_font_color_input')">
-                                                                    <input id="item_devider_font_color_input" type="text" class="form-control" value="{{ isset($settings['item_devider_font_color']) ? $settings['item_devider_font_color'] : '' }}" onkeyup="changeColor('item_devider_font_color_input','item_devider_font_color')">
+                                                                    <input type="color" id="item_devider_font_color" name="item_devider_font_color" class="form-control me-2 p-0" value="" onchange="changeVal('item_devider_font_color','item_devider_font_color_input')">
+                                                                    <input id="item_devider_font_color_input" type="text" class="form-control" value="" onkeyup="changeColor('item_devider_font_color_input','item_devider_font_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -323,7 +320,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
-                    <button class="btn btn-success updatebtn">Update</button>
+                    <a class="btn btn-success" onclick="saveThemeSettings()">S A V E</a>
                 </div>
             </form>
         </div>
@@ -337,35 +334,39 @@
 
     <script type="text/javascript">
 
-        // Remove Color Picker's Eyedropper
-        $('input').attr('colorpick-eyedropper-active','false');
-
-        // Disabled all Input When Theme is Default;
-        var isDefault = $('#is_default').val();
-        if(isDefault == 1)
-        {
-            $("input, select, .updatebtn").prop("disabled", true);
-        }
-
-
-        // Function for Insert Value into ColorPicker's TextBox
         function changeVal(colorPickerID,textID)
         {
             var value = $('#'+colorPickerID).val();
             $('#'+textID).val(value);
         }
 
-        // Function for Insert Value into ColorPicker
         function changeColor(textID,colorPickerID)
         {
             var value = $('#'+textID).val();
             $('#'+colorPickerID).val(value);
         }
 
-        // Success Toastr Message
-        @if (Session::has('success'))
-            toastr.success('{{ Session::get('success') }}')
-        @endif
+        //
+
+        // $(".header-select").on('focus', function () {
+        //     // Store the current value on focus and on change
+        //     previous = this.value;
+        // }).change(function(){
+        //     var position1 = $(this).val();
+        //     var selectID = $(this).attr("id");
+
+        //     if(selectID == 'language_bar_position')
+        //     {
+        //         var position2 = $('#logo_position').val();
+        //         var position3 = $('#search_box_position').val();
+
+        //         if(position1 == position2 || position1 == position3)
+        //         {
+        //             $("#"+selectID).val(previous).prop('selected', true);
+        //             alert('Please Select Diffrent Values');
+        //         }
+        //     }
+        // });
 
     </script>
 

@@ -64,5 +64,22 @@
         $(".lang_inr").removeClass("sidebar");
     });
 
+    $(window).scroll(function()
+    {
+        var scroll = $(window).scrollTop();
+        var header = $('.header_preview');
+
+        // if (scroll >= 50)
+        // {
+        //     $("header.header_preview").addClass("header-sticky");
+        //     // $("body").addClass("header-sticky-active");
+        // }
+        // else
+        // {
+        //     $("header.header_preview").removeClass("header-sticky");
+        //     // $("body").removeClass("header-sticky-active");
+        // }
+    });
+
 </script>
 

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
+use App\Models\ClientSettings;
 use App\Models\Languages;
 use App\Models\LanguageSettings;
 use App\Models\Shop;
 use App\Models\Subscriptions;
+use App\Models\Theme;
+use App\Models\ThemeSettings;
 use App\Models\User;
 use App\Models\UserShop;
 use App\Models\UsersSubscriptions;
@@ -15,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserController extends Controller
 {
@@ -93,6 +98,7 @@ class UserController extends Controller
             // Insert Client Shop
             $shop = new Shop();
             $shop->name = $shop_name;
+            $shop->shop_slug = $shop_slug;
             $shop->description = $shop_description;
 
             if($request->hasFile('shop_logo'))
@@ -106,6 +112,129 @@ class UserController extends Controller
             }
             $shop->save();
 
+            // Shop's Default Currency
+            $default_currency = new ClientSettings();
+            $default_currency->client_id = $client->id;
+            $default_currency->shop_id = $shop->id;
+            $default_currency->key = 'default_currency';
+            $default_currency->value = "EUR";
+            $default_currency->save();
+
+            // Business Name
+            $business_name = new ClientSettings();
+            $business_name->client_id = $client->id;
+            $business_name->shop_id = $shop->id;
+            $business_name->key = $shop_name;
+            $business_name->value = "EUR";
+            $business_name->save();
+
+            // Generate Shop Qr
+            $new_shop_url = URL::to('/')."/".$shop_slug;
+            $qr_name = $shop_slug."_".time()."_qr.png";
+            $upload_path = public_path('admin_uploads/shops_qr/'.$qr_name);
+
+            QrCode::format('png')->size(200)->generate($new_shop_url, $upload_path);
+
+            // Update Shop Details
+            $update_shop_dt = Shop::find($shop->id);
+            $update_shop_dt->qr_code = $qr_name;
+            $update_shop_dt->update();
+
+            // Insert Default Themes
+            $def_themes = [
+                'Default Light Theme',
+                'Default Dark Theme',
+            ];
+
+            foreach ($def_themes as $key => $value)
+            {
+                $theme = new Theme();
+                $theme->shop_id = $shop->id;
+                $theme->name = $value;
+                $theme->is_default = 1;
+                $theme->save();
+
+                // Insert Theme Settings
+                if($value == 'Default Light Theme')
+                {
+                    $setting_keys = [
+                        'header_color' => '#ffffff',
+                        'sticky_header' => 1,
+                        'language_bar_position' => 'left',
+                        'logo_position' => 'center',
+                        'search_box_position' => 'right',
+                        'banner_position' => 'top',
+                        'banner_type' => 'image',
+                        'background_color' => '#ffffff',
+                        'font_color' => '#4d572b',
+                        'label_color' => '#ffffff',
+                        'social_media_icon_color' => '#4d572b',
+                        'categories_bar_color' => '#ffffff',
+                        'menu_bar_font_color' => '#4d572b',
+                        'category_title_and_description_color' => '#4d572b',
+                        'price_color' => '#000000',
+                        'item_devider' => 1,
+                        'devider_color' => '#d1ccb8',
+                        'devider_thickness' => '5px',
+                        'tag_font_color' => '#4d572b',
+                        'tag_label_color' => '#ffffff',
+                        'item_devider_font_color' => '#4d572b',
+                    ];
+
+                    foreach($setting_keys as $key => $val)
+                    {
+                        $theme_setting = new ThemeSettings();
+                        $theme_setting->theme_id = $theme->id;
+                        $theme_setting->key = $key;
+                        $theme_setting->value = $val;
+                        $theme_setting->save();
+                    }
+
+                    // Client's Active Theme
+                    $active_theme = new ClientSettings();
+                    $active_theme->client_id = $client->id;
+                    $active_theme->shop_id = $shop->id;
+                    $active_theme->key = 'shop_active_theme';
+                    $active_theme->value = $theme->id;
+                    $active_theme->save();
+                }
+                else
+                {
+                    $setting_keys = [
+                        'header_color' => '#000000',
+                        'sticky_header' => 1,
+                        'language_bar_position' => 'left',
+                        'logo_position' => 'center',
+                        'search_box_position' => 'right',
+                        'banner_position' => 'top',
+                        'banner_type' => 'image',
+                        'background_color' => '#000000',
+                        'font_color' => '#ffffff',
+                        'label_color' => '#000000',
+                        'social_media_icon_color' => '#ffffff',
+                        'categories_bar_color' => '#000000',
+                        'menu_bar_font_color' => '#E7B76B',
+                        'category_title_and_description_color' => '#ffffff',
+                        'price_color' => '#E7B76B',
+                        'item_devider' => 1,
+                        'devider_color' => '#E7B76B',
+                        'devider_thickness' => '5px',
+                        'tag_font_color' => '#ffffff',
+                        'tag_label_color' => '#000000',
+                        'item_devider_font_color' => '#ffffff',
+                    ];
+
+                    foreach($setting_keys as $key => $val)
+                    {
+                        $theme_setting = new ThemeSettings();
+                        $theme_setting->theme_id = $theme->id;
+                        $theme_setting->key = $key;
+                        $theme_setting->value = $val;
+                        $theme_setting->save();
+                    }
+                }
+
+            }
 
             // Add Client Default Language
             $primary_lang = new LanguageSettings();
@@ -193,6 +322,7 @@ class UserController extends Controller
         // Update Client Shop
         $shop = Shop::find($shop_id);
         $shop->name = $shop_name;
+        $shop->shop_slug = $shop_slug;
         $shop->description = $shop_description;
 
         if($request->hasFile('shop_logo'))

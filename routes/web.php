@@ -18,6 +18,7 @@ use App\Http\Controllers\ShopQrController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersSubscriptionsController;
 use Illuminate\Support\Facades\Artisan;
@@ -149,13 +150,11 @@ Route::group(['prefix' => 'client'], function()
         Route::post('/design-intro-status', [DesignController::class,'introStatus'])->name('design.intro.status');
         Route::post('/design-intro-icon', [DesignController::class,'introIconUpload'])->name('design.intro.icon');
         Route::post('/design-intro-duration', [DesignController::class,'introDuration'])->name('design.intro.duration');
-        Route::get('/design-theme', [DesignController::class,'theme'])->name('design.theme');
         Route::get('/design-cover', [DesignController::class,'cover'])->name('design.cover');
         Route::get('/design-banner', [ShopBannerController::class,'index'])->name('design.banner');
         Route::post('/design-banner-update', [ShopBannerController::class,'update'])->name('design.banner.update');
         Route::get('/design-general-info', [DesignController::class,'generalInfo'])->name('design.general-info');
         Route::post('/design-generalInfoUpdate', [DesignController::class,'generalInfoUpdate'])->name('design.generalInfoUpdate');
-        Route::get('/design-theme-preview', [DesignController::class,'themePrview'])->name('design.theme-preview');
 
         // Languages
         Route::get('/languages', [LanguageController::class,'index'])->name('languages');
@@ -194,12 +193,22 @@ Route::group(['prefix' => 'client'], function()
         // contact us
         Route::get('/contact',[ContactController::class,'index'])->name('contact');
 
+        // Themes
+        Route::get('/design-theme', [ThemeController::class,'index'])->name('design.theme');
+        Route::get('/design-theme-preview/{id}', [ThemeController::class,'themePrview'])->name('design.theme-preview');
+        Route::get('/design-create-theme', [ThemeController::class,'create'])->name('design.theme-create');
+        Route::post('/design-store-theme', [ThemeController::class,'store'])->name('design.theme-store');
+        Route::post('/design-update-theme', [ThemeController::class,'update'])->name('design.theme-update');
+        Route::post('/change-theme', [ThemeController::class,'changeTheme'])->name('theme.change');
+        Route::get('/delete-theme/{id}', [ThemeController::class,'destroy'])->name('theme.delete');
+        Route::get('/clone-theme/{id}', [ThemeController::class,'cloneView'])->name('theme.clone');
+
     });
 });
 
 
 // Shops Preview
-Route::get('/{shopid}',[ShopController::class,'index'])->name('restaurant');
-Route::get('{shopid}/items/{catID}',[ShopController::class,'itemPreview'])->name('items.preview');
+Route::get('/{shop_slug}',[ShopController::class,'index'])->name('restaurant');
+Route::get('{shop_slug}/items/{catID}',[ShopController::class,'itemPreview'])->name('items.preview');
 Route::post('shop-locale-change',[ShopController::class,'changeShopLocale'])->name('shop.locale.change');
 Route::post('search-shop-categories',[ShopController::class,'searchCategories'])->name('shop.categories.search');

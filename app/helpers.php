@@ -7,6 +7,7 @@ use App\Models\Ingredient;
 use App\Models\Languages;
 use App\Models\LanguageSettings;
 use App\Models\ShopBanner;
+use App\Models\ThemeSettings;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,6 +64,7 @@ use Illuminate\Support\Facades\Auth;
             'homepage_intro',
             'map_url',
             'website_url',
+            'shop_active_theme',
         ]);
 
         $settings = [];
@@ -97,6 +99,45 @@ use Illuminate\Support\Facades\Auth;
     }
 
 
+    // Get Theme Settings
+    function themeSettings($themeID)
+    {
+        // Keys
+        $keys = ([
+            'header_color',
+            'sticky_header',
+            'language_bar_position',
+            'logo_position',
+            'search_box_position',
+            'banner_position',
+            'banner_type',
+            'background_color',
+            'font_color',
+            'label_color',
+            'social_media_icon_color',
+            'categories_bar_color',
+            'menu_bar_font_color',
+            'category_title_and_description_color',
+            'price_color',
+            'item_devider',
+            'devider_color',
+            'devider_thickness',
+            'tag_font_color',
+            'tag_label_color',
+            'item_devider_font_color',
+        ]);
+
+        $settings = [];
+
+        foreach($keys as $key)
+        {
+            $query = ThemeSettings::select('value')->where('key',$key)->where('theme_id',$themeID)->first();
+            $settings[$key] = isset($query->value) ? $query->value : '';
+        }
+
+        return $settings;
+    }
+
 
     // Get Language Details
     function getLangDetails($langID)
@@ -119,7 +160,8 @@ use Illuminate\Support\Facades\Auth;
     {
         if(!empty($tagID) && !empty($catID))
         {
-            $items = CategoryProductTags::with(['product'])->where('tag_id',$tagID)->where('category_id',$catID)->get();
+            // $items = CategoryProductTags::with(['product'])->where('tag_id',$tagID)->where('category_id',$catID)->get();
+            $items = CategoryProductTags::join('items','items.id','category_product_tags.item_id')->where('tag_id',$tagID)->where('category_product_tags.category_id',$catID)->orderBy('items.order_key')->get();
         }
         else
         {

@@ -1,3 +1,16 @@
+@php
+    $shop_settings = getClientSettings($shop_details['id']);
+    $shop_theme_id = isset($shop_settings['shop_active_theme']) ? $shop_settings['shop_active_theme'] : '';
+
+    // Theme
+    $theme = \App\Models\Theme::where('id',$shop_theme_id)->first();
+    $theme_name = isset($theme['name']) ? $theme['name'] : '';
+
+    // Theme Settings
+    $theme_settings = themeSettings($shop_theme_id);
+
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +20,13 @@
     <title>@yield('title')</title>
     @include('shop.shop-css')
 </head>
-<body>
+<body class="{{ (!empty($theme_name) && $theme_name == 'Default Dark Theme') ? 'dark' : '' }} test">
 
     {{-- Navbar --}}
     @include('shop.shop-navbar')
 
     {{-- Main Content --}}
-    <main id="main" class="main">
+    <main id="main" class="main shop-main py-3">
         @yield('content')
     </main>
 

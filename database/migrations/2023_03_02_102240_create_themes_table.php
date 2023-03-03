@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShopsTable extends Migration
+class CreateThemesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateShopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shops', function (Blueprint $table) {
+        Schema::create('themes', function (Blueprint $table) {
             $table->id();
+            $table->integer('shop_id');
             $table->string('name');
-            $table->string('shop_slug')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('qr_code')->nullable();
-            $table->string('directory')->nullable();
-            $table->text('description')->nullable();
+            $table->tinyInteger('is_default')->default(false);
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateShopsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shops');
+        Schema::dropIfExists('themes');
     }
 }

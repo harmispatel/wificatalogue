@@ -17,11 +17,13 @@ class ShopController extends Controller
 {
 
     // function for shop Preview
-    public function index($id)
+    public function index($slug)
     {
-        $shop_id = $id;
+        $shop_slug = $slug;
 
-        $data['shop_details'] = Shop::where('id',$shop_id)->first();
+        $data['shop_details'] = Shop::where('shop_slug',$shop_slug)->first();
+
+        $shop_id = isset($data['shop_details']->id) ? $data['shop_details']->id : '';
 
         if($data['shop_details'])
         {
@@ -59,13 +61,17 @@ class ShopController extends Controller
 
 
     // function for shop's Items Preview
-    public function itemPreview($shop_id,$cat_id)
+    public function itemPreview($shop_slug,$cat_id)
     {
+        // Shop Details
+        $data['shop_details'] = Shop::where('shop_slug',$shop_slug)->first();
+
+        // Shop ID
+        $shop_id = isset($data['shop_details']->id) ? $data['shop_details']->id : '';
+
         // Category Details
         $data['cat_details'] = Category::where('shop_id',$shop_id)->where('id',$cat_id)->first();
 
-        // Shop Details
-        $data['shop_details'] = Shop::where('id',$shop_id)->first();
 
         // CategoryItem Tags
         $data['cat_tags'] = CategoryProductTags::join('tags','tags.id','category_product_tags.tag_id')->orderBy('tags.order')->where('category_id',$cat_id)->get()->unique('tag_id');

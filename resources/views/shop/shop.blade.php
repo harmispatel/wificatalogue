@@ -1,6 +1,7 @@
 @php
     // Shop Settings
     $shop_settings = getClientSettings($shop_details['id']);
+    $shop_theme_id = isset($shop_settings['shop_active_theme']) ? $shop_settings['shop_active_theme'] : '';
 
     // Shop Name
     $shop_name = (isset($shop_details['name']) && !empty($shop_details['name'])) ? $shop_details['name'] : "Restaurant Managament - Home";
@@ -21,6 +22,13 @@
     $banner_image = isset($banner_setting[$banner_key]) ? $banner_setting[$banner_key] : "";
     $banner_text = isset($banner_setting[$banner_text_key]) ? $banner_setting[$banner_text_key] : "";
 
+    // Theme Settings
+    $theme_settings = themeSettings($shop_theme_id);
+
+    // echo '<pre>';
+    // print_r($theme_settings['banner_type']);
+    // exit();
+
 @endphp
 
 @extends('shop.shop-layout')
@@ -31,15 +39,21 @@
 
     <input type="hidden" name="shop_id" id="shop_id" value="{{ encrypt($shop_details['id']); }}">
 
-    <div class="banner-image">
-        @if(!empty($banner_image) && file_exists('public/client_uploads/banners/'.$banner_image))
-            <img src="{{ asset('public/client_uploads/banners/'.$banner_image) }}" class="w-100">
+    @if(isset($theme_settings['banner_position']) && !empty($theme_settings['banner_position']) && $theme_settings['banner_position'] == 'top')
+        @if($theme_settings['banner_type'] == 'image')
+            @if(!empty($banner_image) && file_exists('public/client_uploads/banners/'.$banner_image))
+                <div class="banner-image">
+                    <img src="{{ asset('public/client_uploads/banners/'.$banner_image) }}" class="w-100">
+                </div>
+            @endif
         @else
             @if(!empty($banner_text))
-                <h4 class="text-center">{{ $banner_text }}</h4>
+                <div class="banner-image">
+                    <h3 class="text-center">{{ $banner_text }}</h3>
+                </div>
             @endif
         @endif
-    </div>
+    @endif
 
     <section class="sec_main">
         <div class="container" id="CategorySection">
@@ -54,7 +68,7 @@
                         @endphp
 
                         <div class="menu_list_item">
-                            <a href="{{ route('items.preview',[$shop_details['id'],$category->id]) }}">
+                            <a href="{{ route('items.preview',[$shop_details['shop_slug'],$category->id]) }}">
                                 @if(!empty($category->image) && file_exists('public/client_uploads/categories/'.$category->image))
                                     <img src="{{ asset('public/client_uploads/categories/'.$category->image) }}" class="w-100">
                                 @else
@@ -71,6 +85,21 @@
         </div>
     </section>
 
+    @if(isset($theme_settings['banner_position']) && !empty($theme_settings['banner_position']) && $theme_settings['banner_position'] == 'bottom')
+        @if($theme_settings['banner_type'] == 'image')
+            @if(!empty($banner_image) && file_exists('public/client_uploads/banners/'.$banner_image))
+                <div class="banner-image">
+                    <img src="{{ asset('public/client_uploads/banners/'.$banner_image) }}" class="w-100">
+                </div>
+            @endif
+        @else
+            @if(!empty($banner_text))
+                <div class="banner-image">
+                    <h3 class="text-center">{{ $banner_text }}</h3>
+                </div>
+            @endif
+        @endif
+    @endif
 
     <footer class="footer text-center">
         <div class="container">

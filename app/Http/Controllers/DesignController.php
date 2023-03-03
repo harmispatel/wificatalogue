@@ -286,20 +286,11 @@ class DesignController extends Controller
     }
 
 
-    public function theme()
-    {
-        return view('client.design.theme');
-    }
-
     public function cover()
     {
         return view('client.design.cover');
     }
 
-    public function themePrview()
-    {
-        return view('client.design.theme_preview');
-    }
 
 
     // Generel Info View

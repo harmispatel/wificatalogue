@@ -35,9 +35,9 @@
                             <label class="form-label" for="default_currency">Currency</label>
                             <select  class="form-select {{ ($errors->has('default_currency')) ? 'is-invalid' : '' }}" name="default_currency" id="default_currency">
                                 <option value="">Choose Currency</option>
-                                <option value="1" {{ (isset($client_settings['default_currency']) && ($client_settings['default_currency'] == 1)) ? 'selected' : '' }}>EUR</option>
-                                <option value="2" {{ (isset($client_settings['default_currency']) && ($client_settings['default_currency'] == 2)) ? 'selected' : '' }}>USD</option>
-                                <option value="3" {{ (isset($client_settings['default_currency']) && ($client_settings['default_currency'] == 3)) ? 'selected' : '' }}>GBP</option>
+                                <option value="EUR" {{ (isset($client_settings['default_currency']) && ($client_settings['default_currency'] == 'EUR')) ? 'selected' : '' }}>EUR</option>
+                                <option value="USD" {{ (isset($client_settings['default_currency']) && ($client_settings['default_currency'] == 'USD')) ? 'selected' : '' }}>USD</option>
+                                <option value="GBP" {{ (isset($client_settings['default_currency']) && ($client_settings['default_currency'] == 'GBP')) ? 'selected' : '' }}>GBP</option>
                             </select>
                             @if($errors->has('default_currency'))
                                 <div class="invalid-feedback">
