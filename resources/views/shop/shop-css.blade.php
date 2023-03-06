@@ -160,6 +160,13 @@
             }
         @endif
 
+        /* Category Bar Type */
+        @if (isset($theme_settings['category_bar_type']) && !empty($theme_settings['category_bar_type']))
+            .item_box_main .nav .nav-link .img_box img{
+                border-radius: {{ $theme_settings['category_bar_type'] }} !important;
+            }
+        @endif
+
     @endif
 
 </style>

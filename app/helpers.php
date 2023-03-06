@@ -125,6 +125,7 @@ use Illuminate\Support\Facades\Auth;
             'tag_font_color',
             'tag_label_color',
             'item_devider_font_color',
+            'category_bar_type',
         ]);
 
         $settings = [];

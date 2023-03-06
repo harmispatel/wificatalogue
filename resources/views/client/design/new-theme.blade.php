@@ -203,6 +203,17 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
+                                                                <span>Category Bar Type</span>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select name="category_bar_type" id="category_bar_type" class="form-select">
+                                                                    <option value="8px">Square</option>
+                                                                    <option value="50%">Circle</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-8">
                                                                 <span>Menu Bar Fonts Color</span>
                                                             </div>
                                                             <div class="col-md-4">

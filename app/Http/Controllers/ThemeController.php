@@ -50,6 +50,7 @@ class ThemeController extends Controller
             'tag_font_color',
             'tag_label_color',
             'item_devider_font_color',
+            'category_bar_type'
         ]);
 
         $settings = [];
@@ -112,6 +113,7 @@ class ThemeController extends Controller
             'tag_font_color' => $request->tag_font_color,
             'tag_label_color' => $request->tag_label_color,
             'item_devider_font_color' => $request->item_devider_font_color,
+            'category_bar_type' => $request->category_bar_type,
         ];
 
         if($theme->id)
@@ -203,6 +205,7 @@ class ThemeController extends Controller
             'tag_font_color' => $request->tag_font_color,
             'tag_label_color' => $request->tag_label_color,
             'item_devider_font_color' => $request->item_devider_font_color,
+            'category_bar_type' => $request->category_bar_type,
         ];
 
         // Update Theme Settings
@@ -217,6 +220,14 @@ class ThemeController extends Controller
                 $settings = ThemeSettings::find($setting_id);
                 $settings->value = $value;
                 $settings->update();
+            }
+            else
+            {
+                $settings = new ThemeSettings();
+                $settings->theme_id = $theme_id;
+                $settings->key = $key;
+                $settings->value = $value;
+                $settings->save();
             }
         }
 
@@ -267,6 +278,7 @@ class ThemeController extends Controller
             'tag_font_color',
             'tag_label_color',
             'item_devider_font_color',
+            'category_bar_type',
         ]);
 
         $settings = [];
