@@ -179,6 +179,7 @@ class UserController extends Controller
                         'tag_font_color' => '#4d572b',
                         'tag_label_color' => '#ffffff',
                         'item_devider_font_color' => '#4d572b',
+                        'category_bar_type' => '8px',
                     ];
 
                     foreach($setting_keys as $key => $val)

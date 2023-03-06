@@ -1,3 +1,9 @@
+@php
+    $admin_settings = getAdminSettings();
+    $main_screen = isset($admin_settings['theme_main_screen_demo']) ? $admin_settings['theme_main_screen_demo'] : '';
+    $category_screen = isset($admin_settings['theme_category_screen_demo']) ? $admin_settings['theme_category_screen_demo'] : '';
+@endphp
+
 @extends('client.layouts.client-layout')
 
 @section('title', 'Theme-Preview')
@@ -111,6 +117,7 @@
                                                                 <select name="banner_position" id="banner_position" class="form-select">
                                                                     <option value="top" {{ ($settings['banner_position'] == 'top') ? 'selected' : '' }}>Top</option>
                                                                     <option value="bottom" {{ ($settings['banner_position'] == 'bottom') ? 'selected' : '' }}>Bottom</option>
+                                                                    <option value="hide" {{ ($settings['banner_position'] == 'hide') ? 'selected' : '' }}>Hidden</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -173,7 +180,10 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="preview_img">
-                                                        <img src="{{ asset('public/client_images/not-found/theme_main_screen.png') }}" class="w-100">
+                                                        @if(!empty($main_screen))
+                                                            <img src="{{ $main_screen }}" class="w-100">
+                                                            {{-- <img src="{{ asset('public/client_images/not-found/theme_main_screen.png') }}" class="w-100"> --}}
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -322,7 +332,9 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="preview_img">
-                                                        <img src="{{ asset('public/client_images/not-found/theme_within_category_screen.png') }}" class="w-100">
+                                                        @if(!empty($category_screen))
+                                                            <img src="{{ $category_screen }}" class="w-100">
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

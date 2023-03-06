@@ -273,8 +273,12 @@ input:checked + .slider .check_icon{
 
 .add_category{
     /* width: 265px; */
-    height: 201px;
+    min-height: 365px;
     background-color: #d2d6dc;
+}
+
+.add_category img{
+    height:auto;
 }
 
 .add_category_bt {
@@ -416,6 +420,7 @@ input:checked + .slider .check_icon{
 .banner_text{
     padding:20px;
 }
+
 
 /* theme preview */
 
@@ -1235,8 +1240,11 @@ input:checked + .slider .check_icon{
     }
 
     /* Banner */
-    .banner-image img{
+    /* .banner-image img{
         height: 160px;
+    } */
+    .banner-img{
+        min-height:180px !important;
     }
 }
 

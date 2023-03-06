@@ -16,6 +16,10 @@ class AdminSettingsController extends Controller
             'copyright_text',
             'logo',
             'login_form_background',
+            'default_light_theme_image',
+            'default_dark_theme_image',
+            'theme_main_screen_demo',
+            'theme_category_screen_demo',
         ]);
 
         $settings = [];
@@ -41,6 +45,10 @@ class AdminSettingsController extends Controller
             'copyright_text'              =>          'required',
             'logo'                        =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
             'login_form_background'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            'default_light_theme_image'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            'default_dark_theme_image'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            'theme_main_screen_demo'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            'theme_category_screen_demo'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
         $all_data['favourite_client_limit'] = $request->favourite_client_limit;
@@ -60,6 +68,38 @@ class AdminSettingsController extends Controller
             $request->file('login_form_background')->move(public_path('admin_uploads/login_backgrounds/'), $bgName);
             $loginbgUrl = asset('/').'public/admin_uploads/login_backgrounds/'.$bgName;
             $all_data['login_form_background'] = $loginbgUrl;
+        }
+
+        if($request->hasFile('default_light_theme_image'))
+        {
+            $imageName = "light_".time().".". $request->file('default_light_theme_image')->getClientOriginalExtension();
+            $request->file('default_light_theme_image')->move(public_path('admin_uploads/def_theme_images/'), $imageName);
+            $imageUrl = asset('/').'public/admin_uploads/def_theme_images/'.$imageName;
+            $all_data['default_light_theme_image'] = $imageUrl;
+        }
+
+        if($request->hasFile('default_dark_theme_image'))
+        {
+            $imageName = "dark_".time().".". $request->file('default_dark_theme_image')->getClientOriginalExtension();
+            $request->file('default_dark_theme_image')->move(public_path('admin_uploads/def_theme_images/'), $imageName);
+            $imageUrl = asset('/').'public/admin_uploads/def_theme_images/'.$imageName;
+            $all_data['default_dark_theme_image'] = $imageUrl;
+        }
+
+        if($request->hasFile('theme_main_screen_demo'))
+        {
+            $imageName = "main_screen_".time().".". $request->file('theme_main_screen_demo')->getClientOriginalExtension();
+            $request->file('theme_main_screen_demo')->move(public_path('admin_uploads/screen_image/'), $imageName);
+            $imageUrl = asset('/').'public/admin_uploads/screen_image/'.$imageName;
+            $all_data['theme_main_screen_demo'] = $imageUrl;
+        }
+
+        if($request->hasFile('theme_category_screen_demo'))
+        {
+            $imageName = "category_screen_".time().".". $request->file('theme_category_screen_demo')->getClientOriginalExtension();
+            $request->file('theme_category_screen_demo')->move(public_path('admin_uploads/screen_image/'), $imageName);
+            $imageUrl = asset('/').'public/admin_uploads/screen_image/'.$imageName;
+            $all_data['theme_category_screen_demo'] = $imageUrl;
         }
 
         // Insert or Update Settings

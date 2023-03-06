@@ -1,4 +1,7 @@
 @php
+    $admin_settings = getAdminSettings();
+    $light_img = isset($admin_settings['default_light_theme_image']) ? $admin_settings['default_light_theme_image'] : '';
+    $dark_img = isset($admin_settings['default_dark_theme_image']) ? $admin_settings['default_dark_theme_image'] : '';
     $shop_settings = getClientSettings();
     $active_theme = isset($shop_settings['shop_active_theme']) ? $shop_settings['shop_active_theme'] : '';
 @endphp
@@ -22,9 +25,23 @@
                     <div class="col-md-3">
                         <div class="item_box">
                             <div class="item_img add_category">
-                                <a class="add_category_bt">
-                                    <i class="fa-solid fa-bolt icon_none"></i>
-                                </a>
+                                @if($theme->is_default == 1)
+                                    @if($theme->name == 'Default Light Theme')
+                                        @if(!empty($light_img))
+                                            <img src="{{ $light_img }}" class="w-100">
+                                        @endif
+                                    @else
+                                        @if(!empty($dark_img))
+                                            <img src="{{ $dark_img }}" class="w-100">
+                                        @endif
+                                    @endif
+                                @endif
+
+                                @if($theme->is_default == 0)
+                                    <a class="add_category_bt">
+                                        <i class="fa-solid fa-bolt icon_none"></i>
+                                    </a>
+                                @endif
                                 <div class="edit_item_bt">
                                     @if($theme->is_default == 0)
                                         <a href="{{ route('design.theme-preview',$theme->id) }}" class="btn edit_item">Edit</a>

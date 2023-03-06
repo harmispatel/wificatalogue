@@ -12,6 +12,12 @@
     // Language Bar Position
     $language_bar_position = isset($theme_settings['language_bar_position']) ? $theme_settings['language_bar_position'] : '';
 
+    $banner_setting = getBannerSetting($shop_details['id']);
+    $banner_key = $language_details['code']."_image";
+    $banner_text_key = $language_details['code']."_title";
+    $banner_image = isset($banner_setting[$banner_key]) ? $banner_setting[$banner_key] : "";
+    $banner_text = isset($banner_setting[$banner_text_key]) ? $banner_setting[$banner_text_key] : "";
+
 @endphp
 
 <!-- bootstrap css -->
@@ -164,6 +170,15 @@
         @if (isset($theme_settings['category_bar_type']) && !empty($theme_settings['category_bar_type']))
             .item_box_main .nav .nav-link .img_box img{
                 border-radius: {{ $theme_settings['category_bar_type'] }} !important;
+            }
+        @endif
+
+        @if (isset($theme_settings['banner_type']) && !empty($theme_settings['banner_type']))
+            .banner-img{
+                background:url('{{ asset('public/client_uploads/banners/'.$banner_image) }}');
+                background-size: cover;
+                background-repeat: no-repeat;
+                min-height: 300px;
             }
         @endif
 

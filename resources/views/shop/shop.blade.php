@@ -42,8 +42,8 @@
     @if(isset($theme_settings['banner_position']) && !empty($theme_settings['banner_position']) && $theme_settings['banner_position'] == 'top')
         @if($theme_settings['banner_type'] == 'image')
             @if(!empty($banner_image) && file_exists('public/client_uploads/banners/'.$banner_image))
-                <div class="banner-image">
-                    <img src="{{ asset('public/client_uploads/banners/'.$banner_image) }}" class="w-100">
+                <div class="banner-image banner-img">
+                    {{-- <img src="{{ asset('public/client_uploads/banners/'.$banner_image) }}" class="w-100"> --}}
                 </div>
             @endif
         @else
@@ -88,8 +88,8 @@
     @if(isset($theme_settings['banner_position']) && !empty($theme_settings['banner_position']) && $theme_settings['banner_position'] == 'bottom')
         @if($theme_settings['banner_type'] == 'image')
             @if(!empty($banner_image) && file_exists('public/client_uploads/banners/'.$banner_image))
-                <div class="banner-image">
-                    <img src="{{ asset('public/client_uploads/banners/'.$banner_image) }}" class="w-100">
+                <div class="banner-image banner-img">
+                    {{-- <img src="{{ asset('public/client_uploads/banners/'.$banner_image) }}" class="w-100"> --}}
                 </div>
             @endif
         @else
