@@ -112,9 +112,9 @@
                 <div class="row mb-4">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="form-label" for="homepage_intro">Homepage Intro</label>
+                            <label class="form-label" for="homepage_intro">Footer Text HTML</label>
                             {{-- please text editor use --}}
-                            <textarea class="form-control" placeholder="Write Your Shop Intro Here." id="homepage_intro" name="homepage_intro">{{ (isset($client_settings['homepage_intro']) && !empty($client_settings['homepage_intro'])) ? $client_settings['homepage_intro'] : '' }}</textarea>
+                            <textarea class="form-control tinymce-editor" placeholder="Write Your Shop Intro Here." id="homepage_intro" name="homepage_intro">{{ (isset($client_settings['homepage_intro']) && !empty($client_settings['homepage_intro'])) ? $client_settings['homepage_intro'] : '' }}</textarea>
                         </div>
                     </div>
                 </div>

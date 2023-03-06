@@ -104,7 +104,7 @@
     <footer class="footer text-center">
         <div class="container">
             <div class="footer-inr">
-                <h4>{{ isset($shop_settings['homepage_intro']) ? $shop_settings['homepage_intro'] : '[Intro Here]' }}</h4>
+                <p>{!! isset($shop_settings['homepage_intro']) ? $shop_settings['homepage_intro'] : '[Intro Here]' !!}</p>
 
                 <div class="footer_media">
                     <h3>Find Us</h3>

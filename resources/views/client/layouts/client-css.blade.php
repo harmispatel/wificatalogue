@@ -68,4 +68,9 @@
     #categorySection .col-md-3{
         cursor: move;
     }
+
+    /* TinyMCE */
+    .tox-tinymce{
+        height: 250px!important;
+    }
 </style>

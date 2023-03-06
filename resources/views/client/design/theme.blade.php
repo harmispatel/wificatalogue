@@ -26,7 +26,9 @@
                                     <i class="fa-solid fa-bolt icon_none"></i>
                                 </a>
                                 <div class="edit_item_bt">
-                                    <a href="{{ route('design.theme-preview',$theme->id) }}" class="btn edit_item">Prview</a>
+                                    @if($theme->is_default == 0)
+                                        <a href="{{ route('design.theme-preview',$theme->id) }}" class="btn edit_item">Edit</a>
+                                    @endif
                                     <a href="{{ route('theme.clone',$theme->id) }}" class="btn edit_category">Clone</a>
                                 </div>
                                 @if($theme->is_default == 0)
