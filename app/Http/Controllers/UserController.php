@@ -130,10 +130,10 @@ class UserController extends Controller
 
             // Generate Shop Qr
             $new_shop_url = URL::to('/')."/".$shop_slug;
-            $qr_name = $shop_slug."_".time()."_qr.png";
+            $qr_name = $shop_slug."_".time()."_qr.svg";
             $upload_path = public_path('admin_uploads/shops_qr/'.$qr_name);
 
-            QrCode::format('png')->size(200)->generate($new_shop_url, $upload_path);
+            QrCode::size(200)->generate($new_shop_url, $upload_path);
 
             // Update Shop Details
             $update_shop_dt = Shop::find($shop->id);

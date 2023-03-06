@@ -170,6 +170,8 @@ Route::group(['prefix' => 'client'], function()
 
         // Shop QrCode
         Route::get('/qrcode', [ShopQrController::class,'index'])->name('qrcode');
+        Route::post('/qrcode-settings', [ShopQrController::class,'QrCodeSettings'])->name('qrcode.settings');
+        Route::post('/qrcode-update-settings', [ShopQrController::class,'QrCodeUpdateSettings'])->name('qrcode.update.settings');
 
         // ClientProfile
         Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('client.profile');

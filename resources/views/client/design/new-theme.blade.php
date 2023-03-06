@@ -320,7 +320,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
-                    <a class="btn btn-success" onclick="saveThemeSettings()">S A V E</a>
+                    <button class="btn btn-success">S A V E</button>
                 </div>
             </form>
         </div>

@@ -396,6 +396,19 @@ input:checked + .slider .check_icon{
     z-index: 999;
 }
 
+.qr_loader{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    z-index: 9;
+}
+
 .logo-loader img{
     width:50%;
 }
@@ -742,7 +755,6 @@ input:checked + .slider .check_icon{
     height: 94.5%;
     overflow: auto;
     border-radius:20px;
-    animation-iteration-count:infinite;
 }
 
 .mob_preview_inr::-webkit-scrollbar{
@@ -1221,10 +1233,15 @@ input:checked + .slider .check_icon{
     .item_inr_info .nav{
         justify-content:start;
     }
+
+    /* Banner */
+    .banner-image img{
+        height: 160px;
+    }
 }
 
 
 /* Banner */
-.banner-image img{
+/* .banner-image img{
     height: 160px;
-}
+} */
