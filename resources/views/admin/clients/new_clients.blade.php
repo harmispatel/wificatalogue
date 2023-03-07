@@ -65,13 +65,19 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="name" class="form-label">Client Name</label>
-                                            <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter Client Name" value="{{ old('name') }}">
-                                            @if($errors->has('name'))
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" placeholder="Enter First Name" value="{{ old('firstname') }}">
+                                            @if($errors->has('firstname'))
                                                 <div class="invalid-feedback">
-                                                    {{ $errors->first('name') }}
+                                                    {{ $errors->first('firstname') }}
                                                 </div>
                                             @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Last Name" value="{{ old('lastname') }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -107,13 +113,13 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label for="status" class="form-label">Status</label>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" value="1" checked>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label for="favourite" class="form-label">Favourite</label>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" name="favourite" role="switch" id="favourite" value="1">

@@ -41,11 +41,13 @@ class AuthController extends Controller
         {
             if (Auth::user()->user_type === 1)
             {
-                return redirect()->route('admin.dashboard')->with('success', 'Welcome '.Auth::user()->name);
+                $username = Auth::user()->firstname." ".Auth::user()->lastname;
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome '.$username);
             }
             else
             {
-                return redirect()->route('categories')->with('success', 'Welcome '.Auth::user()->name);
+                $username = Auth::user()->firstname." ".Auth::user()->lastname;
+                return redirect()->route('client.dashboard')->with('success', 'Welcome '.$username);
             }
             // return back()->with('error', 'Kindly Login with Active Admin User.');
         }

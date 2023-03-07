@@ -67,7 +67,7 @@
                                     @forelse ($clients as $client)
                                         <tr>
                                             <td>{{ $client->id }}</td>
-                                            <td>{{ $client->name }}</td>
+                                            <td>{{ $client->firstname }} {{ $client->lastname }}</td>
                                             <td>{{ $client->email }}</td>
                                             <td>
                                                 @php

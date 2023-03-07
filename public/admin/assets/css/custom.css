@@ -91,3 +91,10 @@
     height: 25px!important;
 }
 
+
+.edit-profile-btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+

@@ -3,7 +3,7 @@
     if (auth()->user())
     {
         $userID = encrypt(auth()->user()->id);
-        $userName = auth()->user()->name;
+        $userName = auth()->user()->firstname." ".auth()->user()->lastname;
         $userImage = auth()->user()->image;
     }
     else
@@ -24,14 +24,22 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
 
+       {{-- Dashboard Nav --}}
+       <li class="nav-item">
+            <a class="nav-link {{ ($routeName == 'client.dashboard') ? 'active-tab' : '' }}" href="{{ route('client.dashboard') }}">
+                <i class="fa-solid fa-house-chimney {{ ($routeName == 'client.dashboard') ? 'icon-tab' : '' }}"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
         {{-- Shop Details Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ (($routeName != 'client.profile')) ? 'collapsed' : '' }} {{ (($routeName == 'client.profile')) ? 'active-tab' : '' }}" data-bs-target="#shop-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'client.profile')) ? 'true' : 'false' }}">
-                <i class="fa-solid fa-house-chimney {{ (($routeName == 'client.profile')) ? 'icon-tab' : '' }}"></i><span>{{ $shop_name }}</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'client.profile')) ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ (($routeName != 'client.profile.edit')) ? 'collapsed' : '' }} {{ (($routeName == 'client.profile.edit')) ? 'active-tab' : '' }}" data-bs-target="#shop-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'client.profile.edit')) ? 'true' : 'false' }}">
+                <i class="ri-restaurant-2-line  {{ (($routeName == 'client.profile.edit')) ? 'icon-tab' : '' }}"></i><span>{{ $shop_name }}</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'client.profile.edit')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="shop-nav" class="nav-content sidebar-ul collapse  {{ (($routeName == 'client.profile')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="shop-nav" class="nav-content sidebar-ul collapse  {{ (($routeName == 'client.profile.edit')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('client.profile',$userID) }}" class="{{ ($routeName == 'client.profile') ? 'active-link' : '' }}">
+                    <a href="{{ route('client.profile.edit',$userID) }}" class="{{ ($routeName == 'client.profile.edit') ? 'active-link' : '' }}">
                         <span>Manage Account</span>
                     </a>
                 </li>

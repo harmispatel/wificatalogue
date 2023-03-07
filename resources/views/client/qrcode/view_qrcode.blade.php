@@ -22,7 +22,7 @@
                     <div class="qr_img position-relative">
                         <div class="text-center" id="qrImg">
                             @if(!empty($qr_image) && file_exists('public/admin_uploads/shops_qr/'.$qr_image))
-                                <img src="{{ asset('public/admin_uploads/shops_qr/'.$qr_image) }}" class="w-100">
+                                <img src="{{ asset('public/admin_uploads/shops_qr/'.$qr_image) }}">
                             @endif
                         </div>
                         <div class="qr_btn_group d-flex align-center justify-content-center mt-4">
@@ -141,7 +141,7 @@
                                                 <div class="col-md-12 mb-3">
                                                     <div class="form-group">
                                                         <label class="form-label">QR Size</label>
-                                                        <input type="range" name="qr_size" id="qr_size" min="100" max="325" value="320" step="10" class="form-range qr_setting">
+                                                        <input type="range" name="qr_size" id="qr_size" min="100" max="320" value="320" step="10" class="form-range qr_setting">
                                                     </div>
                                                 </div>
                                             </div>

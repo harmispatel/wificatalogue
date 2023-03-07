@@ -75,7 +75,8 @@ class UserController extends Controller
         $end_date = $date->addMonths($subscription_duration)->toDateTimeString();
         $duration = $subscription_duration.' Months.';
 
-        $username = $request->name;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
         $email = $request->email;
         $password = Hash::make($request->password);
         $status = (isset($request->status)) ? $request->status : 0;
@@ -85,7 +86,8 @@ class UserController extends Controller
 
         // Insert New Client
         $client = new User();
-        $client->name = $username;
+        $client->firstname = $firstname;
+        $client->lastname = $lastname;
         $client->email = $email;
         $client->password = $password;
         $client->status = $status;
@@ -284,7 +286,8 @@ class UserController extends Controller
         $end_date = $date->addMonths($subscription_duration)->toDateTimeString();
         $duration = $subscription_duration.' Months.';
 
-        $username = $request->name;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
         $email = $request->email;
         $password = Hash::make($request->password);
         $status = isset($request->status) ? $request->status : 0;
@@ -295,11 +298,12 @@ class UserController extends Controller
 
         // Update New Client
         $client = User::find($request->client_id);
-        $client->name = $username;
+        $client->firstname = $firstname;
+        $client->lastname = $lastname;
         $client->email = $email;
         $client->is_fav = (isset($request->favourite)) ? $request->favourite : 0;
 
-        if(!empty($password))
+        if(!empty($request->password))
         {
             $client->password = $password;
         }
@@ -411,6 +415,21 @@ class UserController extends Controller
         if(Auth::user()->user_type == 1)
         {
             $data['user'] = User::where('id',decrypt($id))->first();
+            return view('auth.admin-profile-edit',$data);
+        }
+        else
+        {
+            $data['user'] = User::with(['hasOneShop','hasOneSubscription'])->where('id',decrypt($id))->first();
+            return view('auth.client-profile-edit',$data);
+        }
+    }
+
+
+    public function myProfile($id)
+    {
+        if(Auth::user()->user_type == 1)
+        {
+            $data['user'] = User::where('id',decrypt($id))->first();
             return view('auth.admin-profile',$data);
         }
         else
@@ -421,7 +440,6 @@ class UserController extends Controller
     }
 
 
-
     public function updateProfile(Request $request)
     {
         $user  = User::find($request->user_id);
@@ -429,13 +447,14 @@ class UserController extends Controller
         if(Auth::user()->user_type == 1)
         {
             $request->validate([
-                'name'                  =>      'required',
+                'firstname'             =>      'required',
                 'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
                 'confirm_password'      =>      'same:password',
                 'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG'
             ]);
 
-            $user->name = $request->name;
+            $user->firstname = $request->firstname;
+            $user->lastname = $request->lastname;
             $user->email = $request->email;
 
             if(!empty($request->password))
@@ -460,13 +479,13 @@ class UserController extends Controller
             }
 
             $user->update();
-            return redirect()->route('admin.dashboard')->with('success','Profile has been Updated SuccessFully..');
+            return redirect()->route('admin.profile.view',encrypt($request->user_id))->with('success','Profile has been Updated SuccessFully..');
         }
         else
         {
             $request->validate([
                 'shop_name'             =>      'required',
-                'name'                  =>      'required',
+                'firstname'                  =>      'required',
                 'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
                 'confirm_password'      =>      'same:password',
                 'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
@@ -474,7 +493,8 @@ class UserController extends Controller
             ]);
 
             // User Update
-            $user->name = $request->name;
+            $user->firstname = $request->firstname;
+            $user->lastname = $request->lastname;
             $user->email = $request->email;
 
             if(!empty($request->password))
@@ -530,7 +550,7 @@ class UserController extends Controller
                 $shop->update();
             }
 
-            return redirect()->back()->with('success','Profile has been Updated SuccessFully..');
+            return redirect()->route('client.profile.view',encrypt($request->user_id))->with('success','Profile has been Updated SuccessFully..');
         }
 
     }
@@ -612,20 +632,22 @@ class UserController extends Controller
     public function storeNewAdmin(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'firstname' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password',
             'user_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
-        $name = $request->name;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
         $email = $request->email;
         $password = Hash::make($request->password);
         $status = isset($request->status) ? $request->status : 0;
 
         $user = new User();
-        $user->name = $name;
+        $user->firstname = $firstname;
+        $user->lastname = $lastname;
         $user->email = $email;
         $user->password = $password;
         $user->user_type = 1;
@@ -692,23 +714,25 @@ class UserController extends Controller
     public function updateAdmin(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'firstname' => 'required',
             'email' => 'required|email|unique:users,email,'.$request->user_id,
             'confirm_password' => 'same:password',
             'user_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
-        $name = $request->name;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
         $email = $request->email;
-        $password = Hash::make($request->password);
         $status = isset($request->status) ? $request->status : 0;
 
         $user = User::find($request->user_id);
-        $user->name = $name;
+        $user->firstname = $firstname;
+        $user->lastname = $lastname;
         $user->email = $email;
 
-        if(!empty($password))
+        if(!empty($request->password))
         {
+            $password = Hash::make($request->password);
             $user->password = $password;
         }
 

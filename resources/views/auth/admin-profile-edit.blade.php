@@ -1,31 +1,25 @@
 @extends('admin.layouts.admin-layout')
 
-@section('title', 'New Admin')
+@section('title', 'Edit Profile')
 
 @section('content')
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Admins</h1>
+        <h1>Edit Profile</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admins') }}">Admins</a></li>
-                        <li class="breadcrumb-item active">New Admin</li>
+                        <li class="breadcrumb-item active">Edit Profile</li>
                     </ol>
                 </nav>
-            </div>
-            <div class="col-md-4" style="text-align: right;">
-                <a href="{{ route('admins') }}" class="btn btn-sm new-amenity btn-primary">
-                    <i class="bi bi-arrow-left"></i>
-                </a>
             </div>
         </div>
     </div>
 
-    {{-- New Admins add Section --}}
+    {{-- Edit User Section --}}
     <section class="section dashboard">
         <div class="row">
             {{-- Error Message Section --}}
@@ -48,20 +42,21 @@
                 </div>
             @endif
 
-            {{-- Admin Card --}}
+            {{-- Userz Card --}}
             <div class="col-md-12">
                 <div class="card">
-                    <form class="form" action="{{ route('admins.store') }}" method="POST" enctype="multipart/form-data">
+                    <form class="form" action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="card-body">
                             <div class="card-title">
                             </div>
-                            @csrf
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="firstname" class="form-label">Firstname</label>
-                                            <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" placeholder="Enter Firstname" value="{{ old('firstname') }}">
+                                            <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" value="{{ $user->firstname }}">
                                             @if($errors->has('firstname'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('firstname') }}
@@ -71,14 +66,14 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="lastname" class="form-label">Lastname</label>
-                                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Lastname" value="{{ old('lastname') }}">
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input type="text" name="lastname" id="lastname" class="form-control" value="{{ $user->lastname }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Enter User Email" value="{{ old('email') }}">
+                                            <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" value="{{ $user->email }}">
                                             @if($errors->has('email'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('email') }}
@@ -89,7 +84,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="password" class="form-label">Password</label>
-                                            <input type="password" name="password" id="password" class="form-control {{ ($errors->has('password')) ? 'is-invalid' : '' }}" placeholder="Enter Password">
+                                            <input type="password" name="password" id="password" class="form-control {{ ($errors->has('password')) ? 'is-invalid' : '' }}" value="">
                                             @if($errors->has('password'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('password') }}
@@ -100,7 +95,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="confirm_password" class="form-label">Confirm Password</label>
-                                            <input type="password" name="confirm_password" id="confirm_password" class="form-control {{ ($errors->has('confirm_password')) ? 'is-invalid' : '' }}" placeholder="Confirm Password">
+                                            <input type="password" name="confirm_password" id="confirm_password" class="form-control {{ ($errors->has('confirm_password')) ? 'is-invalid' : '' }}" value="">
                                             @if($errors->has('confirm_password'))
                                                 <div class="invalid-feedback">
                                                     {{ $errors->first('confirm_password') }}
@@ -110,21 +105,24 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="user_image" class="form-label">User Image</label>
-                                            <input type="file" name="user_image" id="user_image" class="form-control {{ ($errors->has('user_image')) ? 'is-invalid' : '' }}">
-                                            @if($errors->has('user_image'))
+                                            <label for="profile_picture" class="form-label">Profile Picture</label>
+                                            <input type="file" name="profile_picture" id="profile_picture" class="form-control {{ ($errors->has('profile_picture')) ? 'is-invalid' : '' }}" value="">
+                                            @if($errors->has('profile_picture'))
                                                 <div class="invalid-feedback">
-                                                    {{ $errors->first('user_image') }}
+                                                    {{ $errors->first('profile_picture') }}
                                                 </div>
                                             @endif
                                         </div>
-                                        <code>Upload Profile Photo (100*100) </code>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="status" class="form-label">Status</label>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" value="1" checked>
+                                            <label class="form-label">Preview</label>
+                                            <div>
+                                                @if(!empty($user->image))
+                                                    <img src="{{ $user->image }}" width="100">
+                                                @else
+                                                    <img src="{{ asset('public/admin_images/not-found/not-found2.png') }}" width="100">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +130,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success">Save</button>
+                            <button class="btn btn-success">Update</button>
                         </div>
                     </form>
                 </div>

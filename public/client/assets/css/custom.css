@@ -1248,8 +1248,8 @@ input:checked + .slider .check_icon{
     }
 }
 
-
-/* Banner */
-/* .banner-image img{
-    height: 160px;
-} */
+.edit-profile-btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

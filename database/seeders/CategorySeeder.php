@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -23,6 +24,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 1,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Junior',
@@ -32,6 +35,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 2,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Vegetarian',
@@ -41,6 +46,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 3,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Appetizers',
@@ -50,6 +57,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 4,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Salads',
@@ -59,6 +68,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 5,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Pasta',
@@ -68,6 +79,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 6,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Risotto',
@@ -77,6 +90,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 7,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Seafood',
@@ -86,6 +101,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 8,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Fishes',
@@ -95,6 +112,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 9,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Cooked',
@@ -104,6 +123,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 10,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Meat',
@@ -113,6 +134,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 11,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Desserts',
@@ -122,6 +145,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 12,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Refreshments',
@@ -131,6 +156,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 13,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Juices',
@@ -140,6 +167,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 14,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Spirits',
@@ -149,6 +178,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 15,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
             [
                 'name'              =>          'Wines',
@@ -158,6 +189,8 @@ class CategorySeeder extends Seeder
                 'published'     =>      1,
                 "shop_id"   => 1,
                 "order_key" => 16,
+                "created_at"    => Carbon::now(),
+                "updated_at"    => Carbon::now(),
             ],
         ];
 

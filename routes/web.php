@@ -99,8 +99,10 @@ Route::group(['prefix' => 'admin'], function ()
         Route::post('/status-ingredients',[IngredientController::class,'changeStatus'])->name('ingredients.status');
 
         // AdminProfile
-        Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('admin.profile');
+        Route::get('/my-profile/{id}',[UserController::class,'myProfile'])->name('admin.profile.view');
+        Route::get('/edit-profile/{id}',[UserController::class,'editProfile'])->name('admin.profile.edit');
         Route::post('/update-profile',[UserController::class,'updateProfile'])->name('admin.profile.update');
+
 
         // Admin Settings
         Route::get('/settings',[AdminSettingsController::class,'index'])->name('admin.settings');
@@ -174,7 +176,8 @@ Route::group(['prefix' => 'client'], function()
         Route::post('/qrcode-update-settings', [ShopQrController::class,'QrCodeUpdateSettings'])->name('qrcode.update.settings');
 
         // ClientProfile
-        Route::get('/my-profile/{id}',[UserController::class,'editProfile'])->name('client.profile');
+        Route::get('/my-profile/{id}',[UserController::class,'myProfile'])->name('client.profile.view');
+        Route::get('/edit-profile/{id}',[UserController::class,'editProfile'])->name('client.profile.edit');
         Route::post('/update-profile',[UserController::class,'updateProfile'])->name('client.profile.update');
 
         // Tags

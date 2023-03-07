@@ -16,15 +16,10 @@
                     </ol>
                 </nav>
             </div>
-            <div class="col-md-4" style="text-align: right;">
-                <a href="{{ route('admin.dashboard') }}" class="btn btn-sm new-amenity btn-primary">
-                    <i class="bi bi-arrow-left"></i>
-                </a>
-            </div>
         </div>
     </div>
 
-    {{-- New Subscription add Section --}}
+    {{-- Profile Section --}}
     <section class="section dashboard">
         <div class="row">
             {{-- Error Message Section --}}
@@ -47,101 +42,50 @@
                 </div>
             @endif
 
-            {{-- Subscription Card --}}
-            <div class="col-md-12">
+            {{-- Profile Card --}}
+            <div class="col-xl-4">
                 <div class="card">
-                    <form class="form" action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="card-body">
-                            <div class="card-title">
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
-                                            <label for="name" class="form-label">Name</label>
-                                            <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" value="{{ $user->name }}">
-                                            @if($errors->has('name'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('name') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" value="{{ $user->email }}">
-                                            @if($errors->has('email'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('email') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="password" class="form-label">Password</label>
-                                            <input type="password" name="password" id="password" class="form-control {{ ($errors->has('password')) ? 'is-invalid' : '' }}" value="">
-                                            @if($errors->has('password'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('password') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="confirm_password" class="form-label">Confirm Password</label>
-                                            <input type="password" name="confirm_password" id="confirm_password" class="form-control {{ ($errors->has('confirm_password')) ? 'is-invalid' : '' }}" value="">
-                                            @if($errors->has('confirm_password'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('confirm_password') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="profile_picture" class="form-label">Profile Picture</label>
-                                            <input type="file" name="profile_picture" id="profile_picture" class="form-control {{ ($errors->has('profile_picture')) ? 'is-invalid' : '' }}" value="">
-                                            @if($errors->has('profile_picture'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('profile_picture') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label class="form-label">Preview</label>
-                                            <div>
-                                                @if(!empty($user->image))
-                                                    <img src="{{ $user->image }}" width="100">
-                                                @else
-                                                    <img src="{{ asset('public/admin_images/not-found/not-found2.png') }}" width="100">
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success">Update</button>
-                        </div>
-                    </form>
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        @if(!empty($user['image']))
+                            <img src="{{ $user['image'] }}" alt="Profile" class="rounded-circle w-50">
+                        @else
+                            <img src="{{ asset('public/admin_images/demo_images/profiles/profile1.jpg') }}" alt="Profile" class="rounded-circle w-50">
+                        @endif
+                        <h3>{{ $user->firstname }} {{ $user->lastname }}</h3>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-xl-8">
+                <div class="card position-relative">
+                    <a href="{{ route('admin.profile.edit',encrypt($user->id)) }}" class="btn btn-sm btn-primary edit-profile-btn"><i class="bi bi-pencil"></i></a>
+                    <div class="card-body pt-3">
+                        <h5 class="card-title">Profile Details</h5>
+                        <div class="row mb-2">
+                            <div class="col-lg-3 col-md-4 label"><b>Role</b></div>
+                            <div class="col-lg-9 col-md-8">{{ ($user->user_type == 1) ? 'Admin' : 'Client' }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-lg-3 col-md-4 label"><b>FirstName</b></div>
+                            <div class="col-lg-9 col-md-8">{{ $user->firstname }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-lg-3 col-md-4 label"><b>LastName</b></div>
+                            <div class="col-lg-9 col-md-8">{{ $user->lastname }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-lg-3 col-md-4 label"><b>Email</b></div>
+                            <div class="col-lg-9 col-md-8">{{ $user->email }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-lg-3 col-md-4 label"><b>Joined At</b></div>
+                            <div class="col-lg-9 col-md-8">{{ date('d-M-Y',strtotime($user->created_at)) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-@endsection
-
-{{-- Custom JS --}}
-@section('page-js')
-    <script type="text/javascript">
-
-    </script>
 @endsection
