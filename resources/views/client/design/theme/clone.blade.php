@@ -325,6 +325,36 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-4">
+                                                                <span>Today Special Icon</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="form-group align-items-center">
+                                                                    <input type="file" name="today_special_icon" id="today_special_icon" class="form-control {{ ($errors->has('today_special_icon')) ? 'is-invalid' : '' }}">
+                                                                    @if($errors->has('today_special_icon'))
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $errors->first('today_special_icon') }}
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-4">
+                                                                <span>Theme Prview Image</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="form-group align-items-center">
+                                                                    <input type="file" name="theme_preview_image" id="theme_preview_image" class="form-control {{ ($errors->has('theme_preview_image')) ? 'is-invalid' : '' }}">
+                                                                    @if($errors->has('theme_preview_image'))
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $errors->first('theme_preview_image') }}
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">

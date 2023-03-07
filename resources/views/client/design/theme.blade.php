@@ -22,9 +22,13 @@
 
             @if(count($themes) > 0)
                 @foreach ($themes as $theme)
+                    @php
+                        $theme_setting = themeSettings($theme->id);
+                        $theme_preview_image = isset($theme_setting['theme_preview_image']) ? $theme_setting['theme_preview_image'] : '';
+                    @endphp
                     <div class="col-md-3">
                         <div class="item_box">
-                            <div class="item_img add_category">
+                            <div class="item_img add_category add_theme">
                                 @if($theme->is_default == 1)
                                     @if($theme->name == 'Default Light Theme')
                                         @if(!empty($light_img))
@@ -35,13 +39,17 @@
                                             <img src="{{ $dark_img }}" class="w-100">
                                         @endif
                                     @endif
+                                @else
+                                    @if(!empty($theme_preview_image) && file_exists('public/client_uploads/theme_preview_image/'.$theme_preview_image))
+                                        <img src="{{ asset('public/client_uploads/theme_preview_image/'.$theme_preview_image) }}" class="w-100">
+                                    @endif
                                 @endif
 
-                                @if($theme->is_default == 0)
+                                {{-- @if($theme->is_default == 0)
                                     <a class="add_category_bt">
                                         <i class="fa-solid fa-bolt icon_none"></i>
                                     </a>
-                                @endif
+                                @endif --}}
                                 <div class="edit_item_bt">
                                     @if($theme->is_default == 0)
                                         <a href="{{ route('design.theme-preview',$theme->id) }}" class="btn edit_item">Edit</a>
@@ -103,7 +111,7 @@
 
             <div class="col-md-3">
                 <div class="item_box">
-                    <div class="item_img add_category">
+                    <div class="item_img add_category add_theme">
                         <a href="#" class="add_category_bt">
                             <i class="fa-solid fa-image icon_none"></i>
                         </a>

@@ -1,6 +1,7 @@
 @php
     // Shop Settings
     $shop_settings = getClientSettings($shop_details['id']);
+    $shop_theme_id = isset($shop_settings['shop_active_theme']) ? $shop_settings['shop_active_theme'] : '';
 
     // Shop Currency
     $currency = (isset($shop_settings['default_currency']) && !empty($shop_settings['default_currency'])) ? $shop_settings['default_currency'] : 'EUR';
@@ -31,6 +32,12 @@
 
     // Current Category
     $current_cat_id = isset($cat_details['id']) ? $cat_details['id'] : '';
+
+    // Theme Settings
+    $theme_settings = themeSettings($shop_theme_id);
+
+    // Today Special Icon
+    $today_special_icon = isset($theme_settings['today_special_icon']) ? $theme_settings['today_special_icon'] : '';
 
 @endphp
 
@@ -102,7 +109,11 @@
                                                                 @endif
 
                                                                 @if($item['day_special'] == 1)
-                                                                    <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
+                                                                    @if(!empty($today_special_icon) && file_exists('public/client_uploads/today_special_icon/'.$today_special_icon))
+                                                                        <img width="100" class="mt-3" src="{{ asset('public/client_uploads/today_special_icon/'.$today_special_icon) }}">
+                                                                    @else
+                                                                        <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
+                                                                    @endif
                                                                 @endif
 
                                                                 {{-- Name Section --}}
@@ -236,7 +247,9 @@
                                                                         </div>
                                                                     @endif
 
-                                                                    @if($item['day_special'] == 1)
+                                                                    @if(!empty($today_special_icon) && file_exists('public/client_uploads/today_special_icon/'.$today_special_icon))
+                                                                        <img width="100" class="mt-3" src="{{ asset('public/client_uploads/today_special_icon/'.$today_special_icon) }}">
+                                                                    @else
                                                                         <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
                                                                     @endif
 
@@ -365,7 +378,9 @@
                                                             </div>
                                                         @endif
 
-                                                        @if($item['day_special'] == 1)
+                                                        @if(!empty($today_special_icon) && file_exists('public/client_uploads/today_special_icon/'.$today_special_icon))
+                                                            <img width="100" class="mt-3" src="{{ asset('public/client_uploads/today_special_icon/'.$today_special_icon) }}">
+                                                        @else
                                                             <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
                                                         @endif
 

@@ -3,6 +3,9 @@
     $shop_settings = getClientSettings($shop_details['id']);
     $shop_theme_id = isset($shop_settings['shop_active_theme']) ? $shop_settings['shop_active_theme'] : '';
 
+    // Intro Second
+    $intro_second = (isset($shop_settings['intro_icon_duration']) && !empty($shop_settings['intro_icon_duration'])) ? $shop_settings['intro_icon_duration'] : '';
+
     // Shop Name
     $shop_name = (isset($shop_details['name']) && !empty($shop_details['name'])) ? $shop_details['name'] : "Restaurant Managament - Home";
 
@@ -163,6 +166,15 @@
         </div>
     </div>
 
+    <input type="hidden" name="intro_second" id="intro_second" value="{{ $intro_second }}">
+
+    @if(isset($shop_settings['shop_intro_icon']) && !empty($shop_settings['shop_intro_icon']) && file_exists('public/client_uploads/intro_icons/'.$shop_settings['shop_intro_icon']))
+        <div class="cover-img">
+            <img src="{{ asset('public/client_uploads/intro_icons/'.$shop_settings['shop_intro_icon']) }}" width="250">
+        </div>
+    @endif
+
+
 @endsection
 
 {{-- Page JS Function --}}
@@ -178,6 +190,11 @@
                 $('.loader').hide();
             }, 700);
 
+            // Timeout for Cover
+            var introSec = $('#intro_second').val() * 1000;
+            setTimeout(() => {
+                $('.cover-img').hide();
+            }, introSec);
         });
 
 

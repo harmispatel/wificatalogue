@@ -273,12 +273,16 @@ input:checked + .slider .check_icon{
 
 .add_category{
     /* width: 265px; */
-    min-height: 365px;
+    min-height: 201px;
     background-color: #d2d6dc;
 }
 
-.add_category img{
-    height:auto;
+.add_theme{
+    height: 365px !important;
+}
+
+.add_theme img{
+    height:100%;
 }
 
 .add_category_bt {
@@ -385,6 +389,19 @@ input:checked + .slider .check_icon{
 
 .add_category:hover .icon_none{
   display: none;
+}
+
+.cover-img{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    z-index: 99;
 }
 
 .logo-loader{
@@ -1244,6 +1261,7 @@ input:checked + .slider .check_icon{
         height: 160px;
     } */
     .banner-img{
+        background-size: 100% 180px;
         min-height:180px !important;
     }
 }

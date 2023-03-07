@@ -388,6 +388,13 @@ class UserController extends Controller
     }
 
 
+    public function clientAccess($userID)
+    {
+        Auth::loginUsingId($userID);
+        return redirect()->route('login');
+    }
+
+
 
     public function edit($id)
     {

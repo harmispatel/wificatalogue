@@ -176,7 +176,7 @@
         @if (isset($theme_settings['banner_type']) && !empty($theme_settings['banner_type']))
             .banner-img{
                 background:url('{{ asset('public/client_uploads/banners/'.$banner_image) }}');
-                background-size: cover;
+                background-size: 100% 300px;
                 background-repeat: no-repeat;
                 min-height: 300px;
             }

@@ -130,6 +130,8 @@ use Illuminate\Support\Facades\Auth;
             'tag_label_color',
             'item_devider_font_color',
             'category_bar_type',
+            'today_special_icon',
+            'theme_preview_image',
         ]);
 
         $settings = [];

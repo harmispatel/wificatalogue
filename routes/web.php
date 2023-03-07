@@ -79,6 +79,7 @@ Route::group(['prefix' => 'admin'], function ()
         Route::post('/status-fav-clients',[UserController::class,'addToFavClients'])->name('clients.addtofav');
         Route::get('/delete-clients/{id}',[UserController::class,'destroy'])->name('clients.destroy');
         Route::get('/edit-clients/{id}',[UserController::class,'edit'])->name('clients.edit');
+        Route::get('/access-clients/{id}',[UserController::class,'clientAccess'])->name('clients.access');
         Route::post('/update-clients',[UserController::class,'update'])->name('clients.update');
 
         // Subscription

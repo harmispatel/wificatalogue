@@ -50,7 +50,9 @@ class ThemeController extends Controller
             'tag_font_color',
             'tag_label_color',
             'item_devider_font_color',
-            'category_bar_type'
+            'category_bar_type',
+            'today_special_icon',
+            'theme_preview_image',
         ]);
 
         $settings = [];
@@ -78,6 +80,8 @@ class ThemeController extends Controller
     {
         $request->validate([
             'theme_name' => 'required',
+            'today_special_icon' => 'mimes:png,jpg,svg,gif,jpeg,PNG,SVG,JPG,JPEG,GIF',
+            'theme_preview_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
         // Shop ID
@@ -115,6 +119,20 @@ class ThemeController extends Controller
             'item_devider_font_color' => $request->item_devider_font_color,
             'category_bar_type' => $request->category_bar_type,
         ];
+
+        if($request->hasFile('today_special_icon'))
+        {
+            $imgname = "today_special_icon_".time().".". $request->file('today_special_icon')->getClientOriginalExtension();
+            $request->file('today_special_icon')->move(public_path('client_uploads/today_special_icon/'), $imgname);
+            $setting_keys['today_special_icon'] = $imgname;
+        }
+
+        if($request->hasFile('theme_preview_image'))
+        {
+            $imgname = "theme_preview_image_".time().".". $request->file('theme_preview_image')->getClientOriginalExtension();
+            $request->file('theme_preview_image')->move(public_path('client_uploads/theme_preview_image/'), $imgname);
+            $setting_keys['theme_preview_image'] = $imgname;
+        }
 
         if($theme->id)
         {
@@ -170,9 +188,10 @@ class ThemeController extends Controller
     // Update the specified resource in storage.
     public function update(Request $request)
     {
-
         $request->validate([
             'theme_name' => 'required',
+            'today_special_icon' => 'mimes:png,jpg,svg,gif,jpeg,PNG,SVG,JPG,JPEG,GIF',
+            'theme_preview_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
         // Theme ID
@@ -207,6 +226,20 @@ class ThemeController extends Controller
             'item_devider_font_color' => $request->item_devider_font_color,
             'category_bar_type' => $request->category_bar_type,
         ];
+
+        if($request->hasFile('today_special_icon'))
+        {
+            $imgname = "today_special_icon_".time().".". $request->file('today_special_icon')->getClientOriginalExtension();
+            $request->file('today_special_icon')->move(public_path('client_uploads/today_special_icon/'), $imgname);
+            $setting_keys['today_special_icon'] = $imgname;
+        }
+
+        if($request->hasFile('theme_preview_image'))
+        {
+            $imgname = "theme_preview_image_".time().".". $request->file('theme_preview_image')->getClientOriginalExtension();
+            $request->file('theme_preview_image')->move(public_path('client_uploads/theme_preview_image/'), $imgname);
+            $setting_keys['theme_preview_image'] = $imgname;
+        }
 
         // Update Theme Settings
         foreach($setting_keys as $key => $value)
@@ -279,6 +312,8 @@ class ThemeController extends Controller
             'tag_label_color',
             'item_devider_font_color',
             'category_bar_type',
+            'today_special_icon',
+            'theme_preview_image'
         ]);
 
         $settings = [];

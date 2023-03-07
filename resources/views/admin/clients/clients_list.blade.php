@@ -90,6 +90,10 @@
                                                 </div>
                                             </td>
                                             <td>
+                                                <a href="{{ route('clients.access',$client->id) }}" class="btn btn-sm btn-primary">
+                                                    <i class="bi bi-eye"></i>
+                                                    Client Access
+                                                </a>
                                                 <a href="{{ route('clients.edit',$client->id) }}" class="btn btn-sm btn-primary">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
