@@ -33,7 +33,15 @@
                                 <div>
                                     <label for="shop_intro_icon" class="position-relative" style="cursor: pointer;">
                                         @if(!empty($shop_intro_icon) && file_exists('public/client_uploads/intro_icons/'.$shop_intro_icon))
-                                            <img src="{{ asset('public/client_uploads/intro_icons/'.$shop_intro_icon) }}" width="200px"/>
+                                            @php
+                                                $file_ext = pathinfo($shop_intro_icon, PATHINFO_EXTENSION);
+                                            @endphp
+                                            @if($file_ext == 'mp4' || $file_ext == 'mov')
+                                                <video src="{{ asset('public/client_uploads/intro_icons/'.$shop_intro_icon) }}" width="200px" autoplay muted loop>
+                                                </video>
+                                            @else
+                                                <img src="{{ asset('public/client_uploads/intro_icons/'.$shop_intro_icon) }}" width="200px"/>
+                                            @endif
                                         @else
                                             <img src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}" width="200px"/>
                                         @endif

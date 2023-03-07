@@ -215,7 +215,7 @@ class DesignController extends Controller
         $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
 
         $request->validate([
-            'shop_intro_icon' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            'shop_intro_icon' => 'mimes:png,jpg,svg,gif,jpeg,PNG,SVG,JPG,JPEG,GIF,mp4,mov|max:2000',
         ]);
 
         try

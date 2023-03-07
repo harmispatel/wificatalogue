@@ -168,11 +168,23 @@
 
     <input type="hidden" name="intro_second" id="intro_second" value="{{ $intro_second }}">
 
-    @if(isset($shop_settings['shop_intro_icon']) && !empty($shop_settings['shop_intro_icon']) && file_exists('public/client_uploads/intro_icons/'.$shop_settings['shop_intro_icon']))
-        <div class="cover-img">
-            <img src="{{ asset('public/client_uploads/intro_icons/'.$shop_settings['shop_intro_icon']) }}" width="250">
-        </div>
+    @if(isset($shop_settings['intro_icon_status']) && !empty($shop_settings['intro_icon_status']) && $shop_settings['intro_icon_status'] == 1)
+        @if(isset($shop_settings['shop_intro_icon']) && !empty($shop_settings['shop_intro_icon']) && file_exists('public/client_uploads/intro_icons/'.$shop_settings['shop_intro_icon']))
+            @php
+                $intro_file_ext = pathinfo($shop_settings['shop_intro_icon'], PATHINFO_EXTENSION);
+            @endphp
+
+            <div class="cover-img">
+                @if($intro_file_ext == 'mp4' || $intro_file_ext == 'mov')
+                    <video src="{{ asset('public/client_uploads/intro_icons/'.$shop_settings['shop_intro_icon']) }}" width="100%" autoplay muted loop>
+                </video>
+                @else
+                    <img src="{{ asset('public/client_uploads/intro_icons/'.$shop_settings['shop_intro_icon']) }}" width="100%">
+                @endif
+            </div>
+        @endif
     @endif
+
 
 
 @endsection
