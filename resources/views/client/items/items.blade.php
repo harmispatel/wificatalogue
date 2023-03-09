@@ -425,8 +425,16 @@
                 // tokenSeparators: [',', ' ']
             });
 
+            // tinymce.init({
+            //     selector: '#addItemForm #description'
+            // });
+
         });
 
+        // Remove Text Editor from Add New Item Modal
+        // $('#addItemModal .btn-close').on('click',function(){
+        //     tinymce.remove('#addItemForm #description');
+        // });
 
         // Function for add New Price
         function addPrice(key)
@@ -951,6 +959,7 @@
         }
 
 
+        // Sort Tags
         $( function()
         {
             // Sorting Tags
@@ -1024,6 +1033,7 @@
             });
 
         });
+
 
         // Function for Get Items By Category ID
         $('#cat_filter').on('change',function(){

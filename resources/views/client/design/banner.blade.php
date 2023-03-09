@@ -33,7 +33,7 @@
 
                                 {{-- For Primary Language --}}
                                 <li class="nav-item" role="presentation">
-                                    <button title="{{ $primary_name }}" class="nav-link active" id="{{ $primary_code }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $primary_code }}" type="button" role="tab" aria-controls="{{ $primary_code }}" aria-selected="true">{{ strtoupper($primary_code) }}</button>
+                                    <button title="{{ $primary_name }}" class="nav-link active" id="{{ $primary_code }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $primary_code }}" type="button" role="tab" aria-controls="{{ $primary_code }}" aria-selected="true" onclick="setTextEditor('{{ $primary_code }}')">{{ strtoupper($primary_code) }}</button>
                                 </li>
 
                                 {{-- For Additional Language --}}
@@ -47,7 +47,7 @@
 
                                     <li class="nav-item" role="presentation">
                                         <button title="{{ $add_lang_name }}" data-bs-toggle="tab"  class="nav-link" id="{{ $add_lang_code }}-tab" data-bs-target="#{{ $add_lang_code }}" type="butto
-                                        " role="tab" aria-controls="{{ $add_lang_code }}" aria-selected="false">{{ strtoupper($add_lang_code) }}</button>
+                                        " role="tab" aria-controls="{{ $add_lang_code }}" aria-selected="false" onclick="setTextEditor('{{ $add_lang_code }}')">{{ strtoupper($add_lang_code) }}</button>
                                     </li>
                                 @endforeach
                             </ul>
@@ -197,6 +197,10 @@
 
         $(document).ready(function()
         {
+            tinymce.init({
+                selector: 'textarea'
+            });
+
             @if (Session::has('success'))
                 toastr.success('{{ Session::get('success') }}')
             @endif
@@ -206,6 +210,16 @@
         function uploadImage(formID)
         {
             $('#'+formID).submit();
+        }
+
+
+        function setTextEditor(tabID)
+        {
+            var Id = "#"+tabID+" #banner_text";
+
+            tinymce.init({
+                selector: 'textarea'
+            });
         }
 
     </script>

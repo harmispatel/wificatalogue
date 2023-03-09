@@ -52,7 +52,7 @@
         @else
             @if(!empty($banner_text))
                 <div class="banner-image">
-                    <h3 class="text-center">{{ $banner_text }}</h3>
+                    <div class="container">{!! $banner_text !!}</div>
                 </div>
             @endif
         @endif
@@ -98,7 +98,7 @@
         @else
             @if(!empty($banner_text))
                 <div class="banner-image">
-                    <h3 class="text-center">{{ $banner_text }}</h3>
+                    <div class="container">{!! $banner_text !!}</div>
                 </div>
             @endif
         @endif

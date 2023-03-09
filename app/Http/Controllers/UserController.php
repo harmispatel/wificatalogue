@@ -126,8 +126,8 @@ class UserController extends Controller
             $business_name = new ClientSettings();
             $business_name->client_id = $client->id;
             $business_name->shop_id = $shop->id;
-            $business_name->key = $shop_name;
-            $business_name->value = "EUR";
+            $business_name->key = 'business_name';
+            $business_name->value = $shop_name;
             $business_name->save();
 
             // Generate Shop Qr
@@ -492,7 +492,7 @@ class UserController extends Controller
         {
             $request->validate([
                 'shop_name'             =>      'required',
-                'firstname'                  =>      'required',
+                'firstname'             =>      'required',
                 'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
                 'confirm_password'      =>      'same:password',
                 'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
@@ -528,6 +528,26 @@ class UserController extends Controller
 
             // Shop Update
             $shop_id = isset($user->hasOneShop->shop['id']) ? $user->hasOneShop->shop['id'] : '';
+
+            // Update Shop name in Client Settings
+            $shop_name_query = ClientSettings::where('client_id',$request->user_id)->where('shop_id',$shop_id)->where('key','business_name')->first();
+            $shop_name_setting_id = isset($shop_name_query->id) ? $shop_name_query->id : '';
+            if (!empty($shop_name_setting_id) || $shop_name_setting_id != '')  // Update
+            {
+                $settings = ClientSettings::find($shop_name_setting_id);
+                $settings->value = $request->shop_name;
+                $settings->update();
+            }
+            else // Insert
+            {
+                $settings = new ClientSettings();
+                $settings->client_id = $request->user_id;
+                $settings->shop_id = $shop_id;
+                $settings->key = 'business_name';
+                $settings->value = $request->shop_name;
+                $settings->save();
+            }
+
 
             if(!empty($shop_id))
             {

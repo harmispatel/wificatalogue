@@ -191,5 +191,12 @@
 @section('page-js')
     <script type="text/javascript">
 
+        $(document).ready(function()
+        {
+            tinymce.init({
+                selector: 'textarea'
+            });
+        });
+
     </script>
 @endsection

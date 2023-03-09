@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClientSettings;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -322,6 +323,11 @@ class DesignController extends Controller
         $all_data['homepage_intro'] = $request->homepage_intro;
         $all_data['map_url'] = $request->map_url;
         $all_data['website_url'] = $request->website_url;
+
+        // Update Shop Name
+        $shop = Shop::find($shop_id);
+        $shop->name = $request->business_name;
+        $shop->update();
 
         // Insert or Update Settings
         foreach($all_data as $key => $value)
