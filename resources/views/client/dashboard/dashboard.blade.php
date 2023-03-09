@@ -89,7 +89,7 @@
                                 <table class="table table-borderless">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Prview</th>
+                                            <th scope="col">Preview</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Created At</th>
                                         </tr>
@@ -126,7 +126,7 @@
                                 <table class="table table-borderless">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Prview</th>
+                                            <th scope="col">Preview</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Item</th>
                                             <th scope="col">Created At</th>
