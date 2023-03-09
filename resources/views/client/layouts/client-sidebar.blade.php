@@ -34,17 +34,17 @@
 
         {{-- Shop Details Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ (($routeName != 'client.profile.edit')) ? 'collapsed' : '' }} {{ (($routeName == 'client.profile.edit')) ? 'active-tab' : '' }}" data-bs-target="#shop-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'client.profile.edit')) ? 'true' : 'false' }}">
-                <i class="ri-restaurant-2-line  {{ (($routeName == 'client.profile.edit')) ? 'icon-tab' : '' }}"></i><span>{{ $shop_name }}</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'client.profile.edit')) ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ (($routeName != 'client.profile.edit') && ($routeName != 'billing.info')) ? 'collapsed' : '' }} {{ (($routeName == 'client.profile.edit') || ($routeName == 'billing.info')) ? 'active-tab' : '' }}" data-bs-target="#shop-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'client.profile.edit') || ($routeName == 'billing.info')) ? 'true' : 'false' }}">
+                <i class="ri-restaurant-2-line  {{ (($routeName == 'client.profile.edit') || ($routeName == 'billing.info')) ? 'icon-tab' : '' }}"></i><span>{{ $shop_name }}</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'client.profile.edit') || ($routeName == 'billing.info')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="shop-nav" class="nav-content sidebar-ul collapse  {{ (($routeName == 'client.profile.edit')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="shop-nav" class="nav-content sidebar-ul collapse  {{ (($routeName == 'client.profile.edit') || ($routeName == 'billing.info')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('client.profile.edit',$userID) }}" class="{{ ($routeName == 'client.profile.edit') ? 'active-link' : '' }}">
                         <span>Manage Account</span>
                     </a>
                 </li>
                 <li>
-                    <a href="" class="">
+                    <a href="{{ route('billing.info') }}" class="{{ ($routeName == 'billing.info') ? 'active-link' : '' }}">
                         <span>Billing Info</span>
                     </a>
                 </li>

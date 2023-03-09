@@ -426,7 +426,8 @@
             });
 
             // tinymce.init({
-            //     selector: '#addItemForm #description'
+            //     selector: '#addItemForm #description',
+            //     height: "360",
             // });
 
         });

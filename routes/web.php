@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BillingInfoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactController;
@@ -158,6 +159,9 @@ Route::group(['prefix' => 'client'], function()
         Route::post('/design-banner-update', [ShopBannerController::class,'update'])->name('design.banner.update');
         Route::get('/design-general-info', [DesignController::class,'generalInfo'])->name('design.general-info');
         Route::post('/design-generalInfoUpdate', [DesignController::class,'generalInfoUpdate'])->name('design.generalInfoUpdate');
+
+        // Billing Infor
+        Route::get('billing-info',[BillingInfoController::class, 'billingInfo'])->name('billing.info');
 
         // Languages
         Route::get('/languages', [LanguageController::class,'index'])->name('languages');

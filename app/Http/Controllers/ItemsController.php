@@ -1043,9 +1043,6 @@ class ItemsController extends Controller
     // Function for Update Existing Item
     public function update(Request $request)
     {
-        echo '<pre>';
-        print_r($request->all());
-        exit();
         $request->validate([
             'item_name'   => 'required',
             'item_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
