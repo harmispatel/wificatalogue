@@ -1,19 +1,19 @@
 @extends('admin.layouts.admin-layout')
 
-@section('title', 'Edit Ingredient')
+@section('title', 'Edit Indicative Icons')
 
 @section('content')
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Ingredients</h1>
+        <h1>Indicative Icons</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('ingredients') }}">Ingredients</a></li>
-                        <li class="breadcrumb-item active">Edit Ingredient</li>
+                        <li class="breadcrumb-item"><a href="{{ route('ingredients') }}">Indicative Icons</a></li>
+                        <li class="breadcrumb-item active">Edit Indicative Icons</li>
                     </ol>
                 </nav>
             </div>

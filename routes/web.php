@@ -162,6 +162,7 @@ Route::group(['prefix' => 'client'], function()
 
         // Billing Infor
         Route::get('billing-info',[BillingInfoController::class, 'billingInfo'])->name('billing.info');
+        Route::post('billing-info-update',[BillingInfoController::class, 'updateBillingInfo'])->name('update.billing.info');
 
         // Languages
         Route::get('/languages', [LanguageController::class,'index'])->name('languages');

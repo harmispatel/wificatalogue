@@ -6,6 +6,7 @@ use App\Http\Requests\ClientRequest;
 use App\Models\ClientSettings;
 use App\Models\Languages;
 use App\Models\LanguageSettings;
+use App\Models\QrSettings;
 use App\Models\Shop;
 use App\Models\Subscriptions;
 use App\Models\Theme;
@@ -137,6 +138,26 @@ class UserController extends Controller
 
             QrCode::size(200)->generate($new_shop_url, $upload_path);
 
+            // Insert Qr Code Settings
+            $qrdata = [
+                'qr_size' => '200',
+                'qr_style' => 'square',
+                'eye_style' => 'square',
+                'color_type' => '',
+                'color_transparent' => 100,
+                'background_color_transparent' => 100,
+                'eye_inner_color' => "#000000",
+                'eye_outer_color' => "#000000",
+                'first_color' => "#000000",
+                'second_color' => "#000000",
+                'background_color' => "#ffffff",
+            ];
+
+            $qr_setting = new QrSettings();
+            $qr_setting->shop_id = $shop->id;
+            $qr_setting->value = serialize($qrdata);
+            $qr_setting->save();
+
             // Update Shop Details
             $update_shop_dt = Shop::find($shop->id);
             $update_shop_dt->qr_code = $qr_name;
@@ -175,13 +196,19 @@ class UserController extends Controller
                         'menu_bar_font_color' => '#4d572b',
                         'category_title_and_description_color' => '#4d572b',
                         'price_color' => '#000000',
-                        'item_devider' => 1,
-                        'devider_color' => '#d1ccb8',
-                        'devider_thickness' => '5px',
+                        'item_box_shadow' => 1,
+                        'item_box_shadow_color' => '#d1ccb8',
+                        'item_box_shadow_thickness' => '5px',
+                        'item_divider' => 1,
+                        'item_divider_color' => '#000000',
+                        'item_divider_thickness' => '5',
+                        'item_divider_type' => 'solid',
+                        'item_divider_position' => 'top',
+                        'item_divider_font_color' => '#4d572b',
                         'tag_font_color' => '#4d572b',
                         'tag_label_color' => '#ffffff',
-                        'item_devider_font_color' => '#4d572b',
                         'category_bar_type' => '8px',
+                        'search_box_icon_color' => '#000000',
                     ];
 
                     foreach($setting_keys as $key => $val)
@@ -219,12 +246,18 @@ class UserController extends Controller
                         'menu_bar_font_color' => '#E7B76B',
                         'category_title_and_description_color' => '#ffffff',
                         'price_color' => '#E7B76B',
-                        'item_devider' => 1,
-                        'devider_color' => '#E7B76B',
-                        'devider_thickness' => '5px',
+                        'item_box_shadow' => 1,
+                        'item_box_shadow_color' => '#E7B76B',
+                        'item_box_shadow_thickness' => '5px',
+                        'item_divider' => 1,
+                        'item_divider_color' => '#ffffff',
+                        'item_divider_thickness' => '3',
+                        'item_divider_type' => 'dotted',
+                        'item_divider_position' => 'bottom',
+                        'item_devider_font_color' => '#ffffff',
                         'tag_font_color' => '#ffffff',
                         'tag_label_color' => '#000000',
-                        'item_devider_font_color' => '#ffffff',
+                        'search_box_icon_color' => '#ffffff',
                     ];
 
                     foreach($setting_keys as $key => $val)

@@ -24,7 +24,7 @@
                                 <div class="form-group">
                                     <select name="type" id="type" onchange="togglePrice('add')" class="form-control">
                                         <option value="1">Product</option>
-                                        <option value="2">Devider</option>
+                                        <option value="2">Divider</option>
                                     </select>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="ingredients" class="form-label">Ingredients</label>
+                                <label for="ingredients" class="form-label">Indicative Icons</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-3 price_div">
                             <div class="col-md-3">
                                 <label for="price" class="form-label">Price</label>
                             </div>
@@ -129,12 +129,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-4 priceDiv justify-content-end">
+                        <div class="row mb-4 priceDiv price_div justify-content-end">
                             <div class="col-md-3">
                                 <a onclick="addPrice('add')" class="btn addPriceBtn btn-info text-white">Add Price</a>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-3 calories_div">
                             <div class="col-md-3">
                                 <label for="calories" class="form-label">Calories</label>
                             </div>
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mark_new">
                                 <div class="form-group">
                                     <label class="switch me-2">
                                         <input type="checkbox" id="mark_new" name="is_new" value="1">
@@ -157,7 +157,7 @@
                                     <label for="mark_new" class="form-label">Mark Item as New</label>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mark_sign">
                                 <div class="form-group">
                                     <label class="switch me-2">
                                         <input type="checkbox" id="mark_sign" name="is_sign" value="1">
@@ -169,7 +169,7 @@
                                     <label for="mark_sign" class="form-label">Mark Item as Signature</label>
                                 </div>
                             </div>
-                            <div class="col-md-6 mt-2">
+                            <div class="col-md-6 mt-2 day_special">
                                 <div class="form-group">
                                     <label class="switch me-2">
                                         <input type="checkbox" id="day_special" name="day_special" value="1">
@@ -362,7 +362,11 @@
                                                         <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" onclick="changeStatus({{ $item->id }},{{ $newStatus }})" value="1" {{ ($item->published == 1) ? 'checked' : '' }}>
                                                     </div>
                                                 </div>
-                                                <h2>Product</h2>
+                                                @if($item->type == 1)
+                                                    <h2>Item</h2>
+                                                @else
+                                                    <h2>Divider</h2>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -378,7 +382,7 @@
                                         </a>
                                     </div>
                                     <div class="item_info text-center">
-                                        <h2>Product</h2>
+                                        <h2>Add New Item</h2>
                                     </div>
                                 </div>
                             </div>
@@ -414,7 +418,7 @@
             // Intialized Ingredients SelectBox
             $("#addItemForm #ingredients").select2({
                 dropdownParent: $("#addItemModal"),
-                placeholder: "Select Ingredients",
+                placeholder: "Select Indicative Icons",
             });
 
             // Intialized Tags SelectBox
@@ -683,11 +687,19 @@
                         // If Item Type is Divider Then Hide Price Divs
                         if(itemType === 2)
                         {
-                            $('.priceDiv').hide();
+                            $('.price_div').hide();
+                            $('.calories_div').hide();
+                            $('.day_special').hide();
+                            $('.mark_sign').hide();
+                            $('.mark_new').hide();
                         }
                         else
                         {
-                            $('.priceDiv').show();
+                            $('.price_div').show();
+                            $('.calories_div').show();
+                            $('.day_special').show();
+                            $('.mark_sign').show();
+                            $('.mark_new').show();
                         }
 
                         // Reinitialized all Select 2
@@ -701,7 +713,7 @@
                                 // Intialized Ingredients SelectBox
                                 $(ingredientsEle).select2({
                                     dropdownParent: $("#editItemModal"),
-                                    placeholder: "Select Ingredients",
+                                    placeholder: "Select Indicative Icons",
                                 });
 
                                 // Intialized Tags SelectBox
@@ -805,25 +817,51 @@
 
 
         // Function for Hide & Show Price
-        function togglePrice(formType)
+        function togglePrice(formType,dynamicID="")
         {
             if(formType === 'add')
             {
-                var formID = "#addItemForm .priceDiv";
-            }
-            else
-            {
-                var formID = "#editItemForm .priceDiv";
-            }
+                var currVal = $('#type :selected').val();
 
-            var currVal = $('#type :selected').val();
-            if(currVal == 2)
-            {
-                $(formID).hide();
+                if(currVal == 2)
+                {
+                    $("#addItemForm .price_div").hide();
+                    $("#addItemForm .calories_div").hide();
+                    $("#addItemForm .day_special").hide();
+                    $("#addItemForm .mark_sign").hide();
+                    $("#addItemForm .mark_new").hide();
+                }
+                else
+                {
+                    $("#addItemForm .price_div").show();
+                    $("#addItemForm .calories_div").show();
+                    $("#addItemForm .day_special").show();
+                    $("#addItemForm .mark_sign").show();
+                    $("#addItemForm .mark_new").show();
+                }
             }
-            else
+            else if(formType === 'edit')
             {
-                var news= $(formID).show();
+                var formId = "#"+dynamicID;
+                var currSelectedVal = $(formId+' #type :selected').val();
+
+                if(currSelectedVal == 2)
+                {
+                    $(formId+" .price_div").hide();
+                    $(formId+" .calories_div").hide();
+                    $(formId+" .day_special").hide();
+                    $(formId+" .mark_sign").hide();
+                    $(formId+" .mark_new").hide();
+                }
+                else
+                {
+                    $(formId+" .price_div").show();
+                    $(formId+" .calories_div").show();
+                    $(formId+" .day_special").show();
+                    $(formId+" .mark_sign").show();
+                    $(formId+" .mark_new").show();
+                }
+
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\QrSettings;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ class ShopQrController extends Controller
     {
         $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
         $data['shop_details'] = Shop::where('id',$shop_id)->first();
+        $data['qr_data'] = QrSettings::select('value')->where('shop_id',$shop_id)->first();
         return view('client.qrcode.view_qrcode',$data);
     }
 
@@ -138,6 +140,39 @@ class ShopQrController extends Controller
 
             $shop->qr_code = $qr_name;
             $shop->update();
+
+            // Update all Settings Into DB
+            $qrdata = [
+                'qr_size' => $qr_size,
+                'qr_style' => $qr_style,
+                'eye_style' => $eye_style,
+                'color_type' => $color_type,
+                'color_transparent' => $color_transparent,
+                'background_color_transparent' => $background_color_transparent,
+                'eye_inner_color' => $request->eye_inner_color,
+                'eye_outer_color' => $request->eye_outer_color,
+                'first_color' => $request->first_color,
+                'second_color' => $request->second_color,
+                'background_color' => $request->background_color,
+            ];
+
+            $setting = QrSettings::where('shop_id',$shop_id)->first();
+            $setting_id = isset($setting->id) ? $setting->id : '';
+
+            if(!empty($setting_id) || $setting_id != '')
+            {
+                $qr_setting = QrSettings::find($setting_id);
+                $qr_setting->value = serialize($qrdata);
+                $qr_setting->update();
+            }
+            else
+            {
+                $qr_setting = new QrSettings();
+                $qr_setting->shop_id = $shop_id;
+                $qr_setting->value = serialize($qrdata);
+                $qr_setting->save();
+            }
+
         }
 
         return redirect()->back()->with('success','Qrcode has been Changed SuccessFully....');

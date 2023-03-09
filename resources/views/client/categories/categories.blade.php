@@ -177,7 +177,7 @@
                                                         <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" onclick="changeStatus({{ $category->id }},{{ $newStatus }})" value="1" {{ ($category->published == 1) ? 'checked' : '' }}>
                                                     </div>
                                                 </div>
-                                                <h2>Product Category</h2>
+                                                <h2>Item Category</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +193,7 @@
                                         </a>
                                     </div>
                                     <div class="item_info text-center">
-                                        <h2>Product Category</h2>
+                                        <h2>Add New Category</h2>
                                     </div>
                                 </div>
                             </div>

@@ -80,7 +80,7 @@
         <li class="nav-item">
             <a class="nav-link {{ (($routeName == 'ingredients') || ($routeName == 'ingredients.add') || ($routeName == 'ingredients.edit')) ? 'active-tab' : '' }}" href="{{ route('ingredients') }}">
                 <i class="fas fa-seedling {{ (($routeName == 'ingredients') || ($routeName == 'ingredients.add') || ($routeName == 'ingredients.edit')) ? 'icon-tab' : '' }}"></i>
-                <span>Ingredients</span>
+                <span>Indicative Icons</span>
             </a>
         </li>
 

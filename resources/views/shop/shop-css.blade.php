@@ -114,17 +114,17 @@
             }
         @endif
 
-        /* Item Devider Font Color */
-        @if(isset($theme_settings['item_devider_font_color']) && !empty($theme_settings['item_devider_font_color']))
+        /* Item Divider Font Color */
+        @if(isset($theme_settings['item_divider_font_color']) && !empty($theme_settings['item_divider_font_color']))
             .devider h3, .devider p{
-                color : {{ $theme_settings['item_devider_font_color'] }}!important;
+                color : {{ $theme_settings['item_divider_font_color'] }}!important;
             }
         @endif
 
-        /* Border Devider */
-        @if (isset($theme_settings['item_devider']) && !empty($theme_settings['item_devider']) && $theme_settings['item_devider'] == 1)
+        /* Bottom Border Shadow */
+        @if (isset($theme_settings['item_box_shadow']) && !empty($theme_settings['item_box_shadow']) && $theme_settings['item_box_shadow'] == 1)
             .devider-border{
-                border-bottom : {{ $theme_settings['devider_thickness'] }} solid {{ $theme_settings['devider_color'] }} !important;
+                border-bottom : {{ $theme_settings['item_box_shadow_thickness'] }} solid {{ $theme_settings['item_box_shadow_color'] }} !important;
             }
         @endif
 
@@ -180,6 +180,26 @@
                 background-repeat: no-repeat;
                 min-height: 300px;
             }
+        @endif
+
+        /* Search Box Icon Color */
+        @if (isset($theme_settings['search_box_icon_color']) && !empty($theme_settings['search_box_icon_color']))
+            #openSearchBox i{
+                color : {{ $theme_settings['search_box_icon_color'] }} !important;
+            }
+        @endif
+
+        /* Item Devider */
+        @if (isset($theme_settings['item_divider']) && !empty($theme_settings['item_divider']) && $theme_settings['item_divider'] == 1)
+            @if (isset($theme_settings['item_divider_position']) && !empty($theme_settings['item_divider_position']) && $theme_settings['item_divider_position'] == 'top')
+                .item_inr_info_sec .devider{
+                    border-top : {{ $theme_settings['item_divider_thickness'] }}px {{ $theme_settings['item_divider_type'] }} {{ $theme_settings['item_divider_color'] }} !important;
+                }
+            @elseif (isset($theme_settings['item_divider_position']) && !empty($theme_settings['item_divider_position']) && $theme_settings['item_divider_position'] == 'bottom')
+                .item_inr_info_sec .devider{
+                    border-bottom : {{ $theme_settings['item_divider_thickness'] }}px {{ $theme_settings['item_divider_type'] }} {{ $theme_settings['item_divider_color'] }} !important;
+                }
+            @endif
         @endif
 
     @endif

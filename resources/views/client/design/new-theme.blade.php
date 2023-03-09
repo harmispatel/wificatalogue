@@ -108,6 +108,17 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
+                                                                <span>Search Box Icon Color</span>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <div class="from-group d-flex align-items-center">
+                                                                    <input type="color" id="search_box_icon_color" name="search_box_icon_color" class="form-control me-2 p-0" value="" onchange="changeVal('search_box_icon_color','search_box_icon_color_input')">
+                                                                    <input id="search_box_icon_color_input" type="text" class="form-control" value="" onkeyup="changeColor('search_box_icon_color_input','search_box_icon_color')">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-7">
                                                                 <span>Banner Position</span>
                                                             </div>
                                                             <div class="col-md-5">
@@ -192,7 +203,7 @@
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingTwo">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Within Category Screen
+                                            Within Item Screen
                                         </button>
                                     </h2>
                                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -257,11 +268,11 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Devider</span>
+                                                                <span>Item Box Shadow</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="switch">
-                                                                    <input type="checkbox" name="item_devider" id="item_devider" value="1">
+                                                                    <input type="checkbox" name="item_box_shadow" id="item_box_shadow" value="1">
                                                                     <span class="slider round">
                                                                         <i class="fa-solid fa-circle-check check_icon"></i>
                                                                         <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
@@ -271,25 +282,96 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Devider Color</span>
+                                                                <span>Item Box Shadow Color</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="devider_color" name="devider_color" class="form-control me-2 p-0" value="" onchange="changeVal('devider_color','devider_color_input')">
-                                                                    <input id="devider_color_input" type="text" class="form-control" value="" onkeyup="changeColor('devider_color_input','devider_color')">
+                                                                    <input type="color" id="item_box_shadow_color" name="item_box_shadow_color" class="form-control me-2 p-0" value="" onchange="changeVal('item_box_shadow_color','item_box_shadow_color_input')">
+                                                                    <input id="item_box_shadow_color_input" type="text" class="form-control" value="" onkeyup="changeColor('item_box_shadow_color_input','item_box_shadow_color')">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Devider Thickness</span>
+                                                                <span>Item Box Shadow Thickness</span>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <select name="devider_thickness" id="devider_thickness" class="form-select">
+                                                                <select name="item_box_shadow_thickness" id="item_box_shadow_thickness" class="form-select">
                                                                     <option value="1px">Light</option>
                                                                     <option value="3px">Medium</option>
                                                                     <option value="5px">Bold</option>
                                                                 </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-8">
+                                                                <span>Item Divider</span>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="switch">
+                                                                    <input type="checkbox" name="item_divider" id="item_divider" value="1">
+                                                                    <span class="slider round">
+                                                                        <i class="fa-solid fa-circle-check check_icon"></i>
+                                                                        <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-8">
+                                                                <span>Item Divider Color</span>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="from-group d-flex align-items-center">
+                                                                    <input type="color" id="item_divider_color" name="item_divider_color" class="form-control me-2 p-0" value="" onchange="changeVal('item_divider_color','item_divider_color_input')">
+                                                                    <input id="item_divider_color_input" type="text" class="form-control" value="" onkeyup="changeColor('item_divider_color_input','item_divider_color')">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-8">
+                                                                <span>Item Divider Thickness</span>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <input type="number" name="item_divider_thickness" id="item_divider_thickness" class="form-control" value="5">
+                                                                    <code>Enter Thickness in Pexels</code>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-8">
+                                                                <span>Item Divider Type</span>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select name="item_divider_type" id="item_divider_type" class="form-select">
+                                                                    <option value="solid">Solid</option>
+                                                                    <option value="dotted">Dotted</option>
+                                                                    <option value="dashed">Dashed</option>
+                                                                    <option value="double">Double</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-8">
+                                                                <span>Item Divider Position</span>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select name="item_divider_position" id="item_divider_position" class="form-select">
+                                                                    <option value="top">Top</option>
+                                                                    <option value="bottom">Bottom</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row align-items-center mb-4">
+                                                            <div class="col-md-8">
+                                                                <span>Item Divider Font Color</span>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="from-group d-flex align-items-center">
+                                                                    <input type="color" id="item_divider_font_color" name="item_divider_font_color" class="form-control me-2 p-0" value="" onchange="changeVal('item_divider_font_color','item_divider_font_color_input')">
+                                                                    <input id="item_divider_font_color_input" type="text" class="form-control" value="" onkeyup="changeColor('item_divider_font_color_input','item_divider_font_color')">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="row align-items-center mb-4">
@@ -311,17 +393,6 @@
                                                                 <div class="from-group d-flex align-items-center">
                                                                     <input type="color" id="tag_label_color" name="tag_label_color" class="form-control me-2 p-0" value="" onchange="changeVal('tag_label_color','tag_label_color_input')">
                                                                     <input id="tag_label_color_input" type="text" class="form-control" value="" onkeyup="changeColor('tag_label_color_input','tag_label_color')">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row align-items-center mb-4">
-                                                            <div class="col-md-8">
-                                                                <span>Item Devider Font Color</span>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="from-group d-flex align-items-center">
-                                                                    <input type="color" id="item_devider_font_color" name="item_devider_font_color" class="form-control me-2 p-0" value="" onchange="changeVal('item_devider_font_color','item_devider_font_color_input')">
-                                                                    <input id="item_devider_font_color_input" type="text" class="form-control" value="" onkeyup="changeColor('item_devider_font_color_input','item_devider_font_color')">
                                                                 </div>
                                                             </div>
                                                         </div>

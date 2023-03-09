@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             AdminSettingSeeder::class,
             IngredientSeeder::class,
+            CountrySeeder::class,
         ]);
     }
 }

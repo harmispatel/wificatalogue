@@ -36,6 +36,9 @@
     // Theme Settings
     $theme_settings = themeSettings($shop_theme_id);
 
+    // Item Devider
+    $item_devider = (isset($theme_settings['item_divider']) && !empty($theme_settings['item_divider'])) ? $theme_settings['item_divider'] : 0;
+
     // Today Special Icon
     $today_special_icon = isset($theme_settings['today_special_icon']) ? $theme_settings['today_special_icon'] : '';
 
@@ -179,45 +182,47 @@
                                                             </div>
                                                         </div>
                                                     @else
-                                                        <div class="col-md-12 mb-3">
-                                                            <div class="single_item_inr devider">
+                                                        @if($item_devider == 1)
+                                                            <div class="col-md-12 mb-3">
+                                                                <div class="single_item_inr devider">
 
-                                                                {{-- Image Section --}}
-                                                                @if(!empty($item['image']) && file_exists('public/client_uploads/items/'.$item['image']))
-                                                                    <div class="item_image">
-                                                                        <img src="{{ asset('public/client_uploads/items/'.$item['image']) }}">
-                                                                    </div>
-                                                                @endif
+                                                                    {{-- Image Section --}}
+                                                                    @if(!empty($item['image']) && file_exists('public/client_uploads/items/'.$item['image']))
+                                                                        <div class="item_image">
+                                                                            <img src="{{ asset('public/client_uploads/items/'.$item['image']) }}">
+                                                                        </div>
+                                                                    @endif
 
-                                                                {{-- Name Section --}}
-                                                                <h3>{{ (isset($item[$name_key]) && !empty($item[$name_key])) ? $item[$name_key] : $item['name'] }}</h3>
+                                                                    {{-- Name Section --}}
+                                                                    <h3>{{ (isset($item[$name_key]) && !empty($item[$name_key])) ? $item[$name_key] : $item['name'] }}</h3>
 
 
-                                                                {{-- Ingredient Section --}}
-                                                                @php
-                                                                    $ingrediet_arr = (isset($item['ingredients']) && !empty($item['ingredients'])) ? unserialize($item['ingredients']) : [];
-                                                                @endphp
+                                                                    {{-- Ingredient Section --}}
+                                                                    @php
+                                                                        $ingrediet_arr = (isset($item['ingredients']) && !empty($item['ingredients'])) ? unserialize($item['ingredients']) : [];
+                                                                    @endphp
 
-                                                                @if(count($ingrediet_arr) > 0)
-                                                                    <div>
-                                                                        @foreach ($ingrediet_arr as $val)
-                                                                            @php
-                                                                                $ingredient = getIngredientDetail($val);
-                                                                                $ing_icon = isset($ingredient['icon']) ? $ingredient['icon'] : '';
-                                                                            @endphp
+                                                                    @if(count($ingrediet_arr) > 0)
+                                                                        <div>
+                                                                            @foreach ($ingrediet_arr as $val)
+                                                                                @php
+                                                                                    $ingredient = getIngredientDetail($val);
+                                                                                    $ing_icon = isset($ingredient['icon']) ? $ingredient['icon'] : '';
+                                                                                @endphp
 
-                                                                            @if(!empty($ing_icon) && file_exists('public/admin_uploads/ingredients/'.$ing_icon))
-                                                                                <img src="{{ asset('public/admin_uploads/ingredients/'.$ing_icon) }}" width="20px">
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </div>
-                                                                @endif
+                                                                                @if(!empty($ing_icon) && file_exists('public/admin_uploads/ingredients/'.$ing_icon))
+                                                                                    <img src="{{ asset('public/admin_uploads/ingredients/'.$ing_icon) }}" width="20px">
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </div>
+                                                                    @endif
 
-                                                                {{-- Description Section --}}
-                                                                <p>{{ (isset($item[$description_key]) && !empty($item[$description_key])) ? $item[$description_key] : $item['description'] }}</p>
+                                                                    {{-- Description Section --}}
+                                                                    <p>{{ (isset($item[$description_key]) && !empty($item[$description_key])) ? $item[$description_key] : $item['description'] }}</p>
 
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                             @endif
@@ -316,44 +321,46 @@
                                                                 </div>
                                                             </div>
                                                         @else
-                                                            <div class="col-md-12 mb-3">
-                                                                <div class="single_item_inr devider">
+                                                            @if($item_devider == 1)
+                                                                <div class="col-md-12 mb-3">
+                                                                    <div class="single_item_inr devider">
 
-                                                                    {{-- Image Section --}}
-                                                                    @if(!empty($item->product['image']) && file_exists('public/client_uploads/items/'.$item->product['image']))
-                                                                        <div class="item_image">
-                                                                            <img src="{{ asset('public/client_uploads/items/'.$item->product['image']) }}">
-                                                                        </div>
-                                                                    @endif
+                                                                        {{-- Image Section --}}
+                                                                        @if(!empty($item->product['image']) && file_exists('public/client_uploads/items/'.$item->product['image']))
+                                                                            <div class="item_image">
+                                                                                <img src="{{ asset('public/client_uploads/items/'.$item->product['image']) }}">
+                                                                            </div>
+                                                                        @endif
 
-                                                                    {{-- Name Section --}}
-                                                                    <h3>{{ (isset($item->product[$name_key]) && !empty($item->product[$name_key])) ? $item->product[$name_key] : $item->product['name'] }}</h3>
+                                                                        {{-- Name Section --}}
+                                                                        <h3>{{ (isset($item->product[$name_key]) && !empty($item->product[$name_key])) ? $item->product[$name_key] : $item->product['name'] }}</h3>
 
-                                                                    {{-- Ingredient Section --}}
-                                                                    @php
-                                                                        $ingrediet_arr = (isset($item->product['ingredients']) && !empty($item->product['ingredients'])) ? unserialize($item->product['ingredients']) : [];
-                                                                    @endphp
+                                                                        {{-- Ingredient Section --}}
+                                                                        @php
+                                                                            $ingrediet_arr = (isset($item->product['ingredients']) && !empty($item->product['ingredients'])) ? unserialize($item->product['ingredients']) : [];
+                                                                        @endphp
 
-                                                                    @if(count($ingrediet_arr) > 0)
-                                                                        <div>
-                                                                            @foreach ($ingrediet_arr as $val)
-                                                                                @php
-                                                                                    $ingredient = getIngredientDetail($val);
-                                                                                    $ing_icon = isset($ingredient['icon']) ? $ingredient['icon'] : '';
-                                                                                @endphp
+                                                                        @if(count($ingrediet_arr) > 0)
+                                                                            <div>
+                                                                                @foreach ($ingrediet_arr as $val)
+                                                                                    @php
+                                                                                        $ingredient = getIngredientDetail($val);
+                                                                                        $ing_icon = isset($ingredient['icon']) ? $ingredient['icon'] : '';
+                                                                                    @endphp
 
-                                                                                @if(!empty($ing_icon) && file_exists('public/admin_uploads/ingredients/'.$ing_icon))
-                                                                                    <img src="{{ asset('public/admin_uploads/ingredients/'.$ing_icon) }}" width="20px">
-                                                                                @endif
-                                                                            @endforeach
-                                                                        </div>
-                                                                    @endif
+                                                                                    @if(!empty($ing_icon) && file_exists('public/admin_uploads/ingredients/'.$ing_icon))
+                                                                                        <img src="{{ asset('public/admin_uploads/ingredients/'.$ing_icon) }}" width="20px">
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </div>
+                                                                        @endif
 
-                                                                    {{-- Description Section --}}
-                                                                    <p>{{ (isset($item->product[$description_key]) && !empty($item->product[$description_key])) ? $item->product[$description_key] : $item->product['description'] }}</p>
+                                                                        {{-- Description Section --}}
+                                                                        <p>{{ (isset($item->product[$description_key]) && !empty($item->product[$description_key])) ? $item->product[$description_key] : $item->product['description'] }}</p>
 
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            @endif
                                                         @endif
                                                     @endforeach
                                                 @endif
@@ -447,43 +454,45 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="single_item_inr devider">
+                                                @if($item_devider == 1)
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="single_item_inr devider">
 
-                                                        {{-- Image Section --}}
-                                                        @if(!empty($item['image']) && file_exists('public/client_uploads/items/'.$item['image']))
-                                                            <div class="item_image">
-                                                                <img src="{{ asset('public/client_uploads/items/'.$item['image']) }}">
-                                                            </div>
-                                                        @endif
+                                                            {{-- Image Section --}}
+                                                            @if(!empty($item['image']) && file_exists('public/client_uploads/items/'.$item['image']))
+                                                                <div class="item_image">
+                                                                    <img src="{{ asset('public/client_uploads/items/'.$item['image']) }}">
+                                                                </div>
+                                                            @endif
 
-                                                        {{-- Name Section --}}
-                                                        <h3>{{  (isset($item[$name_key]) && !empty($item[$name_key])) ? $item[$name_key] : $item['name'] }}</h3>
+                                                            {{-- Name Section --}}
+                                                            <h3>{{  (isset($item[$name_key]) && !empty($item[$name_key])) ? $item[$name_key] : $item['name'] }}</h3>
 
-                                                        {{-- Ingredient Section --}}
-                                                        @php
-                                                            $ingrediet_arr = (isset($item['ingredients']) && !empty($item['ingredients'])) ? unserialize($item['ingredients']) : [];
-                                                        @endphp
+                                                            {{-- Ingredient Section --}}
+                                                            @php
+                                                                $ingrediet_arr = (isset($item['ingredients']) && !empty($item['ingredients'])) ? unserialize($item['ingredients']) : [];
+                                                            @endphp
 
-                                                        @if(count($ingrediet_arr) > 0)
-                                                            <div>
-                                                                @foreach ($ingrediet_arr as $val)
-                                                                    @php
-                                                                        $ingredient = getIngredientDetail($val);
-                                                                        $ing_icon = isset($ingredient['icon']) ? $ingredient['icon'] : '';
-                                                                    @endphp
+                                                            @if(count($ingrediet_arr) > 0)
+                                                                <div>
+                                                                    @foreach ($ingrediet_arr as $val)
+                                                                        @php
+                                                                            $ingredient = getIngredientDetail($val);
+                                                                            $ing_icon = isset($ingredient['icon']) ? $ingredient['icon'] : '';
+                                                                        @endphp
 
-                                                                    @if(!empty($ing_icon) && file_exists('public/admin_uploads/ingredients/'.$ing_icon))
-                                                                        <img src="{{ asset('public/admin_uploads/ingredients/'.$ing_icon) }}" width="20px">
-                                                                    @endif
-                                                                @endforeach
-                                                            </div>
-                                                        @endif
+                                                                        @if(!empty($ing_icon) && file_exists('public/admin_uploads/ingredients/'.$ing_icon))
+                                                                            <img src="{{ asset('public/admin_uploads/ingredients/'.$ing_icon) }}" width="20px">
+                                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            @endif
 
-                                                        {{-- Description Section --}}
-                                                        <p>{{ (isset($item[$description_key]) && !empty($item[$description_key])) ? $item[$description_key] : $item['description'] }}</p>
+                                                            {{-- Description Section --}}
+                                                            <p>{{ (isset($item[$description_key]) && !empty($item[$description_key])) ? $item[$description_key] : $item['description'] }}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @endif
                                             @endif
                                         @endforeach
                                     @else

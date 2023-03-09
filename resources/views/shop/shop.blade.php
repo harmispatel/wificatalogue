@@ -112,6 +112,13 @@
                 <div class="footer_media">
                     <h3>Find Us</h3>
                     <ul>
+                        {{-- Phone Link --}}
+                        @if(isset($shop_settings['business_telephone']) && !empty($shop_settings['business_telephone']))
+                            <li>
+                                <a href="tel:{{ $shop_settings['business_telephone'] }}"><i class="fa-solid fa-phone"></i></a>
+                            </li>
+                        @endif
+
                         {{-- Instagram Link --}}
                         @if(isset($shop_settings['instagram_link']) && !empty($shop_settings['instagram_link']))
                             <li>

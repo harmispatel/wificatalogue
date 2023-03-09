@@ -966,6 +966,11 @@ input:checked + .slider .check_icon{
     .devider{
         background:none !important;
         border: none !important;
+        border-radius: 0;
+    }
+
+    .devider .item_image img{
+        margin: 0;
     }
 
     .item_image img {
