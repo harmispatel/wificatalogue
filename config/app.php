@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://192.168.1.116/wificatalogue'),
+    'url' => env('APP_URL', 'http://192.168.1.216/wificatalogue'),
 
     'asset_url' => env('ASSET_URL', null),
 

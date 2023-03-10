@@ -10,7 +10,7 @@
 
     <section class="general_info_main">
         <div class="sec_title">
-            <h2>General Information</h2>
+            <h2>{{ __('General Information')}}</h2>
         </div>
         <div class="site_info">
             <form id="generalInfo" action="{{ route('design.generalInfoUpdate') }}" method="POST" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
                 <div class="row mb-4">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label" for="business_name">Business name</label>
+                            <label class="form-label" for="business_name">{{ __('Business name')}}</label>
                             <div class="input-group">
                                 <input type="text" class="form-control {{ ($errors->has('business_name')) ? 'is-invalid' : '' }}" name="business_name" id="business_name" value="{{ (isset($client_settings['business_name']) && !empty($client_settings['business_name'])) ? $client_settings['business_name'] : '' }}">
                                 <span class="input-group-text">#475</span>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label" for="default_currency">Currency</label>
+                            <label class="form-label" for="default_currency">{{ __('Currency')}}</label>
                             <select  class="form-select {{ ($errors->has('default_currency')) ? 'is-invalid' : '' }}" name="default_currency" id="default_currency">
                                 <option value="">Choose Currency</option>
                                 <option value="EUR" {{ (isset($client_settings['default_currency']) && ($client_settings['default_currency'] == 'EUR')) ? 'selected' : '' }}>EUR</option>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label" for="business_telephone">Telephone</label>
+                            <label class="form-label" for="business_telephone">{{ __('Telephone')}}</label>
                             <div class="position-relative">
                                 <input type="text" class="form-control icon-input" name="business_telephone" id="business_telephone" value="{{ (isset($client_settings['business_telephone']) && !empty($client_settings['business_telephone'])) ? $client_settings['business_telephone'] : '' }}">
                                 <i class="fa-solid fa-phone input-icon"></i>
@@ -58,13 +58,13 @@
                 </div>
                 <div class="social_media_part">
                     <div class="social_media_title">
-                        <h2>Social Plateforms</h2>
-                        <p>Fill in your digital assets and they will appear at the bottom of your menu. Boost your online community!</p>
+                        <h2>{{ __('Social Plateforms')}}</h2>
+                        <p>{{ __('Fill in your digital assets and they will appear at the bottom of your menu. Boost your online community!')}}</p>
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
-                                <label class="form-label" for="instagram_link">Instagram</label>
+                                <label class="form-label" for="instagram_link">{{ __('Instagram')}}</label>
                                 <div class="position-relative">
                                     <input type="text" class="form-control icon-input" id="instagram_link" name="instagram_link" value="{{ (isset($client_settings['instagram_link']) && !empty($client_settings['instagram_link'])) ? $client_settings['instagram_link'] : '' }}">
                                     <i class="fa-brands fa-instagram input-icon"></i>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
-                                <label class="form-label" for="twitter_link">Twitter</label>
+                                <label class="form-label" for="twitter_link">{{ __('Twitter')}}</label>
                                 <div class="position-relative">
                                     <input type="text" class="form-control icon-input" name="twitter_link" id="twitter_link" value="{{ (isset($client_settings['twitter_link']) && !empty($client_settings['twitter_link'])) ? $client_settings['twitter_link'] : '' }}">
                                     <i class="fa-brands fa-twitter input-icon"></i>
@@ -82,7 +82,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
-                                <label class="form-label" for="facebook_link">Facebook</label>
+                                <label class="form-label" for="facebook_link">{{ __('Facebook')}}</label>
                                 <div class="position-relative">
                                     <input type="text" class="form-control icon-input" name="facebook_link" id="facebook_link" value="{{ (isset($client_settings['facebook_link']) && !empty($client_settings['facebook_link'])) ? $client_settings['facebook_link'] : '' }}">
                                     <i class="fa-brands fa-facebook-f input-icon"></i>
@@ -91,7 +91,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
-                                <label class="form-label" for="foursquare_link">Foursquare</label>
+                                <label class="form-label" for="foursquare_link">{{ __('Foursquare')}}</label>
                                 <div class="position-relative">
                                     <input type="text" class="form-control icon-input" name="foursquare_link" id="foursquare_link" value="{{ (isset($client_settings['foursquare_link']) && !empty($client_settings['foursquare_link'])) ? $client_settings['foursquare_link'] : '' }}">
                                     <i class="fa-brands fa-foursquare input-icon"></i>
@@ -100,7 +100,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
-                                <label class="form-label" for="tripadvisor_link">Tripadvisor</label>
+                                <label class="form-label" for="tripadvisor_link">{{ __('Tripadvisor')}}</label>
                                 <div class="position-relative">
                                     <input type="text" class="form-control icon-input" name="tripadvisor_link" id="tripadvisor_link" value="{{ (isset($client_settings['tripadvisor_link']) && !empty($client_settings['tripadvisor_link'])) ? $client_settings['tripadvisor_link'] : '' }}">
                                     <i class="fa-solid fa-mask input-icon"></i>
@@ -112,7 +112,7 @@
                 <div class="row mb-4">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="form-label" for="homepage_intro">Footer Text HTML</label>
+                            <label class="form-label" for="homepage_intro">{{ __('Footer Text HTML')}}</label>
                             {{-- please text editor use --}}
                             <textarea class="form-control tinymce-editor" placeholder="Write Your Shop Intro Here." id="homepage_intro" name="homepage_intro">{{ (isset($client_settings['homepage_intro']) && !empty($client_settings['homepage_intro'])) ? $client_settings['homepage_intro'] : '' }}</textarea>
                         </div>
@@ -121,7 +121,7 @@
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="map_url">Map</label>
+                            <label class="form-label" for="map_url">{{ __('Map')}}</label>
                             <div class="position-relative">
                                 <input type="text" class="form-control icon-input" name="map_url" id="map_url" value="{{ (isset($client_settings['map_url']) && !empty($client_settings['map_url'])) ? $client_settings['map_url'] : '' }}">
                                 <i class="fa-solid fa-map input-icon"></i>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="website_url">Website</label>
+                            <label class="form-label" for="website_url">{{ __('Website')}}</label>
                             <div class="position-relative">
                                 <input type="text" class="form-control icon-input" name="website_url" id="website_url" value="{{ (isset($client_settings['website_url']) && !empty($client_settings['website_url'])) ? $client_settings['website_url'] : '' }}">
                                 <i class="fa-solid fa-globe input-icon"></i>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="row mb-4">
                     <div class="col-md-3">
-                        <button class="btn btn-success">Update</button>
+                        <button class="btn btn-success">{{ __('Update')}}</button>
                     </div>
                 </div>
             </form>

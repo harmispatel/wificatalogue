@@ -9,7 +9,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addItemModalLabel">Create New Item</h5>
+                    <h5 class="modal-title" id="addItemModalLabel">{{ __('Create New Item')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -18,20 +18,20 @@
                         {{-- <input type="hidden" name="category_id" id="category_id" value="{{ $category->id }}"> --}}
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="type" class="form-label">Type</label>
+                                <label for="type" class="form-label">{{ __('Type')}}</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <select name="type" id="type" onchange="togglePrice('add')" class="form-control">
-                                        <option value="1">Product</option>
-                                        <option value="2">Divider</option>
+                                        <option value="1">{{ __('Product')}}</option>
+                                        <option value="2">{{ __('Divider')}}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="category" class="form-label">Category</label>
+                                <label for="category" class="form-label">{{ __('Category')}}</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -48,7 +48,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="name" class="form-label">Name</label>
+                                <label for="name" class="form-label">{{ __('Name')}}</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="description" class="form-label">Description</label>
+                                <label for="description" class="form-label">{{ __('Description')}}</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -68,7 +68,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="image" class="form-label">Image</label>
+                                <label for="image" class="form-label">{{ __('Image')}}</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -79,7 +79,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="ingredients" class="form-label">Indicative Icons</label>
+                                <label for="ingredients" class="form-label">{{ __('Indicative Icons')}}</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="tags" class="form-label">Tags</label>
+                                <label for="tags" class="form-label">{{ __('Tags')}}</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -111,7 +111,7 @@
                         </div>
                         <div class="row mb-3 price_div">
                             <div class="col-md-3">
-                                <label for="price" class="form-label">Price</label>
+                                <label for="price" class="form-label">{{ __('Price')}}</label>
                             </div>
                             <div class="col-md-9 priceDiv" id="priceDiv">
                                 <div class="row mb-3 align-items-center price price_1">
@@ -131,12 +131,12 @@
                         </div>
                         <div class="row mb-4 priceDiv price_div justify-content-end">
                             <div class="col-md-3">
-                                <a onclick="addPrice('add')" class="btn addPriceBtn btn-info text-white">Add Price</a>
+                                <a onclick="addPrice('add')" class="btn addPriceBtn btn-info text-white">{{ __('Add Price')}}</a>
                             </div>
                         </div>
                         <div class="row mb-3 calories_div">
                             <div class="col-md-3">
-                                <label for="calories" class="form-label">Calories</label>
+                                <label for="calories" class="form-label">{{ __('Calories')}}</label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -154,7 +154,7 @@
                                             <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
                                         </span>
                                     </label>
-                                    <label for="mark_new" class="form-label">Mark Item as New</label>
+                                    <label for="mark_new" class="form-label">{{ __('Mark Item as New')}}</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mark_sign">
@@ -166,7 +166,7 @@
                                             <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
                                         </span>
                                     </label>
-                                    <label for="mark_sign" class="form-label">Mark Item as Signature</label>
+                                    <label for="mark_sign" class="form-label">{{ __('Mark Item as Signature')}}</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2 day_special">
@@ -178,7 +178,7 @@
                                             <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
                                         </span>
                                     </label>
-                                    <label for="day_special" class="form-label">Mark Item as Day Special</label>
+                                    <label for="day_special" class="form-label">{{ __('Mark Item as Day Special')}}</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
@@ -190,15 +190,15 @@
                                             <i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>
                                         </span>
                                     </label>
-                                    <label for="publish" class="form-label">Published</label>
+                                    <label for="publish" class="form-label">{{ __('Published')}}</label>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a class="btn btn-primary" id="saveItem" onclick="saveItem()">Save</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close')}}</button>
+                    <a class="btn btn-primary" id="saveItem" onclick="saveItem()">{{ __('Save')}}</a>
                 </div>
             </div>
         </div>
@@ -209,7 +209,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+                    <h5 class="modal-title" id="editItemModalLabel">{{ __('Edit Item')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="item_lang_div">
@@ -223,7 +223,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateTagModalLabel">Edit Tag</h5>
+                    <h5 class="modal-title" id="updateTagModalLabel">{{ __('Edit Tag')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="updateTagForm" enctype="multipart/form-data">
@@ -239,8 +239,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn btn-primary" id="updateTag" onclick="updateTag()">Update</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close')}}</button>
+                        <a class="btn btn-primary" id="updateTag" onclick="updateTag()">{{ __('Update')}}</a>
                     </div>
                 </form>
             </div>
@@ -252,12 +252,12 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Items</h1>
+        <h1>{{ __('Items')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('categories') }}">Categories</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('categories') }}">{{ __('Categories')}}</a></li>
                         <li class="breadcrumb-item active">{{ (isset($category->en_name) && !empty($category->en_name)) ? $category->en_name : 'All' }}</li>
                     </ol>
                 </nav>
@@ -312,7 +312,7 @@
                             </div>
                         </div>
                         <div class="sec_title">
-                            <h3>Tags</h3>
+                            <h3>{{ __('Tags')}}</h3>
                         </div>
                         <div class="row mb-4 connectedSortableTags" id="tagsSorting">
                             {{-- Tags Section --}}
@@ -329,7 +329,7 @@
                             @endif
                         </div>
                         <div class="sec_title">
-                            <h3>Items</h3>
+                            <h3>{{ __('Items')}}</h3>
                         </div>
                         <div class="row connectedSortableItems" id="ItemSection">
                             {{-- Itens Section --}}
@@ -346,7 +346,7 @@
                                                     @endif
                                                 </a>
                                                 <div class="edit_item_bt">
-                                                    <button class="btn edit_category" onclick="editItem({{ $item->id }})">EDIT ITEM</button>
+                                                    <button class="btn edit_category" onclick="editItem({{ $item->id }})">{{ __('EDIT ITEM')}}</button>
                                                 </div>
                                                 <a class="delet_bt" onclick="deleteItem({{ $item->id }})" style="cursor: pointer;">
                                                     <i class="fa-solid fa-trash"></i>
@@ -363,9 +363,9 @@
                                                     </div>
                                                 </div>
                                                 @if($item->type == 1)
-                                                    <h2>Item</h2>
+                                                    <h2>{{ __('Item')}}</h2>
                                                 @else
-                                                    <h2>Divider</h2>
+                                                    <h2>{{ __('Divider')}}</h2>
                                                 @endif
                                             </div>
                                         </div>
@@ -382,7 +382,7 @@
                                         </a>
                                     </div>
                                     <div class="item_info text-center">
-                                        <h2>Add New Item</h2>
+                                        <h2>{{ __('Add New Item')}}</h2>
                                     </div>
                                 </div>
                             </div>

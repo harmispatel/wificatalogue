@@ -6,7 +6,7 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Dashboard</h1>
+        <h1>{{ __('Dashboard') }}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
@@ -38,14 +38,14 @@
                     <div class="col-md-4">
                         <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title">Restaurants</h5>
+                                <h5 class="card-title">{{ __('Restaurants')}}</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="ri-restaurant-2-line"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> Total
+                                        <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> {{ __('Total')}}
                                             - {{ isset($shop['total']) ? $shop['total'] : 0 }}</span>
                                     </div>
                                 </div>
@@ -59,17 +59,17 @@
             <div class="col-12">
                 <div class="card recent-sales overflow-auto">
                     <div class="card-body">
-                        <h5 class="card-title">Recent Clients</h5>
+                        <h5 class="card-title">{{ __('Recent Clients')}}</h5>
                         {{-- <h5 class="card-title">Recent Sales <span>| Today</span></h5> --}}
                         <table class="table recentClient">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Client</th>
-                                    <th>Shop</th>
-                                    <th>Subscription</th>
-                                    <th>Expire In</th>
-                                    <th>Status</th>
+                                    <th>{{ __('Client')}}</th>
+                                    <th>{{ __('Shop')}}</th>
+                                    <th>{{ __('Subscription')}}</th>
+                                    <th>{{ __('Expire In')}}</th>
+                                    <th>{{ __('Status')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,15 +85,15 @@
                                         <td>{{ $expire_date }} Months.</td>
                                         <td>
                                             @if($recent_client->status == 1)
-                                                <span class="badge bg-success">Active</span>
+                                                <span class="badge bg-success">{{ __('Active')}}</span>
                                             @else
-                                            <span class="badge bg-danger">NonActive</span>
+                                            <span class="badge bg-danger">{{ __('NonActive')}}</span>
                                             @endif
                                         </td>
                                     </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td colspan="6">Clients Not Found!</td>
+                                        <td colspan="6">{{ __('Clients Not Found!')}}</td>
                                     </tr>
                                 @endforelse
                             </tbody>

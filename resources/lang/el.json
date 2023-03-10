@@ -16,6 +16,8 @@
     "Profile":"Προφίλ",
     "Admins":"Διαχειριστές",
     "Settings":"Ρυθμίσεις",
+    "Total":"Σύνολο",
+
 
   
     "Restaurants":"Εστιατόρια",
@@ -47,6 +49,7 @@
     "Subscription Details":"Στοιχεία συνδρομής",
     "Save":"Αποθηκεύσετε",
     "New Clients":"Νέοι Πελάτες",
+    "Subscriptions Not Found!":"Οι συνδρομές δεν βρέθηκαν!",
     
     
     
@@ -57,6 +60,11 @@
     "New Subscription":"Νέα Συνδρομή",
     "Title":"Τίτλος",
     "Enter Duration in Months":"Εισαγάγετε τη Διάρκεια σε Μήνες",
+    "Indicative Icons Not Found!":"Ενδεικτικά εικονίδια δεν βρέθηκαν!",
+    "Edit Indicative Icons":"Επεξεργασία ενδεικτικών εικονιδίων",
+    "Admins Not Found!":"Διαχειριστές δεν βρέθηκαν!",
+    "Edit Admin":"Επεξεργασία Διαχειριστή",
+    "Edit Clients":"Επεξεργασία πελατών",
 
    
     "Icon":"Εικόνισμα",
@@ -106,6 +114,14 @@
     "Statistics":"Στατιστική",
     "Tutorial":"Φροντιστήριο",
     "Contact":"Επικοινωνία",
+    "Categories Not Found!":"Κατηγορίες Δεν Βρέθηκαν!",
+    "Items Not Found!":"Τα στοιχεία δεν βρέθηκαν!",
+    "VAT ID":"πολύ αργά",
+    "G.E.M.I ID":"Ταυτότητα Γ.Ε.ΜΗ",
+    "NonActive":"Μη ενεργό",
+    "Divider":"Διαιρών",
+    "Add New Item":"Προσθήκη νέου αντικειμένου",
+    "Edit Item":"Επεξεργασία αντικειμένου",
 
     "Recent Categories":"Πρόσφατες Κατηγορίες",
     "Category":"Κατηγορία",
@@ -171,6 +187,8 @@
     "Create New Item":"Δημιουργία νέου αντικειμένου",
     "Type":"Τύπος",
     "Add Price":"Προσθήκη τιμής",
+    "Publish":"Δημοσιεύω",
+    "Unpublish":"Κατάργηση δημοσίευσης",
 
     "All":"Ολα",
     "Calories":"Θερμίδες",

@@ -6,14 +6,14 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Indicative Icons</h1>
+        <h1>{{ __('Indicative Icons')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('ingredients') }}">Indicative Icons</a></li>
-                        <li class="breadcrumb-item active">Edit Indicative Icons</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('ingredients') }}">{{ __('Indicative Icons')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Edit Indicative Icons')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -61,7 +61,7 @@
                                     <input type="hidden" name="ingredient_id" id="ingredient_id" value="{{ $ingredient->id }}">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="name" class="form-label">Name</label>
+                                            <label for="name" class="form-label">{{ __('Name')}}</label>
                                             <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter Ingredient Name" value="{{ $ingredient->name }}">
                                             @if($errors->has('name'))
                                                 <div class="invalid-feedback">
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="icon" class="form-label">Icon</label>
+                                            <label for="icon" class="form-label">{{ __('Icon')}}</label>
                                             <input type="file" name="icon" id="icon" class="form-control {{ ($errors->has('icon')) ? 'is-invalid' : '' }}">
                                             @if($errors->has('icon'))
                                                 <div class="invalid-feedback">
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="status" class="form-label">Status</label>
+                                            <label for="status" class="form-label">{{ __('Status')}}</label>
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" value="1" {{ ($ingredient->status == 1) ? 'checked' : '' }}>
                                             </div>
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success">Update</button>
+                            <button class="btn btn-success">{{ __('Update')}}</button>
                         </div>
                     </form>
                 </div>

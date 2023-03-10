@@ -29,12 +29,12 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Tags</h1>
+        <h1>{{ __('Tags')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active"><a>Tags</a></li>
+                        <li class="breadcrumb-item active"><a>{{ __('Tags')}}</a></li>
                     </ol>
                 </nav>
             </div>
@@ -72,9 +72,9 @@
                         <table class="table table-striped w-100" id="tagsTable">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('Id')}}</th>
+                                    <th>{{ __('Name')}}</th>
+                                    <th>{{ __('Actions')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

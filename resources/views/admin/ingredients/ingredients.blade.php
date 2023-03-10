@@ -6,13 +6,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Indicative Icons</h1>
+        <h1>{{ __('Indicative Icons')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Indicative Icons</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Indicative Icons')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -55,11 +55,11 @@
                             <table class="table table-striped w-100" id="ingredientsTable">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Icon</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>{{ __('Id')}}</th>
+                                        <th>{{ __('Name')}}</th>
+                                        <th>{{ __('Icon')}}</th>
+                                        <th>{{ __('Status')}}</th>
+                                        <th>{{ __('Actions')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,7 +95,7 @@
                                         </tr>
                                     @empty
                                         <tr class="text-center">
-                                            <td colspan="6">Indicative Icons Not Found!</td>
+                                            <td colspan="6">{{ __('Indicative Icons Not Found!')}}</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

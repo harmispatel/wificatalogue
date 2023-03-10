@@ -6,14 +6,14 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Clients</h1>
+        <h1>{{ __('Clients')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('clients') }}">Clients</a></li>
-                        <li class="breadcrumb-item active">New Clients</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('clients') }}">{{ __('Clients')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('New Clients')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -59,13 +59,13 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h3>Client Details</h3>
+                                        <h3>{{ __('Client Details')}}</h3>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="firstname" class="form-label">First Name</label>
+                                            <label for="firstname" class="form-label">{{ __('First Name')}}</label>
                                             <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" placeholder="Enter First Name" value="{{ old('firstname') }}">
                                             @if($errors->has('firstname'))
                                                 <div class="invalid-feedback">
@@ -76,13 +76,13 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <label for="lastname" class="form-label">{{ __('Last Name')}}</label>
                                             <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Last Name" value="{{ old('lastname') }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="email" class="form-label">Client Email</label>
+                                            <label for="email" class="form-label">{{ __('Client Email')}}</label>
                                             <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Enter Client Email" value="{{ old('email') }}">
                                             @if($errors->has('email'))
                                                 <div class="invalid-feedback">
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="password" class="form-label">Password</label>
+                                            <label for="password" class="form-label">{{ __('Password')}}</label>
                                             <input type="password" name="password" id="password" class="form-control {{ ($errors->has('password')) ? 'is-invalid' : '' }}" placeholder="Enter Password">
                                             @if($errors->has('password'))
                                                 <div class="invalid-feedback">
@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                                            <label for="confirm_password" class="form-label">{{ __('Confirm Password')}}</label>
                                             <input type="password" name="confirm_password" id="confirm_password" class="form-control {{ ($errors->has('confirm_password')) ? 'is-invalid' : '' }}" placeholder="Confirm Password">
                                             @if($errors->has('confirm_password'))
                                                 <div class="invalid-feedback">
@@ -114,13 +114,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="status" class="form-label">Status</label>
+                                        <label for="status" class="form-label">{{ __('Status')}}</label>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" value="1" checked>
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="favourite" class="form-label">Favourite</label>
+                                        <label for="favourite" class="form-label">{{ __('Favourite')}}</label>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" name="favourite" role="switch" id="favourite" value="1">
                                         </div>
@@ -129,13 +129,13 @@
                                 <hr>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <h3>Shop Details</h3>
+                                        <h3>{{ __('Shop Details')}}</h3>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="shop_name" class="form-label">Shop Name</label>
+                                            <label for="shop_name" class="form-label">{{ __('Shop Name')}}</label>
                                             <input type="text" name="shop_name" id="shop_name" class="form-control {{ ($errors->has('shop_name')) ? 'is-invalid' : '' }}" placeholder="Enter Shop Name" value="{{ old('shop_name') }}">
                                             @if($errors->has('shop_name'))
                                                 <div class="invalid-feedback">
@@ -146,14 +146,14 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="shop_logo" class="form-label">Shop Logo</label>
+                                            <label for="shop_logo" class="form-label">{{ __('Shop Logo')}}</label>
                                             <input type="file" name="shop_logo" id="shop_logo" class="form-control">
                                         </div>
                                         <code>Upload Shop Logo (150*80) or (150*150)</code>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="primary_language" class="form-label">Primary Language</label>
+                                            <label for="primary_language" class="form-label">{{ __('Primary Language')}}</label>
                                             <select name="primary_language" id="primary_language" class="form-select {{ ($errors->has('primary_language')) ? 'is-invalid' : '' }}">
                                                 <option value="">Select Primary Language</option>
                                                 @if(count($languages) > 0)
@@ -171,7 +171,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
-                                            <label for="shop_description" class="form-label">Shop Description</label>
+                                            <label for="shop_description" class="form-label">{{ __('Shop Description')}}</label>
                                             <textarea name="shop_description" id="shop_description" rows="5" class="form-control">{{ old('shop_description') }}</textarea>
                                         </div>
                                     </div>
@@ -179,13 +179,13 @@
                                 <hr>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <h3>Subscription Details</h3>
+                                        <h3>{{ __('Subscription Details')}}</h3>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="subscription" class="form-label">Subscriptions</label>
+                                            <label for="subscription" class="form-label">{{ __('Subscriptions')}}</label>
                                             <select name="subscription" id="subscription" class="form-control {{ ($errors->has('subscription')) ? 'is-invalid' : '' }}">
                                                 <option value="">Select Subscription</option>
                                                 @if (count($subscriptions) > 0)
@@ -205,7 +205,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success">Save</button>
+                            <button class="btn btn-success">{{ __('Save')}}</button>
                         </div>
                     </form>
                 </div>

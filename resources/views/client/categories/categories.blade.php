@@ -9,7 +9,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editCategoryModalLabel">Edit category</h5>
+                    <h5 class="modal-title" id="editCategoryModalLabel">{{ __('Edit category')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="cat_lang_div">
@@ -23,7 +23,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addCategoryModalLabel">Create New category</h5>
+                    <h5 class="modal-title" id="addCategoryModalLabel">{{ __('Create New category')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="addCategoryForm" enctype="multipart/form-data">
@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="input_label">
-                                    <label class="form-label" for="name">Name</label>
+                                    <label class="form-label" for="name">{{ __('Name')}}</label>
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="input_label">
-                                    <label class="form-label" for="description">Description</label>
+                                    <label class="form-label" for="description">{{ __('Description')}}</label>
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="input_label">
-                                    <label class="form-label" for="image">Image</label>
+                                    <label class="form-label" for="image">{{ __('Image')}}</label>
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="input_label">
-                                    <label class="form-label" for="publish">Published</label>
+                                    <label class="form-label" for="publish">{{ __('Published')}}</label>
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -80,8 +80,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn btn-primary" id="saveCategory" onclick="saveCategory()">Save</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close')}}</button>
+                        <a class="btn btn-primary" id="saveCategory" onclick="saveCategory()">{{ __('Save')}}</a>
                     </div>
                 </form>
             </div>
@@ -90,13 +90,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Categories</h1>
+        <h1>{{ __('Categories')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
                         {{-- <li class="breadcrumb-item"><a href="{{ route('client.dashboard') }}">Dashboard</a></li> --}}
-                        <li class="breadcrumb-item active">Categories</li>
+                        <li class="breadcrumb-item active">{{ __('Categories')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -140,8 +140,8 @@
                             </div>
                         </div>
                         <div class="sec_title">
-                            <h1>Categories</h1>
-                            <p> Menu categories define the core structure of your menu. Move your mouse over a category to ‘Add or edit category items’ (aka products) or ‘Edit category’
+                            <h1>{{ __('Categories')}}</h1>
+                            <p> {{ __('Menu categories define the core structure of your menu. Move your mouse over a category to ‘Add or edit category items’ (aka products) or ‘Edit category’')}}
                             </p>
                         </div>
                         <div class="row connectedSortableCategory" id="categorySection">
@@ -177,7 +177,7 @@
                                                         <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" onclick="changeStatus({{ $category->id }},{{ $newStatus }})" value="1" {{ ($category->published == 1) ? 'checked' : '' }}>
                                                     </div>
                                                 </div>
-                                                <h2>Item Category</h2>
+                                                <h2>{{ __('Item Category')}}</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +193,7 @@
                                         </a>
                                     </div>
                                     <div class="item_info text-center">
-                                        <h2>Add New Category</h2>
+                                        <h2>{{ __('Add New Category')}}</h2>
                                     </div>
                                 </div>
                             </div>

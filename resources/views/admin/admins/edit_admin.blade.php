@@ -6,14 +6,14 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Admins</h1>
+        <h1>{{ __('Admins')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admins') }}">Admins</a></li>
-                        <li class="breadcrumb-item active">Edit Admin</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admins') }}">{{ __('Admins')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Edit Admin')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -61,7 +61,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
-                                            <label for="firstname" class="form-label">Firstname</label>
+                                            <label for="firstname" class="form-label">{{ __('FirstName')}}</label>
                                             <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" placeholder="Enter Firstname" value="{{ $user->firstname }}">
                                             @if($errors->has('firstname'))
                                                 <div class="invalid-feedback">
@@ -72,13 +72,13 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="lastname" class="form-label">Lastname</label>
+                                            <label for="lastname" class="form-label">{{ __('LastName')}}</label>
                                             <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Lastname" value="{{ $user->lastname }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="email" class="form-label">Email</label>
+                                            <label for="email" class="form-label">{{ __('Email')}}</label>
                                             <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Enter User Email" value="{{ $user->email }}">
                                             @if($errors->has('email'))
                                                 <div class="invalid-feedback">
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="password" class="form-label">Password</label>
+                                            <label for="password" class="form-label">{{ __('Password')}}</label>
                                             <input type="password" name="password" id="password" class="form-control {{ ($errors->has('password')) ? 'is-invalid' : '' }}" placeholder="Enter Password">
                                             @if($errors->has('password'))
                                                 <div class="invalid-feedback">
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                                            <label for="confirm_password" class="form-label">{{ __('Confirm Password')}}</label>
                                             <input type="password" name="confirm_password" id="confirm_password" class="form-control {{ ($errors->has('confirm_password')) ? 'is-invalid' : '' }}" placeholder="Confirm Password">
                                             @if($errors->has('confirm_password'))
                                                 <div class="invalid-feedback">
@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="user_image" class="form-label">User Image</label>
+                                            <label for="user_image" class="form-label">{{ __('User Image')}}</label>
                                             <input type="file" name="user_image" id="user_image" class="form-control {{ ($errors->has('user_image')) ? 'is-invalid' : '' }}">
                                             @if($errors->has('user_image'))
                                                 <div class="invalid-feedback">
@@ -128,7 +128,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="status" class="form-label">Status</label>
+                                            <label for="status" class="form-label">{{ __('Status')}}</label>
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" value="1" {{ ($user->status == 1) ? 'checked' : '' }}>
                                             </div>
@@ -138,7 +138,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success">Update</button>
+                            <button class="btn btn-success">{{ __('Update')}}</button>
                         </div>
                     </form>
                 </div>

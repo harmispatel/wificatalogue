@@ -6,13 +6,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Edit Profile</h1>
+        <h1>{{ __('Edit Profile')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Edit Profile</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Edit Profile')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -55,7 +55,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
-                                            <label for="firstname" class="form-label">First Name</label>
+                                            <label for="firstname" class="form-label">{{ __('First Name')}}</label>
                                             <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" value="{{ $user->firstname }}">
                                             @if($errors->has('firstname'))
                                                 <div class="invalid-feedback">
@@ -66,13 +66,13 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <label for="lastname" class="form-label">{{ __('Last Name')}}</label>
                                             <input type="text" name="lastname" id="lastname" class="form-control" value="{{ $user->lastname }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="email" class="form-label">Email</label>
+                                            <label for="email" class="form-label">{{ __('Email')}}</label>
                                             <input type="text" name="email" id="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" value="{{ $user->email }}">
                                             @if($errors->has('email'))
                                                 <div class="invalid-feedback">
@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="password" class="form-label">Password</label>
+                                            <label for="password" class="form-label">{{ __('Password')}}</label>
                                             <input type="password" name="password" id="password" class="form-control {{ ($errors->has('password')) ? 'is-invalid' : '' }}" value="">
                                             @if($errors->has('password'))
                                                 <div class="invalid-feedback">
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                                            <label for="confirm_password" class="form-label">{{ __('Confirm Password')}}</label>
                                             <input type="password" name="confirm_password" id="confirm_password" class="form-control {{ ($errors->has('confirm_password')) ? 'is-invalid' : '' }}" value="">
                                             @if($errors->has('confirm_password'))
                                                 <div class="invalid-feedback">
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="profile_picture" class="form-label">Profile Picture</label>
+                                            <label for="profile_picture" class="form-label">{{ __('Profile Picture')}}</label>
                                             <input type="file" name="profile_picture" id="profile_picture" class="form-control {{ ($errors->has('profile_picture')) ? 'is-invalid' : '' }}" value="">
                                             @if($errors->has('profile_picture'))
                                                 <div class="invalid-feedback">
@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label class="form-label">Preview</label>
+                                            <label class="form-label">{{ __('Preview')}}</label>
                                             <div>
                                                 @if(!empty($user->image))
                                                     <img src="{{ $user->image }}" width="100">
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success">Update</button>
+                            <button class="btn btn-success">{{ __('Update')}}</button>
                         </div>
                     </form>
                 </div>
