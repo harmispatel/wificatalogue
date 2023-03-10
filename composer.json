@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "maatwebsite/excel": "^3.1",
         "magarrent/laravel-currency-formatter": "^1.0",
         "outhebox/blade-flags": "^1.2",
         "simplesoftwareio/simple-qrcode": "^4.2"

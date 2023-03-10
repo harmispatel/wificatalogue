@@ -50,7 +50,7 @@ class AdminSettingsController extends Controller
             'default_dark_theme_image'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
             'theme_main_screen_demo'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
             'theme_category_screen_demo'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
-            'default_special_item_image'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            'default_special_item_image'       =>          'mimes:png,jpg,svg,gif,jpeg,PNG,SVG,JPG,JPEG,GIF',
         ]);
 
         $all_data['favourite_client_limit'] = $request->favourite_client_limit;

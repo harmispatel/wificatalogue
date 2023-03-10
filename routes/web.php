@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DesignController;
+use App\Http\Controllers\ImportExportController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\LanguageController;
@@ -113,6 +114,10 @@ Route::group(['prefix' => 'admin'], function ()
 
         // Languages
         Route::post('/save-language',[LanguagesController::class,'saveAjax'])->name('languages.save.ajax');
+
+        // Import & Export
+        Route::get('/import-export', [ImportExportController::class,'index'])->name('admin.import.export');
+        Route::post('/import-data', [ImportExportController::class,'importData'])->name('admin.import.data');
 
     });
 

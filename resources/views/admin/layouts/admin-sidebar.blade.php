@@ -84,6 +84,14 @@
             </a>
         </li>
 
+        {{-- Import Export Nav --}}
+        <li class="nav-item">
+            <a class="nav-link {{ ($routeName == 'admin.import.export') ? 'active-tab' : '' }}" href="{{ route('admin.import.export') }}">
+                <i class="fa-sharp fa-solid fa-file-export {{ ($routeName == 'admin.import.export') ? 'icon-tab' : '' }}"></i>
+            <span>{{ __('Import / Export') }}</span>
+            </a>
+        </li>
+
         {{-- System Nav --}}
         <li class="nav-item">
             <a class="nav-link {{ (($routeName != 'admin.profile.view') && ($routeName != 'admin.settings') && ($routeName != 'admins')) ? 'collapsed' : '' }} {{ (($routeName == 'admin.profile.view') || ($routeName == 'admin.settings') || ($routeName == 'admins')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'admin.profile.view') || ($routeName == 'admin.settings') || ($routeName == 'admins')) ? 'true' : 'false' }}">
