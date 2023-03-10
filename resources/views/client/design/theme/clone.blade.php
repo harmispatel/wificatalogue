@@ -14,8 +14,8 @@
     <div class="main_section_inr">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('design.theme') }}">Themes</a></li>
-                <li class="breadcrumb-item active">Clone Theme</li>
+                <li class="breadcrumb-item"><a href="{{ route('design.theme') }}">{{ __('Themes')}}</a></li>
+                <li class="breadcrumb-item active">{{ __('Clone Theme')}}</li>
             </ol>
         </nav>
         <div class="row">
@@ -48,7 +48,7 @@
                                                     <div class="main_theme_color">
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Header Color</span>
+                                                                <span>{{ __('Header Color')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
@@ -59,7 +59,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Sticky Header</span>
+                                                                <span>{{ __('Sticky Header')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <label class="switch">
@@ -73,7 +73,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Language Box Position</span>
+                                                                <span>{{ __('Language Box Position')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <select name="language_bar_position" id="language_bar_position" class="form-select">
@@ -84,7 +84,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Logo Position</span>
+                                                                <span>{{ __('Logo Position')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <select name="logo_position" id="logo_position" class="form-select">
@@ -96,7 +96,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Search Box Position</span>
+                                                                <span>{{ __('Search Box Position')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <select name="search_box_position" id="search_box_position" class="form-select">
@@ -108,7 +108,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Search Box Icon Color</span>
+                                                                <span>{{ __('Search Box Icon Color')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
@@ -119,7 +119,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Banner Position</span>
+                                                                <span>{{ __('Banner Position')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <select name="banner_position" id="banner_position" class="form-select">
@@ -131,7 +131,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Banner Type</span>
+                                                                <span>{{ __('Banner Type')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <select name="banner_type" id="banner_type" class="form-select">
@@ -142,7 +142,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Background Color</span>
+                                                                <span>{{ __('Background Color')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
@@ -153,7 +153,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Font Color</span>
+                                                                <span>{{ __('Font Color')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
@@ -164,7 +164,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Label Color</span>
+                                                                <span>{{ __('Label Color')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
@@ -175,7 +175,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-7">
-                                                                <span>Social Media Icons Color</span>
+                                                                <span>{{ __('Social Media Icons Color')}}</span>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="from-group d-flex align-items-center">
@@ -203,7 +203,7 @@
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingTwo">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Within Item Screen
+                                            {{ __('Within Item Screen')}}
                                         </button>
                                     </h2>
                                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -213,7 +213,7 @@
                                                     <div class="main_theme_color">
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Categories Bar Color</span>
+                                                                <span>{{ __('Categories Bar Color')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -224,7 +224,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Category Bar Type</span>
+                                                                <span>{{ __('Category Bar Type')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <select name="category_bar_type" id="category_bar_type" class="form-select">
@@ -235,7 +235,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Category Bar Fonts Color</span>
+                                                                <span>{{ __('Category Bar Fonts Color')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -246,7 +246,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Category Title & Description Fonts Color</span>
+                                                                <span>{{ __('Category Title & Description Fonts Color')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -257,7 +257,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Price Color</span>
+                                                                <span>{{ __('Price Color')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -268,7 +268,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Box Shadow</span>
+                                                                <span>{{ __('Item Box Shadow')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="switch">
@@ -282,7 +282,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Box Shadow Color</span>
+                                                                <span>{{ __('Item Box Shadow Color')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -293,7 +293,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Box Shadow Thickness</span>
+                                                                <span>{{ __('Item Box Shadow Thickness')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <select name="item_box_shadow_thickness" id="item_box_shadow_thickness" class="form-select">
@@ -305,7 +305,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Divider</span>
+                                                                <span>{{ __('Item Divider')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="switch">
@@ -319,8 +319,8 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Divider Color</span>
-                                                            </div>
+                                                                <span>{{ __('Item Divider Color')}}</span>
+                                                            </div> 
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
                                                                     <input type="color" id="item_divider_color" name="item_divider_color" class="form-control me-2 p-0" value="{{ isset($settings['item_divider_color']) ? $settings['item_divider_color'] : '' }}" onchange="changeVal('item_divider_color','item_divider_color_input')">
@@ -330,7 +330,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Divider Thickness</span>
+                                                                <span>{{ __('Item Divider Thickness')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
@@ -341,7 +341,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Divider Type</span>
+                                                                <span>{{ __('Item Divider Type')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <select name="item_divider_type" id="item_divider_type" class="form-select">
@@ -354,7 +354,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Divider Position</span>
+                                                                <span>{{ __('Item Divider Position')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <select name="item_divider_position" id="item_divider_position" class="form-select">
@@ -365,7 +365,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Item Divider Font Color</span>
+                                                                <span>{{ __('Item Divider Font Color')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -376,7 +376,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Tag Font Color</span>
+                                                                <span>{{ __('Tag Font Color')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -387,7 +387,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Tag Label Color</span>
+                                                                <span>{{ __('Tag Label Color')}}</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -398,7 +398,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-4">
-                                                                <span>Today Special Icon</span>
+                                                                <span>{{ __('Today Special Icon')}}</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="form-group align-items-center">
@@ -413,7 +413,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-4">
-                                                                <span>Theme Prview Image</span>
+                                                                <span>{{ __('Theme Prview Imag')}}e</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="form-group align-items-center">
@@ -444,7 +444,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
-                    <button class="btn btn-success">S A V E</button>
+                    <button class="btn btn-success">{{ __('S A V E')}}</button>
                 </div>
             </form>
         </div>

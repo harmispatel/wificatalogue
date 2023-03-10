@@ -14,7 +14,7 @@
         "laravel/ui": "^3.4",
         "magarrent/laravel-currency-formatter": "^1.0",
         "outhebox/blade-flags": "^1.2",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "simplesoftwareio/simple-qrcode": "4.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

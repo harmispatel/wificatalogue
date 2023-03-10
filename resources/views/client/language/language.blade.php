@@ -21,7 +21,7 @@
             <div class="col-md-3">
                 <div class="lang_sidebar">
                     <div class="lang_title">
-                        <h2>Menu</h2>
+                        <h2>{{ __('Menu')}}</h2>
                     </div>
                     <ul class="nav flex-column lang_menu_ul" id="nav_accordion">
                         @if(count($categories) > 0)
@@ -54,13 +54,13 @@
             <div class="col-md-9">
                 <div class="lang_right_side">
                     <div class="lang_title">
-                        <h2>Translations</h2>
+                        <h2>{{ __('Translations')}}</h2>
                         <p>On the left you can find your menu's structure. Click on every menu element and insert the translation of the selected additional languages. Note that primary language descriptions can only be changed through ‘Menu’ tab features.</p>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Primary Language</label>
+                                <label class="form-label">{{ __('Primary Language')}}</label>
                                 <select class="form-select" name="primary_language" id="primary_language" onchange="setPrimaryLanguage({{ $userShopId }})">
                                     @if(count($languages) > 0)
                                         @foreach ($languages as $language)
@@ -82,7 +82,7 @@
                         @endphp
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label" for="additional_languages">Additional Languages</label>
+                                <label class="form-label" for="additional_languages">{{ __('Additional Languages')}}</label>
                                 <select name="additional_languages[]" id="additional_languages" class="form-select" multiple>
                                     @if(count($languages) > 0)
                                         @foreach ($languages as $key => $language)
@@ -96,7 +96,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Google translate</label>
+                                <label class="form-label">{{ __('Google translate')}}</label>
                                 <br/>
                                 <label class="switch">
                                     <input type="checkbox" checked>
@@ -121,8 +121,8 @@
                                             <label class="switch">
                                                 <input type="checkbox"  id="publish_{{ $lang->id }}" {{ ($lang->published == 1) ? 'checked' : '' }} onchange="changeLanguageStatus({{ $lang->id }})">
                                                 <span class="slider round">
-                                                    <span class="check_icon">Publish</span>
-                                                    <span class="uncheck_icon">Unpublish</span>
+                                                    <span class="check_icon">{{ __('Publish')}}</span>
+                                                    <span class="uncheck_icon">{{ __('Unpublish')}}</span>
                                                 </span>
                                             </label>
                                         </div>

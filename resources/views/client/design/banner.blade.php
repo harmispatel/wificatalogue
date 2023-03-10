@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="add_logo_sec">
                     <div class="add_logo_sec_header">
-                        <h2>Banner</h2>
+                        <h2>{{ __('Banner')}}</h2>
                     </div>
 
                     @php
@@ -62,7 +62,7 @@
                                         <input type="hidden" name="lang_code" id="lang_code" value="{{ $primary_code }}">
 
                                         <div class="add_logo_sec_body">
-                                            <label class="form-label">Banner will appear on the top of your menu</label>
+                                            <label class="form-label">{{ __('Banner will appear on the top of your menu')}}</label>
                                             <div class="add_logo_sec_body_inr">
                                                 <label class="position-relative" for="{{ $primary_banner_id }}" style="cursor: pointer;">
                                                     @if(!empty($primary_banner_image) && file_exists('public/client_uploads/banners/'.$primary_banner_image))
@@ -77,12 +77,12 @@
                                         </div>
 
                                         <div class="banner_text">
-                                            <label class="form-label">Banner Text</label>
+                                            <label class="form-label">{{ __('Banner Text')}}</label>
                                             <textarea class="form-control" name="banner_text" id="banner_text">{{ $primary_banner_text }}</textarea>
                                         </div>
 
                                         <div class="add_logo_sec_body">
-                                            <button class="btn btn-success">Update</button>
+                                            <button class="btn btn-success">{{ __('Update')}}</button>
                                         </div>
                                     </form>
                                 </div>
@@ -115,7 +115,7 @@
                                             <input type="hidden" name="lang_code" id="lang_code" value="{{ $add_lang_code }}">
 
                                             <div class="add_logo_sec_body">
-                                                <label class="form-label">Banner will appear on the top of your menu</label>
+                                                <label class="form-label">{{ __('Banner will appear on the top of your menu')}}</label>
                                                 <div class="add_logo_sec_body_inr">
                                                     <label class="position-relative" for="{{ $add_banner_id }}" style="cursor: pointer;">
                                                         @if(!empty($add_banner_image) && file_exists('public/client_uploads/banners/'.$add_banner_image))
@@ -130,12 +130,12 @@
                                             </div>
 
                                             <div class="banner_text">
-                                                <label class="form-label">Banner Text</label>
+                                                <label class="form-label">{{ __('Banner Text')}}</label>
                                                 <textarea class="form-control" name="banner_text" id="banner_text">{{ $add_banner_text }}</textarea>
                                             </div>
 
                                             <div class="add_logo_sec_body">
-                                                <button class="btn btn-success">Update</button>
+                                                <button class="btn btn-success">{{ __('Update')}}</button>
                                             </div>
                                         </form>
                                     </div>
@@ -150,7 +150,7 @@
                             <input type="hidden" name="lang_code" id="lang_code" value="{{ $primary_code }}">
 
                             <div class="add_logo_sec_body">
-                                <label class="form-label">Banner will appear on the top of your menu</label>
+                                <label class="form-label">{{ __('Banner will appear on the top of your menu')}}</label>
                                 <div class="add_logo_sec_body_inr">
                                     <label class="position-relative" for="{{ $primary_banner_id }}" style="cursor: pointer;">
                                         @if(!empty($primary_banner_image) && file_exists('public/client_uploads/banners/'.$primary_banner_image))
@@ -165,12 +165,12 @@
                             </div>
 
                             <div class="banner_text">
-                                <label class="form-label">Banner Text</label>
+                                <label class="form-label">{{ __('Banner Text')}}</label>
                                 <textarea class="form-control" name="banner_text" id="banner_text">{{ $primary_banner_text }}</textarea>
                             </div>
 
                             <div class="add_logo_sec_body">
-                                <button class="btn btn-success">Update</button>
+                                <button class="btn btn-success">{{ __('Update')}}</button>
                             </div>
 
                         </form>

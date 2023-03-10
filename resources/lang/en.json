@@ -16,6 +16,7 @@
     "Profile":"Profile",
     "Admins":"Admins",
     "Settings":"Settings",
+    "Total":"Total",
 
   
     "Restaurants":"Restaurants",
@@ -25,6 +26,7 @@
     "Subscription":"Subscription",
     "Expire In":"Expire In",
     "Status":"Status",
+    "Subscriptions Not Found!":"Subscriptions Not Found!",
 
    
     "Id":"Id",
@@ -47,6 +49,7 @@
     "Subscription Details":"Subscription Details",
     "Save":"Save",
     "New Clients":"New Clients",
+    "Indicative Icons Not Found!":"Indicative Icons Not Found!",
     
     
     
@@ -57,6 +60,8 @@
     "New Subscription":"New Subscription",
     "Title":"Title",
     "Enter Duration in Months":"Enter Duration in Months",
+    "Edit Indicative Icons":"Edit Indicative Icons",
+    "Edit Clients":"Edit Clients",
 
    
     "Icon":"Icon",
@@ -87,8 +92,9 @@
     "New Language":"New Language",
     "Languages":"Languages",
     "Update":"Update",
-
+    "Admins Not Found!":"Admins Not Found!",
     "Logout":"Logout",
+    "Edit Admin":"Edit Admin",
 
     "Saffron":"Saffron",
     "Manage Account":"Manage Account",
@@ -106,6 +112,10 @@
     "Statistics":"Statistics",
     "Tutorial":"Tutorial",
     "Contact":"Contact",
+    "Categories Not Found!":"Categories Not Found!",
+    "Items Not Found!":"Items Not Found!",
+    "VAT ID":"VAT ID",
+    "G.E.M.I ID":"G.E.M.I ID",
 
     "Recent Categories":"Recent Categories",
     "Category":"Category",
@@ -129,6 +139,10 @@
     "Business Name":"Business Name",
     "Plan":"Plan",
     "Remainig Days":"Remainig Days",
+    "NonActive":"NonActive",
+    "Divider":"Divider",
+    "Add New Item":"Add New Item",
+    "Edit Item":"Edit Item",
 
     "General Information":"General Information",
     "Currency":"Currency",
@@ -171,6 +185,8 @@
     "Create New Item":"Create New Item",
     "Type":"Type",
     "Add Price":"Add Price",
+    "Publish":"Publish",
+    "Unpublish":"Unpublish",
 
     "All":"All",
     "Calories":"Calories",

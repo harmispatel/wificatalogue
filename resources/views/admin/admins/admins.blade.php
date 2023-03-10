@@ -6,13 +6,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Admins</h1>
+        <h1>{{ __('Admins')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Admins</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Admins')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -55,12 +55,12 @@
                             <table class="table table-striped w-100" id="clientsTable">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Name</th>
-                                        <th>email</th>
-                                        <th>Profile</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>{{ __('Id')}}</th>
+                                        <th>{{ __('Name')}}</th>
+                                        <th>{{ __('email')}}</th>
+                                        <th>{{ __('Profile')}}</th>
+                                        <th>{{ __('Status')}}</th>
+                                        <th>{{ __('Actions')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -102,7 +102,7 @@
                                         </tr>
                                     @empty
                                         <tr class="text-center">
-                                            <td colspan="6">Admins Not Found!</td>
+                                            <td colspan="6">{{ __('Admins Not Found!')}}</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

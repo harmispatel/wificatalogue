@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div class="add_logo_sec">
                     <div class="add_logo_sec_header d-flex align-items-center justify-content-between">
-                        <h2>Cover</h2>
+                        <h2>{{ __('Cover')}}</h2>
                         <label class="switch">
                             <input type="checkbox" id="intro_icon_status" name="intro_icon_status" {{ ($intro_status == 1) ? 'checked' : '' }}>
                             <span class="slider round">
@@ -53,7 +53,7 @@
                                     </label>
                                     <input type="file" id="shop_intro_icon" name="shop_intro_icon" style="display: none;" />
                                     <div class="form-group mt-2">
-                                        <label class="form-label">Intro duration in seconds</label>
+                                        <label class="form-label">{{ __('Intro duration in seconds')}}</label>
                                         <input type="number" class="form-control" name="intro_icon_duration" id="intro_icon_duration" value="{{ $intro_duration }}">
                                     </div>
                                 </div>

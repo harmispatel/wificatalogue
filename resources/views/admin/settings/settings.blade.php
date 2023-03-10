@@ -6,13 +6,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Settings</h1>
+        <h1>{{ __('Settings')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Settings</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Settings')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -52,7 +52,7 @@
                             {{-- Fav Clients Limit --}}
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Favourites Clients Limit</b>
+                                    <b>{{ __('Favourites Clients Limit')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="number" name="favourite_client_limit" class="form-control {{ ($errors->has('favourite_client_limit')) ? 'is-invalid' : '' }}" value="{{ isset($settings['favourite_client_limit']) ? $settings['favourite_client_limit'] : '' }}">
@@ -67,7 +67,7 @@
                             {{-- CopyRight Text --}}
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Copyright</b>
+                                    <b>{{ __('Copyright')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <textarea name="copyright_text" id="copyright_text" rows="5" class="form-control {{ ($errors->has('copyright_text')) ? 'is-invalid' : '' }}">{{ isset($settings['copyright_text']) ? $settings['copyright_text'] : '' }}</textarea>
@@ -85,7 +85,7 @@
                             @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Logo</b>
+                                    <b>{{ __('Logo')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="logo" class="form-control {{ ($errors->has('logo')) ? 'is-invalid' : '' }}">
@@ -108,7 +108,7 @@
                             @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Login Form Background</b>
+                                    <b>{{ __('Login Form Background')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="login_form_background" class="form-control {{ ($errors->has('login_form_background')) ? 'is-invalid' : '' }}">
@@ -131,7 +131,7 @@
                             @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Default Light Theme Image</b>
+                                    <b>{{ __('Default Light Theme Image')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="default_light_theme_image" id="default_light_theme_image" class="form-control {{ ($errors->has('default_light_theme_image')) ? 'is-invalid' : '' }}">
@@ -154,7 +154,7 @@
                             @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Default Dark Theme Image</b>
+                                    <b>{{ __('Default Dark Theme Image')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="default_dark_theme_image" id="default_dark_theme_image" class="form-control {{ ($errors->has('default_dark_theme_image')) ? 'is-invalid' : '' }}">
@@ -177,7 +177,7 @@
                             @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Theme Main Screen Demo</b>
+                                    <b>{{ __('Theme Main Screen Demo')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="theme_main_screen_demo" id="theme_main_screen_demo" class="form-control {{ ($errors->has('theme_main_screen_demo')) ? 'is-invalid' : '' }}">
@@ -200,7 +200,7 @@
                             @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Theme Category Screen Demo</b>
+                                    <b>{{ __('Theme Category Screen Demo')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="theme_category_screen_demo" id="theme_category_screen_demo" class="form-control {{ ($errors->has('theme_category_screen_demo')) ? 'is-invalid' : '' }}">
@@ -223,7 +223,7 @@
                             @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Default Spcial Item Image</b>
+                                    <b>{{ __('Default Spcial Item Image')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="default_special_item_image" id="default_special_item_image" class="form-control {{ ($errors->has('default_special_item_image')) ? 'is-invalid' : '' }}">
@@ -243,7 +243,7 @@
                             {{-- New Language Section --}}
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>New Language</b>
+                                    <b>{{ __('New Language')}}</b>
                                 </div>
                                 <div class="col-md-3">
                                     <input type="text" name="lang_name" id="lang_name" class="form-control" placeholder="Enter Language Name">
@@ -266,7 +266,7 @@
                             @endphp
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <b>Languages</b>
+                                    <b>{{ __('Languages')}}</b>
                                 </div>
                                 <div class="col-md-6">
                                     <select name="languages[]" id="languages" class="form-control {{ ($errors->has('languages')) ? 'is-invalid' : '' }}" multiple>
@@ -285,7 +285,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success">Update</button>
+                            <button class="btn btn-success">{{ __('Update')}}</button>
                         </div>
                     </form>
                 </div>

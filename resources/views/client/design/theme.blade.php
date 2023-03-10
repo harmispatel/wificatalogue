@@ -14,8 +14,8 @@
 
     <section class="theme_section">
         <div class="sec_title">
-            <h2>Themes</h2>
-            <p> Select a theme and preview your menu to check the result. Click on ‘Add theme’ and edit 	all available features.
+            <h2>{{ __('Themes')}}</h2>
+            <p> {{ __('Select a theme and preview your menu to check the result. Click on ‘Add theme’ and edit 	all available features.')}}
             </p>
         </div>
         <div class="row">
@@ -52,9 +52,9 @@
                                 @endif --}}
                                 <div class="edit_item_bt">
                                     @if($theme->is_default == 0)
-                                        <a href="{{ route('design.theme-preview',$theme->id) }}" class="btn edit_item">Edit</a>
+                                        <a href="{{ route('design.theme-preview',$theme->id) }}" class="btn edit_item">{{ __('Edit')}}</a>
                                     @endif
-                                    <a href="{{ route('theme.clone',$theme->id) }}" class="btn edit_category">Clone</a>
+                                    <a href="{{ route('theme.clone',$theme->id) }}" class="btn edit_category">{{ __('Clone')}}</a>
                                 </div>
                                 @if($theme->is_default == 0)
                                     @if($active_theme != $theme->id)
@@ -75,7 +75,7 @@
                                         </span>
                                     </label>
                                 </div>
-                                <h2>Theme</h2>
+                                <h2>{{ __('Theme')}}</h2>
                             </div>
                         </div>
                     </div>
@@ -116,12 +116,12 @@
                             <i class="fa-solid fa-image icon_none"></i>
                         </a>
                         <div class="edit_item_bt">
-                            <a href="{{ route('design.theme-create') }}" class="btn edit_item">Add New Theme</a>
+                            <a href="{{ route('design.theme-create') }}" class="btn edit_item">{{ __('Add New Theme')}}</a>
                         </div>
                     </div>
                     <div class="item_info">
                         <div class="item_name">
-                            <h3>Add theme</h3>
+                            <h3>{{ __('Add theme')}}</h3>
                         </div>
                     </div>
                 </div>

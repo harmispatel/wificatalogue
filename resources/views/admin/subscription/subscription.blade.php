@@ -6,13 +6,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Subscriptions</h1>
+        <h1>{{ __('Subscriptions')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Subscriptions</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Subscriptions')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -57,12 +57,12 @@
                             <table class="table table-striped w-100" id="subscriptionsTable">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Duration</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>{{ __('Id')}}</th>
+                                        <th>{{ __('Name')}}</th>
+                                        <th>{{ __('Price')}}</th>
+                                        <th>{{ __('Duration')}}</th>
+                                        <th>{{ __('Status')}}</th>
+                                        <th>{{ __('Actions')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,9 +74,9 @@
                                             <td>{{ $subscription->duration }} Months</td>
                                             <td>
                                                 @if($subscription->status == 1)
-                                                    <span class="badge bg-success">Active</span>
+                                                    <span class="badge bg-success">{{ __('Active')}}</span>
                                                 @else
-                                                    <span class="badge bg-danger">InActive</span>
+                                                    <span class="badge bg-danger">{{ __('InActive')}}</span>
                                                 @endif
                                             </td>
                                             <td>
@@ -90,7 +90,7 @@
                                         </tr>
                                     @empty
                                         <tr class="text-center">
-                                            <td colspan="7">Subscriptions Not Found!</td>
+                                            <td colspan="7">{{ __('Subscriptions Not Found!')}}</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

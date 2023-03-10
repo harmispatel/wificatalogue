@@ -45,13 +45,13 @@
                     <div class="col-md-4">
                         <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title"><a href="{{ route('categories') }}">Categories</a></h5>
+                                <h5 class="card-title"><a href="{{ route('categories') }}">{{ __('Categories')}}</a></h5>
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="ri-restaurant-2-line"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> Total
+                                        <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> {{ __('Total')}}
                                             - {{ isset($category['total']) ? $category['total'] : 0 }}</span>
                                     </div>
                                 </div>
@@ -63,13 +63,13 @@
                     <div class="col-md-4">
                         <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title"><a href="{{ route('items') }}">Items</a></h5>
+                                <h5 class="card-title"><a href="{{ route('items') }}">{{ __('Items')}}</a></h5>
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="ri-restaurant-2-line"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> Total
+                                        <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> {{ __('Total')}}
                                             - {{ isset($item['total']) ? $item['total'] : 0 }}</span>
                                     </div>
                                 </div>
@@ -85,13 +85,13 @@
                     <div class="col-md-6">
                         <div class="card top-selling overflow-auto">
                             <div class="card-body pb-0">
-                                <h5 class="card-title">Recent Categories</h5>
+                                <h5 class="card-title">{{ __('Recent Categories')}}</h5>
                                 <table class="table table-borderless">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Preview</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Created At</th>
+                                            <th scope="col">{{ __('Preview')}}</th>
+                                            <th scope="col">{{ __('Category')}}</th>
+                                            <th scope="col">{{ __('Created At')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -111,7 +111,7 @@
                                             @endforeach
                                         @else
                                             <tr class="text-center">
-                                                <th scope="row" colspan="3">Categories Not Found!</th>
+                                                <th scope="row" colspan="3">{{ __('Categories Not Found!')}}</th>
                                             </tr>
                                         @endif
                                     </tbody>
@@ -122,14 +122,14 @@
                     <div class="col-md-6">
                         <div class="card top-selling overflow-auto">
                             <div class="card-body pb-0">
-                                <h5 class="card-title">Recent Items</h5>
+                                <h5 class="card-title">{{ __('Recent Items')}}</h5>
                                 <table class="table table-borderless">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Preview</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Item</th>
-                                            <th scope="col">Created At</th>
+                                            <th scope="col">{{ __('Preview')}}</th>
+                                            <th scope="col">{{ __('Category')}}</th>
+                                            <th scope="col">{{ __('Item')}}</th>
+                                            <th scope="col">{{ __('Created At')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,7 +150,7 @@
                                             @endforeach
                                         @else
                                             <tr class="text-center">
-                                                <th scope="row" colspan="4">Items Not Found!</th>
+                                                <th scope="row" colspan="4">{{ __('Items Not Found!')}}</th>
                                             </tr>
                                         @endif
                                     </tbody>

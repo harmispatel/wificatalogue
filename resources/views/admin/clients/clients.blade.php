@@ -6,13 +6,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Clients</h1>
+        <h1>{{ __('Clients')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Clients</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Clients')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -94,7 +94,7 @@
                                 </tr> --}}
                             @empty
                                 <div class="col-md-12 text-center">
-                                    Clients Not Found!
+                                    {{ __('Clients Not Found!')}}
                                 </div>
                             @endforelse
                         </div>

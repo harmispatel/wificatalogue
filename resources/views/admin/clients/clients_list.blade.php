@@ -6,13 +6,13 @@
 
     {{-- Page Title --}}
     <div class="pagetitle">
-        <h1>Clients</h1>
+        <h1>{{ __('Clients')}}</h1>
         <div class="row">
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Clients</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('Clients')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -55,12 +55,12 @@
                             <table class="table table-striped w-100" id="clientsTable">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Name</th>
-                                        <th>email</th>
-                                        <th>Status</th>
-                                        <th>Favourite</th>
-                                        <th>Actions</th>
+                                        <th>{{ __('Id')}}</th>
+                                        <th>{{ __('Name')}}</th>
+                                        <th>{{ __('email')}}</th>
+                                        <th>{{ __('Status')}}</th>
+                                        <th>{{ __('Favourite')}}</th>
+                                        <th>{{ __('Actions')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,7 +92,7 @@
                                             <td>
                                                 <a href="{{ route('clients.access',$client->id) }}" class="btn btn-sm btn-primary">
                                                     <i class="bi bi-eye"></i>
-                                                    Client Access
+                                                    {{ __('Client Access')}}
                                                 </a>
                                                 <a href="{{ route('clients.edit',$client->id) }}" class="btn btn-sm btn-primary">
                                                     <i class="bi bi-pencil"></i>
@@ -104,7 +104,7 @@
                                         </tr>
                                     @empty
                                         <tr class="text-center">
-                                            <td colspan="6">Clients Not Found!</td>
+                                            <td colspan="6">{{ __('Clients Not Found!')}}</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
