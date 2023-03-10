@@ -3,7 +3,7 @@
     if (auth()->user())
     {
         $userID = encrypt(auth()->user()->id);
-        $userName = auth()->user()->name;
+        $userName = auth()->user()->firstname." ".auth()->user()->lastname;
         $userImage = auth()->user()->image;
     }
     else
@@ -76,15 +76,23 @@
             </a>
         </li>
 
+        {{-- Ingredients Nav --}}
+        <li class="nav-item">
+            <a class="nav-link {{ (($routeName == 'ingredients') || ($routeName == 'ingredients.add') || ($routeName == 'ingredients.edit')) ? 'active-tab' : '' }}" href="{{ route('ingredients') }}">
+                <i class="fas fa-seedling {{ (($routeName == 'ingredients') || ($routeName == 'ingredients.add') || ($routeName == 'ingredients.edit')) ? 'icon-tab' : '' }}"></i>
+                <span>Indicative Icons</span>
+            </a>
+        </li>
+
         {{-- System Nav --}}
         <li class="nav-item">
-            <a class="nav-link {{ (($routeName != 'admin.profile') && ($routeName != 'admin.settings')) ? 'collapsed' : '' }} {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'true' : 'false' }}">
-                <i class="fa-solid fa-wrench {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'icon-tab' : '' }}"></i><span>System</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'icon-tab' : '' }}"></i>
+            <a class="nav-link {{ (($routeName != 'admin.profile.view') && ($routeName != 'admin.settings') && ($routeName != 'admins')) ? 'collapsed' : '' }} {{ (($routeName == 'admin.profile.view') || ($routeName == 'admin.settings') || ($routeName == 'admins')) ? 'active-tab' : '' }}" data-bs-target="#system-nav" data-bs-toggle="collapse" href="#" aria-expanded="{{ (($routeName == 'admin.profile.view') || ($routeName == 'admin.settings') || ($routeName == 'admins')) ? 'true' : 'false' }}">
+                <i class="fa-solid fa-wrench {{ (($routeName == 'admin.profile.view') || ($routeName == 'admin.settings') || ($routeName == 'admins')) ? 'icon-tab' : '' }}"></i><span>System</span><i class="bi bi-chevron-down ms-auto {{ (($routeName == 'admin.profile.view') || ($routeName == 'admin.settings') || ($routeName == 'admins')) ? 'icon-tab' : '' }}"></i>
             </a>
-            <ul id="system-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'admin.profile') || ($routeName == 'admin.settings')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="system-nav" class="nav-content sidebar-ul collapse {{ (($routeName == 'admin.profile.view') || ($routeName == 'admin.settings') || ($routeName == 'admins')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('admin.profile',$userID) }}" class="{{ ($routeName == 'admin.profile') ? 'active-link' : '' }}">
-                        {{-- <i class="{{ ($routeName == 'admin.profile') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
+                    <a href="{{ route('admin.profile.view',$userID) }}" class="{{ ($routeName == 'admin.profile.view') ? 'active-link' : '' }}">
+                        {{-- <i class="{{ ($routeName == 'admin.profile.view') ? 'bi bi-circle-fill' : 'bi bi-circle' }}"></i>--}}
                         <span>Profile</span>
                     </a>
                 </li>

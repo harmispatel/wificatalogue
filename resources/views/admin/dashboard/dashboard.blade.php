@@ -11,7 +11,7 @@
             <div class="col-md-8">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">{{ __('Dashboard') }}</li>
                     </ol>
                 </nav>
             </div>
@@ -34,23 +34,19 @@
 
             <div class="col-md-12">
                 <div class="row">
-                    <!-- Vendors Card -->
+                    <!-- Restaurant Card -->
                     <div class="col-md-4">
                         <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title">Clients <span>|
-                                        ({{ isset($client['total']) ? $client['total'] : 0 }})</span></h5>
+                                <h5 class="card-title">Restaurants</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-people"></i>
+                                        <i class="ri-restaurant-2-line"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> Active
-                                            - {{ isset($client['active']) ? $client['active'] : 0 }}</span><br>
-                                        <span class="text-danger pt-1"><i class="bi bi-arrow-down-circle"></i>
-                                            Non-Active -
-                                            {{ isset($client['nonactive']) ? $client['nonactive'] : 0 }}</span>
+                                        <span class="text-success pt-1"><i class="bi bi-arrow-up-circle"></i> Total
+                                            - {{ isset($shop['total']) ? $shop['total'] : 0 }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +79,7 @@
                                     @endphp
                                     <tr>
                                         <td>{{ $recent_client->id }}</td>
-                                        <td>{{ $recent_client->name }}</td>
+                                        <td>{{ $recent_client->firstname }} {{ $recent_client->lastname }}</td>
                                         <td>{{ isset($recent_client->hasOneShop->shop['name']) ? $recent_client->hasOneShop->shop['name'] : '' }}</td>
                                         <td>{{ isset($recent_client->hasOneSubscription['duration']) ? $recent_client->hasOneSubscription['duration'] : '' }}</td>
                                         <td>{{ $expire_date }} Months.</td>

@@ -61,12 +61,12 @@
     transform: translate(0 , -50%);
 }
 
-.bg_login {
+/* .bg_login {
     background: url('../../../admin_images/backgrounds/login_background.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-}
+} */
 
 .clients-list{
     position: absolute;
@@ -89,5 +89,12 @@
 {
     width: 45px!important;
     height: 25px!important;
+}
+
+
+.edit-profile-btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 

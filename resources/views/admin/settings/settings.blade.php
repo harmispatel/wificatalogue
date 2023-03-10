@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input type="file" name="logo" class="form-control {{ ($errors->has('logo')) ? 'is-invalid' : '' }}">
-                                    <code>Upload Logo (100*30)</code>
+                                    <code>Max Dimensions of Logo (150*50)</code>
                                      @if($errors->has('logo'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('logo') }}
@@ -97,7 +97,144 @@
                                     @endif
                                     @if(!empty($logo))
                                         <div class="mt-3">
-                                            <img src="{{ $logo }}" alt="" width="100">
+                                            <img src="{{ $logo }}" alt="" width="150">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            @php
+                                $login_bg = isset($settings['login_form_background']) ? $settings['login_form_background'] : '';
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Login Form Background</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="login_form_background" class="form-control {{ ($errors->has('login_form_background')) ? 'is-invalid' : '' }}">
+                                    @if($errors->has('login_form_background'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('login_form_background') }}
+                                        </div>
+                                    @endif
+                                    @if(!empty($login_bg))
+                                        <div class="mt-3">
+                                            <img src="{{ $login_bg }}" alt="" width="100">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Default Light Theme Image --}}
+                            @php
+                                $light_img = isset($settings['default_light_theme_image']) ? $settings['default_light_theme_image'] : '';
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Default Light Theme Image</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="default_light_theme_image" id="default_light_theme_image" class="form-control {{ ($errors->has('default_light_theme_image')) ? 'is-invalid' : '' }}">
+                                    @if($errors->has('default_light_theme_image'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('default_light_theme_image') }}
+                                        </div>
+                                    @endif
+                                    @if(!empty($light_img))
+                                        <div class="mt-3">
+                                            <img src="{{ $light_img }}" alt="" width="100">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Default Dark Theme Image --}}
+                            @php
+                                $dark_img = isset($settings['default_dark_theme_image']) ? $settings['default_dark_theme_image'] : '';
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Default Dark Theme Image</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="default_dark_theme_image" id="default_dark_theme_image" class="form-control {{ ($errors->has('default_dark_theme_image')) ? 'is-invalid' : '' }}">
+                                    @if($errors->has('default_dark_theme_image'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('default_dark_theme_image') }}
+                                        </div>
+                                    @endif
+                                    @if(!empty($dark_img))
+                                        <div class="mt-3">
+                                            <img src="{{ $dark_img }}" alt="" width="100">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Theme Main Screen Demo --}}
+                            @php
+                                $theme_main_screen = isset($settings['theme_main_screen_demo']) ? $settings['theme_main_screen_demo'] : '';
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Theme Main Screen Demo</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="theme_main_screen_demo" id="theme_main_screen_demo" class="form-control {{ ($errors->has('theme_main_screen_demo')) ? 'is-invalid' : '' }}">
+                                    @if($errors->has('theme_main_screen_demo'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('theme_main_screen_demo') }}
+                                        </div>
+                                    @endif
+                                    @if(!empty($theme_main_screen))
+                                        <div class="mt-3">
+                                            <img src="{{ $theme_main_screen }}" alt="" width="100">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Theme Category Screen Demo --}}
+                            @php
+                                $theme_category_screen = isset($settings['theme_category_screen_demo']) ? $settings['theme_category_screen_demo'] : '';
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Theme Category Screen Demo</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="theme_category_screen_demo" id="theme_category_screen_demo" class="form-control {{ ($errors->has('theme_category_screen_demo')) ? 'is-invalid' : '' }}">
+                                    @if($errors->has('theme_category_screen_demo'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('theme_category_screen_demo') }}
+                                        </div>
+                                    @endif
+                                    @if(!empty($theme_category_screen))
+                                        <div class="mt-3">
+                                            <img src="{{ $theme_category_screen }}" alt="" width="100">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Default Special Item Image --}}
+                            @php
+                                $default_special_item_image = isset($settings['default_special_item_image']) ? $settings['default_special_item_image'] : '';
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Default Spcial Item Image</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="default_special_item_image" id="default_special_item_image" class="form-control {{ ($errors->has('default_special_item_image')) ? 'is-invalid' : '' }}">
+                                    @if($errors->has('default_special_item_image'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('default_special_item_image') }}
+                                        </div>
+                                    @endif
+                                    @if(!empty($default_special_item_image))
+                                        <div class="mt-3">
+                                            <img src="{{ $default_special_item_image }}" alt="" width="100">
                                         </div>
                                     @endif
                                 </div>

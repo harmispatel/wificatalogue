@@ -68,13 +68,19 @@
                                             <input type="hidden" name="client_id" id="client_id" value="{{ $client->id }}">
                                             <input type="hidden" name="shop_id" id="shop_id" value="{{ $client->hasOneShop['shop_id']}}">
                                             <input type="hidden" name="user_sub_id" id="user_sub_id" value="{{ isset($client->hasOneSubscription['subscription_id']) ? $client->hasOneSubscription['id'] : '' }}">
-                                            <label for="name" class="form-label">Client Name</label>
-                                            <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter Client Name" value="{{ $client->name }}">
-                                            @if($errors->has('name'))
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" placeholder="Enter First Name" value="{{ $client->firstname }}">
+                                            @if($errors->has('firstname'))
                                                 <div class="invalid-feedback">
-                                                    {{ $errors->first('name') }}
+                                                    {{ $errors->first('firstname') }}
                                                 </div>
                                             @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Last Name" value="{{ $client->lastname }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -110,18 +116,16 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="status" class="form-label">Status</label><br>
-                                            <input type="radio" name="status" value="1" id="active" {{ ($client->status == 1) ? 'checked' : '' }}> <label for="active">Active</label>
-                                            <input type="radio" name="status" value="0" id="inactive" {{ ($client->status == 0) ? 'checked' : '' }}> <label for="inactive">InActive</label>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="status" class="form-label">Status</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" value="1" {{ ($client->status == 1) ? 'checked' : '' }}>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="favourite" class="form-label">Favourite</label><br>
-                                            <input type="radio" name="favourite" value="1" id="yes" {{ ($client->is_fav == 1) ? 'checked' : '' }}> <label for="yes">Yes</label>
-                                            <input type="radio" name="favourite" value="0" id="no" {{ ($client->is_fav == 0) ? 'checked' : '' }}> <label for="no">No</label>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="favourite" class="form-label">Favourite</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="favourite" role="switch" id="favourite" value="1" {{ ($client->is_fav == 1) ? 'checked' : '' }}>
                                         </div>
                                     </div>
                                 </div>

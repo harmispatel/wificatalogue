@@ -3,7 +3,7 @@
     if (auth()->user())
     {
         $userID = encrypt(auth()->user()->id);
-        $userName = auth()->user()->name;
+        $userName = auth()->user()->firstname." ".auth()->user()->lastname;
         $userImage = auth()->user()->image;
     }
     else
@@ -35,6 +35,15 @@
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
             <li class="nav-item dropdown pe-3">
+                @php
+                    $lang_id = session('lang_code');
+                @endphp
+                <select class="form-select" aria-label="Default select language" id="backend-lang" onchange="changeBackendLang()">
+                    <option value="en" {{ ($lang_id == 'en') ? 'selected' : '' }}>English</option>
+                    <option value="el" {{ ($lang_id == 'el') ? 'selected' : '' }}>Greek</option>
+                </select>
+            </li>
+            <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     @if (!empty($userImage) || $userImage != null)
                         <img src="{{ asset($userImage) }}" alt="Profile" class="rounded-circle">
@@ -54,7 +63,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.profile',$userID) }}">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.profile.view',$userID) }}">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
@@ -64,13 +73,10 @@
                     </li>
 
                     <li>
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button class="dropdown-item d-flex align-items-center" type="submit">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Logout</span>
-                            </button>
-                        </form>
+                        <a href="{{ route('logout') }}" class="dropdown-item d-flex align-items-center">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </a>
                     </li>
                 </ul>
             </li>

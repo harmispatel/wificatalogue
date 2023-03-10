@@ -60,13 +60,19 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="name" class="form-label">Username</label>
-                                            <input type="text" name="name" id="name" class="form-control {{ ($errors->has('name')) ? 'is-invalid' : '' }}" placeholder="Enter User Name" value="{{ old('name') }}">
-                                            @if($errors->has('name'))
+                                            <label for="firstname" class="form-label">Firstname</label>
+                                            <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" placeholder="Enter Firstname" value="{{ old('firstname') }}">
+                                            @if($errors->has('firstname'))
                                                 <div class="invalid-feedback">
-                                                    {{ $errors->first('name') }}
+                                                    {{ $errors->first('firstname') }}
                                                 </div>
                                             @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="lastname" class="form-label">Lastname</label>
+                                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Lastname" value="{{ old('lastname') }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -104,13 +110,6 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="status" class="form-label">Status</label><br>
-                                            <input type="radio" name="status" value="1" id="active" checked> <label for="active">Active</label>
-                                            <input type="radio" name="status" value="0" id="inactive"> <label for="inactive">InActive</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label for="user_image" class="form-label">User Image</label>
                                             <input type="file" name="user_image" id="user_image" class="form-control {{ ($errors->has('user_image')) ? 'is-invalid' : '' }}">
                                             @if($errors->has('user_image'))
@@ -120,6 +119,14 @@
                                             @endif
                                         </div>
                                         <code>Upload Profile Photo (100*100) </code>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="status" class="form-label">Status</label>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="status" role="switch" id="status" value="1" checked>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

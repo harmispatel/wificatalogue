@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SubscriptionsSeeder::class,
             LanguagesSeeder::class,
+            CategorySeeder::class,
+            AdminSettingSeeder::class,
+            IngredientSeeder::class,
+            CountrySeeder::class,
         ]);
     }
 }

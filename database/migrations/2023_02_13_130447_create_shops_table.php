@@ -16,7 +16,9 @@ class CreateShopsTable extends Migration
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('shop_slug')->nullable();
             $table->string('logo')->nullable();
+            $table->string('qr_code')->nullable();
             $table->string('directory')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

@@ -67,7 +67,7 @@
                                     @forelse ($clients as $client)
                                         <tr>
                                             <td>{{ $client->id }}</td>
-                                            <td>{{ $client->name }}</td>
+                                            <td>{{ $client->firstname }} {{ $client->lastname }}</td>
                                             <td>{{ $client->email }}</td>
                                             <td>
                                                 @php
@@ -90,6 +90,10 @@
                                                 </div>
                                             </td>
                                             <td>
+                                                <a href="{{ route('clients.access',$client->id) }}" class="btn btn-sm btn-primary">
+                                                    <i class="bi bi-eye"></i>
+                                                    Client Access
+                                                </a>
                                                 <a href="{{ route('clients.edit',$client->id) }}" class="btn btn-sm btn-primary">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>

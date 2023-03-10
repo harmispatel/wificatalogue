@@ -24,8 +24,7 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required',
-            'shop_name' => 'required',
+            'firstname' => 'required',
             'subscription' => 'required',
         ];
 
@@ -34,6 +33,7 @@ class ClientRequest extends FormRequest
         {
             $rules += [
                 'email' => 'required|email|unique:users,email,'.$this->client_id,
+                'shop_name' => 'required|unique:shops,name,'.$this->shop_id,
                 'confirm_password' => 'same:password',
             ];
         }
@@ -41,8 +41,10 @@ class ClientRequest extends FormRequest
         {
             $rules += [
                 'email' => 'required|email|unique:users,email',
+                'shop_name' => 'required|unique:shops,name',
                 'password' => 'required|min:6',
                 'confirm_password' => 'required|same:password',
+                'primary_language' => 'required',
             ];
         }
 

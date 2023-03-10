@@ -17,11 +17,12 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'      =>      'Admin',
+                'firstname' =>      'Admin',
+                'lastname' =>      'User',
                 'email'     =>      'admin@gmail.com',
                 'user_type' =>      1,
                 'password'  =>      Hash::make(123456),
-                'status'  =>      1,
+                'status'    =>      1,
             ],
         ];
 

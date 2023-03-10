@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
+use App\Models\ClientSettings;
+use App\Models\Languages;
+use App\Models\LanguageSettings;
+use App\Models\QrSettings;
 use App\Models\Shop;
 use App\Models\Subscriptions;
+use App\Models\Theme;
+use App\Models\ThemeSettings;
 use App\Models\User;
 use App\Models\UserShop;
 use App\Models\UsersSubscriptions;
@@ -13,6 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserController extends Controller
 {
@@ -49,6 +57,7 @@ class UserController extends Controller
     public function insert()
     {
         $data['subscriptions'] = Subscriptions::where('status',1)->get();
+        $data['languages'] = Languages::get();
         return view('admin.clients.new_clients',$data);
     }
 
@@ -57,6 +66,7 @@ class UserController extends Controller
     public function store(ClientRequest $request)
     {
         $subscription_id = $request->subscription;
+        $primary_language = $request->primary_language;
 
         $subscription = Subscriptions::where('id',$subscription_id)->first();
         $subscription_duration = isset($subscription->duration) ? $subscription->duration : '';
@@ -66,22 +76,24 @@ class UserController extends Controller
         $end_date = $date->addMonths($subscription_duration)->toDateTimeString();
         $duration = $subscription_duration.' Months.';
 
-        $username = $request->name;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
         $email = $request->email;
         $password = Hash::make($request->password);
-        $status = $request->status;
+        $status = (isset($request->status)) ? $request->status : 0;
         $shop_name = $request->shop_name;
         $shop_slug = strtolower(str_replace(' ','_',$shop_name));
         $shop_description = $request->shop_description;
 
         // Insert New Client
         $client = new User();
-        $client->name = $username;
+        $client->firstname = $firstname;
+        $client->lastname = $lastname;
         $client->email = $email;
         $client->password = $password;
         $client->status = $status;
         $client->user_type = 2;
-        $client->is_fav = $request->favourite;
+        $client->is_fav = (isset($request->favourite)) ? $request->favourite : 0;
         $client->save();
 
         if($client->id)
@@ -89,6 +101,7 @@ class UserController extends Controller
             // Insert Client Shop
             $shop = new Shop();
             $shop->name = $shop_name;
+            $shop->shop_slug = $shop_slug;
             $shop->description = $shop_description;
 
             if($request->hasFile('shop_logo'))
@@ -102,6 +115,169 @@ class UserController extends Controller
             }
             $shop->save();
 
+            // Shop's Default Currency
+            $default_currency = new ClientSettings();
+            $default_currency->client_id = $client->id;
+            $default_currency->shop_id = $shop->id;
+            $default_currency->key = 'default_currency';
+            $default_currency->value = "EUR";
+            $default_currency->save();
+
+            // Business Name
+            $business_name = new ClientSettings();
+            $business_name->client_id = $client->id;
+            $business_name->shop_id = $shop->id;
+            $business_name->key = 'business_name';
+            $business_name->value = $shop_name;
+            $business_name->save();
+
+            // Generate Shop Qr
+            $new_shop_url = URL::to('/')."/".$shop_slug;
+            $qr_name = $shop_slug."_".time()."_qr.svg";
+            $upload_path = public_path('admin_uploads/shops_qr/'.$qr_name);
+
+            QrCode::size(200)->generate($new_shop_url, $upload_path);
+
+            // Insert Qr Code Settings
+            $qrdata = [
+                'qr_size' => '200',
+                'qr_style' => 'square',
+                'eye_style' => 'square',
+                'color_type' => '',
+                'color_transparent' => 100,
+                'background_color_transparent' => 100,
+                'eye_inner_color' => "#000000",
+                'eye_outer_color' => "#000000",
+                'first_color' => "#000000",
+                'second_color' => "#000000",
+                'background_color' => "#ffffff",
+            ];
+
+            $qr_setting = new QrSettings();
+            $qr_setting->shop_id = $shop->id;
+            $qr_setting->value = serialize($qrdata);
+            $qr_setting->save();
+
+            // Update Shop Details
+            $update_shop_dt = Shop::find($shop->id);
+            $update_shop_dt->qr_code = $qr_name;
+            $update_shop_dt->update();
+
+            // Insert Default Themes
+            $def_themes = [
+                'Default Light Theme',
+                'Default Dark Theme',
+            ];
+
+            foreach ($def_themes as $key => $value)
+            {
+                $theme = new Theme();
+                $theme->shop_id = $shop->id;
+                $theme->name = $value;
+                $theme->is_default = 1;
+                $theme->save();
+
+                // Insert Theme Settings
+                if($value == 'Default Light Theme')
+                {
+                    $setting_keys = [
+                        'header_color' => '#ffffff',
+                        'sticky_header' => 1,
+                        'language_bar_position' => 'left',
+                        'logo_position' => 'center',
+                        'search_box_position' => 'right',
+                        'banner_position' => 'top',
+                        'banner_type' => 'image',
+                        'background_color' => '#ffffff',
+                        'font_color' => '#4d572b',
+                        'label_color' => '#ffffff',
+                        'social_media_icon_color' => '#4d572b',
+                        'categories_bar_color' => '#ffffff',
+                        'menu_bar_font_color' => '#4d572b',
+                        'category_title_and_description_color' => '#4d572b',
+                        'price_color' => '#000000',
+                        'item_box_shadow' => 1,
+                        'item_box_shadow_color' => '#d1ccb8',
+                        'item_box_shadow_thickness' => '5px',
+                        'item_divider' => 1,
+                        'item_divider_color' => '#000000',
+                        'item_divider_thickness' => '5',
+                        'item_divider_type' => 'solid',
+                        'item_divider_position' => 'top',
+                        'item_divider_font_color' => '#4d572b',
+                        'tag_font_color' => '#4d572b',
+                        'tag_label_color' => '#ffffff',
+                        'category_bar_type' => '8px',
+                        'search_box_icon_color' => '#000000',
+                    ];
+
+                    foreach($setting_keys as $key => $val)
+                    {
+                        $theme_setting = new ThemeSettings();
+                        $theme_setting->theme_id = $theme->id;
+                        $theme_setting->key = $key;
+                        $theme_setting->value = $val;
+                        $theme_setting->save();
+                    }
+
+                    // Client's Active Theme
+                    $active_theme = new ClientSettings();
+                    $active_theme->client_id = $client->id;
+                    $active_theme->shop_id = $shop->id;
+                    $active_theme->key = 'shop_active_theme';
+                    $active_theme->value = $theme->id;
+                    $active_theme->save();
+                }
+                else
+                {
+                    $setting_keys = [
+                        'header_color' => '#000000',
+                        'sticky_header' => 1,
+                        'language_bar_position' => 'left',
+                        'logo_position' => 'center',
+                        'search_box_position' => 'right',
+                        'banner_position' => 'top',
+                        'banner_type' => 'image',
+                        'background_color' => '#000000',
+                        'font_color' => '#ffffff',
+                        'label_color' => '#000000',
+                        'social_media_icon_color' => '#ffffff',
+                        'categories_bar_color' => '#000000',
+                        'menu_bar_font_color' => '#E7B76B',
+                        'category_title_and_description_color' => '#ffffff',
+                        'price_color' => '#E7B76B',
+                        'item_box_shadow' => 1,
+                        'item_box_shadow_color' => '#E7B76B',
+                        'item_box_shadow_thickness' => '5px',
+                        'item_divider' => 1,
+                        'item_divider_color' => '#ffffff',
+                        'item_divider_thickness' => '3',
+                        'item_divider_type' => 'dotted',
+                        'item_divider_position' => 'bottom',
+                        'item_devider_font_color' => '#ffffff',
+                        'tag_font_color' => '#ffffff',
+                        'tag_label_color' => '#000000',
+                        'search_box_icon_color' => '#ffffff',
+                    ];
+
+                    foreach($setting_keys as $key => $val)
+                    {
+                        $theme_setting = new ThemeSettings();
+                        $theme_setting->theme_id = $theme->id;
+                        $theme_setting->key = $key;
+                        $theme_setting->value = $val;
+                        $theme_setting->save();
+                    }
+                }
+
+            }
+
+            // Add Client Default Language
+            $primary_lang = new LanguageSettings();
+            $primary_lang->shop_id = $shop->id;
+            $primary_lang->key = "primary_language";
+            $primary_lang->value = $primary_language;
+            $primary_lang->save();
 
             // Insert User Subscriptions
             if($subscription_id)
@@ -143,10 +319,11 @@ class UserController extends Controller
         $end_date = $date->addMonths($subscription_duration)->toDateTimeString();
         $duration = $subscription_duration.' Months.';
 
-        $username = $request->name;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
         $email = $request->email;
         $password = Hash::make($request->password);
-        $status = $request->status;
+        $status = isset($request->status) ? $request->status : 0;
         $shop_id = $request->shop_id;
         $shop_name = $request->shop_name;
         $shop_slug = strtolower(str_replace(' ','_',$shop_name));
@@ -154,11 +331,12 @@ class UserController extends Controller
 
         // Update New Client
         $client = User::find($request->client_id);
-        $client->name = $username;
+        $client->firstname = $firstname;
+        $client->lastname = $lastname;
         $client->email = $email;
-        $client->is_fav = $request->favourite;
+        $client->is_fav = (isset($request->favourite)) ? $request->favourite : 0;
 
-        if(!empty($password))
+        if(!empty($request->password))
         {
             $client->password = $password;
         }
@@ -182,6 +360,7 @@ class UserController extends Controller
         // Update Client Shop
         $shop = Shop::find($shop_id);
         $shop->name = $shop_name;
+        $shop->shop_slug = $shop_slug;
         $shop->description = $shop_description;
 
         if($request->hasFile('shop_logo'))
@@ -242,6 +421,13 @@ class UserController extends Controller
     }
 
 
+    public function clientAccess($userID)
+    {
+        Auth::loginUsingId($userID);
+        return redirect()->route('login');
+    }
+
+
 
     public function edit($id)
     {
@@ -266,34 +452,49 @@ class UserController extends Controller
 
     public function editProfile($id)
     {
-        $data['user'] = User::where('id',decrypt($id))->first();
-
         if(Auth::user()->user_type == 1)
         {
-            return view('auth.admin-profile',$data);
+            $data['user'] = User::where('id',decrypt($id))->first();
+            return view('auth.admin-profile-edit',$data);
         }
         else
         {
-            dd(1);
+            $data['user'] = User::with(['hasOneShop','hasOneSubscription'])->where('id',decrypt($id))->first();
+            return view('auth.client-profile-edit',$data);
         }
     }
 
 
+    public function myProfile($id)
+    {
+        if(Auth::user()->user_type == 1)
+        {
+            $data['user'] = User::where('id',decrypt($id))->first();
+            return view('auth.admin-profile',$data);
+        }
+        else
+        {
+            $data['user'] = User::with(['hasOneShop','hasOneSubscription'])->where('id',decrypt($id))->first();
+            return view('auth.client-profile',$data);
+        }
+    }
+
 
     public function updateProfile(Request $request)
     {
-        $request->validate([
-            'name'                  =>      'required',
-            'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
-            'confirm_password'      =>      'same:password',
-            'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG'
-        ]);
-
         $user  = User::find($request->user_id);
 
         if(Auth::user()->user_type == 1)
         {
-            $user->name = $request->name;
+            $request->validate([
+                'firstname'             =>      'required',
+                'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
+                'confirm_password'      =>      'same:password',
+                'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG'
+            ]);
+
+            $user->firstname = $request->firstname;
+            $user->lastname = $request->lastname;
             $user->email = $request->email;
 
             if(!empty($request->password))
@@ -318,13 +519,126 @@ class UserController extends Controller
             }
 
             $user->update();
-            return redirect()->route('admin.dashboard')->with('success','Profile has been Updated SuccessFully..');
+            return redirect()->route('admin.profile.view',encrypt($request->user_id))->with('success','Profile has been Updated SuccessFully..');
         }
         else
         {
-            dd(1);
+            $request->validate([
+                'shop_name'             =>      'required',
+                'firstname'             =>      'required',
+                'email'                 =>      'required|email|unique:users,email,'.$request->user_id,
+                'confirm_password'      =>      'same:password',
+                'profile_picture'       =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+                'shop_logo'             =>      'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            ]);
+
+            // User Update
+            $user->firstname = $request->firstname;
+            $user->lastname = $request->lastname;
+            $user->email = $request->email;
+
+            if(!empty($request->password))
+            {
+                $user->password = Hash::make($request->password);
+            }
+
+            if($request->hasFile('profile_picture'))
+            {
+                // Remove Old Image
+                $old_image = isset($user->image) ? $user->image : '';
+                if(!empty($old_image) && file_exists($old_image))
+                {
+                    unlink($old_image);
+                }
+
+                // Insert New Image
+                $imgname = time().".". $request->file('profile_picture')->getClientOriginalExtension();
+                $request->file('profile_picture')->move(public_path('admin_uploads/users/'), $imgname);
+                $imageurl = asset('/').'public/admin_uploads/users/'.$imgname;
+                $user->image = $imageurl;
+            }
+            $user->update();
+
+            // Shop Update
+            $shop_id = isset($user->hasOneShop->shop['id']) ? $user->hasOneShop->shop['id'] : '';
+
+            // Update Shop name in Client Settings
+            $shop_name_query = ClientSettings::where('client_id',$request->user_id)->where('shop_id',$shop_id)->where('key','business_name')->first();
+            $shop_name_setting_id = isset($shop_name_query->id) ? $shop_name_query->id : '';
+            if (!empty($shop_name_setting_id) || $shop_name_setting_id != '')  // Update
+            {
+                $settings = ClientSettings::find($shop_name_setting_id);
+                $settings->value = $request->shop_name;
+                $settings->update();
+            }
+            else // Insert
+            {
+                $settings = new ClientSettings();
+                $settings->client_id = $request->user_id;
+                $settings->shop_id = $shop_id;
+                $settings->key = 'business_name';
+                $settings->value = $request->shop_name;
+                $settings->save();
+            }
+
+
+            if(!empty($shop_id))
+            {
+                $shop_slug = strtolower(str_replace(' ','_',$request->shop_name));
+                $shop = Shop::find($shop_id);
+                $shop->name = $request->shop_name;
+                $shop->description = $request->shop_description;
+
+                if($request->hasFile('shop_logo'))
+                {
+                    $old_image = isset($shop->logo) ? $shop->logo : '';
+                    if(!empty($old_image))
+                    {
+                        if(file_exists($old_image))
+                        {
+                            unlink($old_image);
+                        }
+                    }
+
+                    $path = public_path('admin_uploads/shops/').$shop_slug."/";
+                    $imgname = time().".". $request->file('shop_logo')->getClientOriginalExtension();
+                    $request->file('shop_logo')->move($path, $imgname);
+                    $imageurl = asset('public/admin_uploads/shops/'.$shop_slug).'/'.$imgname;
+                    $shop->logo = $imageurl;
+                    $shop->directory = $path;
+                }
+                $shop->update();
+            }
+
+            return redirect()->route('client.profile.view',encrypt($request->user_id))->with('success','Profile has been Updated SuccessFully..');
         }
 
+    }
+
+
+    public function deleteProfilePicture()
+    {
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+
+        if($user)
+        {
+            $user_image = isset($user->image) ? $user->image : '';
+            if(!empty($user_image))
+            {
+                $new_path = str_replace(asset('/public/'),public_path(),$user_image);
+                if(file_exists($new_path))
+                {
+                    unlink($new_path);
+                }
+            }
+
+            $user->image = "";
+        }
+
+        $user->update();
+
+        return redirect()->back()->with('success', "Profile Picture has been Removed SuccessFully..");
     }
 
 
@@ -404,20 +718,22 @@ class UserController extends Controller
     public function storeNewAdmin(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'firstname' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password',
             'user_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
-        $name = $request->name;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
         $email = $request->email;
         $password = Hash::make($request->password);
-        $status = $request->status;
+        $status = isset($request->status) ? $request->status : 0;
 
         $user = new User();
-        $user->name = $name;
+        $user->firstname = $firstname;
+        $user->lastname = $lastname;
         $user->email = $email;
         $user->password = $password;
         $user->user_type = 1;
@@ -484,23 +800,25 @@ class UserController extends Controller
     public function updateAdmin(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'firstname' => 'required',
             'email' => 'required|email|unique:users,email,'.$request->user_id,
             'confirm_password' => 'same:password',
             'user_image' => 'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
-        $name = $request->name;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
         $email = $request->email;
-        $password = Hash::make($request->password);
-        $status = $request->status;
+        $status = isset($request->status) ? $request->status : 0;
 
         $user = User::find($request->user_id);
-        $user->name = $name;
+        $user->firstname = $firstname;
+        $user->lastname = $lastname;
         $user->email = $email;
 
-        if(!empty($password))
+        if(!empty($request->password))
         {
+            $password = Hash::make($request->password);
             $user->password = $password;
         }
 

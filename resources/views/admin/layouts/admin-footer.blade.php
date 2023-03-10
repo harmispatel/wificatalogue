@@ -1,6 +1,8 @@
 @php
+    $current_year = \Carbon\Carbon::now()->format('Y');
     $settings = getAdminSettings();
     $copyright_text = isset($settings['copyright_text']) ? $settings['copyright_text'] : '';
+    $copyright_text = str_replace('[year]',$current_year,$copyright_text);
 @endphp
 
 <!-- ======= Footer ======= -->
