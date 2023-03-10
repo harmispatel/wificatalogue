@@ -111,6 +111,7 @@ class UserController extends Controller
                 $request->file('shop_logo')->move($path, $imgname);
                 $imageurl = asset('public/admin_uploads/shops/'.$shop_slug).'/'.$imgname;
                 $shop->logo = $imageurl;
+
                 $shop->directory = $path;
             }
             $shop->save();
@@ -130,7 +131,6 @@ class UserController extends Controller
             $business_name->key = 'business_name';
             $business_name->value = $shop_name;
             $business_name->save();
-
             // Generate Shop Qr
             $new_shop_url = URL::to('/')."/".$shop_slug;
             $qr_name = $shop_slug."_".time()."_qr.svg";
