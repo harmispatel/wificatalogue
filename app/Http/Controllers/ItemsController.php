@@ -353,7 +353,7 @@ class ItemsController extends Controller
             // Item Details
             $item = Items::where('id',$item_id)->first();
             $default_image = asset('public/client_images/not-found/no_image_1.jpg');
-            $item_image = (isset($item['image']) && !empty($item['image']) && file_exists('public/client_uploads/items/'.$item['image'])) ? asset('public/client_uploads/items/'.$item['image']) : $default_image;
+            $item_image = (isset($item['image']) && !empty($item['image']) && file_exists('public/client_uploads/items/'.$item['image'])) ? asset('public/client_uploads/items/'.$item['image']) : "";
             $item_published = (isset($item['published']) && $item['published'] == 1) ? 'checked' : '';
             $item_is_new = (isset($item['is_new']) && $item['is_new'] == 1) ? 'checked' : '';
             $item_as_sign = (isset($item['as_sign']) && $item['as_sign'] == 1) ? 'checked' : '';
@@ -362,6 +362,7 @@ class ItemsController extends Controller
             $category_id = (isset($item['category_id'])) ? $item['category_id'] : '';
             $item_ingredients = (isset($item['ingredients']) && !empty($item['ingredients'])) ? unserialize($item['ingredients']) : [];
             $item_cat_tags = CategoryProductTags::with(['hasOneTag'])->where('item_id',$item['id'])->where('category_id',$item['category_id'])->get();
+            $delete_item_image_url = route('items.delete.image',$item_id);
 
             // Item Category Tags Array
             if(count($item_cat_tags) > 0)
@@ -481,10 +482,26 @@ class ItemsController extends Controller
                                 $html .= '<div class="form-group mb-3">';
                                     $html .= '<label class="form-label" for="item_image">Image</label>';
                                     $html .= '<input type="file" name="item_image" id="item_image" class="form-control">';
-                                    $html .= '<div class="mt-3" id="itemImage">';
-                                        $html .= '<img src="'.$item_image.'" width="100">';
-                                    $html .= '</div>';
                                     $html .= '<code>Upload Image in (200*200) Dimensions</code>';
+
+                                    if(!empty($item_image))
+                                    {
+                                        $html .= '<div class="row mt-5">';
+                                            $html .= '<div class="col-md-3">';
+                                                $html .= '<div class="mt-3 position-relative" id="itemImage">';
+                                                    $html .= '<img src="'.$item_image.'" class="w-100">';
+                                                    $html .= '<a href="'.$delete_item_image_url.'" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>';
+                                                $html .= '</div>';
+                                            $html .= '</div>';
+                                        $html .= '</div>';
+                                    }
+                                    else
+                                    {
+                                        $html .= '<div class="mt-3" id="itemImage">';
+                                            $html .= '<img src="'.$default_image.'" width="100">';
+                                        $html .= '</div>';
+                                    }
+
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group mb-3">';
@@ -688,10 +705,26 @@ class ItemsController extends Controller
                                     $html .= '<div class="form-group mb-3">';
                                         $html .= '<label class="form-label" for="item_image">Image</label>';
                                         $html .= '<input type="file" name="item_image" id="item_image" class="form-control">';
-                                        $html .= '<div class="mt-3" id="itemImage">';
-                                            $html .= '<img src="'.$item_image.'" width="100">';
-                                        $html .= '</div>';
                                         $html .= '<code>Upload Image in (200*200) Dimensions</code>';
+
+                                        if(!empty($item_image))
+                                        {
+                                            $html .= '<div class="row mt-5">';
+                                                $html .= '<div class="col-md-3">';
+                                                    $html .= '<div class="mt-3 position-relative" id="itemImage">';
+                                                        $html .= '<img src="'.$item_image.'" class="w-100">';
+                                                        $html .= '<a href="'.$delete_item_image_url.'" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>';
+                                                    $html .= '</div>';
+                                                $html .= '</div>';
+                                            $html .= '</div>';
+                                        }
+                                        else
+                                        {
+                                            $html .= '<div class="mt-3" id="itemImage">';
+                                                $html .= '<img src="'.$default_image.'" width="100">';
+                                            $html .= '</div>';
+                                        }
+
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group mb-3">';
@@ -887,10 +920,26 @@ class ItemsController extends Controller
                     $html .= '<div class="form-group mb-3">';
                         $html .= '<label class="form-label" for="item_image">Image</label>';
                         $html .= '<input type="file" name="item_image" id="item_image" class="form-control">';
-                        $html .= '<div class="mt-3" id="itemImage">';
-                            $html .= '<img src="'.$item_image.'" width="100">';
-                        $html .= '</div>';
                         $html .= '<code>Upload Image in (200*200) Dimensions</code>';
+
+                        if(!empty($item_image))
+                        {
+                            $html .= '<div class="row mt-5">';
+                                $html .= '<div class="col-md-3">';
+                                    $html .= '<div class="mt-3 position-relative" id="itemImage">';
+                                        $html .= '<img src="'.$item_image.'" class="w-100">';
+                                        $html .= '<a href="'.$delete_item_image_url.'" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>';
+                                    $html .= '</div>';
+                                $html .= '</div>';
+                            $html .= '</div>';
+                        }
+                        else
+                        {
+                            $html .= '<div class="mt-3" id="itemImage">';
+                                $html .= '<img src="'.$default_image.'" width="100">';
+                            $html .= '</div>';
+                        }
+
                     $html .= '</div>';
 
                     $html .= '<div class="form-group mb-3">';
@@ -1187,6 +1236,31 @@ class ItemsController extends Controller
         }
 
     }
+
+
+
+    // Function Delete Item Image
+    public function deleteItemImage($id)
+    {
+        $item = Items::find($id);
+
+        if($item)
+        {
+            $item_image = isset($item['image']) ? $item['image'] : '';
+
+            if(!empty($item_image) && file_exists('public/client_uploads/items/'.$item_image))
+            {
+                unlink('public/client_uploads/items/'.$item_image);
+            }
+
+            $item->image = "";
+            $item->update();
+        }
+
+        return redirect()->route('items')->with('success',"Item Image has been Removed SuccessFully...");
+
+    }
+
 
 
     // Function for Sorting Tags.

@@ -40,4 +40,25 @@
         window.location.href = "{{ route('clients')}}";
     }
 
+    // Change Admin Language
+    function changeBackendLang()
+    {
+        var langCode = $('#backend-lang :selected').val();
+        $.ajax({
+            type: "POST",
+            url: "{{ route('change.backend.language') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "langCode": langCode,
+            },
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == 1)
+                {
+                    location.reload();
+                }
+            }
+        });
+    }
+
 </script>

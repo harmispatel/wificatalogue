@@ -616,6 +616,32 @@ class UserController extends Controller
     }
 
 
+    public function deleteProfilePicture()
+    {
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+
+        if($user)
+        {
+            $user_image = isset($user->image) ? $user->image : '';
+            if(!empty($user_image))
+            {
+                $new_path = str_replace(asset('/public/'),public_path(),$user_image);
+                if(file_exists($new_path))
+                {
+                    unlink($new_path);
+                }
+            }
+
+            $user->image = "";
+        }
+
+        $user->update();
+
+        return redirect()->back()->with('success', "Profile Picture has been Removed SuccessFully..");
+    }
+
+
 
     public function changeStatus(Request $request)
     {

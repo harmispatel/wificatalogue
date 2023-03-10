@@ -95,4 +95,30 @@ class ShopBannerController extends Controller
         return redirect()->route('design.banner')->with('success','Settings has been Updated SuccessFully..');
 
     }
+
+    public function deleteBanner($key)
+    {
+        $clientID = isset(Auth::user()->id) ? Auth::user()->id : '';
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+        $image_key = $key."_image";
+
+        $get_banner = ShopBanner::where('shop_id',$shop_id)->where('key','shop_banner')->first();
+        $setting_id = isset($get_banner->id) ? $get_banner->id : '';
+        $lang_bannner = isset($get_banner[$image_key]) ? $get_banner[$image_key] : '';
+
+        if(!empty($lang_bannner) && file_exists('public/client_uploads/banners/'.$lang_bannner))
+        {
+            unlink('public/client_uploads/banners/'.$lang_bannner);
+        }
+
+        if(!empty($setting_id))
+        {
+            $banner = ShopBanner::find($setting_id);
+            $banner->$image_key = "";
+            $banner->update();
+        }
+
+        return redirect()->route('design.banner')->with('success','Banner has been Removed SuccessFully...');
+
+    }
 }

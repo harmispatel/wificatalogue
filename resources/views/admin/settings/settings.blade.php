@@ -217,6 +217,29 @@
                                 </div>
                             </div>
 
+                            {{-- Default Special Item Image --}}
+                            @php
+                                $default_special_item_image = isset($settings['default_special_item_image']) ? $settings['default_special_item_image'] : '';
+                            @endphp
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <b>Default Spcial Item Image</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="default_special_item_image" id="default_special_item_image" class="form-control {{ ($errors->has('default_special_item_image')) ? 'is-invalid' : '' }}">
+                                    @if($errors->has('default_special_item_image'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('default_special_item_image') }}
+                                        </div>
+                                    @endif
+                                    @if(!empty($default_special_item_image))
+                                        <div class="mt-3">
+                                            <img src="{{ $default_special_item_image }}" alt="" width="100">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
                             {{-- New Language Section --}}
                             <div class="row mb-3">
                                 <div class="col-md-4">

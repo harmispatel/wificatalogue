@@ -42,6 +42,10 @@
     // Today Special Icon
     $today_special_icon = isset($theme_settings['today_special_icon']) ? $theme_settings['today_special_icon'] : '';
 
+    // Admin Settings
+    $admin_settings = getAdminSettings();
+    $default_special_image = (isset($admin_settings['default_special_item_image'])) ? $admin_settings['default_special_item_image'] : '';
+
 @endphp
 
 
@@ -115,7 +119,11 @@
                                                                     @if(!empty($today_special_icon) && file_exists('public/client_uploads/today_special_icon/'.$today_special_icon))
                                                                         <img width="100" class="mt-3" src="{{ asset('public/client_uploads/today_special_icon/'.$today_special_icon) }}">
                                                                     @else
-                                                                        <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
+                                                                        @if(!empty($default_special_image))
+                                                                            <img width="100" class="mt-3" src="{{ $default_special_image }}">
+                                                                        @else
+                                                                            <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
+                                                                        @endif
                                                                     @endif
                                                                 @endif
 
@@ -255,7 +263,11 @@
                                                                     @if(!empty($today_special_icon) && file_exists('public/client_uploads/today_special_icon/'.$today_special_icon))
                                                                         <img width="100" class="mt-3" src="{{ asset('public/client_uploads/today_special_icon/'.$today_special_icon) }}">
                                                                     @else
-                                                                        <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
+                                                                        @if(!empty($default_special_image))
+                                                                            <img width="100" class="mt-3" src="{{ $default_special_image }}">
+                                                                        @else
+                                                                            <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
+                                                                        @endif
                                                                     @endif
 
                                                                     {{-- Name Section --}}
@@ -388,7 +400,11 @@
                                                         @if(!empty($today_special_icon) && file_exists('public/client_uploads/today_special_icon/'.$today_special_icon))
                                                             <img width="100" class="mt-3" src="{{ asset('public/client_uploads/today_special_icon/'.$today_special_icon) }}">
                                                         @else
-                                                            <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
+                                                            @if(!empty($default_special_image))
+                                                                <img width="100" class="mt-3" src="{{ $default_special_image }}">
+                                                            @else
+                                                                <img width="100" class="mt-3" src="{{ asset('public/client_images/bs-icon/today_special.gif') }}">
+                                                            @endif
                                                         @endif
 
                                                         {{-- Name Section --}}

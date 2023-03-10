@@ -29,3 +29,28 @@
 <!-- Select 2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+<script type="text/javascript">
+
+    // Change Admin Language
+    function changeBackendLang()
+    {
+        var langCode = $('#backend-lang :selected').val();
+        $.ajax({
+            type: "POST",
+            url: "{{ route('change.backend.language') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "langCode": langCode,
+            },
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == 1)
+                {
+                    location.reload();
+                }
+            }
+        });
+    }
+
+</script>
+

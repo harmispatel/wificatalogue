@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Auth;
             'default_dark_theme_image',
             'theme_main_screen_demo',
             'theme_category_screen_demo',
+            'default_special_item_image',
         ]);
 
         $settings = [];

@@ -116,12 +116,13 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <div class="form-group">
                                             <label class="form-label">Preview</label>
-                                            <div>
+                                            <div class="position-relative">
                                                 @if(!empty($user->image))
-                                                    <img src="{{ $user->image }}" width="100">
+                                                    <img src="{{ $user->image }}" class="w-100">
+                                                    <a href="{{ route('client.delete.profile.picture') }}" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>
                                                 @else
                                                     <img src="{{ asset('public/admin_images/not-found/not-found2.png') }}" width="100">
                                                 @endif
@@ -155,17 +156,22 @@
                                                 </div>
                                             @endif
                                         </div>
+                                        <code class="mt-2">Upload Shop Logo (150*80) or (150*150)</code>
                                         @php
                                             $image = isset($user->hasOneShop->shop['logo']) ? $user->hasOneShop->shop['logo'] : '';
                                         @endphp
-                                        <div class="form-group mt-2">
-                                            @if(!empty($image))
-                                                <img width="100" src="{{ $image }}">
-                                            @else
-                                                <img width="100" src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}">
-                                            @endif
+                                        <div class="row mt-5">
+                                            <div class="col-md-4">
+                                                <div class="form-group mt-2 position-relative">
+                                                    @if(!empty($image))
+                                                        <img class="w-100" src="{{ $image }}">
+                                                        <a href="{{ route('shop.delete.logo') }}" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>
+                                                    @else
+                                                        <img width="100" src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}">
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
-                                        <code class="mt-2">Upload Shop Logo (150*80) or (150*150)</code>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">

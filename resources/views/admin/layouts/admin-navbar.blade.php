@@ -35,6 +35,15 @@
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
             <li class="nav-item dropdown pe-3">
+                @php
+                    $lang_id = session('lang_code');
+                @endphp
+                <select class="form-select" aria-label="Default select language" id="backend-lang" onchange="changeBackendLang()">
+                    <option value="en" {{ ($lang_id == 'en') ? 'selected' : '' }}>English</option>
+                    <option value="el" {{ ($lang_id == 'el') ? 'selected' : '' }}>Greek</option>
+                </select>
+            </li>
+            <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     @if (!empty($userImage) || $userImage != null)
                         <img src="{{ asset($userImage) }}" alt="Profile" class="rounded-circle">

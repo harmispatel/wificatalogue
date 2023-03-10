@@ -11,7 +11,7 @@ class BillingInfoController extends Controller
 {
     public function billingInfo()
     {
-        $data['expire_date'] =  (isset(Auth::user()->hasOneSubscription['end_date'])) ? \Carbon\Carbon::now()->diffInMonths(Auth::user()->hasOneSubscription['end_date'], false) : '';
+        $data['expire_date'] =  (isset(Auth::user()->hasOneSubscription['end_date'])) ? \Carbon\Carbon::now()->diffInDays(Auth::user()->hasOneSubscription['end_date'], false) : '';
         $data['user'] = User::where('id',Auth::user()->id)->first();
         $data['countries'] = Country::get();
         return view('client.billing_info.billing_info',$data);
@@ -22,8 +22,14 @@ class BillingInfoController extends Controller
         $request->validate([
             'firstname' => 'required',
             'email' => 'required|email|unique:users,email,'.$request->user_id,
-            'country' => 'required',
         ]);
+
+        if($request->form_type == 'invoice')
+        {
+            $request->validate([
+                'vat_id' => 'required',
+            ]);
+        }
 
         $user = User::find($request->user_id);
         $user->firstname = $request->firstname;
@@ -34,6 +40,8 @@ class BillingInfoController extends Controller
         $user->city = $request->city;
         $user->country = $request->country;
         $user->zipcode = $request->zipcode;
+        $user->vat_id = $request->vat_id;
+        $user->gemi_id = $request->gemi_id;
         $user->update();
 
         return redirect()->route('billing.info')->with('success', "Billing Information has Been Updated SuccessFully...");

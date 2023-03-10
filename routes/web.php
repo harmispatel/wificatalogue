@@ -136,6 +136,7 @@ Route::group(['prefix' => 'client'], function()
         Route::post('status-categories',[CategoryController::class,'status'])->name('categories.status');
         Route::post('search-categories',[CategoryController::class,'searchCategories'])->name('categories.search');
         Route::post('sorting-categories',[CategoryController::class,'sorting'])->name('categories.sorting');
+        Route::get('delete-categories-image/{id}',[CategoryController::class,'deleteCategoryImage'])->name('categories.delete.image');
 
         // Items
         Route::get('items/{id?}',[ItemsController::class,'index'])->name('items');
@@ -146,17 +147,25 @@ Route::group(['prefix' => 'client'], function()
         Route::post('edit-items',[ItemsController::class,'edit'])->name('items.edit');
         Route::post('update-items',[ItemsController::class,'update'])->name('items.update');
         Route::post('sorting-items',[ItemsController::class,'sorting'])->name('items.sorting');
+        Route::get('delete-items-image/{id}',[ItemsController::class,'deleteItemImage'])->name('items.delete.image');
 
 
         // Designs
         Route::get('/design-logo', [DesignController::class,'logo'])->name('design.logo');
         Route::post('/design-logo-upload', [DesignController::class,'logoUpload'])->name('design.logo.upload');
+        Route::get('/design-logo-delete', [DesignController::class,'deleteLogo'])->name('design.logo.delete');
+
         Route::post('/design-intro-status', [DesignController::class,'introStatus'])->name('design.intro.status');
         Route::post('/design-intro-icon', [DesignController::class,'introIconUpload'])->name('design.intro.icon');
         Route::post('/design-intro-duration', [DesignController::class,'introDuration'])->name('design.intro.duration');
+
         Route::get('/design-cover', [DesignController::class,'cover'])->name('design.cover');
+        Route::get('/design-cover-delete', [DesignController::class,'deleteCover'])->name('design.cover.delete');
+
         Route::get('/design-banner', [ShopBannerController::class,'index'])->name('design.banner');
         Route::post('/design-banner-update', [ShopBannerController::class,'update'])->name('design.banner.update');
+        Route::get('/design-banner-delete/{key}', [ShopBannerController::class,'deleteBanner'])->name('design.banner.delete');
+
         Route::get('/design-general-info', [DesignController::class,'generalInfo'])->name('design.general-info');
         Route::post('/design-generalInfoUpdate', [DesignController::class,'generalInfoUpdate'])->name('design.generalInfoUpdate');
 
@@ -185,6 +194,10 @@ Route::group(['prefix' => 'client'], function()
         Route::get('/my-profile/{id}',[UserController::class,'myProfile'])->name('client.profile.view');
         Route::get('/edit-profile/{id}',[UserController::class,'editProfile'])->name('client.profile.edit');
         Route::post('/update-profile',[UserController::class,'updateProfile'])->name('client.profile.update');
+        Route::get('/delete-profile-picture',[UserController::class,'deleteProfilePicture'])->name('client.delete.profile.picture');
+
+        // Delete Shop Logo
+        Route::get('delete-shop-logo',[ShopController::class, 'deleteShopLogo'])->name('shop.delete.logo');
 
         // Tags
         Route::get('tags',[TagsController::class,'index'])->name('tags');
@@ -223,3 +236,6 @@ Route::get('/{shop_slug}',[ShopController::class,'index'])->name('restaurant');
 Route::get('{shop_slug}/items/{catID}',[ShopController::class,'itemPreview'])->name('items.preview');
 Route::post('shop-locale-change',[ShopController::class,'changeShopLocale'])->name('shop.locale.change');
 Route::post('search-shop-categories',[ShopController::class,'searchCategories'])->name('shop.categories.search');
+
+// Change Backend Language
+Route::post('/change-backend-language', [DashboardController::class, 'changeBackendLanguage'])->name('change.backend.language');

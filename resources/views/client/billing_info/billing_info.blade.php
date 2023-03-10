@@ -16,9 +16,6 @@
                     </ol>
                 </nav>
             </div>
-            <div class="col-md-12">
-                <code class="fs-4">Your Subscription has been Expired In {{ $expire_date }} Months.</code>
-            </div>
         </div>
     </div>
 
@@ -56,10 +53,21 @@
                             </div>
                             <div class="container">
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <input class="form_type" type="radio" name="form_type" id="receipt" value="receipt" {{ (old('form_type') == 'receipt') ? 'checked' : (old('form_type') == 'invoice') ? '' : 'checked' }}> <label for="receipt">Receipt</label>
+                                            <input class="form_type" type="radio" name="form_type" id="invoice" value="invoice" {{ (old('form_type') == 'invoice') ? 'checked' : '' }}> <label for="invoice">Invoice</label>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label">First Name</label>
-                                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Plase Enter First Name" value="{{ $user->firstname }}">
+                                            <input type="text" name="firstname" id="firstname" class="form-control {{ ($errors->has('firstname')) ? 'is-invalid' : '' }}" placeholder="Plase Enter First Name" value="{{ $user->firstname }}">
+                                            @if($errors->has('firstname'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('firstname') }}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -71,7 +79,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label">Email</label>
-                                            <input type="text" name="email" id="email" value="{{ $user->email }}" class="form-control" placeholder="Plase Enter your Email">
+                                            <input type="text" name="email" id="email" value="{{ $user->email }}" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Plase Enter your Email">
+                                            @if($errors->has('email'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('email') }}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -109,6 +122,23 @@
                                         <div class="form-group mb-3">
                                             <label class="form-label">Zip</label>
                                             <input type="text" name="zipcode" id="zipcode" value="{{ $user->zipcode }}" class="form-control" placeholder="Plase Enter your Zip">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 invoice_div" style="display: none;">
+                                        <div class="form-group mb-3">
+                                            <label for="vat_id" class="form-label">VAT ID</label>
+                                            <input type="text" name="vat_id" id="vat_id" value="{{ $user->vat_id }}" class="form-control {{ ($errors->has('vat_id')) ? 'is-invalid' : '' }}" placeholder="Enter VAT ID">
+                                            @if($errors->has('vat_id'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('vat_id') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 invoice_div" style="display: none;">
+                                        <div class="form-group mb-3">
+                                            <label for="gemi_id" class="form-label">G.E.M.I ID</label>
+                                            <input type="text" name="gemi_id" id="gemi_id" class="form-control" placeholder="Enter G.E.M.I ID" value="{{ $user->gemi_id }}">
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +186,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{ $expire_date }} Months.
+                                        <code class="fs-5">Your Subscription will Expire In {{ $expire_date }} Days.</code>
                                     </td>
                                 </tr>
                             </tbody>
@@ -176,7 +206,32 @@
 
     <script type="text/javascript">
 
+        $(document).ready(function(){
+            var selVal = $('input[name="form_type"]:checked').val();
+            if(selVal == 'invoice')
+            {
+                $('.invoice_div').show();
+            }
+            else
+            {
+                $('.invoice_div').hide();
+            }
+        });
+
         $('#country').select2();
+
+        // Show & Hide Invoice Fields
+        $('.form_type').on('click',function(){
+            var selectedVal = $(this).val();
+            if(selectedVal == 'invoice')
+            {
+                $('.invoice_div').show();
+            }
+            else
+            {
+                $('.invoice_div').hide();
+            }
+        });
 
     </script>
 

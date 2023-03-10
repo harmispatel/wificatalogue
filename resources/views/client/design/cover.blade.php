@@ -39,8 +39,10 @@
                                             @if($file_ext == 'mp4' || $file_ext == 'mov')
                                                 <video src="{{ asset('public/client_uploads/intro_icons/'.$shop_intro_icon) }}" width="200px" autoplay muted loop>
                                                 </video>
+                                                <a href="{{ route('design.cover.delete') }}" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>
                                             @else
                                                 <img src="{{ asset('public/client_uploads/intro_icons/'.$shop_intro_icon) }}" width="200px"/>
+                                                <a href="{{ route('design.cover.delete') }}" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>
                                             @endif
                                         @else
                                             <img src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}" width="200px"/>
@@ -69,6 +71,10 @@
 @section('page-js')
 
     <script type="text/javascript">
+
+        @if (Session::has('success'))
+            toastr.success('{{ Session::get('success') }}')
+        @endif
 
         // Change Intro Status
         $('#intro_icon_status').on('change',function()

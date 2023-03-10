@@ -11,6 +11,7 @@ use App\Models\Shop;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use JetBrains\PhpStorm\Language;
 
 class ShopController extends Controller
@@ -194,5 +195,34 @@ class ShopController extends Controller
                 'message' => "Internal Server Error!",
             ]);
         }
+    }
+
+
+    // Delete Shop Logo
+    public function deleteShopLogo()
+    {
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+
+        $shop = Shop::find($shop_id);
+
+        if($shop)
+        {
+            $shop_logo = isset($shop->logo) ? $shop->logo : '';
+            if(!empty($shop_logo))
+            {
+                $new_path = str_replace(asset('/public/'),public_path(),$shop_logo);
+                if(file_exists($new_path))
+                {
+                    unlink($new_path);
+                }
+            }
+
+            $shop->logo = "";
+        }
+
+        $shop->update();
+
+        return redirect()->back()->with('success', "Shop Logo has been Removed SuccessFully..");
+
     }
 }

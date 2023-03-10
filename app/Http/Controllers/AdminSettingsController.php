@@ -20,6 +20,7 @@ class AdminSettingsController extends Controller
             'default_dark_theme_image',
             'theme_main_screen_demo',
             'theme_category_screen_demo',
+            'default_special_item_image',
         ]);
 
         $settings = [];
@@ -49,6 +50,7 @@ class AdminSettingsController extends Controller
             'default_dark_theme_image'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
             'theme_main_screen_demo'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
             'theme_category_screen_demo'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
+            'default_special_item_image'       =>          'mimes:png,jpg,svg,jpeg,PNG,SVG,JPG,JPEG',
         ]);
 
         $all_data['favourite_client_limit'] = $request->favourite_client_limit;
@@ -102,6 +104,14 @@ class AdminSettingsController extends Controller
             $all_data['theme_category_screen_demo'] = $imageUrl;
         }
 
+        if($request->hasFile('default_special_item_image'))
+        {
+            $imageName = "special_item_image_".time().".". $request->file('default_special_item_image')->getClientOriginalExtension();
+            $request->file('default_special_item_image')->move(public_path('admin_uploads/special_item_image/'), $imageName);
+            $imageUrl = asset('/').'public/admin_uploads/special_item_image/'.$imageName;
+            $all_data['default_special_item_image'] = $imageUrl;
+        }
+
         // Insert or Update Settings
         foreach($all_data as $key => $value)
         {
@@ -127,15 +137,4 @@ class AdminSettingsController extends Controller
 
     }
 
-    // foreach ($data as $key => $new)
-    // {
-    //     $query = Settings::where('store_id', $current_store_id)->where('key', $key)->first();
-    //     $setting_id = isset($query->setting_id) ? $query->setting_id : '';
-    //     if (!empty($setting_id) || $setting_id != '') {
-    //         update
-    //     }
-    //     else{
-    //         insert
-    //     }
-    // }
 }

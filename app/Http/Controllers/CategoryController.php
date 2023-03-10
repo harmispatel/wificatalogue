@@ -137,8 +137,9 @@ class CategoryController extends Controller
             // Category Details
             $category = Category::where('id',$category_id)->first();
             $default_image = asset('public/client_images/not-found/no_image_1.jpg');
-            $category_image = (isset($category['image']) && !empty($category['image']) && file_exists('public/client_uploads/categories/'.$category['image'])) ? asset('public/client_uploads/categories/'.$category['image']) : $default_image;
+            $category_image = (isset($category['image']) && !empty($category['image']) && file_exists('public/client_uploads/categories/'.$category['image'])) ? asset('public/client_uploads/categories/'.$category['image']) : '';
             $category_status = (isset($category['published']) && $category['published'] == 1) ? 'checked' : '';
+            $delete_cat_image_url = route('categories.delete.image',$category_id);
 
             // Get Language Settings
             $language_settings = clientLanguageSettings($shop_id);
@@ -204,10 +205,26 @@ class CategoryController extends Controller
                                 $html .= '<div class="form-group mb-3">';
                                     $html .= '<label class="form-label" for="category_image">Image</label>';
                                     $html .= '<input type="file" name="category_image" id="category_image" class="form-control">';
-                                    $html .= '<div class="mt-3" id="categoryImage">';
-                                        $html .= '<img src="'.$category_image.'" width="100">';
-                                    $html .= '</div>';
                                     $html .= '<code>Upload Image in (200*200) Dimensions</code>';
+
+                                    if(!empty($category_image))
+                                    {
+                                        $html .= '<div class="row mt-5">';
+                                            $html .= '<div class="col-md-3">';
+                                                $html .= '<div class="mt-3 position-relative" id="categoryImage">';
+                                                    $html .= '<img src="'.$category_image.'" class="w-100">';
+                                                    $html .= '<a href="'.$delete_cat_image_url.'" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>';
+                                                $html .= '</div>';
+                                            $html .= '</div>';
+                                        $html .= '</div>';
+                                    }
+                                    else
+                                    {
+                                        $html .= '<div class="mt-3" id="categoryImage">';
+                                            $html .= '<img src="'.$default_image.'" width="100">';
+                                        $html .= '</div>';
+                                    }
+
                                 $html .= '</div>';
                                 $html .= '<div class="form-group mb-3">';
                                     $html .= '<label class="form-label me-3" for="published">Published</label>';
@@ -256,10 +273,26 @@ class CategoryController extends Controller
                                     $html .= '<div class="form-group mb-3">';
                                         $html .= '<label class="form-label" for="category_image">Image</label>';
                                         $html .= '<input type="file" name="category_image" id="category_image" class="form-control">';
-                                        $html .= '<div class="mt-3" id="categoryImage">';
-                                            $html .= '<img src="'.$category_image.'" width="100">';
-                                        $html .= '</div>';
                                         $html .= '<code>Upload Image in (200*200) Dimensions</code>';
+
+                                        if(!empty($category_image))
+                                        {
+                                            $html .= '<div class="row mt-5">';
+                                                $html .= '<div class="col-md-3">';
+                                                    $html .= '<div class="mt-3 position-relative" id="categoryImage">';
+                                                        $html .= '<img src="'.$category_image.'" class="w-100">';
+                                                        $html .= '<a href="'.$delete_cat_image_url.'" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>';
+                                                    $html .= '</div>';
+                                                $html .= '</div>';
+                                            $html .= '</div>';
+                                        }
+                                        else
+                                        {
+                                            $html .= '<div class="mt-3" id="categoryImage">';
+                                                $html .= '<img src="'.$default_image.'" width="100">';
+                                            $html .= '</div>';
+                                        }
+
                                     $html .= '</div>';
                                     $html .= '<div class="form-group mb-3">';
                                         $html .= '<label class="form-label me-3" for="published">Published</label>';
@@ -306,10 +339,26 @@ class CategoryController extends Controller
                         $html .= '<div class="form-group mb-3">';
                             $html .= '<label class="form-label" for="category_image">Image</label>';
                             $html .= '<input type="file" name="category_image" id="category_image" class="form-control">';
-                            $html .= '<div class="mt-3" id="categoryImage">';
-                                $html .= '<img src="'.$category_image.'" width="100">';
-                            $html .= '</div>';
                             $html .= '<code>Upload Image in (200*200) Dimensions</code>';
+
+                            if(!empty($category_image))
+                            {
+                                $html .= '<div class="row mt-5">';
+                                    $html .= '<div class="col-md-3">';
+                                        $html .= '<div class="mt-3 position-relative" id="categoryImage">';
+                                            $html .= '<img src="'.$category_image.'" class="w-100">';
+                                            $html .= '<a href="'.$delete_cat_image_url.'" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>';
+                                        $html .= '</div>';
+                                    $html .= '</div>';
+                                $html .= '</div>';
+                            }
+                            else
+                            {
+                                $html .= '<div class="mt-3" id="categoryImage">';
+                                    $html .= '<img src="'.$default_image.'" width="100">';
+                                $html .= '</div>';
+                            }
+
                         $html .= '</div>';
 
                         $html .= '<div class="form-group mb-3">';
@@ -516,6 +565,30 @@ class CategoryController extends Controller
                 'message' => "Internal Server Error!",
             ]);
         }
+
+    }
+
+
+
+    // Function Delete Category Image
+    public function deleteCategoryImage($id)
+    {
+        $category = Category::find($id);
+
+        if($category)
+        {
+            $cat_image = isset($category['image']) ? $category['image'] : '';
+
+            if(!empty($cat_image) && file_exists('public/client_uploads/categories/'.$cat_image))
+            {
+                unlink('public/client_uploads/categories/'.$cat_image);
+            }
+
+            $category->image = "";
+            $category->update();
+        }
+
+        return redirect()->route('categories')->with('success',"Category Image has been Removed SuccessFully...");
 
     }
 

@@ -238,7 +238,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Menu Bar Fonts Color</span>
+                                                                <span>Category Bar Fonts Color</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">
@@ -260,7 +260,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-8">
-                                                                <span>Price colour</span>
+                                                                <span>Price Color</span>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="from-group d-flex align-items-center">

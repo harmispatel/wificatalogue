@@ -97,6 +97,33 @@ class DesignController extends Controller
     }
 
 
+    // Delete Logo
+    public function deleteLogo()
+    {
+        $clientID = isset(Auth::user()->id) ? Auth::user()->id : '';
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+
+        $get_logo_setting = ClientSettings::where('client_id',$clientID)->where('shop_id',$shop_id)->where('key','shop_view_header_logo')->first();
+        $setting_id = isset($get_logo_setting->id) ? $get_logo_setting->id : '';
+        $logo = isset($get_logo_setting->value) ? $get_logo_setting->value : '';
+
+        if(!empty($logo) && file_exists('public/client_uploads/top_logos/'.$logo))
+        {
+            unlink('public/client_uploads/top_logos/'.$logo);
+        }
+
+        if(!empty($setting_id))
+        {
+            $logo_setting = ClientSettings::find($setting_id);
+            $logo_setting->value = "";
+            $logo_setting->update();
+        }
+
+        return redirect()->route('design.logo')->with('success','Logo has been Removed SuccessFully...');
+
+    }
+
+
     // Change Intro Status
     public function introStatus(Request $request)
     {
@@ -287,9 +314,38 @@ class DesignController extends Controller
     }
 
 
+
+    // Function for Cover
     public function cover()
     {
         return view('client.design.cover');
+    }
+
+
+    // Delete Cover
+    public function deleteCover()
+    {
+        $clientID = isset(Auth::user()->id) ? Auth::user()->id : '';
+        $shop_id = isset(Auth::user()->hasOneShop->shop['id']) ? Auth::user()->hasOneShop->shop['id'] : '';
+
+        $get_intro_icon = ClientSettings::where('client_id',$clientID)->where('shop_id',$shop_id)->where('key','shop_intro_icon')->first();
+        $setting_id = isset($get_intro_icon->id) ? $get_intro_icon->id : '';
+        $shop_intro_icon = isset($get_intro_icon->value) ? $get_intro_icon->value : '';
+
+        if(!empty($shop_intro_icon) && file_exists('public/client_uploads/intro_icons/'.$shop_intro_icon))
+        {
+            unlink('public/client_uploads/intro_icons/'.$shop_intro_icon);
+        }
+
+        if(!empty($setting_id))
+        {
+            $logo_setting = ClientSettings::find($setting_id);
+            $logo_setting->value = "";
+            $logo_setting->update();
+        }
+
+        return redirect()->route('design.cover')->with('success','Cover has been Removed SuccessFully...');
+
     }
 
 

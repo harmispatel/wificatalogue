@@ -64,9 +64,10 @@
                                         <div class="add_logo_sec_body">
                                             <label class="form-label">Banner will appear on the top of your menu</label>
                                             <div class="add_logo_sec_body_inr">
-                                                <label for="{{ $primary_banner_id }}" style="cursor: pointer;">
+                                                <label class="position-relative" for="{{ $primary_banner_id }}" style="cursor: pointer;">
                                                     @if(!empty($primary_banner_image) && file_exists('public/client_uploads/banners/'.$primary_banner_image))
                                                         <img src="{{ asset('public/client_uploads/banners/'.$primary_banner_image) }}" width="200px">
+                                                        <a href="{{ route('design.banner.delete',$primary_code) }}" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>
                                                     @else
                                                         <img src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}" width="200px"/>
                                                     @endif
@@ -116,9 +117,10 @@
                                             <div class="add_logo_sec_body">
                                                 <label class="form-label">Banner will appear on the top of your menu</label>
                                                 <div class="add_logo_sec_body_inr">
-                                                    <label for="{{ $add_banner_id }}" style="cursor: pointer;">
+                                                    <label class="position-relative" for="{{ $add_banner_id }}" style="cursor: pointer;">
                                                         @if(!empty($add_banner_image) && file_exists('public/client_uploads/banners/'.$add_banner_image))
                                                             <img src="{{ asset('public/client_uploads/banners/'.$add_banner_image) }}" width="200px">
+                                                            <a href="{{ route('design.banner.delete',$add_lang_code) }}" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>
                                                         @else
                                                             <img src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}" width="200px"/>
                                                         @endif
@@ -150,9 +152,10 @@
                             <div class="add_logo_sec_body">
                                 <label class="form-label">Banner will appear on the top of your menu</label>
                                 <div class="add_logo_sec_body_inr">
-                                    <label for="{{ $primary_banner_id }}" style="cursor: pointer;">
+                                    <label class="position-relative" for="{{ $primary_banner_id }}" style="cursor: pointer;">
                                         @if(!empty($primary_banner_image) && file_exists('public/client_uploads/banners/'.$primary_banner_image))
                                             <img src="{{ asset('public/client_uploads/banners/'.$primary_banner_image) }}" width="200px">
+                                            <a href="{{ route('design.banner.delete',$primary_code) }}" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>
                                         @else
                                             <img src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}" width="200px"/>
                                         @endif

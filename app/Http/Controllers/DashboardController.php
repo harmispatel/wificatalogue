@@ -55,4 +55,16 @@ class DashboardController extends Controller
 
         return view('client.dashboard.dashboard',$data);
     }
+
+    // Function for Change Backend Language
+    public function changeBackendLanguage(Request $request)
+    {
+        $lang_code = $request->langCode;
+
+        session()->put('lang_code',$lang_code);
+
+        return response()->json([
+            'success' => 1,
+        ]);
+    }
 }

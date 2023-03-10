@@ -20,10 +20,11 @@
                         <p>Logo will appear on the top of your menu</p>
                         <form id="logoForm" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="add_logo_sec_body_inr">
+                            <div class="add_logo_sec_body_inr position-relative">
                                 <label for="shop_view_header_logo" class="position-relative" style="cursor: pointer;">
                                     @if(!empty($logo) && file_exists('public/client_uploads/top_logos/'.$logo))
                                         <img src="{{ asset('public/client_uploads/top_logos/'.$logo) }}" width="200px"/>
+                                        <a href="{{ route('design.logo.delete') }}" class="btn btn-sm btn-danger" style="position: absolute; top: -35px; right: 0px;"><i class="bi bi-trash"></i></a>
                                     @else
                                         <img src="{{ asset('public/client_images/not-found/no_image_1.jpg') }}" width="200px"/>
                                     @endif
@@ -46,6 +47,11 @@
 @section('page-js')
 
     <script type="text/javascript">
+
+        @if (Session::has('success'))
+            toastr.success('{{ Session::get('success') }}')
+        @endif
+
         $("#shop_view_header_logo").on('change',function()
         {
             myFormData = new FormData(document.getElementById("logoForm"));
