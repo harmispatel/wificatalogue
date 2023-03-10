@@ -55,7 +55,19 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group mb-3">
-                                            <input class="form_type" type="radio" name="form_type" id="receipt" value="receipt" {{ (old('form_type') == 'receipt') ? 'checked' : (old('form_type') == 'invoice') ? '' : 'checked' }}> <label for="receipt">Receipt</label>
+                                            @php
+                                                if(old('form_type') == 'receipt')
+                                                {
+                                                    $receipt_old_val = 'checked';
+                                                }
+                                                elseif (old('form_type') == 'invoice') {
+                                                    $receipt_old_val = '';
+                                                }
+                                                else {
+                                                    $receipt_old_val = 'checked';
+                                                }
+                                            @endphp
+                                            <input class="form_type" type="radio" name="form_type" id="receipt" value="receipt" {{ $receipt_old_val }}> <label for="receipt">Receipt</label>
                                             <input class="form_type" type="radio" name="form_type" id="invoice" value="invoice" {{ (old('form_type') == 'invoice') ? 'checked' : '' }}> <label for="invoice">Invoice</label>
                                         </div>
                                     </div>
