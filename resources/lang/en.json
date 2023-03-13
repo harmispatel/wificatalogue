@@ -1,12 +1,11 @@
 {
-  
+
     "Login to Your Account": "Login to Your Account",
     "Enter your email & password to login": "Enter your email & password to login",
     "Email": "Email",
     "Password":"Password",
     "Login":"Login",
 
- 
     "Dashboard":"Dashboard",
     "Clients":"Clients",
     "All Clients":"All Clients",
@@ -18,7 +17,7 @@
     "Settings":"Settings",
     "Total":"Total",
 
-  
+
     "Restaurants":"Restaurants",
     "Recent Clients":"Recent Clients",
     "Client":"Client",
@@ -28,8 +27,7 @@
     "Status":"Status",
     "Subscriptions Not Found!":"Subscriptions Not Found!",
 
-   
-    "Id":"Id",
+    "Id":"ID",
     "Name":"Name",
     "email":"email",
     "Favourite":"Favourite",
@@ -51,9 +49,9 @@
     "Edit":"Edit",
     "New Clients":"New Clients",
     "Indicative Icons Not Found!":"Indicative Icons Not Found!",
-    
-    
-    
+
+
+
     "Price":"Price",
     "Duration":"Duration",
     "Active":"Active",
@@ -64,15 +62,15 @@
     "Edit Indicative Icons":"Edit Indicative Icons",
     "Edit Clients":"Edit Clients",
 
-   
+
     "Icon":"Icon",
     "New Indicative Icons":"New Indicative Icons",
 
-    
+
     "Profile Details":"Profile Details",
     "Role":"Role",
-    "FirstName":"FirstName",
-    "LastName":"LastName",
+    "FirstName":"First Name",
+    "LastName":"Last Name",
     "Joined At": "Joined At",
     "Profile Picture":"Profile Picture",
     "Preview":"Preview",
@@ -81,7 +79,7 @@
     "User Image":"User Image",
 
 
-    
+
     "Favourites Clients Limit":"Favourites Clients Limit",
     "Copyright":"Copyright",
     "Logo":"Logo",
@@ -117,7 +115,7 @@
     "Get QR Code":"Get QR Code",
     "Statistics":"Statistics",
     "Tutorial":"Tutorial",
-  
+
     "Categories Not Found!":"Categories Not Found!",
     "Items Not Found!":"Items Not Found!",
     "VAT ID":"VAT ID",
@@ -182,7 +180,6 @@
     "Item Category":"Item Category",
     "ADD OR EDIT ITEMS":"ADD OR EDIT ITEMS",
     "EDIT CATEGORY":"EDIT CATEGORY",
-    "κατηγορία προιόντος":"κατηγορία προιόντος",
     "Add New Category":"Add New Category",
     "Create New category":"Create New category",
     "Description":"Description",
@@ -212,19 +209,19 @@
     "French":"French",
     "Greek":"Greek",
 
-    "Qr Code":"Qr Code",
+    "Qr Code":"QR Code",
     "Download":"Download",
     "Print":"Print",
     "Color":"Color",
     "Style":"Style",
     "Size":"Size",
     "Select Color Type":"Select Color Type",
-    "Select First Color":"Select First Color",
-    "Select Second Color":"Select Second Color",
+    "Select First Color":"Select 1st Color",
+    "Select Second Color":"Select 2nd Color",
     "Select Background Color":"Select Background Color",
-    "Background Color Transparent":"Background Color Transparent",
-    "Color Transparent":"Color Transparent",
-    "Select Qr Style":"Select Qr Style",
+    "Background Color Transparent":"Background Color Transparency",
+    "Color Transparent":"Color Transparency",
+    "Select Qr Style":"Select QR Style",
     "Select Eye Style":"Select Eye Style",
     "Select Eye Inner Color":"Select Eye Inner Color",
     "Select Eye Outer Color":"Select Eye Outer Color",
@@ -242,7 +239,7 @@
     "Language Box Position":"Language Box Position",
     "Logo Position":"Logo Position",
     "Search Box Position":"Search Box Position",
-    "Search Box Icon Color":"Search Box Icon Color",
+    "Search Box Icon Color":"Search Icon Color",
     "Banner Position":"Banner Position",
     "Banner Type":"Banner Type",
     "Background Color":"Background Color",
@@ -258,20 +255,20 @@
     "Item Box Shadow":"Item Box Shadow",
     "Item Box Shadow Color":"Item Box Shadow Color",
     "Item Box Shadow Thickness":"Item Box Shadow Thickness",
-    "Item Divider":"Item Divider",
-    "Item Divider Color":"Item Divider Color",
-    "Item Divider Thickness":"Item Divider Thickness",
-    "Item Divider Type":"Item Divider Type",
-    "Item Divider Position":"Item Divider Position",
-    "Item Divider Font Color":"Item Divider Font Color",
+    "Item Divider":"Divider",
+    "Item Divider Color":"Divider Color",
+    "Item Divider Thickness":"Divider Thickness",
+    "Item Divider Type":"Divider Type",
+    "Item Divider Position":"Divider Position",
+    "Item Divider Font Color":"Divider Font Color",
     "Tag Font Color":"Tag Font Color",
     "Tag Label Color":"Tag Label Color",
     "Today Special Icon":"Today Special Icon",
     "Theme Prview Image":"Theme Prview Image",
-    "S A V E":"S A V E",
+    "S A V E":"SAVE",
 
-    "Most visited":"Most visited",
-    "Contact US":"Contact US",
+    "Most visited":"Most Visited",
+    "Contact US":"Contact Us",
     "Message":"Message",
 
     "My Profile":"My Profile",
