@@ -10,7 +10,7 @@
 
 @extends('client.layouts.client-layout')
 
-@section('title', 'Language')
+@section('title', __('Language'))
 
 @section('content')
 

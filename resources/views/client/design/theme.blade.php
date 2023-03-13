@@ -8,14 +8,14 @@
 
 @extends('client.layouts.client-layout')
 
-@section('title', 'Theme')
+@section('title', __('Themes'))
 
 @section('content')
 
     <section class="theme_section">
         <div class="sec_title">
             <h2>{{ __('Themes')}}</h2>
-            <p> {{ __('Select a theme and preview your menu to check the result. Click on ‘Add theme’ and edit 	all available features.')}}
+            <p> {{ __('Select a theme and preview your menu to check the result. Click on ‘Add theme’ and edit all available features.')}}
             </p>
         </div>
         <div class="row">

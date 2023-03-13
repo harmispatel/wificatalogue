@@ -9,7 +9,7 @@
 
 @extends('client.layouts.client-layout')
 
-@section('title', 'Tags')
+@section('title', __('Tags'))
 
 @section('content')
 
@@ -18,7 +18,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editTagModalLabel">Edit Tag</h5>
+                    <h5 class="modal-title" id="editTagModalLabel">{{ __('Edit Tag')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="tag_lang_div">
@@ -94,7 +94,7 @@
                                 @empty
                                     <tr class="text-center">
                                         <td colspan="3">
-                                            Tags Not Found !
+                                            {{ __('Tags Not Found !')}}
                                         </td>
                                     </tr>
                                 @endforelse
