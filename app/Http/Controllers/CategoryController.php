@@ -195,15 +195,15 @@ class CategoryController extends Controller
                             $html .= '<input type="hidden" name="category_id" id="category_id" value="'.$category['id'].'">';
                             $html .= '<div class="row">';
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="category_name">Name</label>';
+                                    $html .= '<label class="form-label" for="category_name">'.__('Name').'</label>';
                                     $html .= '<input type="text" name="category_name" id="category_name" class="form-control" value="'.$primary_cat_name.'">';
                                 $html .= '</div>';
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="category_description">Desription</label>';
+                                    $html .= '<label class="form-label" for="category_description">'.__('Desription').'</label>';
                                     $html .= '<textarea name="category_description" id="category_description" class="form-control" rows="3">'.$primary_cat_desc.'</textarea>';
                                 $html .= '</div>';
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="category_image">Image</label>';
+                                    $html .= '<label class="form-label" for="category_image">'.__('Image').'</label>';
                                     $html .= '<input type="file" name="category_image" id="category_image" class="form-control">';
                                     $html .= '<code>Upload Image in (200*200) Dimensions</code>';
 
@@ -227,7 +227,7 @@ class CategoryController extends Controller
 
                                 $html .= '</div>';
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label me-3" for="published">Published</label>';
+                                    $html .= '<label class="form-label me-3" for="published">'.__('Published').'</label>';
                                     $html .= '<label class="switch">';
                                         $html .= '<input type="checkbox" id="published" name="published" value="1" '.$category_status.'>';
                                         $html .= '<span class="slider round">';
@@ -237,7 +237,7 @@ class CategoryController extends Controller
                                     $html .= '</label>';
                                 $html .= '</div>';
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<a class="btn btn btn-success" onclick="updateCategory('.$primary_input_lang_code.')">Update</a>';
+                                    $html .= '<a class="btn btn btn-success" onclick="updateCategory('.$primary_input_lang_code.')">'.__('Update').'</a>';
                                 $html .= '</div>';
                             $html .= '</div>';
                         $html .= '</form>';
@@ -263,15 +263,15 @@ class CategoryController extends Controller
                                 $html .= '<input type="hidden" name="category_id" id="category_id" value="'.$category['id'].'">';
                                 $html .= '<div class="row">';
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="category_name">Name</label>';
+                                        $html .= '<label class="form-label" for="category_name">'.__('Name').'</label>';
                                         $html .= '<input type="text" name="category_name" id="category_name" class="form-control" value="'.$add_cat_name.'">';
                                     $html .= '</div>';
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="category_description">Desription</label>';
+                                        $html .= '<label class="form-label" for="category_description">'.__('Desription').'</label>';
                                         $html .= '<textarea name="category_description" id="category_description" class="form-control" rows="3">'.$add_cat_desc.'</textarea>';
                                     $html .= '</div>';
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="category_image">Image</label>';
+                                        $html .= '<label class="form-label" for="category_image">'.__('Image').'</label>';
                                         $html .= '<input type="file" name="category_image" id="category_image" class="form-control">';
                                         $html .= '<code>Upload Image in (200*200) Dimensions</code>';
 
@@ -295,7 +295,7 @@ class CategoryController extends Controller
 
                                     $html .= '</div>';
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label me-3" for="published">Published</label>';
+                                        $html .= '<label class="form-label me-3" for="published">'.__('Published').'</label>';
                                         $html .= '<label class="switch">';
                                             $html .= '<input type="checkbox" id="published" name="published" value="1" '.$category_status.'>';
                                             $html .= '<span class="slider round">';
@@ -305,7 +305,7 @@ class CategoryController extends Controller
                                         $html .= '</label>';
                                     $html .= '</div>';
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<a class="btn btn btn-success" onclick="updateCategory('.$add_input_lang_code.')">Update</a>';
+                                        $html .= '<a class="btn btn btn-success" onclick="updateCategory('.$add_input_lang_code.')">'.__('Update').'</a>';
                                     $html .= '</div>';
                                 $html .= '</div>';
                             $html .= '</form>';
@@ -524,7 +524,7 @@ class CategoryController extends Controller
                                 $html .= '<a href="#"><img src="'.$image.'" class="w-100"></a>';
                                 $html .= '<div class="edit_item_bt">';
                                     $html .= '<button type="button" class="btn edit_item">'.__('ADD OR EDIT ITEMS').'</button>';
-                                    $html .= '<button class="btn edit_category" onclick="editCategory('.$category->id.')">EDIT CATEGORY</button>';
+                                    $html .= '<button class="btn edit_category" onclick="editCategory('.$category->id.')">'.__('EDIT CATEGORY').'</button>';
                                 $html .= '</div>';
                                 $html .= '<a class="delet_bt" onclick="deleteCategory('.$category->id.')" style="cursor: pointer;"><i class="fa-solid fa-trash"></i></a>';
                             $html .= '</div>';
