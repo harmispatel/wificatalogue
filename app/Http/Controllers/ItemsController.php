@@ -286,7 +286,7 @@ class ItemsController extends Controller
                             $html .= '<div class="item_img">';
                                 $html .= '<a href="#"><img src="'.$image.'" class="w-100"></a>';
                                 $html .= '<div class="edit_item_bt">';
-                                    $html .= '<button class="btn edit_category" onclick="editCategory('.$item->id.')">EDIT ITEM</button>';
+                                    $html .= '<button class="btn edit_category" onclick="editCategory('.$item->id.')">EDIT ITEM.</button>';
                                 $html .= '</div>';
                                 $html .= '<a class="delet_bt" onclick="deleteItem('.$item->id.')" style="cursor: pointer;"><i class="fa-solid fa-trash"></i></a>';
                             $html .= '</div>';
@@ -433,7 +433,7 @@ class ItemsController extends Controller
                             $html .= '<input type="hidden" name="item_id" id="item_id" value="'.$item['id'].'">';
                             $html .= '<div class="row">';
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="type">Type</label>';
+                                    $html .= '<label class="form-label" for="type">'.__('Type').'</label>';
                                     $html .= '<select name="type" id="type" class="form-select" onchange="togglePrice('.$formType.','.$primary_input_lang_code.')">';
                                         $html .= '<option value="1"';
                                             if($item_type == 1)
@@ -451,7 +451,7 @@ class ItemsController extends Controller
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="category">Category</label>';
+                                    $html .= '<label class="form-label" for="category">'. __('Category').'</label>';
                                     $html .= '<select name="category" id="category" class="form-select">';
                                             $html .= '<option value="">Choose Category</option>';
                                             if(count($categories) > 0)
@@ -470,17 +470,17 @@ class ItemsController extends Controller
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="item_name">Name</label>';
+                                    $html .= '<label class="form-label" for="item_name">'.__('Name').'</label>';
                                     $html .= '<input type="text" name="item_name" id="item_name" class="form-control" value="'.$primary_item_name.'">';
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="item_description">Desription</label>';
+                                    $html .= '<label class="form-label" for="item_description">'.__('Desription').'</label>';
                                     $html .= '<textarea name="item_description" id="item_description" class="form-control" rows="3">'.$primary_item_desc.'</textarea>';
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="item_image">Image</label>';
+                                    $html .= '<label class="form-label" for="item_image">'.__('Image').'</label>';
                                     $html .= '<input type="file" name="item_image" id="item_image" class="form-control">';
                                     $html .= '<code>Upload Image in (200*200) Dimensions</code>';
 
@@ -505,7 +505,7 @@ class ItemsController extends Controller
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="ingredients">Indicative Icons</label>';
+                                    $html .= '<label class="form-label" for="ingredients">'.__('Indicative Icons').'</label>';
                                     $html .= '<select name="ingredients[]" id="'.$primary_lang_code.'_ingredients" class="form-select" multiple>';
                                         if(count($ingredients) > 0)
                                         {
@@ -523,7 +523,7 @@ class ItemsController extends Controller
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<label class="form-label" for="tags">Tags</label>';
+                                    $html .= '<label class="form-label" for="tags">'.__('Tags').'</label>';
                                     $html .= '<select name="tags[]" id="'.$primary_lang_code.'_tags" class="form-select" multiple>';
                                         if(count($tags) > 0)
                                         {
@@ -541,7 +541,7 @@ class ItemsController extends Controller
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group price_div priceDiv mb-3" id="priceDiv">';
-                                    $html .= '<label class="form-label">Price</label>';
+                                    $html .= '<label class="form-label">'.__('Price').'</label>';
                                     if(isset($primary_item_price['price']) && count($primary_item_price['price']) > 0)
                                     {
                                         foreach($primary_item_price['price'] as $key => $item_price)
@@ -565,11 +565,11 @@ class ItemsController extends Controller
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group price_div priceDiv mb-3">';
-                                    $html .= '<a onclick="addPrice(\''.$primary_lang_code.'_item_form\')" class="btn addPriceBtn btn-info text-white">Add Price</a>';
+                                    $html .= '<a onclick="addPrice(\''.$primary_lang_code.'_item_form\')" class="btn addPriceBtn btn-info text-white">'.__('Add Price').'</a>';
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group calories_div mb-3">';
-                                    $html .= '<label class="form-label" for="calories">Calories</label>';
+                                    $html .= '<label class="form-label" for="calories">'.__('Calories').'</label>';
                                     $html .= '<input type="text" name="calories" id="calories" class="form-control" value="'.$primary_item_calories.'">';
                                 $html .= '</div>';
 
@@ -583,7 +583,7 @@ class ItemsController extends Controller
                                                     $html .= '<i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>';
                                                 $html .= '</span>';
                                             $html .= '</label>';
-                                            $html .= '<label for="mark_new" class="form-label">Mark Item as New</label>';
+                                            $html .= '<label for="mark_new" class="form-label">'.__('Mark Item as New').'</label>';
                                         $html .= '</div>';
                                         $html .= '<div class="col-md-6 mark_sign mb-2">';
                                             $html .= '<label class="switch me-2">';
@@ -593,7 +593,7 @@ class ItemsController extends Controller
                                                     $html .= '<i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>';
                                                 $html .= '</span>';
                                             $html .= '</label>';
-                                            $html .= '<label for="mark_sign" class="form-label">Mark Item as Signature</label>';
+                                            $html .= '<label for="mark_sign" class="form-label">'.__('Mark Item as Signature').'</label>';
                                         $html .= '</div>';
                                     $html .= '</div>';
                                 $html .= '</div>';
@@ -608,7 +608,7 @@ class ItemsController extends Controller
                                                     $html .= '<i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>';
                                                 $html .= '</span>';
                                             $html .= '</label>';
-                                            $html .= '<label for="day_special" class="form-label">Mark Item as Day Special</label>';
+                                            $html .= '<label for="day_special" class="form-label">'.__('Mark Item as Day Special').'</label>';
                                         $html .= '</div>';
                                         $html .= '<div class="col-md-6 mb-2">';
                                             $html .= '<label class="switch me-2">';
@@ -618,13 +618,13 @@ class ItemsController extends Controller
                                                     $html .= '<i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>';
                                                 $html .= '</span>';
                                             $html .= '</label>';
-                                            $html .= '<label for="publish" class="form-label">Published</label>';
+                                            $html .= '<label for="publish" class="form-label">'.__('Published').'</label>';
                                         $html .= '</div>';
                                     $html .= '</div>';
                                 $html .= '</div>';
 
                                 $html .= '<div class="form-group mb-3">';
-                                    $html .= '<a class="btn btn btn-success" onclick="updateItem('.$primary_input_lang_code.')">Update</a>';
+                                    $html .= '<a class="btn btn btn-success" onclick="updateItem('.$primary_input_lang_code.')">'.__('Update').'</a>';
                                 $html .= '</div>';
 
                             $html .= '</div>';
@@ -656,7 +656,7 @@ class ItemsController extends Controller
                                 $html .= '<div class="row">';
 
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="type">Type</label>';
+                                        $html .= '<label class="form-label" for="type">'.__('Type').'</label>';
                                         $html .= '<select name="type" id="type" class="form-select" onchange="togglePrice('.$formType.','.$add_input_lang_code.')">';
                                             $html .= '<option value="1"';
                                                 if($item_type == 1)
@@ -674,7 +674,7 @@ class ItemsController extends Controller
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="category">Category</label>';
+                                        $html .= '<label class="form-label" for="category">'.__('Category').'</label>';
                                         $html .= '<select name="category" id="category" class="form-select">';
                                                 $html .= '<option value="">Choose Category</option>';
                                                 if(count($categories) > 0)
@@ -693,17 +693,17 @@ class ItemsController extends Controller
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="item_name">Name</label>';
+                                        $html .= '<label class="form-label" for="item_name">'.__('Name').'</label>';
                                         $html .= '<input type="text" name="item_name" id="item_name" class="form-control" value="'.$add_item_name.'">';
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="item_description">Desription</label>';
+                                        $html .= '<label class="form-label" for="item_description">'.__('Desription').'</label>';
                                         $html .= '<textarea name="item_description" id="item_description" class="form-control" rows="3">'.$add_item_desc.'</textarea>';
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="item_image">Image</label>';
+                                        $html .= '<label class="form-label" for="item_image">'.__('Image').'</label>';
                                         $html .= '<input type="file" name="item_image" id="item_image" class="form-control">';
                                         $html .= '<code>Upload Image in (200*200) Dimensions</code>';
 
@@ -728,7 +728,7 @@ class ItemsController extends Controller
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="ingredients">Indicative Icons</label>';
+                                        $html .= '<label class="form-label" for="ingredients">'.__('Indicative Icons').'</label>';
                                         $html .= '<select name="ingredients[]" id="'.$add_lang_code.'_ingredients" class="form-select" multiple>';
                                             if(count($ingredients) > 0)
                                             {
@@ -746,7 +746,7 @@ class ItemsController extends Controller
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<label class="form-label" for="tags">Tags</label>';
+                                        $html .= '<label class="form-label" for="tags">'.__('Tags').'</label>';
                                         $html .= '<select name="tags[]" id="'.$add_lang_code.'_tags" class="form-select" multiple>';
                                             if(count($tags) > 0)
                                             {
@@ -764,7 +764,7 @@ class ItemsController extends Controller
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group price_div priceDiv mb-3" id="priceDiv">';
-                                        $html .= '<label class="form-label">Price</label>';
+                                        $html .= '<label class="form-label">'.__('Price').'</label>';
                                         if(isset($add_item_price['price']) && count($add_item_price['price']) > 0)
                                         {
                                             foreach($add_item_price['price'] as $key => $item_price)
@@ -788,11 +788,11 @@ class ItemsController extends Controller
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group price_div priceDiv mb-3">';
-                                        $html .= '<a onclick="addPrice(\''.$add_lang_code.'_item_form\')" class="btn addPriceBtn btn-info text-white">Add Price</a>';
+                                        $html .= '<a onclick="addPrice(\''.$add_lang_code.'_item_form\')" class="btn addPriceBtn btn-info text-white">'.__('Add Price').'</a>';
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group calories_div mb-3">';
-                                        $html .= '<label class="form-label" for="calories">Calories</label>';
+                                        $html .= '<label class="form-label" for="calories">'.__('Calories').'</label>';
                                         $html .= '<input type="text" name="calories" id="calories" class="form-control" value="'.$add_item_calories.'">';
                                     $html .= '</div>';
 
@@ -806,7 +806,7 @@ class ItemsController extends Controller
                                                         $html .= '<i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>';
                                                     $html .= '</span>';
                                                 $html .= '</label>';
-                                                $html .= '<label for="mark_new" class="form-label">Mark Item as New</label>';
+                                                $html .= '<label for="mark_new" class="form-label">'.__('Mark Item as New').'</label>';
                                             $html .= '</div>';
                                             $html .= '<div class="col-md-6 mark_sign mb-2">';
                                                 $html .= '<label class="switch me-2">';
@@ -816,7 +816,7 @@ class ItemsController extends Controller
                                                         $html .= '<i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>';
                                                     $html .= '</span>';
                                                 $html .= '</label>';
-                                                $html .= '<label for="mark_sign" class="form-label">Mark Item as Signature</label>';
+                                                $html .= '<label for="mark_sign" class="form-label">'.__('Mark Item as Signature').'</label>';
                                             $html .= '</div>';
                                         $html .= '</div>';
                                     $html .= '</div>';
@@ -831,7 +831,7 @@ class ItemsController extends Controller
                                                         $html .= '<i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>';
                                                     $html .= '</span>';
                                                 $html .= '</label>';
-                                                $html .= '<label for="day_special" class="form-label">Mark Item as Day Special</label>';
+                                                $html .= '<label for="day_special" class="form-label">'.__('Mark Item as Day Special').'</label>';
                                             $html .= '</div>';
                                             $html .= '<div class="col-md-6 mb-2">';
                                                 $html .= '<label class="switch me-2">';
@@ -841,13 +841,13 @@ class ItemsController extends Controller
                                                         $html .= '<i class="fa-sharp fa-solid fa-circle-xmark uncheck_icon"></i>';
                                                     $html .= '</span>';
                                                 $html .= '</label>';
-                                                $html .= '<label for="publish" class="form-label">Published</label>';
+                                                $html .= '<label for="publish" class="form-label">'.__('Published').'</label>';
                                             $html .= '</div>';
                                         $html .= '</div>';
                                     $html .= '</div>';
 
                                     $html .= '<div class="form-group mb-3">';
-                                        $html .= '<a class="btn btn btn-success" onclick="updateItem('.$add_input_lang_code.')">Update</a>';
+                                        $html .= '<a class="btn btn btn-success" onclick="updateItem('.$add_input_lang_code.')">'.__('Update').'</a>';
                                     $html .= '</div>';
 
                                 $html .= '</div>';
@@ -1003,7 +1003,7 @@ class ItemsController extends Controller
                     $html .= '</div>';
 
                     $html .= '<div class="form-group price_div priceDiv mb-3">';
-                            $html .= '<a onclick="addPrice(\''.$primary_lang_code.'_item_form\')" class="btn addPriceBtn btn-info text-white">Add Price</a>';
+                            $html .= '<a onclick="addPrice(\''.$primary_lang_code.'_item_form\')" class="btn addPriceBtn btn-info text-white">'.__('Add Price').'</a>';
                     $html .= '</div>';
 
                     $html .= '<div class="form-group calories_div mb-3">';

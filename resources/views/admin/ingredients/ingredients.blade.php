@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin-layout')
 
-@section('title', 'Indicative Icons')
+@section('title', __('Indicative Icons'))
 
 @section('content')
 

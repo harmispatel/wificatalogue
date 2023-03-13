@@ -1,6 +1,6 @@
 @extends('client.layouts.client-layout')
 
-@section('title', 'Categories')
+@section('title', __('Categories'))
 
 @section('content')
 
@@ -160,8 +160,8 @@
                                                     @endif
                                                 </a>
                                                 <div class="edit_item_bt">
-                                                    <a href="{{ route('items',$category->id) }}" class="btn edit_item" >ADD OR EDIT ITEMS</a>
-                                                    <button class="btn edit_category" onclick="editCategory({{ $category->id }})">EDIT CATEGORY</button>
+                                                    <a href="{{ route('items',$category->id) }}" class="btn edit_item" >{{ __('ADD OR EDIT ITEMS')}}</a>
+                                                    <button class="btn edit_category" onclick="editCategory({{ $category->id }})">{{ __('EDIT CATEGORY')}}</button>
                                                 </div>
                                                 <a class="delet_bt" onclick="deleteCategory({{ $category->id }})" style="cursor: pointer;">
                                                     <i class="fa-solid fa-trash"></i>

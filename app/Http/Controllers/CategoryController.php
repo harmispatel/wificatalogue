@@ -523,7 +523,7 @@ class CategoryController extends Controller
                             $html .= '<div class="item_img">';
                                 $html .= '<a href="#"><img src="'.$image.'" class="w-100"></a>';
                                 $html .= '<div class="edit_item_bt">';
-                                    $html .= '<button type="button" class="btn edit_item">ADD OR EDIT ITEMS</button>';
+                                    $html .= '<button type="button" class="btn edit_item">'.__('ADD OR EDIT ITEMS').'</button>';
                                     $html .= '<button class="btn edit_category" onclick="editCategory('.$category->id.')">EDIT CATEGORY</button>';
                                 $html .= '</div>';
                                 $html .= '<a class="delet_bt" onclick="deleteCategory('.$category->id.')" style="cursor: pointer;"><i class="fa-solid fa-trash"></i></a>';
@@ -533,7 +533,7 @@ class CategoryController extends Controller
                                     $html .= '<h3>'.$category->en_name.'</h3>';
                                     $html .= '<div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="status" role="switch" id="status" onclick="changeStatus('.$category->id.','.$newStatus.')" value="1" '.$checked.'></div>';
                                 $html .= '</div>';
-                                $html .= '<h2>Product Category</h2>';
+                                $html .= '<h2>'.__('Product Category').'</h2>';
                             $html .= '</div>';
                         $html .= '</div>';
                     $html .= '</div>';
@@ -547,7 +547,7 @@ class CategoryController extends Controller
                     $html .= '<div class="item_img add_category">';
                         $html .= '<a data-bs-toggle="modal" data-bs-target="#addCategoryModal" class="add_category_bt" id="NewCategoryBtn"><i class="fa-solid fa-plus"></i></a>';
                     $html .= '</div>';
-                    $html .= '<div class="item_info text-center"><h2>Product Category</h2></div>';
+                    $html .= '<div class="item_info text-center"><h2>'.__('Product Category').'</h2></div>';
                 $html .= '</div>';
             $html .= '</div>';
 

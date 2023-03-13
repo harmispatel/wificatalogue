@@ -1,6 +1,6 @@
 @extends('client.layouts.client-layout')
 
-@section('title', 'Banner')
+@section('title', __('Banner'))
 
 @section('content')
 

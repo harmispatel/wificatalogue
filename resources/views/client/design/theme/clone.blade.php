@@ -6,7 +6,7 @@
 
 @extends('client.layouts.client-layout')
 
-@section('title', 'Clone Theme')
+@section('title', __('Clone Theme'))
 
 @section('content')
 
@@ -39,7 +39,7 @@
                                 {{-- Main Page Section --}}
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Main Screen</button>
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">{{ __('Main Screen')}}</button>
                                     </h2>
                                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
@@ -413,7 +413,7 @@
                                                         </div>
                                                         <div class="row align-items-center mb-4">
                                                             <div class="col-md-4">
-                                                                <span>{{ __('Theme Prview Imag')}}e</span>
+                                                                <span>{{ __('Theme Prview Image')}}</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="form-group align-items-center">

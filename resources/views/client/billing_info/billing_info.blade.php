@@ -1,6 +1,6 @@
 @extends('client.layouts.client-layout')
 
-@section('title',"Billing Info")
+@section('title',__('Billing Info'))
 
 @section('content')
 
@@ -67,7 +67,7 @@
                                                     $receipt_old_val = 'checked';
                                                 }
                                             @endphp
-                                            <input class="form_type" type="radio" name="form_type" id="receipt" value="receipt" {{ $receipt_old_val }}> <label for="receipt">{{ _('Receipt')}}</label>
+                                            <input class="form_type" type="radio" name="form_type" id="receipt" value="receipt" {{ $receipt_old_val }}> <label for="receipt">{{ __('Receipt')}}</label>
                                             <input class="form_type" type="radio" name="form_type" id="invoice" value="invoice" {{ (old('form_type') == 'invoice') ? 'checked' : '' }}> <label for="invoice">{{ __('Invoice')}}</label>
                                         </div>
                                     </div>
