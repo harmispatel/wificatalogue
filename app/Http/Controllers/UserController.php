@@ -82,7 +82,7 @@ class UserController extends Controller
         $password = Hash::make($request->password);
         $status = (isset($request->status)) ? $request->status : 0;
         $shop_name = $request->shop_name;
-        $shop_slug = strtolower(str_replace(' ','_',$shop_name));
+        $shop_slug = mb_strtolower(str_replace(' ','_',$shop_name));
         $shop_description = $request->shop_description;
 
         // Insert New Client

@@ -1,4 +1,4 @@
-@extends('client.layouts.client-layout')
+@extends('admin.layouts.admin-layout')
 
 @section('title',"Import - Export")
 
@@ -22,31 +22,19 @@
     {{-- Clients Section --}}
     <section class="section dashboard">
         <div class="row">
-            {{-- Error Message Section --}}
-            @if (session()->has('error'))
-                <div class="col-md-12">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            @endif
-
-            {{-- Success Message Section --}}
-            @if (session()->has('success'))
-                <div class="col-md-12">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            @endif
 
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h3>Import and Export</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3>Import and Export</h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <a class="btn btn-primary" href="{{ asset('public/csv_demo/category_item_demo.xlsx') }}" download><i class="fa fa-download"></i> Download Demo CSV</a>
+                                </div>
+                            </div>
                         </div>
                         <form action="{{ route('admin.import.data') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -106,6 +94,10 @@
 
         @if (Session::has('success'))
             toastr.success('{{ Session::get('success') }}')
+        @endif
+
+        @if (Session::has('error'))
+            toastr.error('{{ Session::get('error') }}')
         @endif
 
     </script>

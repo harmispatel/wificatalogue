@@ -22,11 +22,8 @@ class ImportExportController extends Controller
             'import' => 'required|mimes:xls,csv,xlsx',
         ]);
 
-        $import = Excel::import(new CategoryandItemsImport($request->shop),$request->file('import'));
+        Excel::import(new CategoryandItemsImport($request->shop),$request->file('import'));
 
-        if($import)
-        {
-            return redirect()->route('admin.import.export')->with('success',"Data has been Imported SuccessFully");
-        }
+        return redirect()->back();
     }
 }
